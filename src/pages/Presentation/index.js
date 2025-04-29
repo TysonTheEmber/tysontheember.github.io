@@ -32,12 +32,12 @@ import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 import Counters from "pages/Presentation/sections/Counters";
 import Information from "pages/Presentation/sections/Information";
 import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
+// import Pages from "pages/Presentation/sections/Pages";
+// import Testimonials from "pages/Presentation/sections/Testimonials";
 import Download from "pages/Presentation/sections/Download";
 
 // Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
+// import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 
 // Routes
 import routes from "routes";
@@ -111,10 +111,10 @@ function Presentation() {
         <Counters />
         <Information />
         <DesignBlocks />
-        <Pages />
-        <Container sx={{ mt: 6 }}>
+        {/* <Pages /> */}
+        {/* <Container sx={{ mt: 6 }}>
           <BuiltByDevelopers />
-        </Container>
+        </Container> */}
         <Container>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={4}>
@@ -122,8 +122,8 @@ function Presentation() {
                 variant="gradient"
                 color="info"
                 icon="flag"
-                title="Getting Started"
-                description="Check the possible ways of working with our product and the necessary files for building your own project."
+                title="Placeholder Text"
+                description="Placeholder Text"
                 action={{
                   type: "external",
                   route: "https://github.com/tysontheember",
@@ -135,8 +135,8 @@ function Presentation() {
               <FilledInfoCard
                 color="info"
                 icon="precision_manufacturing"
-                title="Plugins"
-                description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
+                title="Placeholder Text"
+                description="Placeholder Text"
                 action={{
                   type: "external",
                   route: "https://github.com/tysontheember",
@@ -148,8 +148,8 @@ function Presentation() {
               <FilledInfoCard
                 color="info"
                 icon="apps"
-                title="Components"
-                description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
+                title="Placeholder Text"
+                description="Placeholder Text"
                 action={{
                   type: "external",
                   route: "https://github.com/tysontheember",
@@ -159,9 +159,8 @@ function Presentation() {
             </Grid>
           </Grid>
         </Container>
-        <Testimonials />
         <Download />
-        <MKBox pt={18} pb={6}>
+        {/* <MKBox pt={18} pb={6}>
           <Container>
             <Grid container spacing={3}>
               <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
@@ -212,7 +211,7 @@ function Presentation() {
               </Grid>
             </Grid>
           </Container>
-        </MKBox>
+        </MKBox> */}
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

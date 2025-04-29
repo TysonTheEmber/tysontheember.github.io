@@ -18,13 +18,13 @@ const imagesPrefix =
 
 export default [
   {
-    title: "Placeholder Text",
-    description: "Placeholder Text",
+    title: "Modpacks",
+    description: "Minecraft modpacks that I have worked on!",
     items: [
       {
-        image: `${imagesPrefix}/headers.jpg`,
-        name: "Placeholder Text",
-        route: "",
+        image: `${imagesPrefix}/rekindled-bg.jpg`,
+        name: "EmberCraft: Rekindled",
+        route: "/pages/modpacks/mekindled",
       },
     ],
   },

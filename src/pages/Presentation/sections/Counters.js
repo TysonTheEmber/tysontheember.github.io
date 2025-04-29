@@ -31,27 +31,27 @@ function Counters() {
         <Grid container item xs={12} lg={9} sx={{ mx: "auto" }}>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
-              count={70}
-              suffix="+"
-              title="Coded Elements"
-              description="From buttons, to inputs, navbars, alerts or cards, you are covered"
+              count={12}
+              suffix="k+"
+              title="Downloads"
+              description="Placeholder Text"
             />
           </Grid>
           <Grid item xs={12} md={4} display="flex">
-            <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 0 }} />
+            <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, mx: 5 }} />
             <DefaultCounterCard
-              count={15}
+              count={1500}
               suffix="+"
-              title="Design Blocks"
-              description="Mix the sections, change the colors and unleash your creativity"
+              title="Placeholder Text"
+              description="Placeholder Text"
             />
-            <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 0 }} />
+            <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 5 }} />
           </Grid>
           <Grid item xs={12} md={4}>
             <DefaultCounterCard
               count={4}
-              title="Pages"
-              description="Save 3-4 weeks of work when you use our pre-made pages for your website"
+              title="Projects"
+              description="Placeholder Text"
             />
           </Grid>
         </Grid>

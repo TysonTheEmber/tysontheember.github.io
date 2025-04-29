@@ -42,21 +42,21 @@ function Information() {
                 icon="touch_app"
                 title={
                   <>
-                    Feel the
+                    Project Ember
                     <br />
-                    Material Kit
+                    EmberCraft: Rekindled
                   </>
                 }
                 description="All the MUI components that you need in a development have been re-design with the new look."
               />
               <RotatingCardBack
                 image={bgBack}
-                title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                title="Placeholder Text"
+                description="Placeholder Text"
                 action={{
                   type: "internal",
                   route: "/sections/page-sections/page-headers",
-                  label: "start with header",
+                  label: "Placeholder Text",
                 }}
               />
             </RotatingCard>
@@ -66,16 +66,15 @@ function Information() {
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="content_copy"
-                  title="Full Documentation"
-                  description="Built by developers for developers. Check the foundation and you will find
-                    everything inside our documentation."
+                  title="Placeholder Text"
+                  description="Placeholder Text"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="flip_to_front"
-                  title="MUI Ready"
-                  description="The world's most popular react components library for building user interfaces."
+                  title="Placeholder Text"
+                  description="Placeholder Text"
                 />
               </Grid>
             </Grid>
@@ -83,15 +82,15 @@ function Information() {
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="price_change"
-                  title="Save Time & Money"
-                  description="Creating your design from scratch with dedicated designers can be very expensive. Start with our Design System."
+                  title="Placeholder Text"
+                  description="Placeholder Text"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="devices"
-                  title="Fully Responsive"
-                  description="Regardless of the screen size, the website content will naturally fit the given resolution."
+                  title="Placeholder Text"
+                  description="Placeholder Text"
                 />
               </Grid>
             </Grid>
