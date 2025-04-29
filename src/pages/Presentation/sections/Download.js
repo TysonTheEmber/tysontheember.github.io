@@ -50,22 +50,17 @@ function Download() {
         <Container sx={{ position: "relative", zIndex: 2, py: 12 }}>
           <Grid container item xs={12} md={7} justifyContent="center" mx="auto" textAlign="center">
             <MKTypography variant="h3" color="white">
-              Do you love this awesome
-            </MKTypography>
-            <MKTypography variant="h3" color="white" mb={1}>
-              UI Kit for ReactJS &amp; MUI?
+              Do you love this awesome modpack?
             </MKTypography>
             <MKTypography variant="body2" color="white" mb={6}>
-              Cause if you do, it can be yours for FREE. Hit the button below to navigate to
-              Creative Tim where you can find the Design System in HTML. Start a new project or give
-              an old Bootstrap project a new look!
+              Cause if your interested, you can download now and experience it yourself! Have fun exploring a new world!
             </MKTypography>
             <MKButton
               variant="gradient"
               color="info"
               size="large"
               component="a"
-              href="https://www.creative-tim.com/product/material-kit-react"
+              href=""
               sx={{ mb: 2 }}
             >
               Download Now
@@ -77,28 +72,28 @@ function Download() {
         <Grid container item xs={6} mx="auto">
           <MKBox textAlign="center">
             <MKTypography variant="h3" mt={6} mb={3}>
-              Available on these technologies
+              Mods included
             </MKTypography>
             <Grid container spacing={3} justifyContent="center">
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Bootstrap 5 - Most popular front-end component library">
+                <Tooltip title="Ice and Fire">
                   <MKBox
                     component="a"
-                    href="https://www.creative-tim.com/product/material-kit"
+                    href=""
                     target="_blank"
                   >
                     <MKBox
                       component="img"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/bootstrap5.jpg"
+                      src="https://media.forgecdn.net/avatars/thumbnails/190/975/256/256/636857615673605328.png"
                       width="100%"
                     />
                   </MKBox>
                 </Tooltip>
               </Grid>
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Comming soon">
+                <Tooltip title="Tinker's Construct">
                   <MKBox
-                    opacity={0.5}
+                    opacity={1}
                     component="a"
                     href="#"
                     target="_blank"
@@ -106,16 +101,16 @@ function Download() {
                   >
                     <MKBox
                       component="img"
-                      src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/icon-tailwind.jpg"
+                      src="https://media.forgecdn.net/avatars/thumbnails/488/295/256/256/637792495945179503.png"
                       width="100%"
                     />
                   </MKBox>
                 </Tooltip>
               </Grid>
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Comming soon">
+                <Tooltip title="Create v6 with addons">
                   <MKBox
-                    opacity={0.5}
+                    opacity={1}
                     component="a"
                     href="#"
                     target="_blank"
@@ -123,16 +118,16 @@ function Download() {
                   >
                     <MKBox
                       component="img"
-                      src="https://s3.amazonaws.com/creativetim_bucket/tim_static_images/presentation-page/vue.jpg"
+                      src="https://media.forgecdn.net/avatars/1065/184/638598725500886388.png"
                       width="100%"
                     />
                   </MKBox>
                 </Tooltip>
               </Grid>
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Comming soon">
+                <Tooltip title="Better Combat">
                   <MKBox
-                    opacity={0.5}
+                    opacity={1}
                     component="a"
                     href="#"
                     target="_blank"
@@ -140,31 +135,31 @@ function Download() {
                   >
                     <MKBox
                       component="img"
-                      src="https://s3.amazonaws.com/creativetim_bucket/tim_static_images/presentation-page/angular.jpg"
+                      src="https://media.forgecdn.net/avatars/thumbnails/566/413/256/256/637925434672465483.png"
                       width="100%"
                     />
                   </MKBox>
                 </Tooltip>
               </Grid>
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Comming soon">
+                <Tooltip title="L_Ender's Cataclysm">
                   <MKBox
                     component="a"
-                    href="https://www.creative-tim.com/product/material-kit-react"
+                    href=""
                     target="_blank"
                   >
                     <MKBox
                       component="img"
-                      src="https://s3.amazonaws.com/creativetim_bucket/tim_static_images/presentation-page/react.jpg"
+                      src="https://media.forgecdn.net/avatars/thumbnails/460/870/256/256/637739722679428303.png"
                       width="100%"
                     />
                   </MKBox>
                 </Tooltip>
               </Grid>
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Comming soon">
+                <Tooltip title="Iron's Spells and Spellbooks">
                   <MKBox
-                    opacity={0.5}
+                    opacity={1}
                     component="a"
                     href="#"
                     target="_blank"
@@ -172,7 +167,7 @@ function Download() {
                   >
                     <MKBox
                       component="img"
-                      src="https://s3.amazonaws.com/creativetim_bucket/tim_static_images/presentation-page/sketch.jpg"
+                      src="https://media.forgecdn.net/avatars/thumbnails/871/265/256/256/638288661913483053.png"
                       width="100%"
                     />
                   </MKBox>

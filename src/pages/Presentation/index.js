@@ -44,7 +44,7 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/bg.png";
 
 function Presentation() {
   return (
@@ -53,9 +53,9 @@ function Presentation() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
+          route: "https://www.curseforge.com/minecraft/modpacks/embercraft-rekindled",
+          label: "Modpack",
+          color: "error",
         }}
         sticky
       />
@@ -65,7 +65,7 @@ function Presentation() {
         sx={{
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
-          backgroundPosition: "top",
+          backgroundPosition: "center",
           display: "grid",
           placeItems: "center",
         }}
@@ -83,7 +83,7 @@ function Presentation() {
                 },
               })}
             >
-              Material Kit 2 React{" "}
+              Project Ember{"     "}
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -92,8 +92,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Free & Open Source Web UI Kit built over ReactJS &amp; MUI. Join over 1.6 million
-              developers around the world.
+              Gamers and modders welcome!
             </MKTypography>
           </Grid>
         </Container>
@@ -127,7 +126,7 @@ function Presentation() {
                 description="Check the possible ways of working with our product and the necessary files for building your own project."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/material-kit/",
+                  route: "https://github.com/tysontheember",
                   label: "Let's start",
                 }}
               />
@@ -140,7 +139,7 @@ function Presentation() {
                 description="Get inspiration and have an overview about the plugins that we used to create the Material Kit."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/overview/datepicker/",
+                  route: "https://github.com/tysontheember",
                   label: "Read more",
                 }}
               />
@@ -153,7 +152,7 @@ function Presentation() {
                 description="Material Kit is giving you a lot of pre-made components, that will help you to build UI's faster."
                 action={{
                   type: "external",
-                  route: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
+                  route: "https://github.com/tysontheember",
                   label: "Read more",
                 }}
               />
@@ -167,10 +166,10 @@ function Presentation() {
             <Grid container spacing={3}>
               <Grid item xs={12} lg={5} ml="auto" sx={{ textAlign: { xs: "center", lg: "left" } }}>
                 <MKTypography variant="h4" fontWeight="bold" mb={0.5}>
-                  Thank you for your support!
+                  Placeholder Text
                 </MKTypography>
                 <MKTypography variant="body1" color="text">
-                  We deliver the best web products
+                  Placeholder Text
                 </MKTypography>
               </Grid>
               <Grid

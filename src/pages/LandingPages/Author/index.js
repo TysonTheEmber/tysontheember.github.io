@@ -24,8 +24,6 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Author page sections
 import Profile from "pages/LandingPages/Author/sections/Profile";
-import Posts from "pages/LandingPages/Author/sections/Posts";
-import Contact from "pages/LandingPages/Author/sections/Contact";
 import Footer from "pages/LandingPages/Author/sections/Footer";
 
 // Routes
@@ -41,8 +39,8 @@ function Author() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
+          route: "https://github.com/tysontheember",
+          label: "Github",
           color: "info",
         }}
         transparent
@@ -76,9 +74,7 @@ function Author() {
           }}
         >
           <Profile />
-          <Posts />
         </Card>
-        <Contact />
         <Footer />
       </MKBox>
     </>
