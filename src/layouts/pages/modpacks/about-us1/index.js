@@ -14,8 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // Material Kit 2 React pages
-import Rekindled from "pages/Modpacks/Rekindled";
+import AboutUs1 from "pages/Modpacks/AboutUs";
 
-export default function Rekindled() {
-  return <Rekindled />;
+export default function AboutUsPage1() {
+  return <AboutUs1 />;
 }
