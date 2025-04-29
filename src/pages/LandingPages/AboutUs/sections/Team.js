@@ -47,7 +47,7 @@ function Team() {
             <MKTypography variant="h3" color="white">
               The Executive Team
             </MKTypography>
-            <MKTypography variant="body2" color="white" opacity={0.8}>
+            <MKTypography variant="body2" color="white" opacity={1}>
               There&apos;s nothing I really wanted to do in life that I wasn&apos;t able to get good
               at. That&apos;s my skill.
             </MKTypography>
@@ -59,7 +59,7 @@ function Team() {
               <HorizontalTeamCard
                 image={team1}
                 name="Emma Roberts"
-                position={{ color: "info", label: "UI Designer" }}
+                position={{ color: "white", label: "UI Designer" }}
                 description="Artist is a term applied to a person who engages in an activity deemed to be an art."
               />
             </MKBox>
@@ -69,7 +69,7 @@ function Team() {
               <HorizontalTeamCard
                 image={team2}
                 name="William Pearce"
-                position={{ color: "info", label: "Boss" }}
+                position={{ color: "white", label: "Boss" }}
                 description="Artist is a term applied to a person who engages in an activity deemed to be an art."
               />
             </MKBox>
@@ -79,7 +79,7 @@ function Team() {
               <HorizontalTeamCard
                 image={team3}
                 name="Ivana Flow"
-                position={{ color: "info", label: "Athlete" }}
+                position={{ color: "white", label: "Athlete" }}
                 description="Artist is a term applied to a person who engages in an activity deemed to be an art."
               />
             </MKBox>
@@ -89,7 +89,7 @@ function Team() {
               <HorizontalTeamCard
                 image={team4}
                 name="Marquez Garcia"
-                position={{ color: "info", label: "JS Developer" }}
+                position={{ color: "white", label: "JS Developer" }}
                 description="Artist is a term applied to a person who engages in an activity deemed to be an art."
               />
             </MKBox>

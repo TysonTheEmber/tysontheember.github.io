@@ -48,6 +48,9 @@ import ContactUs from "layouts/pages/landing-pages/contact-us";
 import Author from "layouts/pages/landing-pages/author";
 import SignIn from "layouts/pages/authentication/sign-in";
 
+//Modpacks
+import Rekindled from "layouts/pages/modpacks/rekindled";
+
 // Sections
 import PageHeaders from "layouts/sections/page-sections/page-headers";
 import Features from "layouts/sections/page-sections/featuers";
@@ -92,6 +95,16 @@ const routes = [
             name: "author",
             route: "/pages/landing-pages/author",
             component: <Author />,
+          },
+        ],
+      },
+      {
+        name: "modpacks",
+        collapse: [
+          {
+            name: "rekindled",
+            route: "/pages/modpacks/rekindled",
+            component: <Rekindled />,
           },
         ],
       },

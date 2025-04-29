@@ -1,32 +1,11 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-/**
- * The base colors for the Material Kit 2 React.
- * You can add new color using this file.
- * You can customized the colors for the entire Material Kit 2 React using thie file.
- */
-
 export default {
   background: {
-    default: "#f0f2f5",
+    default: "#1a0c0c", // very dark red background
   },
 
   text: {
-    main: "#7b809a",
-    focus: "#7b809a",
+    main: "#f2e9e4", // soft light text for contrast
+    focus: "#ffffff", // pure white when focused
   },
 
   transparent: {
@@ -39,223 +18,223 @@ export default {
   },
 
   black: {
-    light: "#000000",
+    light: "#2a0a0a",
     main: "#000000",
     focus: "#000000",
   },
 
   primary: {
-    main: "#e91e63",
-    focus: "#e91e63",
+    main: "#ff3c38", // bright fire red
+    focus: "#d62828", // deep ember red
   },
 
   secondary: {
-    main: "#7b809a",
-    focus: "#8f93a9",
+    main: "#ff784f", // orange-red
+    focus: "#e65100", // glowing ember orange
   },
 
   info: {
-    main: "#1A73E8",
-    focus: "#1662C4",
+    main: "#ffa07a", // soft flame orange
+    focus: "#ff7043",
   },
 
   success: {
-    main: "#4CAF50",
-    focus: "#67bb6a",
+    main: "#ff6f61", // warm red-pink for positive tone
+    focus: "#ff3c38",
   },
 
   warning: {
-    main: "#fb8c00",
-    focus: "#fc9d26",
+    main: "#ff8f00", // blazing orange
+    focus: "#ff6f00",
   },
 
   error: {
-    main: "#F44335",
-    focus: "#f65f53",
+    main: "#ff1744", // warning red
+    focus: "#c51162",
   },
 
   light: {
-    main: "#f0f2f5",
-    focus: "#f0f2f5",
+    main: "#2c1a1a", // smoky surface
+    focus: "#3b1f1f",
   },
 
   dark: {
-    main: "#344767",
-    focus: "#2c3c58",
+    main: "#0d0505",
+    focus: "#000000",
   },
 
   grey: {
-    100: "#f8f9fa",
-    200: "#f0f2f5",
-    300: "#dee2e6",
-    400: "#ced4da",
-    500: "#adb5bd",
-    600: "#6c757d",
-    700: "#495057",
-    800: "#343a40",
-    900: "#212529",
+    100: "#2a1b1b",
+    200: "#3c2c2c",
+    300: "#4e3c3c",
+    400: "#615050",
+    500: "#756565",
+    600: "#8b7a7a",
+    700: "#a29191",
+    800: "#c0b0b0",
+    900: "#e6dcdc",
   },
 
   gradients: {
     primary: {
-      main: "#EC407A",
-      state: "#D81B60",
+      main: "#ff3c38",
+      state: "#a40606",
     },
 
     secondary: {
-      main: "#747b8a",
-      state: "#495361",
+      main: "#ff6f3c",
+      state: "#b71c1c",
     },
 
     info: {
-      main: "#49a3f1",
-      state: "#1A73E8",
+      main: "#ff0033",
+      state: "#aa0022",
     },
 
     success: {
-      main: "#66BB6A",
-      state: "#43A047",
+      main: "#ff7043",
+      state: "#ff3c38",
     },
 
     warning: {
-      main: "#FFA726",
-      state: "#FB8C00",
+      main: "#ffa726",
+      state: "#fb8c00",
     },
 
     error: {
-      main: "#EF5350",
-      state: "#E53935",
+      main: "#ff1744",
+      state: "#d50000",
     },
 
     light: {
-      main: "#EBEFF4",
-      state: "#CED4DA",
+      main: "#3a2020",
+      state: "#2c1a1a",
     },
 
     dark: {
-      main: "#42424a",
-      state: "#191919",
+      main: "#0d0505",
+      state: "#000000",
     },
   },
 
   socialMediaColors: {
     facebook: {
-      main: "#3b5998",
-      dark: "#344e86",
+      main: "#b71c1c",
+      dark: "#7f0000",
     },
 
     twitter: {
-      main: "#55acee",
-      dark: "#3ea1ec",
+      main: "#ff7043",
+      dark: "#d84315",
     },
 
     instagram: {
-      main: "#125688",
-      dark: "#0e456d",
+      main: "#e53935",
+      dark: "#b71c1c",
     },
 
     linkedin: {
-      main: "#0077b5",
-      dark: "#00669c",
+      main: "#c62828",
+      dark: "#8e0000",
     },
 
     pinterest: {
-      main: "#cc2127",
-      dark: "#b21d22",
+      main: "#ff3c38",
+      dark: "#c62828",
     },
 
     youtube: {
-      main: "#e52d27",
-      dark: "#d41f1a",
+      main: "#f44336",
+      dark: "#b71c1c",
     },
 
     vimeo: {
-      main: "#1ab7ea",
-      dark: "#13a3d2",
+      main: "#ff7043",
+      dark: "#e64a19",
     },
 
     slack: {
-      main: "#3aaf85",
-      dark: "#329874",
+      main: "#ff8a65",
+      dark: "#ff7043",
     },
 
     dribbble: {
-      main: "#ea4c89",
-      dark: "#e73177",
+      main: "#ff6f61",
+      dark: "#d32f2f",
     },
 
     github: {
-      main: "#24292e",
-      dark: "#171a1d",
+      main: "#c0b0b0",
+      dark: "#888",
     },
 
     reddit: {
       main: "#ff4500",
-      dark: "#e03d00",
+      dark: "#c62828",
     },
 
     tumblr: {
-      main: "#35465c",
-      dark: "#2a3749",
+      main: "#7f0000",
+      dark: "#4e0d0d",
     },
   },
 
   badgeColors: {
     primary: {
-      background: "#f8b3ca",
-      text: "#cc084b",
+      background: "#ff8a80",
+      text: "#5c0000",
     },
 
     secondary: {
-      background: "#d7d9e1",
-      text: "#6c757d",
+      background: "#ffccbc",
+      text: "#6e260e",
     },
 
     info: {
-      background: "#aecef7",
-      text: "#095bc6",
+      background: "#ffab91",
+      text: "#8e0000",
     },
 
     success: {
-      background: "#bce2be",
-      text: "#339537",
+      background: "#ffb74d",
+      text: "#5c1a00",
     },
 
     warning: {
-      background: "#ffd59f",
-      text: "#c87000",
+      background: "#ffd180",
+      text: "#ff6f00",
     },
 
     error: {
-      background: "#fcd3d0",
-      text: "#f61200",
+      background: "#ff5252",
+      text: "#b71c1c",
     },
 
     light: {
-      background: "#ffffff",
-      text: "#c7d3de",
+      background: "#3a2020",
+      text: "#ffffff",
     },
 
     dark: {
-      background: "#8097bf",
-      text: "#1e2e4a",
+      background: "#4d0000",
+      text: "#ffffff",
     },
   },
 
   coloredShadows: {
-    primary: "#e91e62",
-    secondary: "#110e0e",
-    info: "#00bbd4",
-    success: "#4caf4f",
-    warning: "#ff9900",
-    error: "#f44336",
-    light: "#adb5bd",
-    dark: "#404040",
+    primary: "#ff3c38",
+    secondary: "#ff6f3c",
+    info: "#ff9a8b",
+    success: "#ff7043",
+    warning: "#ff8f00",
+    error: "#d50000",
+    light: "#444",
+    dark: "#000",
   },
 
-  inputBorderColor: "#d2d6da",
+  inputBorderColor: "#ff6f61",
 
   tabs: {
-    indicator: { boxShadow: "#ddd" },
+    indicator: { boxShadow: "#ff3c38" },
   },
 };

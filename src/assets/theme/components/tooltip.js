@@ -24,7 +24,7 @@ import borders from "assets/theme/base/borders";
 // Material Kit 2 React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { black, light } = colors;
+const { black, secondary } = colors;
 const { size, fontWeightRegular } = typography;
 const { borderRadius } = borders;
 
@@ -38,7 +38,7 @@ export default {
     tooltip: {
       maxWidth: pxToRem(200),
       backgroundColor: black.main,
-      color: light.main,
+      color: secondary.main,
       fontSize: size.sm,
       fontWeight: fontWeightRegular,
       textAlign: "center",

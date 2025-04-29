@@ -30,26 +30,25 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // About Us page sections
 import Information from "pages/LandingPages/AboutUs/sections/Information";
 import Team from "pages/LandingPages/AboutUs/sections/Team";
-import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
-import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
+// import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
 
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-about-us.jpg";
+import bgImage from "assets/images/bg.png";
 
-function AboutUs1() {
+function Rekindled() {
   return (
     <>
       <DefaultNavbar
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "default",
+          route: "https://www.curseforge.com/minecraft/modpacks/embercraft-rekindled",
+          label: "Modpack",
+          color: "error",
         }}
         transparent
         light
@@ -89,32 +88,22 @@ function AboutUs1() {
                 },
               })}
             >
-              Work with an amazing design
+              EmberCraft: Rekindled
             </MKTypography>
             <MKTypography variant="body1" color="white" opacity={0.8} mt={1} mb={3}>
               We&apos;re constantly trying to express ourselves and actualize our dreams. If you
               have the opportunity to play this game
             </MKTypography>
-            <MKButton color="default" sx={{ color: ({ palette: { dark } }) => dark.main }}>
-              create account
+            <MKButton
+              color="error"
+              sx={{ color: ({ palette: { dark } }) => dark.main }}
+              component="a"
+              href="https://www.curseforge.com/minecraft/modpacks/embercraft-rekindled"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download
             </MKButton>
-            <MKTypography variant="h6" color="white" mt={8} mb={1}>
-              Find us on
-            </MKTypography>
-            <MKBox display="flex" justifyContent="center" alignItems="center">
-              <MKTypography component="a" variant="body1" color="white" href="#" mr={3}>
-                <i className="fab fa-facebook" />
-              </MKTypography>
-              <MKTypography component="a" variant="body1" color="white" href="#" mr={3}>
-                <i className="fab fa-instagram" />
-              </MKTypography>
-              <MKTypography component="a" variant="body1" color="white" href="#" mr={3}>
-                <i className="fab fa-twitter" />
-              </MKTypography>
-              <MKTypography component="a" variant="body1" color="white" href="#">
-                <i className="fab fa-google-plus" />
-              </MKTypography>
-            </MKBox>
           </Grid>
         </Container>
       </MKBox>
@@ -129,8 +118,7 @@ function AboutUs1() {
       >
         <Information />
         <Team />
-        <Featuring />
-        <Newsletter />
+        {/* <Featuring /> */}
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
@@ -139,4 +127,4 @@ function AboutUs1() {
   );
 }
 
-export default AboutUs1;
+export default Rekindled;

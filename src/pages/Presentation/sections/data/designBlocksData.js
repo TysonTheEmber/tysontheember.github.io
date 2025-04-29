@@ -24,7 +24,7 @@ export default [
       {
         image: `${imagesPrefix}/rekindled-bg.jpg`,
         name: "EmberCraft: Rekindled",
-        route: "/pages/modpacks/about-us1",
+        route: "/pages/modpacks/rekindled",
       },
     ],
   },

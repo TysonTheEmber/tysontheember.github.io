@@ -34,7 +34,7 @@ function Information() {
   return (
     <MKBox component="section" py={6} my={6}>
       <Container>
-        <Grid container item xs={11} spacing={3} alignItems="center" sx={{ mx: "auto" }}>
+        <Grid container item xs={12} spacing={3} alignItems="center" sx={{ mx: "auto" }}>
           <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
             <RotatingCard>
               <RotatingCardFront
@@ -42,12 +42,12 @@ function Information() {
                 icon="touch_app"
                 title={
                   <>
-                    Project Ember
+                    EmberCraft
                     <br />
-                    EmberCraft: Rekindled
+                    Rekindled
                   </>
                 }
-                description="All the MUI components that you need in a development have been re-design with the new look."
+                description="My most recent Minecraft modpack."
               />
               <RotatingCardBack
                 image={bgBack}
