@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src/index.html",
+    "baseUrl": "public/index.html",
     "paths": {
       "*": ["src/*"]
     }
