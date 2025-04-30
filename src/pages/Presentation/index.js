@@ -44,7 +44,7 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg.png";
+import bgImage from "assets/images/minecraft/bg.png";
 
 function Presentation() {
   return (
@@ -53,9 +53,9 @@ function Presentation() {
         routes={routes}
         action={{
           type: "external",
-          route: "https://www.curseforge.com/minecraft/modpacks/embercraft-rekindled",
-          label: "Modpack",
-          color: "error",
+          route: "https://discord.gg/GCN2Hv4Qzr",
+          label: "Discord",
+          color: "info",
         }}
         sticky
       />
@@ -79,7 +79,7 @@ function Presentation() {
               mb={1}
               sx={({ breakpoints, typography: { size } }) => ({
                 [breakpoints.down("md")]: {
-                  fontSize: size["3xl"],
+                  fontSize: size["3x1"],
                 },
               })}
             >

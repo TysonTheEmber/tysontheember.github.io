@@ -464,7 +464,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         left={0}
         zIndex={3}
         sx={({ palette: { transparent: transparentColor, white }, functions: { rgba } }) => ({
-          backgroundColor: transparent ? transparentColor.main : rgba(white.main, 0.8),
+          backgroundColor: transparent ? transparentColor.main : rgba(white.main, 0.25),
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
@@ -505,6 +505,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                   {action.label}
                 </MKButton>
               ) : (
+                //Right button
                 <MKButton
                   component="a"
                   href={action.route}

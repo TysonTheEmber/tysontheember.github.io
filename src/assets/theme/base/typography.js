@@ -67,7 +67,7 @@ const typography = {
 
   h1: {
     fontFamily: baseProperties.fontFamily2,
-    fontSize: pxToRem(48),
+    fontSize: pxToRem(98),
     lineHeight: 1.25,
     ...baseHeadingProperties,
   },
@@ -123,7 +123,7 @@ const typography = {
 
   body1: {
     fontFamily: baseProperties.fontFamily,
-    fontSize: baseProperties.fontSizeXL,
+    fontSize: baseProperties.fontSize3XL,
     fontWeight: baseProperties.fontWeightRegular,
     lineHeight: 1.625,
   },

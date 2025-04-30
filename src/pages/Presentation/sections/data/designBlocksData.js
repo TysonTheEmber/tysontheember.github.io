@@ -12,6 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+import rekindled from "assets/images/minecraft/logo.webp";
 
 const imagesPrefix =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/sections";
@@ -22,7 +23,7 @@ export default [
     description: "Minecraft modpacks that I have worked on!",
     items: [
       {
-        image: `${imagesPrefix}/rekindled-bg.jpg`,
+        image: rekindled,
         name: "EmberCraft: Rekindled",
         route: "/pages/modpacks/rekindled",
       },

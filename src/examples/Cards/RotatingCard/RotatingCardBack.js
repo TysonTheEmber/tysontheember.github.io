@@ -44,8 +44,8 @@ function RotatingCard({ color, image, title, description, action }) {
       sx={{
         backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
           `${linearGradient(
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.85),
-            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.85)
+            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.25),
+            rgba(gradients[color] ? gradients[color].main : gradients.info.main, 0.25)
           )}, url(${image})`,
         backgroundSize: "cover",
         backfaceVisibility: "hidden",

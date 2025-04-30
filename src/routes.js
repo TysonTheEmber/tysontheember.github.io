@@ -257,30 +257,30 @@ const routes = [
     collapse: [
       {
         name: "getting started",
-        description: "All about overview, quick start, license and contents",
-        href: "https://www.creative-tim.com/learning-lab/react/quick-start/material-kit/",
+        description: "",
+        href: "",
       },
       {
         name: "foundation",
-        description: "See our colors, icons and typography",
-        href: "https://www.creative-tim.com/learning-lab/react/colors/material-kit/",
+        description: "",
+        href: "",
       },
       {
         name: "components",
-        description: "Explore our collection of fully designed components",
-        href: "https://www.creative-tim.com/learning-lab/react/alerts/material-kit/",
+        description: "",
+        href: "",
       },
       {
         name: "plugins",
-        description: "Check how you can integrate our plugins",
-        href: "https://www.creative-tim.com/learning-lab/react/datepicker/material-kit/",
+        description: "",
+        href: "",
       },
     ],
   },
   {
     name: "github",
     icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
+    href: "https://www.github.com/tysontheember",
   },
 ];
 

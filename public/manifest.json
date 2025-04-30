@@ -1,11 +1,11 @@
 {
-  "short_name": "Material Kit",
-  "name": "Material Kit 2 React",
+  "short_name": "Project Ember",
+  "name": "Project Ember Website",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "assets/images/minecraft/logo.webp",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ],
   "start_url": ".",
