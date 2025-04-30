@@ -103,7 +103,8 @@ function Footer() {
               </MKBox>
             </Stack>
             <MKTypography variant="button" opacity={0.8}>
-              Copyright © <script>document.write(new Date().getFullYear())</script>2025 Project Ember.
+              Copyright © <script>document.write(new Date().getFullYear())</script>2025 Project
+               Ember.
             </MKTypography>
           </Grid>
           <Grid item xs={12} lg={6} ml="auto" textAlign={{ xs: "center", lg: "right" }}>

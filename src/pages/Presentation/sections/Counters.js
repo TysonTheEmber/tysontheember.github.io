@@ -48,11 +48,7 @@ function Counters() {
             <Divider orientation="vertical" sx={{ display: { xs: "none", md: "block" }, ml: 5 }} />
           </Grid>
           <Grid item xs={12} md={4}>
-            <DefaultCounterCard
-              count={4}
-              title="Projects"
-              description="Placeholder Text"
-            />
+            <DefaultCounterCard count={4} title="Projects" description="Placeholder Text" />
           </Grid>
         </Grid>
       </Container>

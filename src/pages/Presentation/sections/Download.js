@@ -53,7 +53,8 @@ function Download() {
               Do you love this awesome modpack?
             </MKTypography>
             <MKTypography variant="body2" color="white" mb={6}>
-              Cause if your interested, you can download now and experience it yourself! Have fun exploring a new world!
+              Cause if your interested, you can download now and experience it yourself! Have fun
+              exploring a new world!
             </MKTypography>
             <MKButton
               variant="gradient"
@@ -76,12 +77,9 @@ function Download() {
             </MKTypography>
             <Grid container spacing={3} justifyContent="center">
               <Grid item xs={4} lg={2}>
-                <Tooltip title="Ice and Fire">
-                  <MKBox
-                    component="a"
-                    href=""
-                    target="_blank"
-                  >
+                <Tooltip
+                title="Ice and Fire">
+                  <MKBox component="a" href="" target="_blank">
                     <MKBox
                       component="img"
                       src="https://media.forgecdn.net/avatars/thumbnails/190/975/256/256/636857615673605328.png"
@@ -101,7 +99,7 @@ function Download() {
                   >
                     <MKBox
                       component="img"
-                      src="https://media.forgecdn.net/avatars/thumbnails/488/295/256/256/637792495945179503.png"
+                     src="https://media.forgecdn.net/avatars/thumbnails/488/295/256/256/637792495945179503.png"
                       width="100%"
                     />
                   </MKBox>
@@ -141,18 +139,11 @@ function Download() {
                   </MKBox>
                 </Tooltip>
               </Grid>
-              <Grid item xs={4} lg={2}>
+              <Grid item
+               xs={4} lg={2}>
                 <Tooltip title="L_Ender's Cataclysm">
-                  <MKBox
-                    component="a"
-                    href=""
-                    target="_blank"
-                  >
-                    <MKBox
-                      component="img"
-                      src="https://media.forgecdn.net/avatars/thumbnails/460/870/256/256/637739722679428303.png"
-                      width="100%"
-                    />
+                  <MKBox component="a" href="" target="_blank">
+                    <MKBox component="img" src="https://media.forgecdn.net/avatars/thumbnails/460/870/256/256/637739722679428303.png" width="100%" />
                   </MKBox>
                 </Tooltip>
               </Grid>
