@@ -4,27 +4,123 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* EmbeForge Fire/Ember Theme */
+
+/* Light Mode - Warm ember accents */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary ember orange colors */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-dark: #ff5519;
+  --ifm-color-primary-darker: #ff4708;
+  --ifm-color-primary-darkest: #e63d00;
+  --ifm-color-primary-light: #ff8151;
+  --ifm-color-primary-lighter: #ff8f62;
+  --ifm-color-primary-lightest: #ffad84;
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 107, 53, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark Mode - Glowing ember accents on neutral dark */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Ember orange for accents */
+  --ifm-color-primary: #ff8c42;
+  --ifm-color-primary-dark: #ff7a24;
+  --ifm-color-primary-darker: #ff6e13;
+  --ifm-color-primary-darkest: #e65c00;
+  --ifm-color-primary-light: #ff9e60;
+  --ifm-color-primary-lighter: #ffaa71;
+  --ifm-color-primary-lightest: #ffc393;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 66, 0.15);
+}
+
+/* Hero banner with fire gradient */
+.hero--primary {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffa577 100%);
+  color: white;
+}
+
+[data-theme='dark'] .hero--primary {
+  background: linear-gradient(135deg, #2a1a12 0%, #3d2415 50%, #4a2e1a 100%);
+  border-bottom: 3px solid #ff8c42;
+}
+
+/* Ember glow effect on buttons */
+.button--primary {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, #ff5519, #ff7a24);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .button--primary {
+  background: linear-gradient(135deg, #ff8c42, #ffa577);
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.4);
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background: linear-gradient(135deg, #ff9e60, #ffb584);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.6);
+}
+
+/* Secondary button with ember outline */
+.button--secondary {
+  border: 2px solid #ff6b35;
+  color: #ff6b35;
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover {
+  background-color: #ff6b35;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+[data-theme='dark'] .button--secondary {
+  border-color: #ff8c42;
+  color: #ff8c42;
+}
+
+[data-theme='dark'] .button--secondary:hover {
+  background-color: #ff8c42;
+  color: #1b1b1b;
+}
+
+/* Navbar links with ember hover */
+.navbar__link:hover {
+  color: #ff6b35;
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  color: #ff9e60;
+}
+
+/* Active menu items with ember accent */
+.menu__link--active {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+  border-left: 3px solid #ff6b35;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(255, 140, 66, 0.15);
+  color: #ff9e60;
+  border-left: 3px solid #ff8c42;
+}
+
+/* Table of contents active link */
+.table-of-contents__link--active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #ff9e60;
 }
