@@ -4,27 +4,127 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* EmbeForge Fire/Ember Theme - Light Mode */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  /* Primary colors - Warm ember orange */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-dark: #ff5519;
+  --ifm-color-primary-darker: #ff4708;
+  --ifm-color-primary-darkest: #e63d00;
+  --ifm-color-primary-light: #ff8151;
+  --ifm-color-primary-lighter: #ff8f62;
+  --ifm-color-primary-lightest: #ffad84;
+
+  /* Secondary warm tones */
+  --ifm-color-secondary: #ffa577;
+
+  /* Accent colors */
+  --ifm-color-warning: #ffb347;
+  --ifm-color-danger: #ff4500;
+  --ifm-color-success: #ff8c42;
+
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 107, 53, 0.1);
+
+  /* Navbar */
+  --ifm-navbar-background-color: #fff;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(255, 107, 53, 0.1);
+
+  /* Footer */
+  --ifm-footer-background-color: #1a1a1a;
+  --ifm-footer-link-color: #ff8151;
+  --ifm-footer-link-hover-color: #ffad84;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* EmbeForge Fire/Ember Theme - Dark Mode */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /* Primary colors - Bright embers in darkness */
+  --ifm-color-primary: #ff8c42;
+  --ifm-color-primary-dark: #ff7a24;
+  --ifm-color-primary-darker: #ff6e13;
+  --ifm-color-primary-darkest: #e65c00;
+  --ifm-color-primary-light: #ff9e60;
+  --ifm-color-primary-lighter: #ffaa71;
+  --ifm-color-primary-lightest: #ffc393;
+
+  /* Warm dark background tones */
+  --ifm-background-color: #1a1410;
+  --ifm-background-surface-color: #251e18;
+
+  /* Card/container backgrounds with warm tint */
+  --ifm-card-background-color: #2a2218;
+
+  /* Code blocks with ember glow */
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 66, 0.2);
+
+  /* Link colors */
+  --ifm-link-color: #ff9e60;
+  --ifm-link-hover-color: #ffb584;
+
+  /* Navbar in dark mode */
+  --ifm-navbar-background-color: #1a1410;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(255, 140, 66, 0.2);
+
+  /* Footer in dark mode */
+  --ifm-footer-background-color: #0d0a08;
+  --ifm-footer-link-color: #ff9e60;
+  --ifm-footer-link-hover-color: #ffc393;
+}
+
+/* Hero banner gradient for fire effect */
+.hero--primary {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffa577 100%);
+  color: white;
+}
+
+[data-theme='dark'] .hero--primary {
+  background: linear-gradient(135deg, #2a2218 0%, #3d2f1f 50%, #4a3628 100%);
+  border-bottom: 3px solid #ff8c42;
+}
+
+/* Add subtle ember glow to buttons */
+.button--primary {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, #ff5519, #ff7a24);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .button--primary {
+  background: linear-gradient(135deg, #ff8c42, #ffa577);
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.4);
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background: linear-gradient(135deg, #ff9e60, #ffb584);
+  box-shadow: 0 6px 20px rgba(255, 140, 66, 0.6);
+}
+
+/* Secondary button with ember outline */
+.button--secondary {
+  border: 2px solid #ff6b35;
+  color: #ff6b35;
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover {
+  background-color: #ff6b35;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+[data-theme='dark'] .button--secondary {
+  border-color: #ff8c42;
+  color: #ff8c42;
+}
+
+[data-theme='dark'] .button--secondary:hover {
+  background-color: #ff8c42;
+  color: #1a1410;
 }

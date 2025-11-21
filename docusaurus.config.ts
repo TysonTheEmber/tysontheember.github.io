@@ -85,6 +85,8 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
       respectPrefersColorScheme: true,
     },
     navbar: {
@@ -173,7 +175,8 @@ const config: Config = {
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      darkTheme: prismThemes.vsDark,
+      additionalLanguages: ['java', 'json', 'bash'],
     },
   } satisfies Preset.ThemeConfig,
 };
