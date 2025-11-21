@@ -1,0 +1,71 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#1a1410"/>
+
+  <!-- Anvil base (forge) -->
+  <path d="M180 380 L332 380 L332 400 L180 400 Z" fill="#4a4a4a"/>
+  <path d="M160 400 L352 400 L352 420 L160 420 Z" fill="#3a3a3a"/>
+
+  <!-- Anvil body -->
+  <path d="M200 300 L312 300 L332 340 L332 380 L180 380 L180 340 Z" fill="#5a5a5a"/>
+  <path d="M200 280 L312 280 L312 300 L200 300 Z" fill="#6a6a6a"/>
+
+  <!-- Anvil horn -->
+  <path d="M312 280 L340 260 L340 300 L312 300 Z" fill="#4a4a4a"/>
+
+  <!-- Ember/flame above anvil -->
+  <g>
+    <!-- Large flame -->
+    <path d="M256 120 C256 120 220 160 220 200 C220 230 235 250 256 250 C277 250 292 230 292 200 C292 160 256 120 256 120 Z"
+          fill="url(#flameGradient1)"/>
+
+    <!-- Medium flame -->
+    <path d="M256 140 C256 140 235 165 235 190 C235 210 243 225 256 225 C269 225 277 210 277 190 C277 165 256 140 256 140 Z"
+          fill="url(#flameGradient2)"/>
+
+    <!-- Small inner flame -->
+    <path d="M256 160 C256 160 245 175 245 190 C245 200 250 208 256 208 C262 208 267 200 267 190 C267 175 256 160 256 160 Z"
+          fill="url(#flameGradient3)"/>
+  </g>
+
+  <!-- Sparks/embers floating -->
+  <circle cx="200" cy="180" r="4" fill="#ffaa71" opacity="0.8"/>
+  <circle cx="310" cy="200" r="3" fill="#ff9e60" opacity="0.9"/>
+  <circle cx="230" cy="250" r="3" fill="#ffc393" opacity="0.7"/>
+  <circle cx="285" cy="230" r="4" fill="#ff8c42" opacity="0.8"/>
+  <circle cx="190" cy="220" r="2" fill="#ffb584" opacity="0.6"/>
+  <circle cx="320" cy="170" r="3" fill="#ff9e60" opacity="0.8"/>
+
+  <!-- Glow effect around flame -->
+  <ellipse cx="256" cy="200" rx="60" ry="80" fill="url(#glowGradient)" opacity="0.3"/>
+
+  <!-- Gradients -->
+  <defs>
+    <!-- Outer flame gradient (orange to red) -->
+    <linearGradient id="flameGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ff8c42;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffa577;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Middle flame gradient (brighter orange) -->
+    <linearGradient id="flameGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ff9e60;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffaa71;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Inner flame gradient (yellow-white hot) -->
+    <linearGradient id="flameGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fffacd;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#ffc393;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb584;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow gradient -->
+    <radialGradient id="glowGradient">
+      <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+</svg>

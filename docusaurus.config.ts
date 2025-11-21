@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'EmbeForge',
   tagline: 'Minecraft Mods & Creative Projects by TysonTheEmber',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/embeforge-icon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -93,7 +93,7 @@ const config: Config = {
       title: 'EmbeForge',
       logo: {
         alt: 'EmbeForge Logo',
-        src: 'img/logo.svg',
+        src: 'img/embeforge-icon.svg',
       },
       items: [
         {
