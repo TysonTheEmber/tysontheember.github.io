@@ -70,15 +70,6 @@ const config: Config = {
         sidebarPath: './sidebars-aperture.ts',
       },
     ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'spelunkery-plus',
-        path: 'docs-spelunkery-plus',
-        routeBasePath: 'spelunkery-plus',
-        sidebarPath: './sidebars-spelunkery.ts',
-      },
-    ],
   ],
 
   themeConfig: {
@@ -117,11 +108,6 @@ const config: Config = {
         {
           to: '/aperture-api/intro',
           label: 'Aperture API',
-          position: 'left',
-        },
-        {
-          to: '/spelunkery-plus/intro',
-          label: 'Spelunkery+',
           position: 'left',
         },
         {
@@ -170,10 +156,6 @@ const config: Config = {
             {
               label: 'Aperture API',
               to: '/aperture-api/intro',
-            },
-            {
-              label: 'Spelunkery+',
-              to: '/spelunkery-plus/intro',
             },
           ],
         },

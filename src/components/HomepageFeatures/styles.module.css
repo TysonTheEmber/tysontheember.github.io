@@ -9,3 +9,20 @@
   height: 200px;
   width: 200px;
 }
+
+.featureImg {
+  height: 128px;
+  width: 128px;
+  object-fit: contain;
+}
+
+.featureLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.featureLink:hover {
+  transform: translateY(-4px);
+}
