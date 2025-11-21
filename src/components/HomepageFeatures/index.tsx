@@ -46,7 +46,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Orbital Railgun Reforged',
-    image: require('@site/static/img/orbital-railgun-icon.webp').default,
+    image: require('@site/static/img/orbital-railgun-icon.png').default,
     description: (
       <>
         A powerful weapon mod bringing devastating orbital strikes to Minecraft.
