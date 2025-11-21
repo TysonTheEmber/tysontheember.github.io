@@ -47,28 +47,36 @@
   --ifm-color-primary-lighter: #ffaa71;
   --ifm-color-primary-lightest: #ffc393;
 
-  /* Warm dark background tones */
-  --ifm-background-color: #1a1410;
-  --ifm-background-surface-color: #251e18;
+  /* Neutral backgrounds - much less orange */
+  --ifm-background-color: #1b1b1b;
+  --ifm-background-surface-color: #242424;
 
-  /* Card/container backgrounds with warm tint */
-  --ifm-card-background-color: #2a2218;
+  /* Card/container backgrounds */
+  --ifm-card-background-color: #2a2a2a;
+
+  /* Text colors for better contrast */
+  --ifm-font-color-base: #e3e3e3;
+  --ifm-heading-color: #ffffff;
 
   /* Code blocks with ember glow */
-  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 66, 0.2);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 66, 0.15);
 
   /* Link colors */
   --ifm-link-color: #ff9e60;
   --ifm-link-hover-color: #ffb584;
 
-  /* Navbar in dark mode */
-  --ifm-navbar-background-color: #1a1410;
-  --ifm-navbar-shadow: 0 1px 2px 0 rgba(255, 140, 66, 0.2);
+  /* Navbar in dark mode - neutral dark */
+  --ifm-navbar-background-color: #1f1f1f;
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
 
-  /* Footer in dark mode */
-  --ifm-footer-background-color: #0d0a08;
+  /* Footer in dark mode - darker neutral */
+  --ifm-footer-background-color: #0f0f0f;
   --ifm-footer-link-color: #ff9e60;
   --ifm-footer-link-hover-color: #ffc393;
+
+  /* Menu/Sidebar backgrounds */
+  --ifm-menu-color-background-active: rgba(255, 140, 66, 0.1);
+  --ifm-menu-color-background-hover: rgba(255, 140, 66, 0.05);
 }
 
 /* Hero banner gradient for fire effect */
@@ -127,4 +135,109 @@
 [data-theme='dark'] .button--secondary:hover {
   background-color: #ff8c42;
   color: #1a1410;
+}
+
+/* Homepage features section */
+.features {
+  background-color: #f9f9f9;
+  padding: 4rem 0;
+}
+
+[data-theme='dark'] .features {
+  background-color: #1b1b1b;
+}
+
+/* Feature cards */
+.features .col {
+  padding: 1rem;
+}
+
+/* Sidebar styling */
+.theme-doc-sidebar-container {
+  background-color: #fafafa;
+  border-right: 1px solid #e0e0e0;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background-color: #1f1f1f;
+  border-right: 1px solid #333;
+}
+
+/* Main content area */
+.theme-doc-markdown {
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] .theme-doc-markdown {
+  background-color: #1b1b1b;
+}
+
+/* Add subtle borders to cards and sections */
+.card {
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #ff6b35;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+}
+
+[data-theme='dark'] .card {
+  border: 1px solid #333;
+  background-color: #242424;
+}
+
+[data-theme='dark'] .card:hover {
+  border-color: #ff8c42;
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.2);
+}
+
+/* Navbar links */
+.navbar__link {
+  transition: color 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: #ff6b35;
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  color: #ff9e60;
+}
+
+/* Active menu items */
+.menu__link--active {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+  border-left: 3px solid #ff6b35;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(255, 140, 66, 0.15);
+  color: #ff9e60;
+  border-left: 3px solid #ff8c42;
+}
+
+/* Admonitions/callouts with ember accents */
+.admonition {
+  border-left-width: 4px;
+}
+
+/* Table of contents */
+.table-of-contents {
+  border-left: 2px solid #e0e0e0;
+}
+
+[data-theme='dark'] .table-of-contents {
+  border-left: 2px solid #333;
+}
+
+.table-of-contents__link--active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #ff9e60;
 }
