@@ -12,9 +12,9 @@ Welcome to the documentation hub for **EmbeForge** - home to innovative Minecraf
 
 Explore documentation for each of our Minecraft mods:
 
-- **[Embers Text API](embers-text-api/)** - Animated in-game overlays, banners, and cinematic messaging
-- **[Aperture API](aperture-api/)** - Forge cinematic camera tooling with in-game editing and path exports
-- **[Spelunkery+](spelunkery-plus/)** - Compatibility expansion for mining progression and underground loot
+- **[Embers Text API](embers-text-api/intro)** - Animated in-game overlays, banners, and cinematic messaging
+- **[Aperture API](aperture-api/intro)** - Forge cinematic camera tooling with in-game editing and path exports
+- **[Spelunkery+](spelunkery-plus/intro)** - Compatibility expansion for mining progression and underground loot
 
 ## Quick Links
 
