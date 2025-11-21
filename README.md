@@ -1,12 +1,12 @@
-# EmbeForge Website
+# EmberForge Website
 
-Official website for EmbeForge - Minecraft mods and creative projects by TysonTheEmber.
+Official website for EmberForge - Minecraft mods and creative projects by TysonTheEmber.
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
 ## Features
 
-- 📚 Separate wikis for each EmbeForge project
+- 📚 Separate wikis for each EmberForge project
 - 🎨 Custom branding and theming
 - 🔍 Built-in search functionality
 - 🌓 Dark/light mode support

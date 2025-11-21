@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Welcome to EmbeForge
+# Welcome to EmberForge
 
-Welcome to the documentation hub for **EmbeForge** - home to innovative Minecraft mods and creative projects by TysonTheEmber.
+Welcome to the documentation hub for **EmberForge** - home to innovative Minecraft mods and creative projects by TysonTheEmber.
 
 ## Featured Projects
 

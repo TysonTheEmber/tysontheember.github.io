@@ -5,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'EmbeForge',
+  title: 'EmberForge',
   tagline: 'Minecraft Mods & Creative Projects by TysonTheEmber',
-  favicon: 'img/embeforge-icon.svg',
+  favicon: 'img/emberforge-icon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -90,10 +90,10 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'EmbeForge',
+      title: 'EmberForge',
       logo: {
-        alt: 'EmbeForge Logo',
-        src: 'img/embeforge-icon.svg',
+        alt: 'EmberForge Logo',
+        src: 'img/emberforge-icon.svg',
       },
       items: [
         {
