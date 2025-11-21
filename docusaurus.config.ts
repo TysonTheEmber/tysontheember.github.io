@@ -53,12 +53,29 @@ const config: Config = {
 
   plugins: [
     [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['en'],
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: true,
+        docsRouteBasePath: ['/', '/embers-text-api', '/aperture-api', '/spelunkery-plus'],
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'embers-text-api',
         path: 'docs-embers-text-api',
         routeBasePath: 'embers-text-api',
         sidebarPath: './sidebars-embers.ts',
+        versions: {
+          current: {
+            label: '2.0',
+            path: '',
+          },
+        },
       },
     ],
     [
@@ -106,6 +123,11 @@ const config: Config = {
           to: '/embers-text-api/intro',
           label: 'Embers Text API',
           position: 'left',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'left',
+          docsPluginId: 'embers-text-api',
         },
         {
           to: '/aperture-api/intro',
