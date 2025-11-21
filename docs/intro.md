@@ -10,11 +10,11 @@ Welcome to the documentation hub for **EmbeForge** - home to innovative Minecraf
 
 ### Minecraft Mods
 
-Explore documentation for each of our Minecraft mods:
+Explore documentation for each of our Minecraft mods using the navigation bar above:
 
-- **[Embers Text API](embers-text-api/intro)** - Animated in-game overlays, banners, and cinematic messaging
-- **[Aperture API](aperture-api/intro)** - Forge cinematic camera tooling with in-game editing and path exports
-- **[Spelunkery+](spelunkery-plus/intro)** - Compatibility expansion for mining progression and underground loot
+- **Embers Text API** - Animated in-game overlays, banners, and cinematic messaging
+- **Aperture API** - Forge cinematic camera tooling with in-game editing and path exports
+- **Spelunkery+** - Compatibility expansion for mining progression and underground loot
 
 ## Quick Links
 
@@ -25,10 +25,6 @@ Explore documentation for each of our Minecraft mods:
 ## Getting Help
 
 If you need help with any of our projects:
-1. Check the specific project documentation
+1. Check the specific project documentation using the navigation bar
 2. Visit the GitHub repository and open an issue
-3. Join discussions on the respective platform pages
-
-## Stay Updated
-
-Check out our [blog](/blog) for updates, tutorials, and announcements about new features and projects.
+3. Join discussions on Modrinth or CurseForge platform pages

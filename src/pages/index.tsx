@@ -21,13 +21,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Explore Projects
-          </Link>
-          <Link
-            className="button button--primary button--lg"
-            to="/blog"
-            style={{marginLeft: '1rem'}}>
-            Read the Blog
+            Explore All Projects
           </Link>
         </div>
       </div>

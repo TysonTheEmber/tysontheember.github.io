@@ -6,8 +6,7 @@ This website is built using [Docusaurus](https://docusaurus.io/), a modern stati
 
 ## Features
 
-- 📚 Documentation for all EmbeForge projects
-- 📝 Blog for updates and tutorials
+- 📚 Separate wikis for each EmbeForge project
 - 🎨 Custom branding and theming
 - 🔍 Built-in search functionality
 - 🌓 Dark/light mode support
@@ -83,38 +82,40 @@ This builds the website and pushes to the `gh-pages` branch.
 ## Project Structure
 
 ```
-├── blog/                   # Blog posts
-├── docs/                   # Documentation files
-│   ├── embers-text-api/   # Embers Text API docs
-│   ├── aperture-api/      # Aperture API docs
-│   └── spelunkery-plus/   # Spelunkery+ docs
+├── docs/                      # Main documentation (overview)
+├── docs-embers-text-api/      # Embers Text API wiki
+├── docs-aperture-api/         # Aperture API wiki
+├── docs-spelunkery-plus/      # Spelunkery+ wiki
 ├── src/
-│   ├── components/        # React components
-│   ├── css/              # Custom CSS
-│   └── pages/            # Custom pages (homepage, etc.)
-├── static/               # Static assets (images, etc.)
-├── docusaurus.config.ts  # Site configuration
-└── sidebars.ts          # Sidebar configuration
+│   ├── components/            # React components
+│   ├── css/                   # Custom CSS
+│   └── pages/                 # Custom pages (homepage, etc.)
+├── static/                    # Static assets (images, etc.)
+├── docusaurus.config.ts       # Site configuration
+├── sidebars.ts                # Main sidebar configuration
+├── sidebars-embers.ts         # Embers Text API sidebar
+├── sidebars-aperture.ts       # Aperture API sidebar
+└── sidebars-spelunkery.ts     # Spelunkery+ sidebar
+```
 
 ## Adding Content
 
-### New Blog Post
+### Add Documentation to a Mod Wiki
 
-Create a new markdown file in the `blog/` directory:
+Add markdown files to the appropriate wiki directory:
+- `docs-embers-text-api/` for Embers Text API
+- `docs-aperture-api/` for Aperture API
+- `docs-spelunkery-plus/` for Spelunkery+
 
-```bash
-blog/YYYY-MM-DD-post-title.md
-```
+The sidebar will automatically update based on the file structure.
 
-### New Documentation Page
+### Add a New Project Wiki
 
-Add markdown files to the appropriate project directory under `docs/`.
-
-### New Project
-
-1. Create a new directory under `docs/`
+1. Create a new `docs-project-name/` directory
 2. Add an `intro.md` file
-3. The sidebar will automatically update
+3. Create a `sidebars-project.ts` file
+4. Add a plugin configuration in `docusaurus.config.ts`
+5. Update the navbar to include a link to the new wiki
 
 ## Configuration
 

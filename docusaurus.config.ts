@@ -43,21 +43,41 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Edit URL removed - users should contribute via GitHub issues/PRs
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false, // Disable blog
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'embers-text-api',
+        path: 'docs-embers-text-api',
+        routeBasePath: 'embers-text-api',
+        sidebarPath: './sidebars-embers.ts',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'aperture-api',
+        path: 'docs-aperture-api',
+        routeBasePath: 'aperture-api',
+        sidebarPath: './sidebars-aperture.ts',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'spelunkery-plus',
+        path: 'docs-spelunkery-plus',
+        routeBasePath: 'spelunkery-plus',
+        sidebarPath: './sidebars-spelunkery.ts',
+      },
     ],
   ],
 
@@ -78,9 +98,23 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Projects',
+          label: 'Home',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          to: '/embers-text-api/intro',
+          label: 'Embers Text API',
+          position: 'left',
+        },
+        {
+          to: '/aperture-api/intro',
+          label: 'Aperture API',
+          position: 'left',
+        },
+        {
+          to: '/spelunkery-plus/intro',
+          label: 'Spelunkery+',
+          position: 'left',
+        },
         {
           href: 'https://github.com/TysonTheEmber',
           label: 'GitHub',
@@ -118,11 +152,19 @@ const config: Config = {
           ],
         },
         {
-          title: 'More',
+          title: 'Wikis',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Embers Text API',
+              to: '/embers-text-api/intro',
+            },
+            {
+              label: 'Aperture API',
+              to: '/aperture-api/intro',
+            },
+            {
+              label: 'Spelunkery+',
+              to: '/spelunkery-plus/intro',
             },
           ],
         },
