@@ -2,13 +2,9 @@
 sidebar_position: 1
 ---
 
-# Embers Text API (v2.0)
+# Embers Text API
 
 **Embers Text API** is a powerful Minecraft mod that provides animated in-game overlays, banners, and cinematic messaging capabilities.
-
-:::info Version 2.0
-You are viewing documentation for version 2.0. Use the version dropdown in the navbar to switch between versions.
-:::
 
 ## Overview
 
