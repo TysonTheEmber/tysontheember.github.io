@@ -226,3 +226,206 @@ body:has(.intro-page-no-sidebar) article {
   max-width: 1200px !important;
   margin: 0 auto !important;
 }
+
+/* Algolia DocSearch Modal - Ember Theme */
+.DocSearch-Button {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.DocSearch-Button:hover {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: rgba(255, 107, 53, 0.5);
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  background: rgba(255, 140, 66, 0.1);
+  border: 1px solid rgba(255, 140, 66, 0.3);
+}
+
+[data-theme='dark'] .DocSearch-Button:hover {
+  background: rgba(255, 140, 66, 0.15);
+  border-color: rgba(255, 140, 66, 0.5);
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
+}
+
+.DocSearch-Search-Icon {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Search-Icon {
+  color: #ff9e60 !important;
+}
+
+/* Modal container */
+.DocSearch-Container {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Modal styling */
+.DocSearch-Modal {
+  background: var(--ifm-background-color) !important;
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+}
+
+[data-theme='dark'] .DocSearch-Modal {
+  background: #1b1b1b !important;
+  box-shadow: 0 10px 40px rgba(255, 140, 66, 0.3);
+}
+
+/* Search form */
+.DocSearch-Form {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Form {
+  background: #2a2a2a;
+  border-color: rgba(255, 140, 66, 0.2);
+}
+
+.DocSearch-Input {
+  background: transparent !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.DocSearch-Input:focus {
+  border-color: #ff6b35;
+  box-shadow: none;
+  outline: none;
+}
+
+[data-theme='dark'] .DocSearch-Input:focus {
+  border-color: #ff8c42;
+}
+
+/* Dropdown */
+.DocSearch-Dropdown {
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .DocSearch-Dropdown {
+  background: #1b1b1b;
+}
+
+/* Search results */
+.DocSearch-Hit {
+  border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+[data-theme='dark'] .DocSearch-Hit {
+  border-bottom-color: rgba(255, 140, 66, 0.1);
+}
+
+.DocSearch-Hit a {
+  background: transparent;
+  border-radius: 6px;
+}
+
+.DocSearch-Hit a:hover {
+  background: rgba(255, 107, 53, 0.05);
+}
+
+[data-theme='dark'] .DocSearch-Hit a:hover {
+  background: rgba(255, 140, 66, 0.1);
+}
+
+.DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(255, 107, 53, 0.15) !important;
+}
+
+[data-theme='dark'] .DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(255, 140, 66, 0.2) !important;
+}
+
+/* Section headers */
+.DocSearch-Hit-source {
+  background: transparent;
+  color: #ff6b35 !important;
+  font-weight: 600;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+[data-theme='dark'] .DocSearch-Hit-source {
+  background: transparent;
+  color: #ff9e60 !important;
+}
+
+/* Hit content */
+.DocSearch-Hit-title {
+  color: var(--ifm-font-color-base);
+}
+
+.DocSearch-Hit-path {
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Highlighted text in results */
+.DocSearch-Hit mark {
+  color: #ff6b35 !important;
+  background: rgba(255, 107, 53, 0.2);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .DocSearch-Hit mark {
+  color: #ffaa71 !important;
+  background: rgba(255, 140, 66, 0.25);
+}
+
+/* "Clear the query" link */
+.DocSearch-Reset,
+.DocSearch-Reset svg {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Reset,
+[data-theme='dark'] .DocSearch-Reset svg {
+  color: #ff9e60 !important;
+}
+
+.DocSearch-Reset:hover,
+.DocSearch-Reset:hover svg {
+  color: #ff5519 !important;
+}
+
+[data-theme='dark'] .DocSearch-Reset:hover,
+[data-theme='dark'] .DocSearch-Reset:hover svg {
+  color: #ffaa71 !important;
+}
+
+/* Cancel button */
+.DocSearch-Cancel {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Cancel {
+  color: #ff9e60 !important;
+}
+
+/* Footer */
+.DocSearch-Footer {
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid rgba(255, 107, 53, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Footer {
+  background: #2a2a2a;
+  border-top-color: rgba(255, 140, 66, 0.2);
+}
+
+/* Footer commands */
+.DocSearch-Commands-Key {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Commands-Key {
+  background: rgba(255, 140, 66, 0.15);
+  border-color: rgba(255, 140, 66, 0.3);
+}
