@@ -1,4 +1,5 @@
 import type {ReactNode} from 'react';
+import {useState, useEffect} from 'react';
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
@@ -8,6 +9,8 @@ type FeatureItem = {
   image: string;
   description: ReactNode;
   link?: string;
+  curseforgeSlug?: string;
+  modrinthSlug?: string;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -20,7 +23,9 @@ const FeatureList: FeatureItem[] = [
         with full control over styling, positioning, and animations.
       </>
     ),
-    link: '/embers-text-api/intro',
+    link: 'https://www.curseforge.com/minecraft/mc-mods/embers-text-api',
+    curseforgeSlug: 'embers-text-api',
+    modrinthSlug: 'embers-text-api',
   },
   {
     title: 'Aperture API',
@@ -31,7 +36,9 @@ const FeatureList: FeatureItem[] = [
         smooth camera paths, and export capabilities for your videos.
       </>
     ),
-    link: '/aperture-api/intro',
+    link: 'https://www.curseforge.com/minecraft/mc-mods/aperture-api',
+    curseforgeSlug: 'aperture-api',
+    modrinthSlug: 'aperture-api',
   },
   {
     title: 'Spelunkery+',
@@ -43,6 +50,8 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     link: 'https://www.curseforge.com/minecraft/mc-mods/spelunkery-plus',
+    curseforgeSlug: 'spelunkery-plus',
+    modrinthSlug: 'spelunkery-plus',
   },
   {
     title: 'Orbital Railgun Reforged',
@@ -54,10 +63,66 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     link: 'https://www.curseforge.com/minecraft/mc-mods/orbital-railgun-reforged',
+    curseforgeSlug: 'orbital-railgun-reforged',
+    modrinthSlug: 'orbital-railgun-reforged',
   },
 ];
 
-function Feature({title, image, description, link}: FeatureItem) {
+function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}: FeatureItem) {
+  const [curseforgeDownloads, setCurseforgeDownloads] = useState<number | null>(null);
+  const [modrinthDownloads, setModrinthDownloads] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const promises = [];
+
+      if (curseforgeSlug) {
+        promises.push(
+          fetch(`https://api.cfwidget.com/minecraft/mc-mods/${curseforgeSlug}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data.downloads?.total) {
+                setCurseforgeDownloads(data.downloads.total);
+              }
+            })
+            .catch(() => {})
+        );
+      }
+
+      if (modrinthSlug) {
+        promises.push(
+          fetch(`https://api.modrinth.com/v2/project/${modrinthSlug}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data.downloads) {
+                setModrinthDownloads(data.downloads);
+              }
+            })
+            .catch(() => {})
+        );
+      }
+
+      await Promise.all(promises);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [curseforgeSlug, modrinthSlug]);
+
+  const formatDownloads = (count: number | null): string => {
+    if (count === null) return '...';
+    if (count >= 1000000) {
+      return `${(count / 1000000).toFixed(1)}M`;
+    }
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}K`;
+    }
+    return count.toString();
+  };
+
+  const totalDownloads = (curseforgeDownloads ?? 0) + (modrinthDownloads ?? 0);
+
   const content = (
     <>
       <div className="text--center">
@@ -66,6 +131,31 @@ function Feature({title, image, description, link}: FeatureItem) {
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
+        {(curseforgeSlug || modrinthSlug) && (
+          <div style={{marginTop: '1rem', fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>
+            {loading ? (
+              <div>Loading downloads...</div>
+            ) : (
+              <>
+                {(curseforgeDownloads !== null || modrinthDownloads !== null) && (
+                  <div><strong>{formatDownloads(totalDownloads)}</strong> total downloads</div>
+                )}
+                {curseforgeDownloads !== null && (
+                  <div>CurseForge: {formatDownloads(curseforgeDownloads)}</div>
+                )}
+                {modrinthSlug ? (
+                  modrinthDownloads !== null ? (
+                    <div>Modrinth: {formatDownloads(modrinthDownloads)}</div>
+                  ) : (
+                    <div>Modrinth: Not available</div>
+                  )
+                ) : (
+                  <div>Modrinth: Not available</div>
+                )}
+              </>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
@@ -73,7 +163,7 @@ function Feature({title, image, description, link}: FeatureItem) {
   return (
     <div className={clsx('col col--3')}>
       {link ? (
-        <a href={link} className={styles.featureLink}>
+        <a href={link} className={styles.featureLink} target="_blank" rel="noopener noreferrer">
           {content}
         </a>
       ) : (

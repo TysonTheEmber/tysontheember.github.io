@@ -19,9 +19,9 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className={clsx('button button--lg', styles.heroButton)}
             to="/docs/intro">
-            Explore All Projects
+            Explore The Docs
           </Link>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Welcome to ${siteConfig.title}`}
-      description="Minecraft mods and creative projects by TysonTheEmber - featuring Embers Text API, Aperture API, and Spelunkery+">
+      description="Minecraft mods by TysonTheEmber - featuring Embers Text API, Aperture API, Spelunkery+, and Orbital Railgun Reforged">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

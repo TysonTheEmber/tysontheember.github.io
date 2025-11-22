@@ -21,6 +21,10 @@
   color: inherit;
   display: block;
   transition: transform 0.2s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .featureLink:hover {

@@ -98,7 +98,7 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Home',
+          label: 'Docs Home',
         },
         {
           to: '/embers-text-api/intro',
@@ -111,9 +111,22 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/TysonTheEmber',
-          label: 'GitHub',
+          href: 'https://discord.gg/GCN2Hv4Qzr',
           position: 'right',
+          className: 'header-discord-link',
+          'aria-label': 'Discord server',
+        },
+        {
+          href: 'https://www.youtube.com/@tysontheember',
+          position: 'right',
+          className: 'header-youtube-link',
+          'aria-label': 'YouTube channel',
+        },
+        {
+          href: 'https://github.com/TysonTheEmber',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
@@ -121,28 +134,19 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Projects',
-          items: [
-            {
-              label: 'Documentation',
-              to: '/docs/intro',
-            },
-          ],
-        },
-        {
           title: 'Links',
           items: [
             {
+              label: 'Discord',
+              href: 'https://discord.gg/GCN2Hv4Qzr',
+            },
+            {
+              label: 'YouTube',
+              href: 'https://www.youtube.com/@tysontheember',
+            },
+            {
               label: 'GitHub',
               href: 'https://github.com/TysonTheEmber',
-            },
-            {
-              label: 'Modrinth',
-              href: 'https://modrinth.com/user/TysonTheEmber',
-            },
-            {
-              label: 'CurseForge',
-              href: 'https://www.curseforge.com/members/tysontheember/projects',
             },
           ],
         },
@@ -156,6 +160,19 @@ const config: Config = {
             {
               label: 'Aperture API',
               to: '/aperture-api/intro',
+            },
+          ],
+        },
+        {
+          title: 'Mod Platforms',
+          items: [
+            {
+              label: 'Modrinth',
+              href: 'https://modrinth.com/user/TysonTheEmber',
+            },
+            {
+              label: 'CurseForge',
+              href: 'https://www.curseforge.com/members/tysontheember/projects',
             },
           ],
         },
