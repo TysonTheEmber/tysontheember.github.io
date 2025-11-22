@@ -20,6 +20,8 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
+  trailingSlash: true,
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'TysonTheEmber', // Usually your GitHub org/user name.
@@ -77,9 +79,9 @@ const config: Config = {
     algolia: {
       appId: 'S2FTCYM93P',
       apiKey: '93791c27131499c512943e864ef6cf39',
-      indexName: 'Docs',
+      indexName: 'dev_Docs',
       contextualSearch: true,
-      searchPagePath: false, // Disable search page route (uses modal instead)
+      searchPagePath: 'search',
     },
     colorMode: {
       defaultMode: 'dark',

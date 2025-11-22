@@ -29,7 +29,7 @@ Powerful library for creating animated text overlays, cinematic messaging, and d
 - Flexible positioning with 9 anchor points
 - NBT command support for scripting
 
-[View Documentation](../embers-text-api/intro)
+[View Documentation](/embers-text-api/intro)
 
 ### Aperture API
 Professional cinematic camera tools with an in-game editor, advanced path system, and powerful interpolation capabilities.
@@ -40,7 +40,7 @@ Professional cinematic camera tools with an in-game editor, advanced path system
 - Constant-speed path preview
 - Path export functionality
 
-[View Documentation](../aperture-api/intro)
+[View Documentation](/aperture-api/intro)
 
 ## Quick Navigation
 
