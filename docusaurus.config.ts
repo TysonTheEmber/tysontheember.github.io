@@ -73,15 +73,16 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Algolia search - uncomment after deploying site and Algolia creates the index
-    // algolia: {
-    //   appId: 'S2FTCYM93P',
-    //   apiKey: '93791c27131499c512943e864ef6cf39',
-    //   indexName: 'emberforge',
-    //   contextualSearch: true,
-    // },
+    // Algolia search
+    algolia: {
+      appId: 'S2FTCYM93P',
+      apiKey: '93791c27131499c512943e864ef6cf39',
+      indexName: 'Docs',
+      contextualSearch: true,
+      searchPagePath: false, // Disable search page route (uses modal instead)
+    },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
@@ -107,6 +108,10 @@ const config: Config = {
           to: '/aperture-api/intro',
           label: 'Aperture API',
           position: 'left',
+        },
+        {
+          type: 'search',
+          position: 'right',
         },
         {
           href: 'https://discord.gg/GCN2Hv4Qzr',
