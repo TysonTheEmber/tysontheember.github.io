@@ -429,3 +429,20 @@ body:has(.intro-page-no-sidebar) article {
   background: rgba(255, 140, 66, 0.15);
   border-color: rgba(255, 140, 66, 0.3);
 }
+
+/* Make theme switcher icon bigger */
+.navbar__item button[aria-label*="Switch"] svg,
+button[class*='colorModeToggle'] svg,
+button[class*='toggle'] svg,
+[class*='colorModeToggle'] svg,
+.colorModeToggle svg {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+/* Also ensure the button container is sized appropriately */
+.navbar__item button[aria-label*="Switch"],
+button[class*='colorModeToggle'],
+[class*='colorModeToggle'] button {
+  padding: 4px !important;
+}

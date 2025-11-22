@@ -3,6 +3,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
+  margin-left: 12px;
   border-radius: 4px;
   background-color: var(--ifm-color-emphasis-100);
   font-size: 14px;
