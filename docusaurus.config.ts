@@ -73,8 +73,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
     // Algolia search - uncomment after deploying site and Algolia creates the index
     // algolia: {
     //   appId: 'S2FTCYM93P',
