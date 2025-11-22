@@ -102,14 +102,18 @@ const config: Config = {
           label: 'Docs Home',
         },
         {
-          to: '/embers-text-api/intro',
-          label: 'Embers Text API',
+          type: 'docSidebar',
+          sidebarId: 'embersSidebar',
+          docsPluginId: 'embers-text-api',
           position: 'left',
+          label: 'Embers Text API',
         },
         {
-          to: '/aperture-api/intro',
-          label: 'Aperture API',
+          type: 'docSidebar',
+          sidebarId: 'apertureSidebar',
+          docsPluginId: 'aperture-api',
           position: 'left',
+          label: 'Aperture API',
         },
         {
           type: 'search',
