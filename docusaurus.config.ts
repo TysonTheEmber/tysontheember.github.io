@@ -78,7 +78,7 @@ const config: Config = {
     // Algolia search
     algolia: {
       appId: 'S2FTCYM93P',
-      apiKey: '93791c27131499c512943e864ef6cf39',
+      apiKey: '75cbcad6c9fc55b748cf24ba5a75fa32',
       indexName: 'dev_Docs',
       contextualSearch: false,
       searchPagePath: 'search',
