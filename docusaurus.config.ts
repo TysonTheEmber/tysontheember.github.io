@@ -41,10 +41,7 @@ const config: Config = {
     [
       'classic',
       {
-        docs: {
-          sidebarPath: './sidebars.ts',
-          // Edit URL removed - users should contribute via GitHub issues/PRs
-        },
+        docs: false, // Disable main docs
         blog: false, // Disable blog
         theme: {
           customCss: './src/css/custom.css',
@@ -82,11 +79,17 @@ const config: Config = {
       indexName: 'dev_Docs',
       contextualSearch: false,
       searchPagePath: 'search',
+      translations: {
+        button: {
+          buttonText: 'Search the docs',
+          buttonAriaLabel: 'Search the docs',
+        },
+      },
     },
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: false,
-      respectPrefersColorScheme: true,
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'EmberForge',
@@ -95,12 +98,6 @@ const config: Config = {
         src: 'img/emberforge-icon.svg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Docs Home',
-        },
         {
           type: 'docSidebar',
           sidebarId: 'embersSidebar',
@@ -118,6 +115,18 @@ const config: Config = {
         {
           type: 'search',
           position: 'right',
+        },
+        {
+          href: 'https://modrinth.com/user/TysonTheEmber',
+          position: 'right',
+          className: 'header-modrinth-link',
+          'aria-label': 'Modrinth profile',
+        },
+        {
+          href: 'https://www.curseforge.com/members/tysontheember/projects',
+          position: 'right',
+          className: 'header-curseforge-link',
+          'aria-label': 'CurseForge profile',
         },
         {
           href: 'https://discord.gg/GCN2Hv4Qzr',

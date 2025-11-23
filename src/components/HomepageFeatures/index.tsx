@@ -1,6 +1,7 @@
 import type {ReactNode} from 'react';
 import {useState, useEffect} from 'react';
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
@@ -23,7 +24,7 @@ const FeatureList: FeatureItem[] = [
         with full control over styling, positioning, and animations.
       </>
     ),
-    link: 'https://www.curseforge.com/minecraft/mc-mods/embers-text-api',
+    link: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',
     modrinthSlug: 'embers-text-api',
   },
@@ -36,7 +37,7 @@ const FeatureList: FeatureItem[] = [
         smooth camera paths, and export capabilities for your videos.
       </>
     ),
-    link: 'https://www.curseforge.com/minecraft/mc-mods/aperture-api',
+    link: '/aperture-api/intro',
     curseforgeSlug: 'aperture-api',
     modrinthSlug: 'aperture-api',
   },
@@ -49,7 +50,6 @@ const FeatureList: FeatureItem[] = [
         new loot tables, and compatibility with popular mining-focused mods.
       </>
     ),
-    link: 'https://www.curseforge.com/minecraft/mc-mods/spelunkery-plus',
     curseforgeSlug: 'spelunkery-plus',
     modrinthSlug: 'spelunkery-plus',
   },
@@ -62,7 +62,6 @@ const FeatureList: FeatureItem[] = [
         Unleash precision firepower from the skies with advanced targeting systems.
       </>
     ),
-    link: 'https://www.curseforge.com/minecraft/mc-mods/orbital-railgun-reforged',
     curseforgeSlug: 'orbital-railgun-reforged',
     modrinthSlug: 'orbital-railgun-reforged',
   },
@@ -131,44 +130,65 @@ function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
-        {(curseforgeSlug || modrinthSlug) && (
-          <div style={{marginTop: '1rem', fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>
-            {loading ? (
-              <div>Loading downloads...</div>
-            ) : (
-              <>
-                {(curseforgeDownloads !== null || modrinthDownloads !== null) && (
-                  <div><strong>{formatDownloads(totalDownloads)}</strong> total downloads</div>
-                )}
-                {curseforgeDownloads !== null && (
-                  <div>CurseForge: {formatDownloads(curseforgeDownloads)}</div>
-                )}
-                {modrinthSlug ? (
-                  modrinthDownloads !== null ? (
-                    <div>Modrinth: {formatDownloads(modrinthDownloads)}</div>
-                  ) : (
-                    <div>Modrinth: Not available</div>
-                  )
-                ) : (
-                  <div>Modrinth: Not available</div>
-                )}
-              </>
-            )}
-          </div>
-        )}
+        <div style={{marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center'}}>
+          {link && (
+            <Link to={link} className="button button--primary button--md" style={{width: '100%', maxWidth: '200px'}}>
+              View Docs
+            </Link>
+          )}
+          {(curseforgeSlug || modrinthSlug) && (
+            <>
+              {loading ? (
+                <div style={{fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>Loading downloads...</div>
+              ) : (
+                <>
+                  {(curseforgeDownloads !== null || modrinthDownloads !== null) && (
+                    <div style={{marginTop: '0.5rem', fontSize: '0.9rem'}}>
+                      <div style={{marginBottom: '0.25rem', fontWeight: 'bold'}}>
+                        {formatDownloads(totalDownloads)} total downloads
+                      </div>
+                    </div>
+                  )}
+                  <div style={{fontSize: '0.9rem', display: 'flex', gap: '1rem'}}>
+                    {curseforgeDownloads !== null && curseforgeSlug && (
+                      <div>
+                        <a
+                          href={`https://www.curseforge.com/minecraft/mc-mods/${curseforgeSlug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{color: 'var(--ifm-color-primary)', textDecoration: 'underline', fontWeight: '500'}}
+                        >
+                          CurseForge
+                        </a>
+                        {' '}({formatDownloads(curseforgeDownloads)})
+                      </div>
+                    )}
+                    {modrinthSlug && modrinthDownloads !== null && (
+                      <div>
+                        <a
+                          href={`https://modrinth.com/mod/${modrinthSlug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{color: 'var(--ifm-color-primary)', textDecoration: 'underline', fontWeight: '500'}}
+                        >
+                          Modrinth
+                        </a>
+                        {' '}({formatDownloads(modrinthDownloads)})
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   );
 
   return (
     <div className={clsx('col col--3')}>
-      {link ? (
-        <a href={link} className={styles.featureLink} target="_blank" rel="noopener noreferrer">
-          {content}
-        </a>
-      ) : (
-        content
-      )}
+      {content}
     </div>
   );
 }

@@ -1,0 +1,55 @@
+name: Update Download Counts
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-downloads:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch download counts
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        run: |
+          # Fetch Modrinth downloads
+          MODRINTH_TOTAL=$(curl -s 'https://api.modrinth.com/v2/user/PEiFMA4y/projects' | \
+            python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(p['downloads'] for p in data))")
+
+          # Fetch CurseForge downloads
+          CURSEFORGE_TOTAL=$(curl -s -H "x-api-key: $CURSEFORGE_API_KEY" \
+            'https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&pageSize=50' | \
+            python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(mod['downloadCount'] for mod in data['data']))")
+
+          # Calculate total
+          TOTAL=$((MODRINTH_TOTAL + CURSEFORGE_TOTAL))
+
+          # Create JSON file
+          mkdir -p static/data
+          cat > static/data/downloads.json << EOF
+          {
+            "modrinth": $MODRINTH_TOTAL,
+            "curseforge": $CURSEFORGE_TOTAL,
+            "total": $TOTAL,
+            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          }
+          EOF
+
+          echo "Total downloads: $TOTAL (Modrinth: $MODRINTH_TOTAL, CurseForge: $CURSEFORGE_TOTAL)"
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add static/data/downloads.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update download counts [skip ci]" && git push)

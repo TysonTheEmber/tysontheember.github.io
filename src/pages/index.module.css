@@ -10,6 +10,60 @@
   overflow: hidden;
 }
 
+.emberBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ember {
+  position: absolute;
+  bottom: -10px;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #ff8c42 0%, #ff6b35 50%, transparent 70%);
+  border-radius: 50%;
+  animation: floatUp 5s infinite ease-in;
+  box-shadow:
+    0 0 8px #ff8c42,
+    0 0 12px #ff6b35,
+    0 0 16px rgba(255, 107, 53, 0.5);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(calc(-50px + 100px * var(--random, 0.5))) scale(0.3);
+    opacity: 0;
+  }
+}
+
+[data-theme='dark'] .ember {
+  background: radial-gradient(circle, #ffaa71 0%, #ff8c42 50%, transparent 70%);
+  box-shadow:
+    0 0 10px #ffaa71,
+    0 0 15px #ff8c42,
+    0 0 20px rgba(255, 140, 66, 0.6);
+}
+
+.heroBanner .container {
+  position: relative;
+  z-index: 1;
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
@@ -37,4 +91,34 @@
   border-color: rgba(255, 173, 132, 0.9);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.downloads {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.downloadCount {
+  color: var(--ifm-color-emphasis-800);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  display: inline-block;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.downloadCount strong {
+  color: var(--ifm-color-primary-lightest);
+  font-size: 1.5rem;
+}
+
+[data-theme='dark'] .downloadCount {
+  color: var(--ifm-color-emphasis-900);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .downloadCount strong {
+  color: #ffaa71;
 }
