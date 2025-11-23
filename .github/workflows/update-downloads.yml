@@ -22,20 +22,44 @@ jobs:
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         run: |
-          # Fetch CurseForge downloads with error handling
-          CURSEFORGE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "x-api-key: $CURSEFORGE_API_KEY" \
-            'https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&pageSize=50')
-          CURSEFORGE_HTTP_CODE=$(echo "$CURSEFORGE_RESPONSE" | tail -n1)
-          CURSEFORGE_BODY=$(echo "$CURSEFORGE_RESPONSE" | sed '$d')
+          # Fetch CurseForge downloads with pagination handling
+          CURSEFORGE_TOTAL=0
+          CURSEFORGE_SUCCESS=false
+          INDEX=0
 
-          if [ "$CURSEFORGE_HTTP_CODE" -eq 200 ] && [ -n "$CURSEFORGE_BODY" ]; then
-            CURSEFORGE_TOTAL=$(echo "$CURSEFORGE_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(mod['downloadCount'] for mod in data['data']))" 2>/dev/null || echo "0")
-            CURSEFORGE_SUCCESS=true
-          else
-            echo "Warning: CurseForge API failed (HTTP $CURSEFORGE_HTTP_CODE), using previous value"
-            CURSEFORGE_TOTAL=$(jq -r '.curseforge // 0' static/data/downloads.json 2>/dev/null || echo "0")
-            CURSEFORGE_SUCCESS=false
-          fi
+          while true; do
+            CURSEFORGE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "x-api-key: $CURSEFORGE_API_KEY" \
+              "https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&pageSize=50&index=$INDEX")
+            CURSEFORGE_HTTP_CODE=$(echo "$CURSEFORGE_RESPONSE" | tail -n1)
+            CURSEFORGE_BODY=$(echo "$CURSEFORGE_RESPONSE" | sed '$d')
+
+            if [ "$CURSEFORGE_HTTP_CODE" -eq 200 ] && [ -n "$CURSEFORGE_BODY" ]; then
+              PAGE_DOWNLOADS=$(echo "$CURSEFORGE_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(mod['downloadCount'] for mod in data['data']))" 2>/dev/null || echo "0")
+              RESULT_COUNT=$(echo "$CURSEFORGE_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(data['pagination']['resultCount'])" 2>/dev/null || echo "0")
+
+              CURSEFORGE_TOTAL=$((CURSEFORGE_TOTAL + PAGE_DOWNLOADS))
+              CURSEFORGE_SUCCESS=true
+
+              echo "Fetched page at index $INDEX: $PAGE_DOWNLOADS downloads, $RESULT_COUNT mods"
+
+              # Break if we got fewer results than page size (last page)
+              if [ "$RESULT_COUNT" -lt 50 ]; then
+                break
+              fi
+
+              INDEX=$((INDEX + 50))
+            else
+              echo "Warning: CurseForge API failed (HTTP $CURSEFORGE_HTTP_CODE) at index $INDEX"
+              if [ "$INDEX" -eq 0 ]; then
+                # First request failed, use fallback
+                CURSEFORGE_TOTAL=$(jq -r '.curseforge // 0' static/data/downloads.json 2>/dev/null || echo "0")
+                CURSEFORGE_SUCCESS=false
+              fi
+              break
+            fi
+          done
+
+          echo "CurseForge total downloads: $CURSEFORGE_TOTAL"
 
           # Fetch Modrinth downloads with error handling
           MODRINTH_RESPONSE=$(curl -s -w "\n%{http_code}" 'https://api.modrinth.com/v2/user/PEiFMA4y/projects')
@@ -75,4 +99,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add static/data/downloads.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update download counts [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update download counts [skip ci]" && git pull --rebase && git push)
