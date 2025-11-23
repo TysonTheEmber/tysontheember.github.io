@@ -2,8 +2,8 @@ name: Update Download Counts
 
 on:
   schedule:
-    # Run every 6 hours
-    - cron: '0 */6 * * *'
+    # Run every hour
+    - cron: '0 * * * *'
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -22,21 +22,41 @@ jobs:
         env:
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
         run: |
-          # Fetch Modrinth downloads
-          MODRINTH_TOTAL=$(curl -s 'https://api.modrinth.com/v2/user/PEiFMA4y/projects' | \
-            python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(p['downloads'] for p in data))")
+          # Fetch CurseForge downloads with error handling
+          CURSEFORGE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "x-api-key: $CURSEFORGE_API_KEY" \
+            'https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&pageSize=50')
+          CURSEFORGE_HTTP_CODE=$(echo "$CURSEFORGE_RESPONSE" | tail -n1)
+          CURSEFORGE_BODY=$(echo "$CURSEFORGE_RESPONSE" | sed '$d')
 
-          # Fetch CurseForge downloads
-          CURSEFORGE_TOTAL=$(curl -s -H "x-api-key: $CURSEFORGE_API_KEY" \
-            'https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&pageSize=50' | \
-            python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(mod['downloadCount'] for mod in data['data']))")
+          if [ "$CURSEFORGE_HTTP_CODE" -eq 200 ] && [ -n "$CURSEFORGE_BODY" ]; then
+            CURSEFORGE_TOTAL=$(echo "$CURSEFORGE_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(mod['downloadCount'] for mod in data['data']))" 2>/dev/null || echo "0")
+            CURSEFORGE_SUCCESS=true
+          else
+            echo "Warning: CurseForge API failed (HTTP $CURSEFORGE_HTTP_CODE), using previous value"
+            CURSEFORGE_TOTAL=$(jq -r '.curseforge // 0' static/data/downloads.json 2>/dev/null || echo "0")
+            CURSEFORGE_SUCCESS=false
+          fi
+
+          # Fetch Modrinth downloads with error handling
+          MODRINTH_RESPONSE=$(curl -s -w "\n%{http_code}" 'https://api.modrinth.com/v2/user/PEiFMA4y/projects')
+          MODRINTH_HTTP_CODE=$(echo "$MODRINTH_RESPONSE" | tail -n1)
+          MODRINTH_BODY=$(echo "$MODRINTH_RESPONSE" | sed '$d')
+
+          if [ "$MODRINTH_HTTP_CODE" -eq 200 ] && [ -n "$MODRINTH_BODY" ]; then
+            MODRINTH_TOTAL=$(echo "$MODRINTH_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(p['downloads'] for p in data))" 2>/dev/null || echo "0")
+          else
+            echo "Warning: Modrinth API failed (HTTP $MODRINTH_HTTP_CODE), using CurseForge only"
+            MODRINTH_TOTAL=0
+          fi
 
           # Calculate total
           TOTAL=$((MODRINTH_TOTAL + CURSEFORGE_TOTAL))
 
-          # Create JSON file
-          mkdir -p static/data
-          cat > static/data/downloads.json << EOF
+          # Only update if CurseForge succeeded
+          if [ "$CURSEFORGE_SUCCESS" = true ]; then
+            # Create JSON file
+            mkdir -p static/data
+            cat > static/data/downloads.json << EOF
           {
             "modrinth": $MODRINTH_TOTAL,
             "curseforge": $CURSEFORGE_TOTAL,
@@ -44,8 +64,11 @@ jobs:
             "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
           }
           EOF
-
-          echo "Total downloads: $TOTAL (Modrinth: $MODRINTH_TOTAL, CurseForge: $CURSEFORGE_TOTAL)"
+            echo "Total downloads: $TOTAL (Modrinth: $MODRINTH_TOTAL, CurseForge: $CURSEFORGE_TOTAL)"
+          else
+            echo "Error: CurseForge API failed, keeping existing data"
+            exit 1
+          fi
 
       - name: Commit and push if changed
         run: |
