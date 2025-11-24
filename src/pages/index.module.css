@@ -73,44 +73,49 @@
     transform: translateY(0) translateX(0) scale(1) rotate(0deg);
     opacity: 0;
   }
-  3% {
+  5% {
     opacity: 0.8;
+    transform: translateY(-5vh) translateX(calc(var(--wind-offset, 0px) * 0.05)) scale(1.02) rotate(18deg);
   }
-  8% {
+  10% {
     opacity: 1;
-    transform: translateY(-8vh) translateX(5px) scale(1.05) rotate(25deg);
+    transform: translateY(-10vh) translateX(calc(var(--wind-offset, 0px) * 0.1)) scale(1.0) rotate(36deg);
   }
-  18% {
+  20% {
     opacity: 0.95;
-    transform: translateY(-18vh) translateX(-8px) scale(1.02) rotate(70deg);
+    transform: translateY(-20vh) translateX(calc(var(--wind-offset, 0px) * 0.2)) scale(0.98) rotate(72deg);
   }
-  28% {
+  30% {
     opacity: 0.9;
-    transform: translateY(-28vh) translateX(calc(var(--wind-offset, 0px) * 0.25 + 12px)) scale(0.98) rotate(120deg);
+    transform: translateY(-30vh) translateX(calc(var(--wind-offset, 0px) * 0.3)) scale(0.95) rotate(108deg);
   }
-  38% {
+  40% {
     opacity: 0.85;
-    transform: translateY(-38vh) translateX(calc(var(--wind-offset, 0px) * 0.35 - 6px)) scale(0.95) rotate(160deg);
+    transform: translateY(-40vh) translateX(calc(var(--wind-offset, 0px) * 0.4)) scale(0.92) rotate(144deg);
   }
   50% {
     opacity: 0.8;
-    transform: translateY(-50vh) translateX(calc(var(--wind-offset, 0px) * 0.5 + 10px)) scale(0.88) rotate(200deg);
+    transform: translateY(-50vh) translateX(calc(var(--wind-offset, 0px) * 0.5)) scale(0.88) rotate(180deg);
   }
-  62% {
+  60% {
     opacity: 0.7;
-    transform: translateY(-62vh) translateX(calc(var(--wind-offset, 0px) * 0.65 - 8px)) scale(0.75) rotate(245deg);
+    transform: translateY(-60vh) translateX(calc(var(--wind-offset, 0px) * 0.6)) scale(0.82) rotate(216deg);
   }
-  75% {
-    opacity: 0.55;
-    transform: translateY(-75vh) translateX(calc(var(--wind-offset, 0px) * 0.8 + 5px)) scale(0.6) rotate(290deg);
+  70% {
+    opacity: 0.6;
+    transform: translateY(-70vh) translateX(calc(var(--wind-offset, 0px) * 0.7)) scale(0.75) rotate(252deg);
   }
-  88% {
-    opacity: 0.35;
-    transform: translateY(-88vh) translateX(calc(var(--wind-offset, 0px) * 0.92 - 3px)) scale(0.45) rotate(330deg);
+  80% {
+    opacity: 0.45;
+    transform: translateY(-80vh) translateX(calc(var(--wind-offset, 0px) * 0.8)) scale(0.65) rotate(288deg);
+  }
+  90% {
+    opacity: 0.25;
+    transform: translateY(-90vh) translateX(calc(var(--wind-offset, 0px) * 0.9)) scale(0.5) rotate(324deg);
   }
   95% {
-    opacity: 0.15;
-    transform: translateY(-95vh) translateX(calc(var(--wind-offset, 0px) - 2px)) scale(0.35) rotate(350deg);
+    opacity: 0.1;
+    transform: translateY(-95vh) translateX(calc(var(--wind-offset, 0px) * 0.95)) scale(0.4) rotate(342deg);
   }
   100% {
     transform: translateY(-105vh) translateX(calc(var(--wind-offset, 0px))) scale(0.3) rotate(360deg);
