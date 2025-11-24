@@ -33,6 +33,10 @@ export default function EmberCanvas({className}: EmberCanvasProps) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Disable on mobile devices for performance
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobile) return;
+
     const ctx = canvas.getContext('2d', {alpha: true});
     if (!ctx) return;
 
@@ -78,7 +82,7 @@ export default function EmberCanvas({className}: EmberCanvasProps) {
         x: Math.random() * rect.width,
         y: rect.height,
         vx: (Math.random() - 0.5) * 0.15,
-        vy: -(0.4 + Math.random() * 0.4) * (0.3 + layer * 0.7),
+        vy: -(0.3 + Math.random() * 0.3) * (0.3 + layer * 0.7),
         size: baseSize,
         baseSize: baseSize,
         opacity: 0,
@@ -162,7 +166,7 @@ export default function EmberCanvas({className}: EmberCanvasProps) {
       particle.y += particle.vy;
 
       // Rising force (buoyancy)
-      particle.vy -= 0.008;
+      particle.vy -= 0.006;
 
       // Calculate stretch based on velocity (subtle motion blur effect)
       const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);

@@ -42,7 +42,7 @@
 }
 
 [data-theme='dark'] .hero--primary {
-  background: linear-gradient(135deg, #2a1a12 0%, #3d2415 50%, #4a2e1a 100%);
+  background: radial-gradient(circle at center, #0f0a08 0%, #1f1510 50%, #2f2018 100%);
   border-bottom: 3px solid #ff8c42;
 }
 
