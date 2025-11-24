@@ -9,6 +9,10 @@
   position: relative;
   overflow: hidden;
   background: radial-gradient(circle at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 0.6) 100%);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .emberBackground {

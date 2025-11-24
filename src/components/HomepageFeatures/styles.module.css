@@ -14,6 +14,11 @@
   height: 128px;
   width: 128px;
   object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
 }
 
 .featureLink {
