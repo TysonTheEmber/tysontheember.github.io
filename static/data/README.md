@@ -11,6 +11,7 @@ It contains:
 - `curseforge`: Total downloads from all CurseForge projects
 - `total`: Combined total downloads
 - `lastUpdated`: ISO 8601 timestamp of last update
+- `projects`: Per-project breakdown keyed by slug (used on the homepage cards)
 
 ## Setup
 

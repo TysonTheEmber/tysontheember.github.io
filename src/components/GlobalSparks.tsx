@@ -1,4 +1,5 @@
 import {useEffect, useRef} from 'react';
+import {useSettings} from '@site/src/contexts/SettingsContext';
 
 interface Spark {
   x: number;
@@ -17,26 +18,30 @@ export default function GlobalSparks() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const sparksRef = useRef<Spark[]>([]);
+  const {sparksEnabled} = useSettings();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) {
-      console.log('GlobalSparks: Canvas ref not available');
-      return;
-    }
+    if (!canvas) return;
+
+    // Disable on mobile devices for performance
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                     window.innerWidth < 768 ||
+                     ('ontouchstart' in window) ||
+                     (navigator.maxTouchPoints > 0);
+    if (isMobile) return;
 
     const ctx = canvas.getContext('2d', {alpha: true});
-    if (!ctx) {
-      console.log('GlobalSparks: Could not get 2D context');
-      return;
-    }
-
-    console.log('GlobalSparks: Initialized successfully');
+    if (!ctx) return;
 
     // Set canvas size to cover entire viewport
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
     };
 
     resizeCanvas();
@@ -45,17 +50,17 @@ export default function GlobalSparks() {
     // Create spark particle on click
     const createSpark = (x: number, y: number): Spark => {
       const angle = Math.random() * Math.PI * 2;
-      const speed = 3 + Math.random() * 5;
+      const speed = 4 + Math.random() * 5.5;
 
       return {
         x: x,
         y: y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
-        size: 3 + Math.random() * 4,
+        size: 1.2 + Math.random() * 1.6,
         opacity: 1,
         life: 0,
-        maxLife: 40 + Math.random() * 30,
+        maxLife: 28 + Math.random() * 18,
         stretch: 1,
         angle: 0,
       };
@@ -63,16 +68,19 @@ export default function GlobalSparks() {
 
     // Handle click events globally
     const handleClick = (event: MouseEvent) => {
+      if (!sparksEnabled) return;
+
+      // Prevent runaway particle counts
+      if (sparksRef.current.length > 140) return;
+
       const x = event.clientX;
       const y = event.clientY;
-      console.log('GlobalSparks: Click detected at', x, y);
 
-      // Create 8-15 sparks at click location
-      const sparkCount = 8 + Math.floor(Math.random() * 8);
+      // Create a handful of sparks at click location
+      const sparkCount = 6 + Math.floor(Math.random() * 6);
       for (let i = 0; i < sparkCount; i++) {
         sparksRef.current.push(createSpark(x, y));
       }
-      console.log('GlobalSparks: Created', sparkCount, 'sparks. Total:', sparksRef.current.length);
     };
 
     document.addEventListener('click', handleClick);
@@ -85,18 +93,18 @@ export default function GlobalSparks() {
       spark.opacity = Math.max(0, 1 - spark.life / spark.maxLife);
 
       // Apply gravity to sparks
-      spark.vy += 0.15;
+      spark.vy += 0.14;
 
       // Apply drag
-      spark.vx *= 0.96;
-      spark.vy *= 0.96;
+      spark.vx *= 0.99;
+      spark.vy *= 0.99;
 
       spark.x += spark.vx;
       spark.y += spark.vy;
 
       // Calculate angle and stretch for sparks
       const speed = Math.sqrt(spark.vx * spark.vx + spark.vy * spark.vy);
-      spark.stretch = 1 + Math.min(speed * 0.3, 1.5);
+      spark.stretch = 1.2 + Math.min(speed * 0.45, 2);
       spark.angle = Math.atan2(spark.vy, spark.vx) + Math.PI / 2;
     };
 
@@ -109,26 +117,38 @@ export default function GlobalSparks() {
       ctx.rotate(spark.angle);
 
       const baseAlpha = spark.opacity;
-      const glowRadius = spark.size * 3;
-      const glowRadiusStretched = glowRadius * spark.stretch;
+      const glowRadius = spark.size * 2.2;
+      const glowRadiusStretched = glowRadius * (spark.stretch * 1.6);
+      const coreLength = glowRadiusStretched * 1.2;
 
       const gradient = ctx.createRadialGradient(
         0, 0, 0,
         0, 0, glowRadius
       );
 
-      // Bright yellow-white spark
-      gradient.addColorStop(0, `rgba(255, 255, 220, ${baseAlpha})`);
-      gradient.addColorStop(0.2, `rgba(255, 240, 180, ${baseAlpha * 0.9})`);
-      gradient.addColorStop(0.4, `rgba(255, 200, 100, ${baseAlpha * 0.7})`);
-      gradient.addColorStop(0.6, `rgba(255, 160, 60, ${baseAlpha * 0.4})`);
-      gradient.addColorStop(0.8, `rgba(255, 120, 30, ${baseAlpha * 0.2})`);
-      gradient.addColorStop(1, `rgba(255, 80, 0, 0)`);
+      // Bright, tight spark with a hot core and quick falloff (warmer/orange)
+      gradient.addColorStop(0, `rgba(255, 245, 225, ${baseAlpha})`);
+      gradient.addColorStop(0.15, `rgba(255, 225, 185, ${baseAlpha})`);
+      gradient.addColorStop(0.35, `rgba(255, 195, 120, ${baseAlpha * 0.85})`);
+      gradient.addColorStop(0.55, `rgba(255, 150, 70, ${baseAlpha * 0.55})`);
+      gradient.addColorStop(0.7, `rgba(255, 110, 35, ${baseAlpha * 0.28})`);
+      gradient.addColorStop(1, `rgba(235, 80, 10, 0)`);
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.ellipse(0, 0, glowRadius, glowRadiusStretched, 0, 0, Math.PI * 2);
       ctx.fill();
+
+      // Crisp core streak for a sharper spark feel
+      ctx.strokeStyle = `rgba(255, 220, 160, ${baseAlpha})`;
+      ctx.lineWidth = Math.max(1, spark.size * 0.65);
+      ctx.lineCap = 'round';
+      ctx.shadowColor = `rgba(255, 190, 110, ${baseAlpha * 0.35})`;
+      ctx.shadowBlur = spark.size * 1.6;
+      ctx.beginPath();
+      ctx.moveTo(0, -coreLength * 0.6);
+      ctx.lineTo(0, coreLength * 0.6);
+      ctx.stroke();
 
       ctx.restore();
     };
@@ -162,7 +182,7 @@ export default function GlobalSparks() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [sparksEnabled]);
 
   return (
     <canvas
@@ -174,7 +194,7 @@ export default function GlobalSparks() {
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        zIndex: 9999,
+        zIndex: 999999,
       }}
     />
   );

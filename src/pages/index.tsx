@@ -13,17 +13,19 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   const [totalDownloads, setTotalDownloads] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchTotalDownloads = async () => {
       try {
         // Fetch pre-computed download counts from static file
         // This file is updated every 6 hours by GitHub Actions
-        const response = await fetch('/data/downloads.json');
+        const response = await fetch('/data/downloads.json', {cache: 'no-store'});
         const data = await response.json();
         setTotalDownloads(data.total);
       } catch (error) {
         console.error('Error fetching downloads:', error);
+        setError(true);
       }
       setLoading(false);
     };
@@ -52,6 +54,8 @@ function HomepageHeader() {
         <div className={styles.downloads}>
           {loading ? (
             <div>Loading downloads...</div>
+          ) : error ? (
+            <div>Downloads temporarily unavailable</div>
           ) : totalDownloads !== null ? (
             <div className={styles.downloadCount}>
               <strong>{formatDownloads(totalDownloads)}</strong> total downloads

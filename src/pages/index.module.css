@@ -44,6 +44,25 @@
   }
 }
 
+/* Optimize for mobile performance */
+@media screen and (max-width: 768px) {
+  .heroBanner {
+    /* Simpler background for mobile performance */
+    background: rgba(0, 0, 0, 0.7);
+    will-change: auto;
+  }
+
+  .heroBanner h1 {
+    /* Reduce text-shadow complexity on mobile */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: none;
+  }
+
+  .heroBanner p {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  }
+}
+
 .buttons {
   display: flex;
   align-items: center;

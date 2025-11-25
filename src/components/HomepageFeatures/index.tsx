@@ -5,6 +5,20 @@ import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+type ProjectDownloads = {
+  modrinth?: number;
+  curseforge?: number;
+  total?: number;
+};
+
+type DownloadsData = {
+  modrinth?: number;
+  curseforge?: number;
+  total?: number;
+  lastUpdated?: string;
+  projects?: Record<string, ProjectDownloads>;
+};
+
 type FeatureItem = {
   title: string;
   image: string;
@@ -51,7 +65,6 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     curseforgeSlug: 'spelunkery-plus',
-    modrinthSlug: 'spelunkery-plus',
   },
   {
     title: 'Orbital Railgun Reforged',
@@ -63,51 +76,24 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
     curseforgeSlug: 'orbital-railgun-reforged',
-    modrinthSlug: 'orbital-railgun-reforged',
   },
 ];
 
-function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}: FeatureItem) {
-  const [curseforgeDownloads, setCurseforgeDownloads] = useState<number | null>(null);
-  const [modrinthDownloads, setModrinthDownloads] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const promises = [];
-
-      if (curseforgeSlug) {
-        promises.push(
-          fetch(`https://api.cfwidget.com/minecraft/mc-mods/${curseforgeSlug}`)
-            .then(res => res.json())
-            .then(data => {
-              if (data.downloads?.total) {
-                setCurseforgeDownloads(data.downloads.total);
-              }
-            })
-            .catch(() => {})
-        );
-      }
-
-      if (modrinthSlug) {
-        promises.push(
-          fetch(`https://api.modrinth.com/v2/project/${modrinthSlug}`)
-            .then(res => res.json())
-            .then(data => {
-              if (data.downloads) {
-                setModrinthDownloads(data.downloads);
-              }
-            })
-            .catch(() => {})
-        );
-      }
-
-      await Promise.all(promises);
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [curseforgeSlug, modrinthSlug]);
+function Feature({
+  title,
+  image,
+  description,
+  link,
+  curseforgeSlug,
+  modrinthSlug,
+  downloadsData,
+  downloadsLoading,
+  downloadsError,
+}: FeatureItem & {
+  downloadsData: DownloadsData | null;
+  downloadsLoading: boolean;
+  downloadsError: boolean;
+}) {
 
   const formatDownloads = (count: number | null): string => {
     if (count === null) return '...';
@@ -120,13 +106,29 @@ function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}
     return count.toString();
   };
 
-  const totalDownloads = (curseforgeDownloads ?? 0) + (modrinthDownloads ?? 0);
+  const projectKey = curseforgeSlug ?? modrinthSlug;
+  const projectData = projectKey ? downloadsData?.projects?.[projectKey] : undefined;
+  const curseforgeDownloads = projectData?.curseforge;
+  const modrinthDownloads = projectData?.modrinth;
+  const totalDownloads =
+    projectData?.total ??
+    ((curseforgeDownloads ?? 0) + (modrinthDownloads ?? 0));
+
+  const imageElement = (
+    <div className="text--center">
+      <img src={image} className={styles.featureImg} alt={title} />
+    </div>
+  );
 
   const content = (
     <>
-      <div className="text--center">
-        <img src={image} className={styles.featureImg} alt={title} />
-      </div>
+      {link ? (
+        <Link to={link} style={{textDecoration: 'none', color: 'inherit', display: 'block'}}>
+          {imageElement}
+        </Link>
+      ) : (
+        imageElement
+      )}
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
@@ -138,19 +140,25 @@ function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}
           )}
           {(curseforgeSlug || modrinthSlug) && (
             <>
-              {loading ? (
+              {downloadsLoading ? (
                 <div style={{fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>Loading downloads...</div>
+              ) : downloadsError ? (
+                <div style={{fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>Downloads unavailable right now</div>
               ) : (
                 <>
-                  {(curseforgeDownloads !== null || modrinthDownloads !== null) && (
+                  {(projectData && totalDownloads !== null) ? (
                     <div style={{marginTop: '0.5rem', fontSize: '0.9rem'}}>
                       <div style={{marginBottom: '0.25rem', fontWeight: 'bold'}}>
                         {formatDownloads(totalDownloads)} total downloads
                       </div>
                     </div>
+                  ) : (
+                    <div style={{marginTop: '0.5rem', fontSize: '0.9rem', color: 'var(--ifm-color-emphasis-600)'}}>
+                      No download data yet
+                    </div>
                   )}
                   <div style={{fontSize: '0.9rem', display: 'flex', gap: '1rem'}}>
-                    {curseforgeDownloads !== null && curseforgeSlug && (
+                    {curseforgeDownloads !== undefined && curseforgeDownloads !== null && curseforgeSlug && (
                       <div>
                         <a
                           href={`https://www.curseforge.com/minecraft/mc-mods/${curseforgeSlug}`}
@@ -163,7 +171,7 @@ function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}
                         {' '}({formatDownloads(curseforgeDownloads)})
                       </div>
                     )}
-                    {modrinthSlug && modrinthDownloads !== null && (
+                    {modrinthSlug && modrinthDownloads !== undefined && modrinthDownloads !== null && (
                       <div>
                         <a
                           href={`https://modrinth.com/mod/${modrinthSlug}`}
@@ -193,16 +201,61 @@ function Feature({title, image, description, link, curseforgeSlug, modrinthSlug}
   );
 }
 
-export default function HomepageFeatures(): ReactNode {
+function FeaturesGrid({
+  downloadsData,
+  downloadsLoading,
+  downloadsError,
+}: {
+  downloadsData: DownloadsData | null;
+  downloadsLoading: boolean;
+  downloadsError: boolean;
+}): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
         <div className="row">
           {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+            <Feature
+              key={idx}
+              {...props}
+              downloadsData={downloadsData}
+              downloadsLoading={downloadsLoading}
+              downloadsError={downloadsError}
+            />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+export default function HomepageFeatures(): ReactNode {
+  const [downloadsData, setDownloadsData] = useState<DownloadsData | null>(null);
+  const [downloadsLoading, setDownloadsLoading] = useState(true);
+  const [downloadsError, setDownloadsError] = useState(false);
+
+  useEffect(() => {
+    const fetchDownloads = async () => {
+      try {
+        const response = await fetch('/data/downloads.json', {cache: 'no-store'});
+        const data = await response.json();
+        setDownloadsData(data);
+      } catch (err) {
+        console.error('Error fetching project downloads', err);
+        setDownloadsError(true);
+      } finally {
+        setDownloadsLoading(false);
+      }
+    };
+
+    fetchDownloads();
+  }, []);
+
+  return (
+    <FeaturesGrid
+      downloadsData={downloadsData}
+      downloadsLoading={downloadsLoading}
+      downloadsError={downloadsError}
+    />
   );
 }

@@ -76,6 +76,46 @@ jobs:
           # Calculate total
           TOTAL=$((MODRINTH_TOTAL + CURSEFORGE_TOTAL))
 
+          # Per-project download breakdown (used by homepage cards)
+          declare -A PROJECT_CURSEFORGE
+          declare -A PROJECT_MODRINTH
+          PROJECT_SLUGS=("embers-text-api" "aperture-api" "spelunkery-plus" "orbital-railgun-reforged" "echoes-of-battle")
+
+          for SLUG in "${PROJECT_SLUGS[@]}"; do
+            MODRINTH_PROJECT=$(curl -s -w "\n%{http_code}" "https://api.modrinth.com/v2/project/$SLUG")
+            MODRINTH_PROJECT_HTTP=$(echo "$MODRINTH_PROJECT" | tail -n1)
+            MODRINTH_PROJECT_BODY=$(echo "$MODRINTH_PROJECT" | sed '$d')
+            if [ "$MODRINTH_PROJECT_HTTP" -eq 200 ] && [ -n "$MODRINTH_PROJECT_BODY" ]; then
+              PROJECT_MODRINTH[$SLUG]=$(echo "$MODRINTH_PROJECT_BODY" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('downloads', 0))" 2>/dev/null || echo "0")
+            else
+              # Fallback to prior data if available
+              PROJECT_MODRINTH[$SLUG]=$(jq -r --arg slug "$SLUG" '.projects[$slug].modrinth // 0' static/data/downloads.json 2>/dev/null || echo "0")
+            fi
+          done
+
+          for SLUG in "${PROJECT_SLUGS[@]}"; do
+            CURSEFORGE_PROJECT=$(curl -s -w "\n%{http_code}" -H "x-api-key: $CURSEFORGE_API_KEY" \
+              "https://api.curseforge.com/v1/mods/search?gameId=432&authorId=103107110&slug=$SLUG&pageSize=1")
+            CURSEFORGE_PROJECT_HTTP=$(echo "$CURSEFORGE_PROJECT" | tail -n1)
+            CURSEFORGE_PROJECT_BODY=$(echo "$CURSEFORGE_PROJECT" | sed '$d')
+            if [ "$CURSEFORGE_PROJECT_HTTP" -eq 200 ] && [ -n "$CURSEFORGE_PROJECT_BODY" ]; then
+              PROJECT_CURSEFORGE[$SLUG]=$(echo "$CURSEFORGE_PROJECT_BODY" | python3 -c "import sys, json; data=json.load(sys.stdin); mods=data.get('data') or []; print(mods[0].get('downloadCount', 0) if mods else 0)" 2>/dev/null || echo "0")
+            else
+              PROJECT_CURSEFORGE[$SLUG]=$(jq -r --arg slug "$SLUG" '.projects[$slug].curseforge // 0' static/data/downloads.json 2>/dev/null || echo "0")
+            fi
+          done
+
+          PROJECTS_JSON="{"
+          for SLUG in "${PROJECT_SLUGS[@]}"; do
+            CF=${PROJECT_CURSEFORGE[$SLUG]:-0}
+            MR=${PROJECT_MODRINTH[$SLUG]:-0}
+            PROJECT_TOTAL=$((CF + MR))
+            PROJECTS_JSON+="\"$SLUG\": {\"curseforge\": $CF, \"modrinth\": $MR, \"total\": $PROJECT_TOTAL},"
+          done
+          # Trim trailing comma
+          PROJECTS_JSON="${PROJECTS_JSON%,}"
+          PROJECTS_JSON="${PROJECTS_JSON}}"
+
           # Only update if CurseForge succeeded
           if [ "$CURSEFORGE_SUCCESS" = true ]; then
             # Create JSON file
@@ -85,7 +125,8 @@ jobs:
             "modrinth": $MODRINTH_TOTAL,
             "curseforge": $CURSEFORGE_TOTAL,
             "total": $TOTAL,
-            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "projects": $PROJECTS_JSON
           }
           EOF
             echo "Total downloads: $TOTAL (Modrinth: $MODRINTH_TOTAL, CurseForge: $CURSEFORGE_TOTAL)"

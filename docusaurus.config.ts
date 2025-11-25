@@ -116,36 +116,6 @@ const config: Config = {
           type: 'search',
           position: 'right',
         },
-        {
-          href: 'https://modrinth.com/user/TysonTheEmber',
-          position: 'right',
-          className: 'header-modrinth-link',
-          'aria-label': 'Modrinth profile',
-        },
-        {
-          href: 'https://www.curseforge.com/members/tysontheember/projects',
-          position: 'right',
-          className: 'header-curseforge-link',
-          'aria-label': 'CurseForge profile',
-        },
-        {
-          href: 'https://discord.gg/GCN2Hv4Qzr',
-          position: 'right',
-          className: 'header-discord-link',
-          'aria-label': 'Discord server',
-        },
-        {
-          href: 'https://www.youtube.com/@tysontheember',
-          position: 'right',
-          className: 'header-youtube-link',
-          'aria-label': 'YouTube channel',
-        },
-        {
-          href: 'https://github.com/TysonTheEmber',
-          position: 'right',
-          className: 'header-github-link',
-          'aria-label': 'GitHub repository',
-        },
       ],
     },
     footer: {

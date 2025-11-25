@@ -34,8 +34,14 @@ export default function EmberCanvas({className}: EmberCanvasProps) {
     if (!canvas) return;
 
     // Disable on mobile devices for performance
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    if (isMobile) return;
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                     window.innerWidth < 768 ||
+                     ('ontouchstart' in window) ||
+                     (navigator.maxTouchPoints > 0);
+    if (isMobile) {
+      console.log('EmberCanvas: Disabled on mobile device');
+      return;
+    }
 
     const ctx = canvas.getContext('2d', {alpha: true});
     if (!ctx) return;
@@ -46,7 +52,8 @@ export default function EmberCanvas({className}: EmberCanvasProps) {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
+      // Reset transform before scaling so repeated resizes don't compound scale
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
     };
