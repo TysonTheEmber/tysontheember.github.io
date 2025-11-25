@@ -18,7 +18,7 @@ import NavbarLogo from '@theme/Navbar/Logo';
 import NavbarSearch from '@theme/Navbar/Search';
 import SettingsMenu from '@site/src/components/SettingsMenu';
 import NavbarIcon from '@site/src/components/NavbarIcon';
-import styles from '@theme/Navbar/Content/styles.module.css';
+import styles from './styles.module.css';
 
 function useNavbarItems(): NavbarItemConfig[] {
   return useThemeConfig().navbar.items;
