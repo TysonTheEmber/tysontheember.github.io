@@ -78,4 +78,14 @@ a:hover .featureImg {
   .featureImg {
     margin-bottom: 1.5rem;
   }
+
+  /* Add bottom padding to each feature column on mobile */
+  .features :global(.col) {
+    margin-bottom: 3rem;
+  }
+
+  /* Remove extra margin from last item */
+  .features :global(.col):last-child {
+    margin-bottom: 0;
+  }
 }
