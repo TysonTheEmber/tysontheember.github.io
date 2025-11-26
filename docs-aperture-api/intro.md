@@ -27,12 +27,14 @@ Create stunning Minecraft cinematics with a fully-featured camera path system su
 
 ## Installation
 
-Download the latest version from:
-- [GitHub Releases](https://github.com/TysonTheEmber/Aperture-API)
-- [Modrinth](https://modrinth.com/user/TysonTheEmber)
-- [CurseForge](https://www.curseforge.com/members/tysontheember/projects)
+1. Download the latest version from:
+   - [Modrinth](https://modrinth.com/mod/aperture-api)
+   - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aperture-api)
+   - [GitHub](https://github.com/TysonTheEmber/Aperture-API)
 
-Place the `.jar` file in your Minecraft `mods` folder and launch with Forge 1.20.1.
+2. Place the `.jar` file in your Minecraft `mods` folder
+
+3. Launch Minecraft with Forge 1.20.1
 
 ## Quick Start
 

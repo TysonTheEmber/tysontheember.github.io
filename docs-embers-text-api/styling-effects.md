@@ -13,7 +13,7 @@ Learn how to create visually stunning text overlays with colors, gradients, anim
 Apply a single color to your entire text:
 
 **Command:**
-```
+```mcfunction
 /emberstextapi sendcustom @p {color:0xFF0000} 100 "Red text"
 ```
 
@@ -48,12 +48,12 @@ Use an online hex color picker to find the perfect color code for your text!
 Create smooth color transitions across your text:
 
 **Two-Color Gradient:**
-```
+```mcfunction
 /emberstextapi sendcustom @p {gradient:[0xFF0000,0x0000FF]} 100 "Red to Blue"
 ```
 
 **Multi-Color Gradient:**
-```
+```mcfunction
 /emberstextapi sendcustom @p {gradient:[0xFF0000,0xFFFF00,0x00FF00]} 100 "Rainbow!"
 ```
 

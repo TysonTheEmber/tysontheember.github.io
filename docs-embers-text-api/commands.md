@@ -22,7 +22,7 @@ Test the mod's functionality by displaying one of nine built-in demo effects.
 
 ### Syntax
 
-```
+```mcfunction
 /emberstextapi test <id>
 ```
 
@@ -32,7 +32,7 @@ Test the mod's functionality by displaying one of nine built-in demo effects.
 
 ### Examples
 
-```
+```mcfunction
 /emberstextapi test 1
 /emberstextapi test 5
 /emberstextapi test 9
@@ -64,7 +64,7 @@ Send a basic text message to one or more players with optional fade effects.
 
 ### Syntax
 
-```
+```mcfunction
 /emberstextapi send <player> <duration> [fadeIn] [fadeOut] <text>
 ```
 
@@ -84,7 +84,7 @@ Send a basic text message to one or more players with optional fade effects.
 
 #### Basic Message
 
-```
+```mcfunction
 /emberstextapi send @p 100 "Hello, World!"
 ```
 
@@ -92,7 +92,7 @@ Displays "Hello, World!" to the nearest player for 5 seconds.
 
 #### With Fade Effects
 
-```
+```mcfunction
 /emberstextapi send @a 200 20 20 "Welcome to the server!"
 ```
 
@@ -103,7 +103,7 @@ Displays "Hello, World!" to the nearest player for 5 seconds.
 
 #### Targeting Specific Players
 
-```
+```mcfunction
 /emberstextapi send Steve 60 "Quest completed!"
 ```
 
@@ -111,7 +111,7 @@ Shows message to player "Steve" for 3 seconds.
 
 #### Longer Duration
 
-```
+```mcfunction
 /emberstextapi send @p 600 40 40 "This is an important announcement"
 ```
 
@@ -121,7 +121,7 @@ Shows message to player "Steve" for 3 seconds.
 
 #### Using Formatting Codes
 
-```
+```mcfunction
 /emberstextapi send @p 100 "§6Gold Text §r§bBlue Text"
 ```
 
@@ -145,7 +145,7 @@ Send a message with full control using NBT data. This is the most powerful comma
 
 ### Syntax
 
-```
+```mcfunction
 /emberstextapi sendcustom <player> <nbt> <duration> <text>
 ```
 
@@ -173,7 +173,7 @@ All available NBT tags are documented in the [NBT Configuration](nbt-configurati
 
 #### Gradient Text
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {gradient:[0xFF0000,0x0000FF]} 100 "Rainbow Text"
 ```
 
@@ -181,7 +181,7 @@ Creates text with a red-to-blue gradient.
 
 #### Centered with Typewriter Effect
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {anchor:"CENTER_CENTER",typewriter:2.0f,typewriterCenter:1b} 150 "Dramatic entrance..."
 ```
 
@@ -191,7 +191,7 @@ Creates text with a red-to-blue gradient.
 
 #### With Background
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {bgColor:0x000000,bgGradient:[0x330000,0x003300]} 100 "Styled Message"
 ```
 
@@ -199,7 +199,7 @@ Adds a black background with red-to-green gradient border.
 
 #### Shake Animation
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {shakeWave:1.5f} 80 "Wobbly Text!"
 ```
 
@@ -207,7 +207,7 @@ Applies a wave shake effect with 1.5 intensity.
 
 #### Complex Configuration
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {
   anchor:"TOP_CENTER",
   align:"CENTER",
@@ -230,7 +230,7 @@ This creates:
 
 #### Character-Level Shake
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {charShakeRandom:2.0f} 100 "Chaotic Energy!"
 ```
 
@@ -238,7 +238,7 @@ Each character shakes independently with random movement.
 
 #### Obfuscation with Reveal
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {obfuscate:1b,obfuscateReveal:"LEFT_TO_RIGHT"} 120 "Secret Message"
 ```
 
@@ -246,7 +246,7 @@ Text starts obfuscated and reveals from left to right.
 
 #### Custom Font and Wrapping
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {
   font:"minecraft:uniform",
   wrap:200,
@@ -274,11 +274,11 @@ All commands support Minecraft's target selector system:
 
 You can also use selector arguments:
 
-```
+```mcfunction
 /emberstextapi send @a[team=red] 100 "Red team message!"
 ```
 
-```
+```mcfunction
 /emberstextapi send @p[distance=..10] 60 "You're close!"
 ```
 
@@ -313,7 +313,7 @@ By default, all Embers Text API commands require operator level 2. Configure per
 
 ### Permission Nodes
 
-```
+```yaml
 emberstextapi.command.test
 emberstextapi.command.send
 emberstextapi.command.sendcustom

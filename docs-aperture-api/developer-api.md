@@ -24,17 +24,19 @@ Aperture API provides a clean, minimal public API for:
 ```gradle
 repositories {
     maven {
-        name = "TysonTheEmber's Maven"
-        url = "https://maven.tysontheember.net/releases"
+        url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
     }
 }
 
 dependencies {
-    implementation fg.deobf("net.tysontheember:apertureapi:VERSION")
+    implementation fg.deobf("curse.maven:aperture-api-PROJECT_ID:FILE_ID")
 }
 ```
 
-Replace `VERSION` with the specific Aperture API version you want to use.
+Replace `PROJECT_ID` with the CurseForge project ID and `FILE_ID` with the latest file ID from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aperture-api).
 
 #### Development Environment
 

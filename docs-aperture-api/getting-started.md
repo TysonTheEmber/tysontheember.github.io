@@ -43,7 +43,7 @@ Before installing Aperture API, ensure you have:
 
 Once in-game, you can access the camera editor using:
 
-```
+```mcfunction
 /aperture
 ```
 
@@ -57,7 +57,7 @@ This opens the main editor interface where you can:
 
 Get familiar with these essential commands:
 
-```
+```mcfunction
 /aperture help       - Display help information
 /aperture version    - Show mod version
 /aperture api        - Display API information
@@ -67,7 +67,7 @@ Get familiar with these essential commands:
 
 Control camera playback with the `/camera` command:
 
-```
+```mcfunction
 /camera list         - List all saved camera paths
 /camera play <name>  - Play a camera path
 /camera stop         - Stop current playback
@@ -77,7 +77,7 @@ Control camera playback with the `/camera` command:
 ## Creating Your First Camera Path
 
 1. **Open the Editor**
-   ```
+   ```mcfunction
    /aperture
    ```
 
@@ -108,11 +108,13 @@ Aperture API supports multiple interpolation methods:
 
 ## Tips for Beginners
 
+:::tip
 - **Start Simple**: Begin with 2-3 keyframes to understand path behavior
 - **Use Preview**: Always preview your paths before recording
 - **Experiment**: Try different interpolation methods to see what works best
 - **Save Often**: Save your paths frequently to avoid losing work
 - **Constant Speed**: Enable constant-speed playback for smoother results
+:::
 
 ## Next Steps
 

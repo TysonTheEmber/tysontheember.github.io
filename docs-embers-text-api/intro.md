@@ -58,13 +58,13 @@ Create stunning visual text effects in your Minecraft world with:
 ### For Players
 
 1. Download the latest version from:
-   - [Modrinth](https://modrinth.com/user/TysonTheEmber)
-   - [CurseForge](https://www.curseforge.com/members/tysontheember/projects)
+   - [Modrinth](https://modrinth.com/mod/embers-text-api)
+   - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api)
    - [GitHub](https://github.com/TysonTheEmber/EmbersTextAPI)
 
 2. Place the `.jar` file in your Minecraft `mods` folder
 
-3. Restart Minecraft
+3. Launch Minecraft with Forge 1.20.1
 
 ### For Developers
 
@@ -93,7 +93,7 @@ Replace `FILE_ID` with the latest file ID from [CurseForge](https://www.cursefor
 
 Try the built-in demo effects:
 
-```
+```mcfunction
 /emberstextapi test 1
 ```
 
@@ -101,13 +101,13 @@ Run test IDs 1-9 to see different features in action.
 
 ### Send Your First Message
 
-```
+```mcfunction
 /emberstextapi send @p 100 "Hello, World!"
 ```
 
 ### Create a Styled Message
 
-```
+```mcfunction
 /emberstextapi sendcustom @p {
   anchor:"CENTER_CENTER",
   gradient:[0xFF0000,0x0000FF],

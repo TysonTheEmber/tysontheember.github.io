@@ -12,8 +12,8 @@ The main command for accessing Aperture API features and information.
 
 ### Syntax
 
-```
-/aperture [help|version|api]
+```mcfunction
+/aperture [subcommand]
 ```
 
 ### Subcommands
@@ -22,7 +22,7 @@ The main command for accessing Aperture API features and information.
 
 Display help information about Aperture API commands and features.
 
-```
+```mcfunction
 /aperture help
 ```
 
@@ -32,7 +32,7 @@ Display help information about Aperture API commands and features.
 
 Display the current version of Aperture API.
 
-```
+```mcfunction
 /aperture version
 ```
 
@@ -42,7 +42,7 @@ Display the current version of Aperture API.
 
 Display API information for developers.
 
-```
+```mcfunction
 /aperture api
 ```
 
@@ -56,7 +56,7 @@ Manage camera paths and playback controls.
 
 ### Syntax
 
-```
+```mcfunction
 /camera <subcommand> [arguments]
 ```
 
@@ -66,7 +66,7 @@ Manage camera paths and playback controls.
 
 List all saved camera paths.
 
-```
+```mcfunction
 /camera list
 ```
 
@@ -84,15 +84,15 @@ Available camera paths:
 
 Play a saved camera path.
 
-```
+```mcfunction
 /camera play <path_name>
 ```
 
 **Parameters**:
-- `path_name` - The name of the camera path to play
+- `<path_name>` - The name of the camera path to play
 
 **Example**:
-```
+```mcfunction
 /camera play intro_scene
 ```
 
@@ -102,7 +102,7 @@ Play a saved camera path.
 
 Stop the currently playing camera path.
 
-```
+```mcfunction
 /camera stop
 ```
 
@@ -112,7 +112,7 @@ Stop the currently playing camera path.
 
 Reset the camera to its default position.
 
-```
+```mcfunction
 /camera reset
 ```
 
@@ -122,13 +122,17 @@ Reset the camera to its default position.
 
 Camera configuration commands allow you to adjust playback settings and path parameters.
 
-**Note**: Additional configuration subcommands may be available through the in-game editor interface.
+:::note
+Additional configuration subcommands may be available through the in-game editor interface.
+:::
 
 ### Export Subcommands
 
 Export camera paths for external use or backup.
 
-**Note**: Specific export syntax is handled through the editor interface and API.
+:::note
+Specific export syntax is handled through the editor interface and API.
+:::
 
 ---
 
@@ -137,27 +141,27 @@ Export camera paths for external use or backup.
 ### Basic Workflow
 
 1. **Create a new path in the editor**:
-   ```
+   ```mcfunction
    /aperture
    ```
 
 2. **List available paths**:
-   ```
+   ```mcfunction
    /camera list
    ```
 
 3. **Play a specific path**:
-   ```
+   ```mcfunction
    /camera play my_cinematic
    ```
 
 4. **Stop playback**:
-   ```
+   ```mcfunction
    /camera stop
    ```
 
 5. **Reset camera position**:
-   ```
+   ```mcfunction
    /camera reset
    ```
 
@@ -269,7 +273,7 @@ When creating and saving paths:
 
 In some cases, you may want to chain commands:
 
-```
+```mcfunction
 /camera stop
 /camera reset
 /camera play new_path
