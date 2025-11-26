@@ -32,11 +32,11 @@ repositories {
 }
 
 dependencies {
-    implementation fg.deobf("curse.maven:aperture-api-PROJECT_ID:FILE_ID")
+    implementation fg.deobf("curse.maven:aperture-api-1350829:FILE_ID")
 }
 ```
 
-Replace `PROJECT_ID` with the CurseForge project ID and `FILE_ID` with the latest file ID from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aperture-api).
+Replace `FILE_ID` with the latest file ID from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/aperture-api/files).
 
 #### Development Environment
 
