@@ -93,36 +93,38 @@ export default function NavbarContent(): JSX.Element {
       right={
         <>
           <NavbarItems items={rightItemsWithoutSearch} />
-          <NavbarIcon
-            icon="mdi:github"
-            href="https://github.com/TysonTheEmber"
-            label="GitHub repository"
-            size={28}
-          />
-          <NavbarIcon
-            icon="ic:baseline-discord"
-            href="https://discord.gg/GCN2Hv4Qzr"
-            label="Discord server"
-            size={30}
-          />
-          <NavbarIcon
-            icon="mdi:youtube"
-            href="https://www.youtube.com/@tysontheember"
-            label="YouTube channel"
-            size={32}
-          />
-          <NavbarIcon
-            icon="simple-icons:modrinth"
-            href="https://modrinth.com/user/TysonTheEmber"
-            label="Modrinth profile"
-          />
-          <NavbarIcon
-            icon="simple-icons:curseforge"
-            href="https://www.curseforge.com/members/tysontheember/projects"
-            label="CurseForge profile"
-            size={32}
-          />
-          <SettingsMenu />
+          <div className={styles.desktopOnly}>
+            <NavbarIcon
+              icon="mdi:github"
+              href="https://github.com/TysonTheEmber"
+              label="GitHub repository"
+              size={28}
+            />
+            <NavbarIcon
+              icon="ic:baseline-discord"
+              href="https://discord.gg/GCN2Hv4Qzr"
+              label="Discord server"
+              size={30}
+            />
+            <NavbarIcon
+              icon="mdi:youtube"
+              href="https://www.youtube.com/@tysontheember"
+              label="YouTube channel"
+              size={32}
+            />
+            <NavbarIcon
+              icon="simple-icons:modrinth"
+              href="https://modrinth.com/user/TysonTheEmber"
+              label="Modrinth profile"
+            />
+            <NavbarIcon
+              icon="simple-icons:curseforge"
+              href="https://www.curseforge.com/members/tysontheember/projects"
+              label="CurseForge profile"
+              size={32}
+            />
+            <SettingsMenu />
+          </div>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
           {searchBarItem ? (
             <NavbarItem {...searchBarItem} />

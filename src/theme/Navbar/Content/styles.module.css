@@ -6,12 +6,21 @@
  */
 
 /*
-Hide color mode toggle in small viewports
+Hide color mode toggle and desktop-only items in small viewports
  */
 @media (max-width: 996px) {
   .colorModeToggle {
     display: none;
   }
+
+  .desktopOnly {
+    display: none;
+  }
+}
+
+.desktopOnly {
+  display: flex;
+  align-items: center;
 }
 
 /*
