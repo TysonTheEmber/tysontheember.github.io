@@ -73,4 +73,9 @@ a:hover .featureImg {
   .features {
     padding-bottom: 3rem;
   }
+
+  /* Add spacing between featured mods on mobile */
+  .featureImg {
+    margin-bottom: 1.5rem;
+  }
 }

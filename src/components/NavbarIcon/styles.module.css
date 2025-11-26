@@ -15,3 +15,10 @@
 [data-theme='dark'] .navbarIcon:hover {
   color: #ff9e60;
 }
+
+/* Hide icons in mobile viewport */
+@media (max-width: 996px) {
+  .navbarIcon {
+    display: none;
+  }
+}
