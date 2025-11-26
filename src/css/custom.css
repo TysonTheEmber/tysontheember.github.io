@@ -186,7 +186,6 @@ body:has(.hero--primary) .navbar__title {
 body[class*='homepage'] .navbar__logo img,
 body:has(.hero--primary) .navbar__logo img {
   filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.45));
-  transform: translateY(-1px);
 }
 
 [data-theme='dark'] body[class*='homepage'] .navbar__logo img,
