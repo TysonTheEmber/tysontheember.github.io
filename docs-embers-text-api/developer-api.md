@@ -29,7 +29,7 @@ dependencies {
 }
 ```
 
-Replace `FILE_ID` with the latest file ID from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api). Example: `7104998`
+Replace `FILE_ID` with the latest file ID from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api/files).
 
 ### Importing Classes
 
