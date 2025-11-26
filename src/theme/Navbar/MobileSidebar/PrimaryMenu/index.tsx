@@ -4,7 +4,7 @@ import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal';
 import NavbarItem, {type Props as NavbarItemConfig} from '@theme/NavbarItem';
 import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
 import SettingsMenu from '@site/src/components/SettingsMenu';
-import NavbarIcon from '@site/src/components/NavbarIcon';
+import {Icon} from '@iconify/react';
 import styles from './styles.module.css';
 
 function useNavbarItems() {
@@ -28,36 +28,57 @@ export default function NavbarMobilePrimaryMenu(): ReactNode {
         ))}
       </ul>
       <div className={styles.mobileSidebarFooter}>
-        <div className={styles.iconRow}>
-          <NavbarIcon
-            icon="mdi:github"
+        <div className={styles.linksList}>
+          <a
             href="https://github.com/TysonTheEmber"
-            label="GitHub repository"
-            size={28}
-          />
-          <NavbarIcon
-            icon="ic:baseline-discord"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkItem}
+            aria-label="GitHub repository"
+          >
+            <Icon icon="mdi:github" width={24} height={24} />
+            <span>GitHub</span>
+          </a>
+          <a
             href="https://discord.gg/GCN2Hv4Qzr"
-            label="Discord server"
-            size={30}
-          />
-          <NavbarIcon
-            icon="mdi:youtube"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkItem}
+            aria-label="Discord server"
+          >
+            <Icon icon="ic:baseline-discord" width={24} height={24} />
+            <span>Discord</span>
+          </a>
+          <a
             href="https://www.youtube.com/@tysontheember"
-            label="YouTube channel"
-            size={32}
-          />
-          <NavbarIcon
-            icon="simple-icons:modrinth"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkItem}
+            aria-label="YouTube channel"
+          >
+            <Icon icon="mdi:youtube" width={24} height={24} />
+            <span>YouTube</span>
+          </a>
+          <a
             href="https://modrinth.com/user/TysonTheEmber"
-            label="Modrinth profile"
-          />
-          <NavbarIcon
-            icon="simple-icons:curseforge"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkItem}
+            aria-label="Modrinth profile"
+          >
+            <Icon icon="simple-icons:modrinth" width={24} height={24} />
+            <span>Modrinth</span>
+          </a>
+          <a
             href="https://www.curseforge.com/members/tysontheember/projects"
-            label="CurseForge profile"
-            size={32}
-          />
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.linkItem}
+            aria-label="CurseForge profile"
+          >
+            <Icon icon="simple-icons:curseforge" width={24} height={24} />
+            <span>CurseForge</span>
+          </a>
         </div>
         <div className={styles.settingsRow}>
           <SettingsMenu />

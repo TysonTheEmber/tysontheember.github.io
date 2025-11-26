@@ -39,6 +39,15 @@
   animation: slideDown 0.2s ease;
 }
 
+/* Prevent clipping on mobile */
+@media (max-width: 996px) {
+  .settingsDropdown {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 [data-theme='dark'] .settingsDropdown {
   background: #2a2a2a;
   border-color: rgba(255, 140, 66, 0.2);
