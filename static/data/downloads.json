@@ -1,7 +1,7 @@
 {
-  "modrinth": 1860,
+  "modrinth": 1866,
   "curseforge": 996242,
-  "total": 998102,
-  "lastUpdated": "2025-11-27T12:38:56Z",
-  "projects": {"embers-text-api": {"curseforge": 345719, "modrinth": 1724, "total": 347443},"aperture-api": {"curseforge": 750, "modrinth": 136, "total": 886},"spelunkery-plus": {"curseforge": 160991, "modrinth": 0, "total": 160991},"orbital-railgun-reforged": {"curseforge": 481040, "modrinth": 0, "total": 481040},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0}}
+  "total": 998108,
+  "lastUpdated": "2025-11-27T13:30:40Z",
+  "projects": {"embers-text-api": {"curseforge": 345719, "modrinth": 1730, "total": 347449},"aperture-api": {"curseforge": 750, "modrinth": 136, "total": 886},"spelunkery-plus": {"curseforge": 160991, "modrinth": 0, "total": 160991},"orbital-railgun-reforged": {"curseforge": 481040, "modrinth": 0, "total": 481040},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0}}
 }
