@@ -150,7 +150,13 @@ const fetchDownloadsInternal = async (): Promise<DownloadsData | null> => {
   return mergeDownloads(staticData, curseForgeCounts);
 };
 
-export const fetchDownloads = async (): Promise<DownloadsData | null> => {
+export const fetchDownloads = async (
+  options?: {forceRefresh?: boolean},
+): Promise<DownloadsData | null> => {
+  if (options?.forceRefresh) {
+    downloadsPromise = null;
+  }
+
   if (!downloadsPromise) {
     downloadsPromise = fetchDownloadsInternal();
   }
