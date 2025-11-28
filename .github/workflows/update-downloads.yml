@@ -19,44 +19,58 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fetch download counts
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          # Optional repo/org var override; falls back to TysonTheEmber by default
+          CURSEFORGE_AUTHOR_ID: ${{ vars.CURSEFORGE_AUTHOR_ID }}
         run: |
-          # Fetch CurseForge downloads via CFWidget (no API key required)
-          CURSEFORGE_TOTAL=0
-          CURSEFORGE_SUCCESS=false
-          CURSEFORGE_FETCHED=0
-          CF_WIDGET_BASE="https://api.cfwidget.com/minecraft/mc-mods"
-          PROJECT_SLUGS=("embers-text-api" "aperture-api" "spelunkery-plus" "orbital-railgun-reforged" "echoes-of-battle")
-          declare -A PROJECT_CURSEFORGE
+          set -euo pipefail
+          CF_API_KEY="${CURSEFORGE_API_KEY:-}"
+          CF_AUTHOR_ID="${CURSEFORGE_AUTHOR_ID:-103107110}"
 
-          for SLUG in "${PROJECT_SLUGS[@]}"; do
-            RESPONSE=$(curl -s "${CF_WIDGET_BASE}/${SLUG}")
-            DOWNLOADS=$(echo "$RESPONSE" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('downloads', {}).get('total', 0))" 2>/dev/null || echo "0")
-            if [ -z "$DOWNLOADS" ]; then
-              DOWNLOADS=0
-            fi
-
-            if [ "$DOWNLOADS" -eq 0 ]; then
-              if [ -f static/data/downloads.json ]; then
-                # fall back to existing per-project data if the widget call failed
-                DOWNLOADS=$(jq -r --arg slug "$SLUG" '.projects[$slug].curseforge // 0' static/data/downloads.json 2>/dev/null || echo "0")
-                echo "Warning: CFWidget fetch failed for $SLUG, using fallback value $DOWNLOADS"
-              else
-                echo "Warning: CFWidget fetch failed for $SLUG and no fallback available; treating as 0"
-              fi
-            else
-              CURSEFORGE_FETCHED=$((CURSEFORGE_FETCHED + 1))
-              echo "Fetched CurseForge downloads for $SLUG: $DOWNLOADS"
-            fi
-
-            PROJECT_CURSEFORGE[$SLUG]=$DOWNLOADS
-            CURSEFORGE_TOTAL=$((CURSEFORGE_TOTAL + DOWNLOADS))
-          done
-
-          if [ "$CURSEFORGE_FETCHED" -gt 0 ]; then
-            CURSEFORGE_SUCCESS=true
+          if [ -z "$CF_API_KEY" ]; then
+            echo "Error: CURSEFORGE_API_KEY secret is not set."
+            exit 1
           fi
 
-          echo "CurseForge total downloads (CFWidget): $CURSEFORGE_TOTAL"
+          # Fetch CurseForge downloads via official API using the secret key
+          CURSEFORGE_TOTAL=0
+          CURSEFORGE_SUCCESS=false
+          PER_PAGE=50
+          INDEX=0
+          declare -A PROJECT_CURSEFORGE
+
+          while true; do
+            RESPONSE=$(curl -s -w "\n%{http_code}" -H "Accept: application/json" -H "X-Api-Key: $CF_API_KEY" "https://api.curseforge.com/v1/mods/search?gameId=432&authorId=${CF_AUTHOR_ID}&pageSize=${PER_PAGE}&index=${INDEX}")
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" -ne 200 ]; then
+              echo "Error: CurseForge API returned HTTP $HTTP_CODE at index $INDEX"
+              exit 1
+            fi
+
+            PAGE_COUNT=$(echo "$BODY" | jq '.data | length' 2>/dev/null || echo "0")
+            if [ "$PAGE_COUNT" -eq 0 ]; then
+              break
+            fi
+
+            CURSEFORGE_SUCCESS=true
+
+            while read -r SLUG DOWNLOADS; do
+              PROJECT_CURSEFORGE[$SLUG]=$DOWNLOADS
+              CURSEFORGE_TOTAL=$((CURSEFORGE_TOTAL + DOWNLOADS))
+            done < <(echo "$BODY" | jq -r '.data[] | select(.slug != null and .downloadCount != null) | "\(.slug) \(.downloadCount)"')
+
+            INDEX=$((INDEX + PER_PAGE))
+          done
+
+          if [ "$CURSEFORGE_SUCCESS" = false ]; then
+            echo "Error: No CurseForge data was fetched; aborting update."
+            exit 1
+          fi
+
+          echo "CurseForge total downloads (API): $CURSEFORGE_TOTAL"
 
           # Fetch Modrinth downloads with error handling
           MODRINTH_RESPONSE=$(curl -s -w "\n%{http_code}" 'https://api.modrinth.com/v2/user/PEiFMA4y/projects')
@@ -77,7 +91,18 @@ jobs:
           declare -A PROJECT_MODRINTH
           PROJECT_SLUGS=("embers-text-api" "aperture-api" "spelunkery-plus" "orbital-railgun-reforged" "echoes-of-battle")
 
-          for SLUG in "${PROJECT_SLUGS[@]}"; do
+          # Include any CurseForge projects discovered that aren't in the static list
+          ALL_SLUGS=("${PROJECT_SLUGS[@]}" "${!PROJECT_CURSEFORGE[@]}")
+          declare -A SEEN
+          UNIQUE_SLUGS=()
+          for SLUG in "${ALL_SLUGS[@]}"; do
+            if [ -z "${SEEN[$SLUG]+x}" ]; then
+              SEEN[$SLUG]=1
+              UNIQUE_SLUGS+=("$SLUG")
+            fi
+          done
+
+          for SLUG in "${UNIQUE_SLUGS[@]}"; do
             MODRINTH_PROJECT=$(curl -s -w "\n%{http_code}" "https://api.modrinth.com/v2/project/$SLUG")
             MODRINTH_PROJECT_HTTP=$(echo "$MODRINTH_PROJECT" | tail -n1)
             MODRINTH_PROJECT_BODY=$(echo "$MODRINTH_PROJECT" | sed '$d')
@@ -90,7 +115,7 @@ jobs:
           done
 
           PROJECTS_JSON="{"
-          for SLUG in "${PROJECT_SLUGS[@]}"; do
+          for SLUG in "${UNIQUE_SLUGS[@]}"; do
             CF=${PROJECT_CURSEFORGE[$SLUG]:-0}
             MR=${PROJECT_MODRINTH[$SLUG]:-0}
             PROJECT_TOTAL=$((CF + MR))

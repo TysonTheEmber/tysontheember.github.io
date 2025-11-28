@@ -111,7 +111,9 @@ const mergeDownloads = (
     projects: {...(base?.projects ?? {})},
   };
 
-  if (Object.keys(curseForgeCounts).length > 0) {
+  const hasLiveCurseForge = Object.keys(curseForgeCounts).length > 0;
+
+  if (hasLiveCurseForge) {
     Object.entries(curseForgeCounts).forEach(([slug, count]) => {
       const current = merged.projects?.[slug] ?? {};
       merged.projects![slug] = {
@@ -134,7 +136,8 @@ const mergeDownloads = (
 
   merged.curseforge = curseForgeTotal;
   merged.total = curseForgeTotal + (modrinthTotal ?? 0);
-  merged.lastUpdated = new Date().toISOString();
+  // Only mark as freshly updated when live CurseForge data was merged; otherwise preserve snapshot timestamp.
+  merged.lastUpdated = hasLiveCurseForge ? new Date().toISOString() : base?.lastUpdated;
 
   return merged;
 };
