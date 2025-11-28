@@ -4,6 +4,15 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const curseForgeApiKey = process.env.CURSEFORGE_API_KEY ?? process.env.CF_API_KEY ?? '';
+// Public author id can be baked in; env overrides if provided
+const curseForgeAuthorId =
+  process.env.CURSEFORGE_AUTHOR_ID ??
+  process.env.CF_AUTHOR_ID ??
+  process.env.CURSEFORGE_MEMBER_ID ??
+  process.env.CF_MEMBER_ID ??
+  '103107110';
+
 const config: Config = {
   title: 'EmberForge',
   tagline: 'Minecraft Mods & Creative Projects by TysonTheEmber',
@@ -35,6 +44,11 @@ const config: Config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  customFields: {
+    curseForgeApiKey,
+    curseForgeAuthorId: Number(curseForgeAuthorId),
   },
 
   presets: [

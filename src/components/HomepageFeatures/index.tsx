@@ -4,20 +4,8 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
-
-type ProjectDownloads = {
-  modrinth?: number;
-  curseforge?: number;
-  total?: number;
-};
-
-type DownloadsData = {
-  modrinth?: number;
-  curseforge?: number;
-  total?: number;
-  lastUpdated?: string;
-  projects?: Record<string, ProjectDownloads>;
-};
+import type {DownloadsData} from '@site/src/utils/downloads';
+import {fetchDownloads} from '@site/src/utils/downloads';
 
 type FeatureItem = {
   title: string;
@@ -235,10 +223,13 @@ export default function HomepageFeatures(): ReactNode {
   const [downloadsError, setDownloadsError] = useState(false);
 
   useEffect(() => {
-    const fetchDownloads = async () => {
+    const loadDownloads = async () => {
       try {
-        const response = await fetch('/data/downloads.json', {cache: 'no-store'});
-        const data = await response.json();
+        const data = await fetchDownloads();
+        if (!data) {
+          setDownloadsError(true);
+          return;
+        }
         setDownloadsData(data);
       } catch (err) {
         console.error('Error fetching project downloads', err);
@@ -248,7 +239,7 @@ export default function HomepageFeatures(): ReactNode {
       }
     };
 
-    fetchDownloads();
+    loadDownloads();
   }, []);
 
   return (

@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import EmberCanvas from '@site/src/components/EmberCanvas';
+import {fetchDownloads} from '@site/src/utils/downloads';
 
 import styles from './index.module.css';
 
@@ -18,11 +19,14 @@ function HomepageHeader() {
   useEffect(() => {
     const fetchTotalDownloads = async () => {
       try {
-        // Fetch pre-computed download counts from static file
-        // This file is updated every 6 hours by GitHub Actions
-        const response = await fetch('/data/downloads.json', {cache: 'no-store'});
-        const data = await response.json();
-        setTotalDownloads(data.total);
+        // Pull latest downloads (static snapshot + live CurseForge override)
+        const downloads = await fetchDownloads();
+        if (!downloads) {
+          setError(true);
+          setTotalDownloads(null);
+          return;
+        }
+        setTotalDownloads(downloads.total ?? null);
       } catch (error) {
         console.error('Error fetching downloads:', error);
         setError(true);
