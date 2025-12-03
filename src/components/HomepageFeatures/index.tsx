@@ -12,6 +12,7 @@ type FeatureItem = {
   image: string;
   description: ReactNode;
   link?: string;
+  buttonLabel?: string;
   curseforgeSlug?: string;
   modrinthSlug?: string;
 };
@@ -23,7 +24,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Create stunning animated in-game overlays, banners, and cinematic text messaging
-        with full control over styling, positioning, and animations.
+        with full control over styling, positioning, and animations. With more to come!
       </>
     ),
     link: '/embers-text-api/intro',
@@ -36,23 +37,12 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Professional cinematic camera tooling for Minecraft Forge with in-game editing,
-        smooth camera paths, and export capabilities for your videos.
+        smooth camera paths, and export capabilities for use in your videos.
       </>
     ),
     link: '/aperture-api/intro',
     curseforgeSlug: 'aperture-api',
     modrinthSlug: 'aperture-api',
-  },
-  {
-    title: 'Spelunkery+',
-    image: require('@site/static/img/spelunkery-plus-icon.png').default,
-    description: (
-      <>
-        Enhance your underground adventures with expanded mining progression,
-        new loot tables, and compatibility with popular mining-focused mods.
-      </>
-    ),
-    curseforgeSlug: 'spelunkery-plus',
   },
   {
     title: 'Orbital Railgun Reforged',
@@ -63,6 +53,8 @@ const FeatureList: FeatureItem[] = [
         Unleash precision firepower from the skies with advanced targeting systems.
       </>
     ),
+    link: '/orbital-railgun/config',
+    buttonLabel: 'Config Guide',
     curseforgeSlug: 'orbital-railgun-reforged',
   },
 ];
@@ -72,6 +64,7 @@ function Feature({
   image,
   description,
   link,
+  buttonLabel,
   curseforgeSlug,
   modrinthSlug,
   downloadsData,
@@ -123,7 +116,7 @@ function Feature({
         <div style={{marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center'}}>
           {link && (
             <Link to={link} className="button button--primary button--md" style={{width: '100%', maxWidth: '200px'}}>
-              View Docs
+              {buttonLabel ?? 'View Docs'}
             </Link>
           )}
           {(curseforgeSlug || modrinthSlug) && (
@@ -183,7 +176,7 @@ function Feature({
   );
 
   return (
-    <div className={clsx('col col--3')}>
+    <div className={clsx('col col--4')}>
       {content}
     </div>
   );

@@ -76,7 +76,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`Welcome to ${siteConfig.title}`}
-      description="Minecraft mods by TysonTheEmber - featuring Embers Text API, Aperture API, Spelunkery+, and Orbital Railgun Reforged">
+      description="Minecraft mods by TysonTheEmber - featuring Embers Text API, Aperture API, and Orbital Railgun Reforged">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
