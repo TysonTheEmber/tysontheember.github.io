@@ -1,0 +1,18 @@
+.navbarIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  margin: 0 8px;
+  color: #808080;
+  transition: color 0.3s ease;
+}
+
+.navbarIcon:hover {
+  color: #ff6b35;
+}
+
+[data-theme='dark'] .navbarIcon:hover {
+  color: #ff9e60;
+}
+
