@@ -61,7 +61,7 @@ function HomepageHeader() {
           ) : error ? (
             <div>Downloads temporarily unavailable</div>
           ) : totalDownloads !== null ? (
-            <div className={styles.downloadCount}>
+            <div className={styles.downloadCount} title={totalDownloads.toLocaleString()}>
               <strong>{formatDownloads(totalDownloads)}</strong> total downloads
             </div>
           ) : null}
