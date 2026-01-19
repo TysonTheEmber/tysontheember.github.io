@@ -1,0 +1,195 @@
+.filterBar {
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid var(--ifm-border-color);
+  margin-bottom: 2rem;
+}
+
+.filterSection {
+  margin-bottom: 1.5rem;
+}
+
+.filterSection:last-child {
+  margin-bottom: 0;
+}
+
+.filterLabel {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-heading-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gameButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.gameButton {
+  padding: 0.5rem 1.5rem;
+  border: 2px solid rgba(255, 107, 53, 0.3);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+}
+
+.gameButton:hover {
+  background: rgba(255, 107, 53, 0.1);
+  transform: translateY(-2px);
+}
+
+.gameButton.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+.tagButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tagButton {
+  padding: 0.4rem 1rem;
+  border: 2px solid rgba(255, 107, 53, 0.2);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-700);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tagButton:hover {
+  background: rgba(255, 107, 53, 0.1);
+  border-color: rgba(255, 107, 53, 0.4);
+  transform: translateY(-2px);
+}
+
+.tagButton.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+.clearSection {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.clearButton {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--ifm-color-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: rgba(255, 107, 53, 0.25);
+  transform: translateY(-2px);
+}
+
+html[data-theme='dark'] .filterBar {
+  background: rgba(255, 140, 66, 0.08);
+}
+
+html[data-theme='dark'] .gameButton {
+  border-color: rgba(255, 140, 66, 0.4);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-primary-light);
+}
+
+html[data-theme='dark'] .gameButton:hover {
+  background: rgba(255, 140, 66, 0.15);
+}
+
+html[data-theme='dark'] .gameButton.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+html[data-theme='dark'] .tagButton {
+  border-color: rgba(255, 140, 66, 0.3);
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-emphasis-700);
+}
+
+html[data-theme='dark'] .tagButton:hover {
+  background: rgba(255, 140, 66, 0.15);
+  border-color: rgba(255, 140, 66, 0.5);
+}
+
+html[data-theme='dark'] .tagButton.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+html[data-theme='dark'] .clearButton {
+  background: rgba(255, 140, 66, 0.2);
+  color: var(--ifm-color-primary-light);
+}
+
+html[data-theme='dark'] .clearButton:hover {
+  background: rgba(255, 140, 66, 0.3);
+}
+
+/* Accessibility: Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gameButton,
+  .tagButton,
+  .clearButton {
+    transition: none !important;
+  }
+
+  .gameButton:hover,
+  .tagButton:hover,
+  .clearButton:hover {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .filterBar {
+    padding: 1rem;
+  }
+
+  .gameButtons,
+  .tagButtons {
+    gap: 0.5rem;
+  }
+
+  .gameButton {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .tagButton {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .clearButton {
+    font-size: 0.85rem;
+    padding: 0.4rem 1.25rem;
+  }
+}

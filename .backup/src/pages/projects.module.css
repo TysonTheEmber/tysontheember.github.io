@@ -1,0 +1,75 @@
+.projectsPage {
+  padding: 3rem 0;
+  min-height: 70vh;
+}
+
+.pageHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pageHeader h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, #ff8c42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pageHeader p {
+  font-size: 1.2rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.loadingState,
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 1.2rem;
+}
+
+.emptyState p {
+  margin-bottom: 1.5rem;
+}
+
+/* Accessibility: Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pageHeader h1 {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsPage {
+    padding: 2rem 0;
+  }
+
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+
+  .pageHeader p {
+    font-size: 1rem;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .loadingState,
+  .emptyState {
+    padding: 3rem 1.5rem;
+    font-size: 1rem;
+  }
+}

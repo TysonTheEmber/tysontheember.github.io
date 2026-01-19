@@ -1,0 +1,667 @@
+/**
+ * EmberForge Custom Styling
+ * Color palette inspired by warm embers from a fireplace
+ * A calm, sophisticated take on fire with muted reds, oranges, and warm browns
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Warm Ember Color Palette - Light Mode */
+  --ember-deep-red: #8b3a32;        /* Deep ember red */
+  --ember-brick: #a84832;            /* Warm brick red */
+  --ember-rust: #c55a3f;             /* Rust orange */
+  --ember-glow: #d67650;             /* Warm glow */
+  --ember-peach: #e89b7e;            /* Soft peach */
+  --ember-ash: #f5e6d3;              /* Warm ash */
+  --ember-smoke: #faf5f0;            /* Smoke white */
+
+  /* Semantic Color Mapping */
+  --ifm-color-primary: #a84832;
+  --ifm-color-primary-dark: #973f2d;
+  --ifm-color-primary-darker: #8b3a2a;
+  --ifm-color-primary-darkest: #722e22;
+  --ifm-color-primary-light: #b35137;
+  --ifm-color-primary-lighter: #ba573c;
+  --ifm-color-primary-lightest: #c96547;
+
+  /* Background colors */
+  --ifm-background-color: #faf5f0;
+  --ifm-background-surface-color: #ffffff;
+
+  /* Text colors */
+  --ifm-font-color-base: #3e2723;
+  --ifm-font-color-secondary: #5d4037;
+
+  /* Card and component styling */
+  --ifm-card-background-color: #ffffff;
+  --ifm-hover-overlay: rgba(168, 72, 50, 0.05);
+
+  /* Navbar */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 2px 8px rgba(139, 58, 50, 0.08);
+
+  /* Footer */
+  --ifm-footer-background-color: #4a2f1f;
+  --ifm-footer-color: #f5e6d3;
+  --ifm-footer-link-color: #e89b7e;
+  --ifm-footer-link-hover-color: #d67650;
+  --ifm-footer-title-color: #d67650;
+
+  /* Code blocks */
+  --ifm-code-background: #f5e6d3;
+  --ifm-code-color: #8b3a32;
+
+  /* Borders */
+  --ifm-border-color: #e4d5c6;
+
+  /* Font */
+  --ifm-font-family-base: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --ifm-heading-font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+  /* Spacing and sizing */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-navbar-height: 4rem;
+
+  /* Shadow colors for light mode */
+  --shadow-color: rgba(139, 58, 50, 0.3);
+  --shadow-color-light: rgba(139, 58, 50, 0.08);
+  --shadow-color-medium: rgba(139, 58, 50, 0.15);
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(168, 72, 50, 0.1);
+}
+
+/* Dark Mode - Glowing embers in darkness */
+[data-theme='dark'] {
+  /* Dark mode warm ember palette */
+  --ember-deep-red: #e89b7e;        /* Soft glow for headings */
+  --ember-brick: #d67650;            /* Warm glow for accents */
+  --ember-rust: #c55a3f;             /* Rust orange */
+  --ember-glow: #a84832;             /* Deeper ember */
+  --ember-peach: #8b3a32;            /* Deep red for badges */
+  --ember-ash: #2c1810;              /* Dark ash surface */
+  --ember-smoke: #1a0f09;            /* Deep darkness background */
+
+  /* Semantic color mapping for dark mode */
+  --ifm-color-primary: #d67650;
+  --ifm-color-primary-dark: #c66843;
+  --ifm-color-primary-darker: #bc6240;
+  --ifm-color-primary-darkest: #a84832;
+  --ifm-color-primary-light: #dd825d;
+  --ifm-color-primary-lighter: #e08e6a;
+  --ifm-color-primary-lightest: #e89b7e;
+
+  --ifm-background-color: #1a0f09;
+  --ifm-background-surface-color: #2c1810;
+  --ifm-font-color-base: #f5e6d3;
+  --ifm-font-color-secondary: #e4d5c6;
+  --ifm-card-background-color: #2c1810;
+  --ifm-navbar-background-color: #2c1810;
+  --ifm-code-background: #3e2417;
+  --ifm-code-color: #e89b7e;
+  --ifm-border-color: #5d3a1a;
+
+  /* Dark mode specific overrides */
+  --ifm-hover-overlay: rgba(214, 118, 80, 0.1);
+  --ifm-navbar-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --ifm-footer-background-color: #1a0f09;
+  --ifm-footer-color: #e4d5c6;
+  --ifm-footer-link-color: #e89b7e;
+  --ifm-footer-link-hover-color: #d67650;
+  --ifm-footer-title-color: #d67650;
+
+  /* Shadow colors for dark mode */
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --shadow-color-light: rgba(0, 0, 0, 0.2);
+  --shadow-color-medium: rgba(0, 0, 0, 0.3);
+
+  --docusaurus-highlighted-code-line-bg: rgba(214, 118, 80, 0.15);
+}
+
+/* Body styling */
+body {
+  font-family: var(--ifm-font-family-base);
+  background-color: var(--ifm-background-color);
+}
+
+/* Smooth transitions for cozy feel */
+a {
+  transition: color 0.2s ease-in-out;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px var(--shadow-color-medium);
+}
+
+/* Hero section styling */
+.hero {
+  background: linear-gradient(135deg, var(--ember-ash) 0%, var(--ember-peach) 100%);
+  border-bottom: 4px solid var(--ember-brick);
+}
+
+[data-theme='dark'] .hero {
+  background: linear-gradient(135deg, var(--ember-ash) 0%, var(--ember-glow) 100%);
+  border-bottom: 4px solid var(--ember-brick);
+}
+
+.hero--primary {
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .hero--primary {
+  --ifm-hero-text-color: var(--ifm-font-color-base);
+}
+
+/* Subtle ember glow on hero title */
+.hero__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+[data-theme='dark'] .hero__title {
+  text-shadow: 0 2px 12px rgba(214, 118, 80, 0.3);
+}
+
+/* Navbar styling */
+.navbar {
+  box-shadow: var(--ifm-navbar-shadow);
+  border-bottom: 2px solid var(--ember-brick);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom: 2px solid var(--ember-rust);
+}
+
+.navbar__logo {
+  height: 2.5rem;
+  width: auto;
+}
+
+.navbar__logo img {
+  height: 2.5rem !important;
+  width: auto !important;
+}
+
+.navbar__title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 1.4rem;
+  transition: color 0.3s ease;
+}
+
+.navbar__link {
+  color: #bca8a4;
+  transition: color 0.2s ease;
+}
+
+.navbar__link:hover {
+  color: var(--ember-brick);
+}
+
+[data-theme='dark'] .navbar__link {
+  color: #c4b3af;
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  color: var(--ember-glow);
+}
+
+/* Highlight navbar brand on homepage */
+body[class*='homepage'] .navbar__title,
+body:has(.hero--primary) .navbar__title {
+  color: var(--ember-brick);
+}
+
+[data-theme='dark'] body[class*='homepage'] .navbar__title,
+[data-theme='dark'] body:has(.hero--primary) .navbar__title {
+  color: var(--ember-glow);
+}
+
+/* Highlight navbar icon on homepage */
+body[class*='homepage'] .navbar__logo img,
+body:has(.hero--primary) .navbar__logo img {
+  filter: drop-shadow(0 0 6px rgba(168, 72, 50, 0.4));
+}
+
+[data-theme='dark'] body[class*='homepage'] .navbar__logo img,
+[data-theme='dark'] body:has(.hero--primary) .navbar__logo img {
+  filter: drop-shadow(0 0 8px rgba(214, 118, 80, 0.5));
+}
+
+/* Button styling */
+.button {
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.button--primary {
+  background-color: var(--ember-brick);
+  border-color: var(--ember-brick);
+  color: #ffffff;
+}
+
+.button--primary:hover {
+  background-color: var(--ember-deep-red);
+  border-color: var(--ember-deep-red);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+}
+
+.button--secondary {
+  color: var(--ember-brick);
+  border-color: var(--ember-brick);
+  background-color: transparent;
+}
+
+.button--secondary:hover {
+  background-color: var(--ember-peach);
+  border-color: var(--ember-brick);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .button--primary {
+  background-color: var(--ember-rust);
+  border-color: var(--ember-rust);
+  color: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background-color: var(--ember-glow);
+  border-color: var(--ember-glow);
+  color: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .button--secondary {
+  border-color: var(--ember-rust);
+  color: var(--ember-glow);
+  background-color: transparent;
+}
+
+[data-theme='dark'] .button--secondary:hover {
+  background-color: var(--ember-peach);
+  border-color: var(--ember-rust);
+  color: var(--ifm-background-color);
+}
+
+/* Footer styling */
+.footer {
+  background-color: var(--ifm-footer-background-color) !important;
+  color: var(--ifm-footer-color) !important;
+  border-top: 3px solid var(--ember-brick);
+  padding: 3rem 0 2rem 0;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(168, 72, 50, 0.5) 20%,
+    rgba(139, 58, 50, 0.8) 50%,
+    rgba(168, 72, 50, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+[data-theme='dark'] .footer::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(214, 118, 80, 0.5) 20%,
+    rgba(197, 90, 63, 0.8) 50%,
+    rgba(214, 118, 80, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+.footer__title {
+  color: var(--ifm-footer-title-color) !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.footer__link-item {
+  color: var(--ifm-footer-link-color) !important;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  text-decoration: none !important;
+}
+
+.footer__link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ember-brick), var(--ember-rust));
+  transition: width 0.3s ease;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-footer-link-hover-color) !important;
+  transform: translateX(3px);
+}
+
+.footer__link-item:hover::after {
+  width: 100%;
+}
+
+.footer__copyright {
+  opacity: 0.7;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(168, 72, 50, 0.2);
+  font-size: 0.9rem;
+}
+
+[data-theme='dark'] .footer__copyright {
+  border-top: 1px solid rgba(214, 118, 80, 0.2);
+}
+
+.footer__col {
+  margin-bottom: 1.5rem;
+}
+
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Active menu items with ember accent */
+.menu__link--active {
+  background-color: rgba(168, 72, 50, 0.1);
+  color: var(--ember-brick);
+  border-left: 3px solid var(--ember-brick);
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(214, 118, 80, 0.15);
+  color: var(--ember-glow);
+  border-left: 3px solid var(--ember-rust);
+}
+
+/* Table of contents active link */
+.table-of-contents__link--active {
+  color: var(--ember-brick);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: var(--ember-glow);
+}
+
+/* Custom scrollbar for ember feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ifm-background-surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ember-brick);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-primary);
+}
+
+/* Make docs content feel warm */
+.markdown {
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 2rem;
+  --ifm-h3-font-size: 1.5rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  color: var(--ember-deep-red);
+}
+
+[data-theme='dark'] .markdown h1,
+[data-theme='dark'] .markdown h2,
+[data-theme='dark'] .markdown h3 {
+  color: var(--ember-deep-red);
+}
+
+/* Admonitions */
+.admonition {
+  border-left-width: 4px;
+  border-radius: 8px;
+}
+
+/* Tables */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Code blocks */
+pre {
+  border-radius: 8px;
+  border: 1px solid var(--ifm-border-color);
+}
+
+/* Inline code */
+code {
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  background: var(--ifm-code-background);
+  color: var(--ifm-code-color);
+  border: 1px solid var(--ifm-border-color);
+}
+
+/* Cards */
+.card {
+  border-radius: 12px;
+  border: 1px solid var(--ifm-border-color);
+  background-color: var(--ifm-card-background-color);
+}
+
+/* Breadcrumbs */
+.breadcrumbs__link {
+  color: var(--ember-brick);
+}
+
+.breadcrumbs__link:hover {
+  color: var(--ember-deep-red);
+}
+
+[data-theme='dark'] .breadcrumbs__link {
+  color: var(--ember-rust);
+}
+
+[data-theme='dark'] .breadcrumbs__link:hover {
+  color: var(--ember-glow);
+}
+
+/* Algolia DocSearch Modal - Ember Theme */
+.DocSearch-Button {
+  background: rgba(168, 72, 50, 0.1);
+  border: 1px solid rgba(168, 72, 50, 0.3);
+  transition: all 0.3s ease;
+}
+
+.DocSearch-Button:hover {
+  background: rgba(168, 72, 50, 0.2);
+  border-color: rgba(168, 72, 50, 0.5);
+  box-shadow: 0 2px 8px rgba(168, 72, 50, 0.2);
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  background: rgba(214, 118, 80, 0.1);
+  border: 1px solid rgba(214, 118, 80, 0.3);
+}
+
+[data-theme='dark'] .DocSearch-Button:hover {
+  background: rgba(214, 118, 80, 0.15);
+  border-color: rgba(214, 118, 80, 0.5);
+  box-shadow: 0 2px 8px rgba(214, 118, 80, 0.3);
+}
+
+.DocSearch-Search-Icon {
+  color: var(--ember-brick) !important;
+}
+
+[data-theme='dark'] .DocSearch-Search-Icon {
+  color: var(--ember-glow) !important;
+}
+
+/* Modal styling */
+.DocSearch-Modal {
+  background: var(--ifm-background-color) !important;
+  box-shadow: 0 10px 40px var(--shadow-color-medium);
+}
+
+/* Search form */
+.DocSearch-Form {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgba(168, 72, 50, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Form {
+  background: #2a2a2a;
+  border-color: rgba(214, 118, 80, 0.2);
+}
+
+.DocSearch-Input {
+  background: transparent !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.DocSearch-Input:focus {
+  border-color: var(--ember-brick);
+  box-shadow: none;
+  outline: none;
+}
+
+[data-theme='dark'] .DocSearch-Input:focus {
+  border-color: var(--ember-rust);
+}
+
+/* Search results */
+.DocSearch-Hit {
+  border-bottom: 1px solid rgba(168, 72, 50, 0.1);
+}
+
+[data-theme='dark'] .DocSearch-Hit {
+  border-bottom-color: rgba(214, 118, 80, 0.1);
+}
+
+.DocSearch-Hit a:hover {
+  background: rgba(168, 72, 50, 0.05);
+}
+
+[data-theme='dark'] .DocSearch-Hit a:hover {
+  background: rgba(214, 118, 80, 0.1);
+}
+
+.DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(168, 72, 50, 0.15) !important;
+}
+
+[data-theme='dark'] .DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(214, 118, 80, 0.2) !important;
+}
+
+/* Section headers */
+.DocSearch-Hit-source {
+  background: transparent;
+  color: var(--ember-brick) !important;
+  font-weight: 600;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+[data-theme='dark'] .DocSearch-Hit-source {
+  color: var(--ember-glow) !important;
+}
+
+/* Highlighted text in results */
+.DocSearch-Hit mark {
+  color: var(--ember-brick) !important;
+  background: rgba(168, 72, 50, 0.2);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .DocSearch-Hit mark {
+  color: var(--ember-peach) !important;
+  background: rgba(214, 118, 80, 0.25);
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card:hover,
+  .button:hover,
+  .footer__link-item:hover {
+    transform: none !important;
+  }
+}
+
+/* Hide sidebar on intro page only */
+.intro-page-no-sidebar ~ * .theme-doc-sidebar-container,
+article:has(.intro-page-no-sidebar) ~ .theme-doc-sidebar-container,
+.theme-doc-page:has(.intro-page-no-sidebar) .theme-doc-sidebar-container {
+  display: none !important;
+}
+
+.theme-doc-page:has(.intro-page-no-sidebar) .main-wrapper,
+.theme-doc-page:has(.intro-page-no-sidebar) .docMainContainer {
+  max-width: 100% !important;
+}
+
+.theme-doc-page:has(.intro-page-no-sidebar) article {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+body:has(.intro-page-no-sidebar) .theme-doc-sidebar-container {
+  display: none !important;
+}
+
+body:has(.intro-page-no-sidebar) .main-wrapper,
+body:has(.intro-page-no-sidebar) .docMainContainer {
+  max-width: 100% !important;
+}
+
+body:has(.intro-page-no-sidebar) article {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}

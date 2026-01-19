@@ -1,0 +1,91 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+.featureImg {
+  height: 128px;
+  width: 128px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, filter 0.3s ease-in-out;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+/* Clickable images get stronger glow */
+a .featureImg {
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4),
+              0 0 40px rgba(255, 107, 53, 0.2);
+}
+
+/* Hover effect for clickable images - simple translate like buttons */
+a:hover .featureImg {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.6),
+              0 0 60px rgba(255, 107, 53, 0.4);
+  filter: brightness(1.1);
+}
+
+[data-theme='dark'] .featureImg {
+  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+}
+
+[data-theme='dark'] a .featureImg {
+  box-shadow: 0 8px 20px rgba(255, 140, 66, 0.5),
+              0 0 40px rgba(255, 140, 66, 0.3);
+}
+
+[data-theme='dark'] a:hover .featureImg {
+  box-shadow: 0 12px 30px rgba(255, 140, 66, 0.7),
+              0 0 60px rgba(255, 140, 66, 0.5);
+}
+
+.featureLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.featureLink:hover {
+  transform: translateY(-4px);
+}
+
+@media screen and (max-width: 768px) {
+  .features {
+    padding-bottom: 3rem;
+  }
+
+  /* Add spacing between featured mods on mobile */
+  .featureImg {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Add bottom padding to each feature column on mobile */
+  .features :global(.col) {
+    margin-bottom: 3rem;
+  }
+
+  /* Remove extra margin from last item */
+  .features :global(.col):last-child {
+    margin-bottom: 0;
+  }
+}

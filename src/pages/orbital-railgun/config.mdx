@@ -1,0 +1,58 @@
+---
+title: Orbital Railgun Reforged Configuration
+description: Configure claim safety, strike power, visuals, and performance for the 1.20.1 Forge port.
+slug: /orbital-railgun/config
+---
+
+# Orbital Railgun Reforged Configuration
+
+This page covers how to tune [Orbital Railgun Reforged](https://www.curseforge.com/minecraft/mc-mods/orbital-railgun-reforged) for your server or client.
+
+## Where the config files live
+
+- `config/orbital_railgun-common.toml` — shared/server settings. This file is generated after the first launch and is authoritative for servers.
+- `config/orbital_railgun-client.toml` — client-only visuals. Each player can customize their own look without affecting gameplay.
+
+Restart the game after editing either file. Copy the `common` file to the server to enforce your values.
+
+## Opening the config folder (CurseForge launcher)
+
+1. In CurseForge, open `Minecraft` → `My Modpacks` and hover your pack.  
+2. Click the `...` menu → `Open Folder`.  
+3. Open the `config` directory and edit `orbital_railgun-common.toml` (server/shared) or `orbital_railgun-client.toml` (client visuals).  
+4. Restart the game after saving.
+
+## Common (server/authoritative) options
+
+- `range` (default `256.0`) — maximum targeting distance of the railgun.
+- `maxBreakHardness` (default `50.0`) — highest block hardness that can be destroyed (`-1` breaks everything, higher values increase power).
+- `cooldown` (default `2400` ticks ≈ 2 minutes) — delay between shots.
+- `strikeDamage` (default `2147483647`) — damage dealt by the strike. Lower this to make the weapon survivable.
+- `blacklistedBlocks` — blocks the strike will never destroy (defaults include bedrock, end portal, barrier).
+- `suckEntities` (default `true`) — pull nearby mobs/players toward the impact before detonation.
+- `destructionDiameter` (default `16.0`) — diameter in blocks used for the server-side physics/destruction.
+- `blocksPerTick` (default `2000`) — cap on blocks removed per tick while the strike resolves; lower to reduce lag.
+- `minDestroyY` (default `-64`) — lowest Y level the strike will excavate down to.
+- `dropBlocks` (default `false`) — if `true`, broken blocks drop items instead of vaporizing (heavier on servers).
+- `debugMode` (default `false`) — extra logging; leave off unless diagnosing issues.
+
+### Claim protection toggles
+
+- `respectClaims` (default `true`) — enable FTB Chunks claim protection.
+- `respectOPACClaims` (default `true`) — enable Open Parties & Claims protection when that mod is installed.
+- `allowEntityDamageInClaims` (default `false`) — allow entity damage inside claims when the shooter has permission.
+- `allowBlockBreakInClaims` (default `false`) — allow block destruction inside claims when permitted.
+- `allowExplosionsInClaims` (default `false`) — allow the explosion effect inside claims when permitted.
+- `opsBypassClaims` (default `true`) — operators (permission level ≥ 2) ignore the above claim checks.
+
+Example: to keep claims fully protected unless an operator fires the weapon, leave the `allow*` settings at `false` and set `opsBypassClaims = true`.
+
+## Client-only visuals
+
+These live in `config/orbital_railgun-client.toml` and do not affect servers or other players:
+
+- `beamColor` / `beamAlpha` — hex color (e.g., `#2CC6FF`) and transparency multiplier for the beam.
+- `markerInnerColor` / `markerInnerAlpha` — color/opacity for the inner targeting reticle.
+- `markerOuterColor` / `markerOuterAlpha` — color/opacity for the outer targeting reticle.
+
+Tip: Keep alpha values between `0.5`–`1.0` to preserve readability of the shaders while charging the railgun.

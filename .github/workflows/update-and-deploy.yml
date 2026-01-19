@@ -1,0 +1,191 @@
+name: Update Downloads and Deploy
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+  pull_request:
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Fetch download counts
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          CURSEFORGE_AUTHOR_ID: ${{ vars.CURSEFORGE_AUTHOR_ID }}
+        run: |
+          set -euo pipefail
+          CF_API_KEY="${CURSEFORGE_API_KEY:-}"
+          CF_AUTHOR_ID="${CURSEFORGE_AUTHOR_ID:-103107110}"
+
+          if [ -z "$CF_API_KEY" ]; then
+            echo "Error: CURSEFORGE_API_KEY secret is not set."
+            exit 1
+          fi
+
+          # Fetch CurseForge downloads via official API using the secret key
+          CURSEFORGE_TOTAL=0
+          CURSEFORGE_SUCCESS=false
+          PER_PAGE=50
+          INDEX=0
+          declare -A PROJECT_CURSEFORGE
+
+          while true; do
+            RESPONSE=$(curl -s -w "\n%{http_code}" -H "Accept: application/json" -H "X-Api-Key: $CF_API_KEY" "https://api.curseforge.com/v1/mods/search?gameId=432&authorId=${CF_AUTHOR_ID}&pageSize=${PER_PAGE}&index=${INDEX}")
+            HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+            BODY=$(echo "$RESPONSE" | sed '$d')
+
+            if [ "$HTTP_CODE" -ne 200 ]; then
+              echo "Error: CurseForge API returned HTTP $HTTP_CODE at index $INDEX"
+              exit 1
+            fi
+
+            PAGE_COUNT=$(echo "$BODY" | jq '.data | length' 2>/dev/null || echo "0")
+            if [ "$PAGE_COUNT" -eq 0 ]; then
+              break
+            fi
+
+            CURSEFORGE_SUCCESS=true
+
+            while read -r SLUG DOWNLOADS; do
+              PROJECT_CURSEFORGE[$SLUG]=$DOWNLOADS
+              CURSEFORGE_TOTAL=$((CURSEFORGE_TOTAL + DOWNLOADS))
+            done < <(echo "$BODY" | jq -r '.data[] | select(.slug != null and .downloadCount != null) | "\(.slug) \(.downloadCount)"')
+
+            INDEX=$((INDEX + PER_PAGE))
+          done
+
+          if [ "$CURSEFORGE_SUCCESS" = false ]; then
+            echo "Error: No CurseForge data was fetched; aborting update."
+            exit 1
+          fi
+
+          echo "CurseForge total downloads (API): $CURSEFORGE_TOTAL"
+
+          # Fetch Modrinth downloads with error handling
+          MODRINTH_RESPONSE=$(curl -s -w "\n%{http_code}" 'https://api.modrinth.com/v2/user/PEiFMA4y/projects')
+          MODRINTH_HTTP_CODE=$(echo "$MODRINTH_RESPONSE" | tail -n1)
+          MODRINTH_BODY=$(echo "$MODRINTH_RESPONSE" | sed '$d')
+
+          if [ "$MODRINTH_HTTP_CODE" -eq 200 ] && [ -n "$MODRINTH_BODY" ]; then
+            MODRINTH_TOTAL=$(echo "$MODRINTH_BODY" | python3 -c "import sys, json; data = json.load(sys.stdin); print(sum(p['downloads'] for p in data))" 2>/dev/null || echo "0")
+          else
+            echo "Warning: Modrinth API failed (HTTP $MODRINTH_HTTP_CODE), using CurseForge only"
+            MODRINTH_TOTAL=0
+          fi
+
+          # Calculate total
+          TOTAL=$((MODRINTH_TOTAL + CURSEFORGE_TOTAL))
+
+          # Per-project download breakdown (used by homepage cards)
+          declare -A PROJECT_MODRINTH
+          PROJECT_SLUGS=("embers-text-api" "aperture-api" "spelunkery-plus" "orbital-railgun-reforged" "echoes-of-battle")
+
+          # Include any CurseForge projects discovered that aren't in the static list
+          ALL_SLUGS=("${PROJECT_SLUGS[@]}" "${!PROJECT_CURSEFORGE[@]}")
+          declare -A SEEN
+          UNIQUE_SLUGS=()
+          for SLUG in "${ALL_SLUGS[@]}"; do
+            if [ -z "${SEEN[$SLUG]+x}" ]; then
+              SEEN[$SLUG]=1
+              UNIQUE_SLUGS+=("$SLUG")
+            fi
+          done
+
+          for SLUG in "${UNIQUE_SLUGS[@]}"; do
+            MODRINTH_PROJECT=$(curl -s -w "\n%{http_code}" "https://api.modrinth.com/v2/project/$SLUG")
+            MODRINTH_PROJECT_HTTP=$(echo "$MODRINTH_PROJECT" | tail -n1)
+            MODRINTH_PROJECT_BODY=$(echo "$MODRINTH_PROJECT" | sed '$d')
+            if [ "$MODRINTH_PROJECT_HTTP" -eq 200 ] && [ -n "$MODRINTH_PROJECT_BODY" ]; then
+              PROJECT_MODRINTH[$SLUG]=$(echo "$MODRINTH_PROJECT_BODY" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('downloads', 0))" 2>/dev/null || echo "0")
+            else
+              # Fallback to prior data if available
+              PROJECT_MODRINTH[$SLUG]=$(jq -r --arg slug "$SLUG" '.projects[$slug].modrinth // 0' static/data/downloads.json 2>/dev/null || echo "0")
+            fi
+          done
+
+          PROJECTS_JSON="{"
+          for SLUG in "${UNIQUE_SLUGS[@]}"; do
+            CF=${PROJECT_CURSEFORGE[$SLUG]:-0}
+            MR=${PROJECT_MODRINTH[$SLUG]:-0}
+            PROJECT_TOTAL=$((CF + MR))
+            PROJECTS_JSON+="\"$SLUG\": {\"curseforge\": $CF, \"modrinth\": $MR, \"total\": $PROJECT_TOTAL},"
+          done
+          # Trim trailing comma
+          PROJECTS_JSON="${PROJECTS_JSON%,}"
+          PROJECTS_JSON="${PROJECTS_JSON}}"
+
+          # Only update if CurseForge succeeded
+          if [ "$CURSEFORGE_SUCCESS" = true ]; then
+            # Create JSON file
+            mkdir -p static/data
+            cat > static/data/downloads.json << EOF
+          {
+            "modrinth": $MODRINTH_TOTAL,
+            "curseforge": $CURSEFORGE_TOTAL,
+            "total": $TOTAL,
+            "lastUpdated": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+            "projects": $PROJECTS_JSON
+          }
+          EOF
+            echo "Total downloads: $TOTAL (Modrinth: $MODRINTH_TOTAL, CurseForge: $CURSEFORGE_TOTAL)"
+          else
+            echo "Error: CurseForge API failed, keeping existing data"
+            exit 1
+          fi
+
+      - name: Commit download updates if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add static/data/downloads.json
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to downloads.json"
+          else
+            git commit -m "Update download counts"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,35 @@
+.viewCounter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin-left: 12px;
+  border-radius: 4px;
+  background-color: var(--ifm-color-emphasis-100);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.viewCounter:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+.count {
+  white-space: nowrap;
+}
+
+/* Responsive: hide "views" text on smaller screens */
+@media (max-width: 768px) {
+  .count {
+    font-size: 13px;
+  }
+}
