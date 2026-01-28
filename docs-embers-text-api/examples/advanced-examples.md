@@ -167,6 +167,8 @@ EmbersTextAPI.sendMessage(player, msg);
 - Line 3 gently shakes with muted gray color.
 - The whole banner fades in and out smoothly.
 
+**Note:** As of v2.0.0, welcome messages are no longer automatically sent to players on first join. The mod only displays a basic chat message. This example shows how you would create a custom welcome message in your own mod if desired.
+
 ---
 
 ## 5. Item Trading Display

@@ -24,6 +24,18 @@ Embers Text API gives Minecraft mods the ability to display rich, animated, and 
 
 ## Quick Start
 
+### In-Game Commands
+
+Try the mod immediately using the `/eta` command:
+
+```
+/eta test 26              # Rainbow effect demo
+/eta test 27              # Glitch effect demo
+/eta send @p 100 <rainbow>Hello, World!</rainbow>
+```
+
+See the [Commands Reference](./general/commands-reference.md) for the full command list.
+
 ### Markup Example
 
 ```markup

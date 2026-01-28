@@ -149,3 +149,16 @@ Messages can be anchored to any of 9 screen positions:
 | `BOTTOM_RIGHT` | Lower-right corner |
 
 You can also apply pixel offsets (`x`, `y`) to fine-tune placement, and scale the entire message up or down.
+
+---
+
+## In-Game Commands
+
+The mod includes commands for testing and sending messages directly in-game:
+
+- `/eta test <id>` — Run predefined test cases (33 different demos)
+- `/eta send <player> <duration> <text>` — Send a message with markup support
+- `/eta sendcustom <player> <data> <duration> <text>` — Advanced message with NBT properties, supports JSON text components and translatable text
+- `/eta help` — Show mod information and documentation links
+
+See the [Commands Reference](./commands-reference.md) for detailed usage examples.
