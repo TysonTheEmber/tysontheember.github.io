@@ -77,6 +77,15 @@ const config: Config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'embers-text-api-legacy',
+        path: 'docs-embers-text-api-legacy',
+        routeBasePath: 'embers-text-api-legacy',
+        sidebarPath: './sidebars-embers-legacy.ts',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'aperture-api',
         path: 'docs-aperture-api',
         routeBasePath: 'aperture-api',
@@ -126,7 +135,13 @@ const config: Config = {
               type: 'docSidebar',
               sidebarId: 'embersSidebar',
               docsPluginId: 'embers-text-api',
-              label: 'Embers Text API',
+              label: 'Embers Text API v2',
+            },
+            {
+              type: 'docSidebar',
+              sidebarId: 'embersSidebarLegacy',
+              docsPluginId: 'embers-text-api-legacy',
+              label: 'Embers Text API (Legacy)',
             },
             {
               type: 'docSidebar',
@@ -169,8 +184,12 @@ const config: Config = {
           title: 'Documentation',
           items: [
             {
-              label: 'Embers Text API',
+              label: 'Embers Text API v2',
               to: '/embers-text-api/intro',
+            },
+            {
+              label: 'Embers Text API (Legacy)',
+              to: '/embers-text-api-legacy/intro',
             },
             {
               label: 'Aperture API',
