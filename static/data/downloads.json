@@ -1,7 +1,68 @@
 {
   "modrinth": 4971,
-  "curseforge": 1132146,
-  "total": 1137117,
-  "lastUpdated": "2026-02-04T20:45:12Z",
-  "projects": {"embers-text-api": {"curseforge": 0, "modrinth": 4323, "total": 4323},"aperture-api": {"curseforge": 7220, "modrinth": 648, "total": 7868},"spelunkery-plus": {"curseforge": 233764, "modrinth": 0, "total": 233764},"orbital-railgun-reforged": {"curseforge": 875498, "modrinth": 0, "total": 875498},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 58, "modrinth": 0, "total": 58},"particle-interactions-reforged": {"curseforge": 2547, "modrinth": 0, "total": 2547},"explodee": {"curseforge": 6302, "modrinth": 4451, "total": 10753},"resistance-formulation": {"curseforge": 165, "modrinth": 0, "total": 165},"hyrpland-input-fix": {"curseforge": 86, "modrinth": 0, "total": 86},"embercraft-rekindled": {"curseforge": 2801, "modrinth": 0, "total": 2801},"project-ember-embercraft": {"curseforge": 3705, "modrinth": 0, "total": 3705}}
+  "curseforge": 1591951,
+  "total": 1596922,
+  "lastUpdated": "2026-02-04T20:51:12Z",
+  "projects": {
+    "embers-text-api": {
+      "curseforge": 627880,
+      "modrinth": 4323,
+      "total": 632203
+    },
+    "aperture-api": {
+      "curseforge": 1215,
+      "modrinth": 648,
+      "total": 1863
+    },
+    "explodee": {
+      "curseforge": 2759,
+      "modrinth": 4451,
+      "total": 7210
+    },
+    "spelunkery-plus": {
+      "curseforge": 204214,
+      "modrinth": 0,
+      "total": 204214
+    },
+    "orbital-railgun-reforged": {
+      "curseforge": 748986,
+      "modrinth": 0,
+      "total": 748986
+    },
+    "echoes-of-battle": {
+      "curseforge": 0,
+      "modrinth": 0,
+      "total": 0
+    },
+    "embercraft-rekindled": {
+      "curseforge": 2772,
+      "modrinth": 0,
+      "total": 2772
+    },
+    "project-ember-embercraft": {
+      "curseforge": 3686,
+      "modrinth": 0,
+      "total": 3686
+    },
+    "resistance-formulation": {
+      "curseforge": 134,
+      "modrinth": 0,
+      "total": 134
+    },
+    "infernumrpg": {
+      "curseforge": 34,
+      "modrinth": 0,
+      "total": 34
+    },
+    "particle-interactions-reforged": {
+      "curseforge": 228,
+      "modrinth": 0,
+      "total": 228
+    },
+    "hyrpland-input-fix": {
+      "curseforge": 43,
+      "modrinth": 0,
+      "total": 43
+    }
+  }
 }
