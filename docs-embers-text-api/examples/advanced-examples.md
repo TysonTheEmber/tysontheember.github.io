@@ -35,7 +35,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 300f); // 15 seconds
-msg.setTextScale(1.4f);
+msg.scale(1.4f);
 EmbersTextAPI.sendMessage(player, msg);
 ```
 
@@ -69,11 +69,14 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 250f);
-msg.setAnchor(TextAnchor.TOP_LEFT);
-msg.setBackground(true);
-msg.setBackgroundColor(new ImmersiveColor(0x80101010));
-msg.setXOffset(10f);
-msg.setYOffset(10f);
+msg.anchor(TextAnchor.TOP_LEFT);
+msg.background(true);
+msg.backgroundColors(
+    new ImmersiveColor(0x80101010),
+    new ImmersiveColor(0xAAFFFFFF),
+    new ImmersiveColor(0xAA000000)
+);
+msg.offset(10f, 10f);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -115,7 +118,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 400f); // 20 seconds
-msg.fadeIn(10);
+msg.fadeInTicks(10);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -155,8 +158,8 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 250f);
-msg.fadeIn(40);
-msg.fadeOut(40);
+msg.fadeInTicks(40);
+msg.fadeOutTicks(40);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -195,7 +198,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.CENTER_CENTER);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -244,7 +247,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.CENTER_CENTER);
 EmbersTextAPI.sendMessage(player, msg);
 ```
 
@@ -263,8 +266,8 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 150f);
-msg.setAnchor(TextAnchor.CENTER_RIGHT);
-msg.setXOffset(-20f);
+msg.anchor(TextAnchor.CENTER_RIGHT);
+msg.offset(-20f, 0f);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```

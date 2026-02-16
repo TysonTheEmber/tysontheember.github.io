@@ -80,7 +80,9 @@ public class FanEffect extends BaseEffect {
 
 ## Step 2: Register the Effect
 
-Register your effect during your mod's client setup event:
+Register your effect during your mod's client setup event. The specific event class depends on your loader:
+
+### Forge 1.20.1
 
 ```java
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -98,7 +100,40 @@ public class YourMod {
 }
 ```
 
-> **Important:** Registration must happen during `FMLClientSetupEvent` (or later), because the built-in effects are initialized during Embers Text API's own client setup. If you register during an earlier event, your effect may be available but the registry may not be locked yet.
+### NeoForge 1.21.1
+
+```java
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.tysontheember.emberstextapi.immersivemessages.effects.EffectRegistry;
+
+public class YourMod {
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            EffectRegistry.register("fan", FanEffect::new);
+        });
+    }
+}
+```
+
+### Fabric (1.20.1 and 1.21.1)
+
+```java
+import net.fabricmc.api.ClientModInitializer;
+import net.tysontheember.emberstextapi.immersivemessages.effects.EffectRegistry;
+
+public class YourModClient implements ClientModInitializer {
+
+    @Override
+    public void onInitializeClient() {
+        EffectRegistry.register("fan", FanEffect::new);
+    }
+}
+```
+
+> **Important:** Registration must happen during client setup (or later), because the built-in effects are initialized during Embers Text API's own client setup. If you register during an earlier event, your effect may be available but the registry may not be locked yet.
 
 > **Important:** You cannot overwrite built-in effect names after the registry is locked. Use a unique name for your custom effect.
 

@@ -6,7 +6,7 @@ description: Introduction to the mod and what it does.
 
 # What Is Embers Text API?
 
-Embers Text API is a Minecraft mod that adds rich, animated, and interactive text rendering to the game. It gives mod developers and modpack creators the ability to display on-screen messages with visual effects — things like rainbow color transitions, bouncing text, neon glows, typewriter reveals, and much more — all without writing complex rendering code from scratch.
+Embers Text API is a Minecraft mod that adds rich, animated, and interactive text rendering to the game. It supports **Forge**, **NeoForge**, and **Fabric** across Minecraft 1.20.1 and 1.21.1, giving mod developers and modpack creators the ability to display on-screen messages with visual effects — things like rainbow color transitions, bouncing text, neon glows, typewriter reveals, and much more — all without writing complex rendering code from scratch.
 
 ## The Problem It Solves
 
@@ -34,17 +34,16 @@ Embers Text API solves this by providing:
 
 ## Version Information
 
-| Property | Value |
-|---|---|
-| Mod Version | 2.0.0 |
-| Minecraft Version | 1.20.1 |
-| Mod Loader | Forge (47.4.0) |
-| Java Version | 17 |
+| Minecraft Version | Mod Loaders | Mod Version | Java |
+|---|---|---|---|
+| 1.20.1 | Forge 47.4.0, Fabric | 2.0.2 | 17+ |
+| 1.21.1 | NeoForge, Fabric | 2.0.2 | 21+ |
 
 ## What's New in v2
 
 Version 2 is a major overhaul of the text rendering system. Key changes from v1:
 
+- **Multiloader Support** — The mod now supports Forge, NeoForge, and Fabric across Minecraft 1.20.1 and 1.21.1 through shared common codebases. The API is identical across all loaders — the same effects, markup, and Java API work on every platform.
 - **Unified Effect System** — All visual effects (rainbow, wave, shake, glitch, neon, etc.) are now part of a single composable registry. In v1, many of these were hardcoded or implemented as separate one-off systems.
 - **Span-Based Rendering** — Messages are composed of `TextSpan` objects. Each span carries its own text, styling, and effects. This replaces the older global-styling approach.
 - **Effect Composition** — Multiple effects can be stacked on the same text span. A single word can simultaneously have a rainbow color cycle and a wave motion.

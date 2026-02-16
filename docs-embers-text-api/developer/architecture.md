@@ -10,18 +10,38 @@ This page describes the internal structure of Embers Text API v2, how its major 
 
 ---
 
-## Package Layout
+## Multiloader Architecture
+
+The project uses a multiloader structure with shared common modules per Minecraft version:
+
+```
+EmbersTextAPI/
+├── common-1.20.1/          # Shared code for MC 1.20.1
+├── common-1.21.1/          # Shared code for MC 1.21.1
+├── forge-1.20.1/           # Forge loader implementation
+├── fabric-1.20.1/          # Fabric loader implementation (MC 1.20.1)
+├── fabric-1.21.1/          # Fabric loader implementation (MC 1.21.1)
+└── neoforge-1.21.1/        # NeoForge loader implementation
+```
+
+Each **common** module contains the full API, effects, markup parser, serialization, and client logic. The **loader** modules contain platform-specific code: mod entry points, event bus registration, network channel setup, and mixins.
+
+This means the API surface is identical across all loaders — the same effects, markup syntax, and Java API work on Forge, NeoForge, and Fabric.
+
+---
+
+## Package Layout (Common Module)
 
 ```
 net.tysontheember.emberstextapi/
-├── EmbersTextAPI                    # Main mod entry point (@Mod class)
-├── config/                          # Forge configuration system
-│   └── ModConfig
+├── accessor/                        # Mixin duck interfaces
+│   ├── ETABakedGlyph
+│   └── ETAStyle
 ├── client/                          # Client-side message management
 │   ├── ClientMessageManager         # Stores and ticks all active messages
 │   ├── ActiveMessage                # Wrapper for a single active message
 │   ├── TextLayoutCache              # Caches text layout calculations
-│   └── ...
+│   └── ViewStateTracker             # Tracks message view start times
 ├── immersivemessages/
 │   ├── api/                         # Public API — the classes you interact with
 │   │   ├── ImmersiveMessage         # The main message class
@@ -40,24 +60,53 @@ net.tysontheember.emberstextapi/
 │   │   ├── preset/                  # Effect presets (JSON-based bundles)
 │   │   └── ...
 │   └── util/                        # Utilities (color parsing, etc.)
-├── net/                             # Network packet definitions
-│   ├── S2C_OpenMessagePacket
-│   ├── S2C_UpdateMessagePacket
-│   ├── S2C_CloseMessagePacket
-│   └── S2C_CloseAllMessagesPacket
-├── network/                         # Network channel registration
-│   └── Network
-├── mixin/                           # Mixin classes for rendering integration
-│   ├── StyleMixin                   # Global item rendering
-│   └── client/
-│       ├── BakedGlyphMixin          # Per-character effect rendering hook
-│       ├── StringSplitterMixin      # Text layout caching
-│       └── ...
-├── duck/                            # Mixin duck interfaces
-│   ├── ETABakedGlyph
-│   └── ETAStyle
+├── network/                         # Platform-agnostic network handler interface
+├── platform/                        # Platform abstraction interfaces
+│   ├── NetworkHelper                # Network abstraction
+│   ├── ConfigHelper                 # Config abstraction
+│   └── PlatformHelper               # General platform utilities
+├── serialization/                   # TextSpan codec and serialization
 ├── typewriter/                      # Typewriter animation state management
 └── util/                            # Cross-cutting utilities
+```
+
+### Loader Module (Forge 1.20.1)
+
+```
+forge-1.20.1/
+├── EmbersTextAPI                    # @Mod entry point, Forge event bus
+├── mixin/                           # Forge-specific mixins
+│   ├── StyleMixin
+│   └── client/
+│       ├── BakedGlyphMixin
+│       ├── StringRenderOutputMixin
+│       └── ...
+└── network/                         # Forge SimpleChannel packets
+```
+
+### Loader Module (NeoForge 1.21.1)
+
+```
+neoforge-1.21.1/
+├── EmbersTextAPI                    # @Mod entry point, NeoForge event bus
+├── mixin/                           # NeoForge-specific mixins
+│   ├── StyleMixin
+│   └── client/
+│       ├── BakedGlyphMixin
+│       ├── StringRenderOutputMixin
+│       └── ...
+└── network/                         # NeoForge StreamCodec packets
+```
+
+### Loader Module (Fabric)
+
+```
+fabric-1.20.1/ (or fabric-1.21.1/)
+├── EmbersTextAPIFabric              # ModInitializer entry point
+├── EmbersTextAPIFabricClient        # ClientModInitializer entry point
+├── commands/                        # Fabric command registration
+├── network/fabric/                  # Fabric Networking API packets
+└── welcome/                         # Player join handler
 ```
 
 ---
@@ -145,7 +194,28 @@ When messages are sent from server to client, each `TextSpan` is serialized to a
 
 ## Mod Initialization Flow
 
+The initialization sequence is the same across all loaders, though the specific event classes and entry points differ:
+
+### Forge 1.20.1
+
 1. `EmbersTextAPI` constructor registers event listeners and mod config.
-2. `commonSetup` (FMLCommonSetupEvent) registers the network channel.
-3. `onClientSetup` (FMLClientSetupEvent, client-only) initializes the effect registry with all built-in effects and locks it.
+2. `commonSetup` (`FMLCommonSetupEvent`) registers the network channel via Forge's `SimpleChannel`.
+3. `onClientSetup` (`FMLClientSetupEvent`, client-only) initializes the effect registry with all built-in effects and locks it.
 4. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager`.
+
+### NeoForge 1.21.1
+
+1. `EmbersTextAPI` constructor registers event listeners.
+2. Network packets are registered using NeoForge's `StreamCodec` system.
+3. Client setup initializes the effect registry with all built-in effects and locks it.
+4. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager`.
+
+### Fabric (1.20.1 and 1.21.1)
+
+1. `EmbersTextAPIFabric` (`ModInitializer`) registers config, networking, commands, and player join handler.
+2. `EmbersTextAPIFabricClient` (`ClientModInitializer`) initializes the effect registry with all built-in effects and locks it, and registers client-side event handlers.
+3. At runtime, messages are sent/received via Fabric Networking API and rendered each frame by `ClientMessageManager`.
+
+:::note
+The API surface is identical on all loaders. The differences are limited to the mod entry point and network registration — the effect system, markup parser, and rendering pipeline are shared code in the common modules.
+:::

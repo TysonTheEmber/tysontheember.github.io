@@ -6,7 +6,7 @@ description: Welcome to Embers Text API v2 documentation.
 
 # Embers Text API v2
 
-Welcome to the official documentation for **Embers Text API v2** — a comprehensive text rendering API for Minecraft 1.20.1 (Forge).
+Welcome to the official documentation for **Embers Text API v2** — a comprehensive text rendering API for Minecraft, supporting **Forge**, **NeoForge**, and **Fabric** across Minecraft 1.20.1 and 1.21.1.
 
 ---
 
@@ -55,10 +55,10 @@ List<TextSpan> spans = MarkupParser.parse(
     "<color value=#AAAAAA>Enjoy your stay.</color>"
 );
 
-ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
-msg.fadeIn(30);
-msg.fadeOut(30);
+ImmersiveMessage msg = new ImmersiveMessage(spans, 200f)
+    .anchor(TextAnchor.CENTER_CENTER)
+    .fadeInTicks(30)
+    .fadeOutTicks(30);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -80,17 +80,16 @@ This documentation is organized into four sections:
 
 ## Version & Compatibility
 
-| Property | Value |
-|---|---|
-| Mod Version | 2.0.0 |
-| Minecraft | 1.20.1 |
-| Mod Loader | Forge 47.4.0 |
-| Java | 17 |
+| Minecraft Version | Mod Loaders | Mod Version | Java |
+|---|---|---|---|
+| 1.20.1 | Forge 47.4.0, Fabric | 2.0.2 | 17+ |
+| 1.21.1 | NeoForge, Fabric | 2.0.2 | 21+ |
 
 ---
 
 ## What's New in v2
 
+- **Multiloader Support** — Now available on Forge, NeoForge, and Fabric across Minecraft 1.20.1 and 1.21.1.
 - **Unified Effect Registry** — All effects (color, motion, special, animation) live in one composable system.
 - **Span-Based Rendering** — Each piece of text has independent styling and effects.
 - **Effect Composition** — Stack multiple effects on the same span.

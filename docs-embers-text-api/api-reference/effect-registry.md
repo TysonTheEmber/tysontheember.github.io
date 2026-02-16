@@ -23,19 +23,27 @@ public interface Effect {
      * @param settings The mutable rendering state for this character.
      *                 Modify this object to change how the character is drawn.
      */
-    void apply(EffectSettings settings);
+    void apply(@NotNull EffectSettings settings);
 
     /**
      * Return the canonical name of this effect.
      * Used for serialization and registry lookup.
      */
-    String getName();
+    @NotNull String getName();
 
     /**
      * Serialize this effect to a string for network transmission.
      * The string format is: "effectName key1=value1 key2=value2"
+     * Default implementation returns just the effect name.
      */
-    String serialize();
+    @NotNull default String serialize() { return getName(); }
+
+    /**
+     * Factory method: create an effect by name from the registry.
+     */
+    @NotNull static Effect create(@NotNull String name, @NotNull Params params) {
+        return EffectRegistry.create(name, params);
+    }
 }
 ```
 

@@ -29,9 +29,9 @@ Effects modify these to move, rotate, or resize individual characters.
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `r` | `float` | (from TextColor) | Red channel (0.0–1.0) |
-| `g` | `float` | (from TextColor) | Green channel (0.0–1.0) |
-| `b` | `float` | (from TextColor) | Blue channel (0.0–1.0) |
+| `r` | `float` | `1.0` | Red channel (0.0–1.0) |
+| `g` | `float` | `1.0` | Green channel (0.0–1.0) |
+| `b` | `float` | `1.0` | Blue channel (0.0–1.0) |
 | `a` | `float` | `1.0` | Alpha / opacity (0.0 = invisible, 1.0 = fully opaque) |
 
 Color effects (rainbow, gradient) set `r`, `g`, `b`. Transparency effects (fade, typewriter) set `a`.
@@ -57,9 +57,12 @@ These fields provide information about the character being processed. Effects re
 | Field | Type | Description |
 |---|---|---|
 | `typewriterTrack` | `TypewriterTrack` | Active typewriter animation state for this context |
+| `typewriterIndex` | `int` | Global character position offset for typewriter ordering (-1 = uninitialized) |
 | `obfuscateKey` | `Object` | Cache key for obfuscation tracking |
 | `obfuscateStableKey` | `Object` | Stable cache key (for tooltips that re-render) |
 | `obfuscateTrack` | `ObfuscateTrack` | Active obfuscation animation state |
+| `obfuscateSpanStart` | `int` | Span-local start index (keeps spans independent) |
+| `obfuscateSpanLength` | `int` | Span-local length |
 | `useRandomGlyph` | `boolean` | If `true`, render a random glyph instead of the real character |
 
 ---
@@ -77,8 +80,11 @@ List<EffectSettings> getSiblings()
 /** Add a sibling layer. */
 void addSibling(EffectSettings sibling)
 
-/** Check if any siblings have been added. */
+/** Check if any siblings have been added (without creating the list). */
 boolean hasSiblings()
+
+/** Safe iteration — returns empty list if no siblings (does NOT create list). */
+List<EffectSettings> getSiblingsOrEmpty()
 ```
 
 Each sibling is rendered as an additional glyph pass after the main character.

@@ -39,8 +39,8 @@ ImmersiveMessage msg = new ImmersiveMessage(
     Component.literal("Welcome back!"),
     150f  // 7.5 seconds total
 );
-msg.fadeIn(30);   // Fade in over 1.5 seconds
-msg.fadeOut(30);  // Fade out over 1.5 seconds
+msg.fadeInTicks(30);   // Fade in over 1.5 seconds
+msg.fadeOutTicks(30);  // Fade out over 1.5 seconds
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -59,9 +59,13 @@ ImmersiveMessage msg = new ImmersiveMessage(
     Component.literal("Important Notice"),
     200f
 );
-msg.setAnchor(TextAnchor.CENTER_CENTER);
-msg.setBackground(true);
-msg.setBackgroundColor(new ImmersiveColor(0x80000000)); // 50% black
+msg.anchor(TextAnchor.CENTER_CENTER);
+msg.background(true);
+msg.backgroundColors(
+    new ImmersiveColor(0x80000000),  // 50% black background
+    new ImmersiveColor(0xAAFFFFFF),  // Border start color
+    new ImmersiveColor(0xAA000000)   // Border end color
+);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -97,9 +101,9 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 150f);
-msg.setAnchor(TextAnchor.TOP_CENTER);
-msg.fadeIn(20);
-msg.fadeOut(20);
+msg.anchor(TextAnchor.TOP_CENTER);
+msg.fadeInTicks(20);
+msg.fadeOutTicks(20);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -157,7 +161,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 300f); // Long duration for full reveal
-msg.setAnchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.CENTER_CENTER);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -174,10 +178,10 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
-msg.setTextScale(1.5f);
-msg.fadeIn(30);
-msg.fadeOut(30);
+msg.anchor(TextAnchor.CENTER_CENTER);
+msg.scale(1.5f);
+msg.fadeInTicks(30);
+msg.fadeOutTicks(30);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -194,7 +198,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.CENTER_CENTER);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```

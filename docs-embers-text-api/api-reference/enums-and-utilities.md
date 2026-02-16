@@ -34,8 +34,8 @@ public enum TextAnchor {
 ```
 
 Used in:
-- `ImmersiveMessage.setAnchor(TextAnchor)`
-- `ImmersiveMessage.setAlign(TextAnchor)`
+- `ImmersiveMessage.anchor(TextAnchor)`
+- `ImmersiveMessage.align(TextAnchor)`
 - `<anchor value=...>` markup tag
 - `<align value=...>` markup tag
 
@@ -58,7 +58,7 @@ public enum ObfuscateMode {
 }
 ```
 
-Used in the `<obfuscate direction=...>` markup tag and `ImmersiveMessage.obfuscate(mode, speed)`.
+Used in the `<obfuscate direction=...>` markup tag and `ImmersiveMessage.obfuscate(ObfuscateMode, float)`.
 
 ---
 

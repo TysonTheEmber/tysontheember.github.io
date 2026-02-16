@@ -8,22 +8,34 @@ description: Server-to-client packet types, serialization, and the network proto
 
 Embers Text API communicates between server and client using custom network packets. All message transmission is server-to-client.
 
-**Package:** `net.tysontheember.emberstextapi.net`
+**Package:** `net.tysontheember.emberstextapi.network`
 
 ---
 
 ## Network Channel
 
-The network channel is registered during `FMLCommonSetupEvent`:
+The network channel registration differs by loader:
+
+### Forge 1.20.1
+
+Registered during `FMLCommonSetupEvent` using Forge's `SimpleChannel`:
 
 ```java
-// In Network.java
-public static void register() {
-    // Registers all S2C packets on the Forge SimpleChannel
-}
+// Registers all S2C packets on the Forge SimpleChannel
+// Protocol version: "3"
 ```
 
-Protocol version: `"3"`
+### NeoForge 1.21.1
+
+Registered using NeoForge's `StreamCodec` system during mod initialization. Packets use NeoForge's built-in codec-based serialization.
+
+### Fabric (1.20.1 and 1.21.1)
+
+Registered using the Fabric Networking API with custom packet codecs. The `FabricNetworkHandler` handles packet registration and `FabricClientPacketHandlers` processes incoming packets on the client.
+
+:::note
+The packet types, payload structure, and client handling are identical across all loaders. Only the network transport layer differs.
+:::
 
 ---
 
@@ -100,10 +112,13 @@ No fields. Clears the entire active message set.
 For the most common case (sending a new message), use the static helper:
 
 ```java
+// Forge / NeoForge
 import net.tysontheember.emberstextapi.EmbersTextAPI;
-
-// On the server side:
 EmbersTextAPI.sendMessage(serverPlayer, immersiveMessage);
+
+// Fabric
+import net.tysontheember.emberstextapi.fabric.EmbersTextAPIFabric;
+EmbersTextAPIFabric.sendMessage(serverPlayer, immersiveMessage);
 ```
 
 This internally:

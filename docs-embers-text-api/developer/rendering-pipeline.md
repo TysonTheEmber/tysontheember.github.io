@@ -16,11 +16,15 @@ A mod creates an `ImmersiveMessage` on the server side:
 
 ```java
 ImmersiveMessage msg = new ImmersiveMessage(Component.literal("Hello!"), 200f);
-msg.setAnchor(TextAnchor.CENTER_CENTER);
-msg.setBackground(true);
-msg.setBackgroundColor(new ImmersiveColor(0x60000000));
-msg.fadeIn(20);
-msg.fadeOut(20);
+msg.anchor(TextAnchor.CENTER_CENTER);
+msg.background(true);
+msg.backgroundColors(
+    new ImmersiveColor(0x60000000),
+    new ImmersiveColor(0xAAFFFFFF),
+    new ImmersiveColor(0xAA000000)
+);
+msg.fadeInTicks(20);
+msg.fadeOutTicks(20);
 ```
 
 Alternatively, a message can be constructed from a list of `TextSpan` objects (parsed from markup):
@@ -42,8 +46,13 @@ EmbersTextAPI.sendMessage(serverPlayer, msg);
 
 Internally this:
 1. Serializes the `ImmersiveMessage` to NBT (including all `TextSpan` data).
-2. Wraps it in a `TooltipPacket` with a unique UUID.
-3. Sends it via Forge's `SimpleChannel`.
+2. Wraps it in an `S2C_OpenMessagePacket` with a unique UUID.
+3. Sends it via the platform's network channel.
+
+The network transport differs by loader:
+- **Forge 1.20.1** — Uses Forge's `SimpleChannel` with manual buffer encoding.
+- **NeoForge 1.21.1** — Uses NeoForge's `StreamCodec` system for packet serialization.
+- **Fabric** — Uses the Fabric Networking API with custom packet codecs.
 
 On the client, the packet handler deserializes the NBT back into an `ImmersiveMessage`.
 

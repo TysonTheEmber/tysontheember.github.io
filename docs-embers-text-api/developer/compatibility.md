@@ -65,9 +65,18 @@ If another mod also hooks into `BakedGlyph` or `StringRenderer`, there may be co
 
 Embers Text API includes an optional mixin for FTB Quests (`QuestScreenMixin`) that enables immersive messages in quest UI screens. This mixin is included in the mixin config but will gracefully fail if FTB Quests is not present.
 
-### Architectury API
+### Supported Loaders
 
-The mod lists Architectury API as a dependency. This is used for cross-platform compatibility utilities but does not mean the mod supports Fabric or NeoForge directly — it is a Forge mod for Minecraft 1.20.1.
+Embers Text API supports **Forge**, **NeoForge**, and **Fabric**. The API is identical across all platforms — the same effects, markup, and Java API work on every loader.
+
+| Minecraft | Loaders | Status |
+|---|---|---|
+| 1.20.1 | Forge 47.4.0, Fabric | Fully supported |
+| 1.21.1 | NeoForge, Fabric | Fully supported |
+
+:::note
+On MC 1.21.1, some internal Minecraft APIs have changed compared to 1.20.1 (e.g., `ResourceLocation.fromNamespaceAndPath()` instead of the constructor, `BuiltInRegistries.ITEM` instead of `ForgeRegistries.ITEMS`). These differences are handled internally — the public API remains the same across all loaders and versions.
+:::
 
 ---
 
@@ -99,5 +108,5 @@ Do not attempt to create or render `ImmersiveMessage` objects directly on the se
 
 1. **Don't stack too many neon effects.** Each neon effect on each character generates 6–20 sibling layers. On a 50-character message at q=2, that's 600 extra render passes per frame.
 2. **Don't send messages every tick.** Each `sendMessage` call creates a new network packet. For updating messages, use the update packet with the same UUID.
-3. **Don't register effects in `commonSetup`.** The effect registry is initialized during `clientSetup`. Register your effects there or later.
+3. **Don't register effects too early.** The effect registry is initialized during client setup. On Forge, register during `FMLClientSetupEvent`. On NeoForge, register during the equivalent client setup event. On Fabric, register in your `ClientModInitializer.onInitializeClient()` method.
 4. **Use `ValidationHelper.clamp()`** for all numeric parameters to prevent extreme values.
