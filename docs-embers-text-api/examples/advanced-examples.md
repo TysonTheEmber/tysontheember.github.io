@@ -17,7 +17,7 @@ A dramatic center-screen announcement with layered effects:
 ```java
 List<TextSpan> spans = MarkupParser.parse(
     // Layout and background
-    "<anchor value=CENTER_CENTER>" +
+    "<anchor value=MIDDLE>" +
     "<bg color=#70000020>" +
     "<fade in=40 out=40>" +
 
@@ -96,7 +96,7 @@ A cyber-aesthetic message with glitch and typewriter effects:
 
 ```java
 List<TextSpan> spans = MarkupParser.parse(
-    "<anchor value=CENTER_CENTER>" +
+    "<anchor value=MIDDLE>" +
     "<bg color=#90001A00 bordercolor=#40AAFFAA>" +
     "<scale value=1.2>" +
 
@@ -198,7 +198,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -247,7 +247,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 EmbersTextAPI.sendMessage(player, msg);
 ```
 
@@ -266,7 +266,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 150f);
-msg.anchor(TextAnchor.CENTER_RIGHT);
+msg.anchor(TextAnchor.MIDDLE_RIGHT);
 msg.offset(-20f, 0f);
 
 EmbersTextAPI.sendMessage(player, msg);

@@ -16,7 +16,7 @@ A mod creates an `ImmersiveMessage` on the server side:
 
 ```java
 ImmersiveMessage msg = new ImmersiveMessage(Component.literal("Hello!"), 200f);
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 msg.background(true);
 msg.backgroundColors(
     new ImmersiveColor(0x60000000),

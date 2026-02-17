@@ -172,16 +172,20 @@ These tags set properties on the entire message, not just the enclosed text.
 ### Anchor
 
 ```markup
-<anchor value=CENTER_CENTER>Centered on screen</anchor>
+<anchor value=MIDDLE>Centered on screen</anchor>
 ```
 
-Valid values: `TOP_LEFT`, `TOP_CENTER`, `TOP_RIGHT`, `CENTER_LEFT`, `CENTER_CENTER`, `CENTER_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_CENTER`, `BOTTOM_RIGHT`
+Valid values: `TOP_LEFT`, `TOP_CENTER`, `TOP_RIGHT`, `MIDDLE_LEFT`, `MIDDLE`, `MIDDLE_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_CENTER`, `BOTTOM_RIGHT`
 
 ### Align
 
 ```markup
-<align value=CENTER_LEFT>Left-aligned text</align>
+<align value=LEFT>Left-aligned text</align>
+<align value=CENTER>Center-aligned text</align>
+<align value=RIGHT>Right-aligned text</align>
 ```
+
+Valid values: `LEFT` (default), `CENTER`, `RIGHT`
 
 ### Shadow (Global Toggle)
 

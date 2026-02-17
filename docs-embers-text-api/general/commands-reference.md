@@ -110,8 +110,8 @@ Sends an advanced message with full control over positioning, background, effect
 #### Positioning & Layout
 | Property | Type | Description |
 |---|---|---|
-| `anchor` | String | Screen anchor: `TOP_CENTER`, `CENTER_CENTER`, `BOTTOM_LEFT`, etc. |
-| `align` | String | Text alignment within the message |
+| `anchor` | String | Screen anchor: `TOP_CENTER`, `MIDDLE`, `BOTTOM_LEFT`, etc. |
+| `align` | String | Horizontal text alignment: `LEFT` (default), `CENTER`, `RIGHT` |
 | `offsetX` | Float | Horizontal offset in pixels |
 | `offsetY` | Float | Vertical offset in pixels |
 | `size` | Float | Text scale multiplier (1.0 = normal) |
@@ -199,7 +199,7 @@ This applies the Norse font to the first span and the alt font to the second spa
 
 #### Basic Custom Message with Background
 ```
-/eta sendcustom @p {background:true, bgColor:"#80000000", anchor:"CENTER_CENTER"} 150 <rainbow>Important Announcement!</rainbow>
+/eta sendcustom @p {background:true, bgColor:"#80000000", anchor:"MIDDLE"} 150 <rainbow>Important Announcement!</rainbow>
 ```
 
 #### Message with Position and Scale
@@ -215,7 +215,7 @@ This applies the Norse font to the first span and the alt font to the second spa
 #### JSON Text Component Support (NEW in v2.0.0)
 You can now use JSON text components directly:
 ```
-/eta sendcustom @p {background:true, anchor:"CENTER_CENTER"} 100 {"text":"Hello","color":"gold","bold":true}
+/eta sendcustom @p {background:true, anchor:"MIDDLE"} 100 {"text":"Hello","color":"gold","bold":true}
 ```
 
 Array format:
@@ -246,7 +246,7 @@ This applies the Norse font to the first span ("Norse") and the alt font to the 
 
 #### Texture Background
 ```
-/eta sendcustom @p {textureBackground:{location:"minecraft:textures/block/oak_planks.png", mode:"tile", padding:8}, anchor:"CENTER_CENTER"} 200 <color value="white"><bold>Wooden Sign</bold></color>
+/eta sendcustom @p {textureBackground:{location:"minecraft:textures/block/oak_planks.png", mode:"tile", padding:8}, anchor:"MIDDLE"} 200 <color value="white"><bold>Wooden Sign</bold></color>
 ```
 
 ---
@@ -272,7 +272,7 @@ You can combine markup syntax with NBT properties for advanced control:
   background:true,
   bgColor:"#AA000000",
   borderGradient:{start:"gold", end:"orange"},
-  anchor:"CENTER_CENTER",
+  anchor:"MIDDLE",
   size:1.5,
   font0:"emberstextapi:norse"
 } 200 <gradient from="#FFD700" to="#FFA500"><bold>LEGENDARY</bold></gradient>

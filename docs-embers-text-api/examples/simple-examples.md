@@ -59,7 +59,7 @@ ImmersiveMessage msg = new ImmersiveMessage(
     Component.literal("Important Notice"),
     200f
 );
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 msg.background(true);
 msg.backgroundColors(
     new ImmersiveColor(0x80000000),  // 50% black background
@@ -161,7 +161,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 300f); // Long duration for full reveal
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```
@@ -178,7 +178,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 msg.scale(1.5f);
 msg.fadeInTicks(30);
 msg.fadeOutTicks(30);
@@ -198,7 +198,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f);
-msg.anchor(TextAnchor.CENTER_CENTER);
+msg.anchor(TextAnchor.MIDDLE);
 
 EmbersTextAPI.sendMessage(player, msg);
 ```

@@ -141,9 +141,9 @@ Messages can be anchored to any of 9 screen positions:
 | `TOP_LEFT` | Upper-left corner |
 | `TOP_CENTER` | Top center (default) |
 | `TOP_RIGHT` | Upper-right corner |
-| `CENTER_LEFT` | Middle left |
-| `CENTER_CENTER` | Dead center |
-| `CENTER_RIGHT` | Middle right |
+| `MIDDLE_LEFT` | Middle left |
+| `MIDDLE` | Dead center |
+| `MIDDLE_RIGHT` | Middle right |
 | `BOTTOM_LEFT` | Lower-left corner |
 | `BOTTOM_CENTER` | Bottom center |
 | `BOTTOM_RIGHT` | Lower-right corner |

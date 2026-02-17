@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: Enums and Utility Classes
-description: TextAnchor, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser.
+description: TextAnchor, TextAlign, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser.
 ---
 
 # Enums and Utility Classes
@@ -10,33 +10,55 @@ description: TextAnchor, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser.
 
 ## TextAnchor
 
-Defines screen anchor positions for message placement.
+Defines 9-position screen anchor positions for message placement. Values use clean normalized coordinates (0, 0.5, 1).
 
 **Package:** `net.tysontheember.emberstextapi.immersivemessages.api`
 
 ```java
 public enum TextAnchor {
-    TOP_LEFT(0.1f, 0.0f),
-    TOP_CENTER(0.5f, 0.0f),
-    TOP_RIGHT(0.9f, 0.0f),
+    TOP_LEFT(0f, 0f),
+    TOP_CENTER(0.5f, 0f),
+    TOP_RIGHT(1f, 0f),
 
-    CENTER_LEFT(0.1f, 0.5f),
-    CENTER_CENTER(0.5f, 0.5f),
-    CENTER_RIGHT(0.9f, 0.5f),
+    MIDDLE_LEFT(0f, 0.5f),
+    MIDDLE(0.5f, 0.5f),
+    MIDDLE_RIGHT(1f, 0.5f),
 
-    BOTTOM_LEFT(0.1f, 0.8f),
-    BOTTOM_CENTER(0.5f, 0.8f),
-    BOTTOM_RIGHT(0.9f, 0.8f);
+    BOTTOM_LEFT(0f, 1f),
+    BOTTOM_CENTER(0.5f, 1f),
+    BOTTOM_RIGHT(1f, 1f);
 
     public final float xFactor;  // Normalized X position (0.0 = left, 1.0 = right)
     public final float yFactor;  // Normalized Y position (0.0 = top, 1.0 = bottom)
 }
 ```
 
+Text is automatically clamped to stay on screen with a small margin, so edge anchors like `TOP_LEFT` won't render text off-screen.
+
 Used in:
 - `ImmersiveMessage.anchor(TextAnchor)`
-- `ImmersiveMessage.align(TextAnchor)`
 - `<anchor value=...>` markup tag
+
+---
+
+## TextAlign
+
+Defines horizontal text alignment within an anchored position.
+
+**Package:** `net.tysontheember.emberstextapi.immersivemessages.api`
+
+```java
+public enum TextAlign {
+    LEFT(0f),
+    CENTER(0.5f),
+    RIGHT(1f);
+
+    public final float xFactor;
+}
+```
+
+Used in:
+- `ImmersiveMessage.align(TextAlign)`
 - `<align value=...>` markup tag
 
 ---

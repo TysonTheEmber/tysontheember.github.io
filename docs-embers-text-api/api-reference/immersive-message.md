@@ -84,9 +84,9 @@ ImmersiveMessage anchor(TextAnchor anchor)
 Sets where on screen the message is anchored. Defaults to `TOP_CENTER`.
 
 ```java
-ImmersiveMessage align(TextAnchor align)
+ImmersiveMessage align(TextAlign align)
 ```
-Sets text alignment within the message area.
+Sets horizontal text alignment within the message area. Values: `LEFT` (default), `CENTER`, `RIGHT`.
 
 ```java
 ImmersiveMessage offset(float x, float y)
@@ -279,7 +279,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f) // 10 seconds
-    .anchor(TextAnchor.CENTER_CENTER)
+    .anchor(TextAnchor.MIDDLE)
     .scale(1.3f)
     .background(true)
     .backgroundColors(

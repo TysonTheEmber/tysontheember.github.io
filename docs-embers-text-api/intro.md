@@ -56,7 +56,7 @@ List<TextSpan> spans = MarkupParser.parse(
 );
 
 ImmersiveMessage msg = new ImmersiveMessage(spans, 200f)
-    .anchor(TextAnchor.CENTER_CENTER)
+    .anchor(TextAnchor.MIDDLE)
     .fadeInTicks(30)
     .fadeOutTicks(30);
 

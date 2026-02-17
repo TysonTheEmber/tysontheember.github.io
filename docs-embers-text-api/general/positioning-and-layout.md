@@ -16,20 +16,20 @@ The `<anchor>` tag determines where on the screen a message is placed. The value
 
 | Anchor Value | Horizontal | Vertical |
 |---|---|---|
-| `TOP_LEFT` | Left edge (10% from left) | Top edge |
-| `TOP_CENTER` | Center | Top edge |
-| `TOP_RIGHT` | Right edge (90% from left) | Top edge |
-| `CENTER_LEFT` | Left edge | Middle (50% from top) |
-| `CENTER_CENTER` | Center | Middle |
-| `CENTER_RIGHT` | Right edge | Middle |
-| `BOTTOM_LEFT` | Left edge | 80% from top |
-| `BOTTOM_CENTER` | Center | 80% from top |
-| `BOTTOM_RIGHT` | Right edge | 80% from top |
+| `TOP_LEFT` | Left edge (0%) | Top edge (0%) |
+| `TOP_CENTER` | Center (50%) | Top edge (0%) |
+| `TOP_RIGHT` | Right edge (100%) | Top edge (0%) |
+| `MIDDLE_LEFT` | Left edge (0%) | Middle (50%) |
+| `MIDDLE` | Center (50%) | Middle (50%) |
+| `MIDDLE_RIGHT` | Right edge (100%) | Middle (50%) |
+| `BOTTOM_LEFT` | Left edge (0%) | Bottom edge (100%) |
+| `BOTTOM_CENTER` | Center (50%) | Bottom edge (100%) |
+| `BOTTOM_RIGHT` | Right edge (100%) | Bottom edge (100%) |
 
 **Markup usage:**
 
 ```markup
-<anchor value=CENTER_CENTER>This message appears at the center of the screen</anchor>
+<anchor value=MIDDLE>This message appears at the center of the screen</anchor>
 <anchor value=BOTTOM_CENTER>This message appears at the bottom</anchor>
 ```
 
@@ -39,10 +39,18 @@ The default anchor is `TOP_CENTER`.
 
 ## Text Alignment
 
-The `<align>` tag controls how the text itself is aligned within its rendered area. It uses the same anchor values as positioning, but applies to text justification.
+The `<align>` tag controls horizontal text alignment within the anchored position.
+
+| Value | Description |
+|---|---|
+| `LEFT` | Left-aligned (default) |
+| `CENTER` | Center-aligned |
+| `RIGHT` | Right-aligned |
 
 ```markup
-<align value=CENTER_LEFT>Left-aligned text</align>
+<align value=LEFT>Left-aligned text</align>
+<align value=CENTER>Center-aligned text</align>
+<align value=RIGHT>Right-aligned text</align>
 ```
 
 ---
@@ -130,7 +138,7 @@ For custom shadow styling (color, offset, transparency), use the shadow effect p
 All layout controls can be combined in a single message using nested or sibling tags:
 
 ```markup
-<anchor value=CENTER_CENTER>
+<anchor value=MIDDLE>
   <offset y=-20>
     <scale value=1.2>
       <bg color=#60000000>
