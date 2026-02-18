@@ -19,6 +19,7 @@ Embers Text API gives Minecraft mods the ability to display rich, animated, and 
 - **Immersive Messages** — Full-featured on-screen messages with positioning, backgrounds, fade animations, and per-character effects.
 - **A composable effect system** — Stack multiple effects on the same text. Each effect modifies the rendering state independently.
 - **Inline items and entities** — Render Minecraft item icons and entity models directly within text.
+- **Message Queues** — Send ordered sequences of messages on named channels. Steps play one after another; each step can show multiple messages simultaneously.
 
 ---
 
@@ -96,3 +97,4 @@ This documentation is organized into four sections:
 - **Preset System** — Reusable effect bundles defined in JSON.
 - **Typewriter & Obfuscation as Effects** — Full-featured character reveal/hide animations in the effect system.
 - **Inline Items and Entities** — Render item icons and entity models within text spans.
+- **Message Queue System** — Send ordered sequences of messages on named channels via `/eta queue`. Steps advance automatically, channels are independent, and simultaneous messages per step are supported.

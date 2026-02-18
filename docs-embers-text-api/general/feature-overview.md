@@ -152,13 +152,39 @@ You can also apply pixel offsets (`x`, `y`) to fine-tune placement, and scale th
 
 ---
 
+## Message Queues
+
+The queue system lets you send ordered sequences of immersive messages on named channels. Each channel runs independently, and each **step** in a queue can contain one or more simultaneously-displayed messages. The next step starts only after every message in the current step has expired.
+
+**Key concepts:**
+
+- **Channel** — A named slot (e.g., `cutscene`, `boss`, `tutorial`). Multiple channels play at the same time without interfering.
+- **Step** — One unit of the sequence. All messages in a step appear together; the step ends when all of them expire.
+- **Sequential steps** — Separated by ` | ` in the command syntax.
+- **Simultaneous messages** — Separated by ` & ` within a step.
+
+**Example — a three-beat cutscene:**
+```
+/eta queue @p cutscene "<dur:120><rainbow>You have entered the dungeon!</rainbow>" | "<dur:100><shake>Beware what lies ahead...</shake>" | "<dur:80><bold>Turn back now.</bold>"
+```
+
+**Example — simultaneous messages:**
+```
+/eta queue @p hud "<dur:80>Top line" & "<dur:80>Bottom line"
+```
+
+Appending works naturally — if a channel is already playing, new steps are added to the end of its queue without interrupting the current display.
+
+---
+
 ## In-Game Commands
 
 The mod includes commands for testing and sending messages directly in-game:
 
 - `/eta test <id>` — Run predefined test cases (33 different demos)
 - `/eta send <player> <duration> <text>` — Send a message with markup support
-- `/eta sendcustom <player> <data> <duration> <text>` — Advanced message with NBT properties, supports JSON text components and translatable text
+- `/eta queue <player> <channel> <definition>` — Send an ordered sequence of messages on a named channel
+- `/eta clearqueue <player> [channel]` — Cancel pending queue steps, or clear all channels immediately
 - `/eta help` — Show mod information and documentation links
 
-See the [Commands Reference](./commands-reference.md) for detailed usage examples.
+See the [Commands Reference](./commands-reference.md) for detailed usage and syntax.

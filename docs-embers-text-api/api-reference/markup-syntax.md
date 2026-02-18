@@ -204,6 +204,20 @@ When used with effect parameters (`x`, `y`, `c`, `r`, `g`, `b`), it acts as a sh
 
 When used with effect parameters (`a`, `f`, `w`), it acts as a fade oscillation effect instead.
 
+### Duration (Queue Only)
+
+```markup
+<dur:120>Message text here</dur:120>
+```
+
+The `<dur:N>` tag is **only used inside `/eta queue` definitions**. It specifies the duration of that message in ticks and is stripped from the markup before rendering. It is not a visual effect tag and has no effect when used in `/eta send` or Java API calls.
+
+| Attribute | Description |
+|---|---|
+| `N` | Duration in ticks (integer or decimal). 20 ticks = 1 second. |
+
+If this tag is absent from a queue message, the duration defaults to 60 ticks (3 seconds) and a warning is logged.
+
 ---
 
 ## Content Tags

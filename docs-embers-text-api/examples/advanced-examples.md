@@ -277,3 +277,75 @@ EmbersTextAPI.sendMessage(player, msg);
 - Each entity spins at a different speed and direction.
 - The zombie plays a walk animation.
 - The panel is positioned on the right side of the screen.
+
+---
+
+## 8. Message Queue — Cutscene Sequence
+
+A fully scripted cutscene that plays through four story beats automatically, with a simultaneous subtitle during the boss reveal:
+
+### Via Command
+
+```
+/eta queue @p cutscene "<dur:160><anchor value=MIDDLE><scale value=2.0><neon c=FF0000><shake>BOSS BATTLE BEGINS!</shake></neon>" | "<dur:120><anchor value=MIDDLE><grad from=FF0000 to=440000>Defeat the Lich King to claim victory.</grad>" | "<dur:80><anchor value=MIDDLE><fade>Survive. Fight. Win.</fade>" | "<dur:100><anchor value=MIDDLE><rainbow><bold>Good luck!</bold></rainbow>"
+```
+
+### Via Java API
+
+```java
+import net.tysontheember.emberstextapi.platform.NetworkHelper;
+import net.tysontheember.emberstextapi.immersivemessages.api.ImmersiveMessage;
+import net.tysontheember.emberstextapi.immersivemessages.api.TextAnchor;
+
+NetworkHelper net = NetworkHelper.getInstance();
+
+// Step 1: Boss reveal — two simultaneous messages (title + subtitle)
+ImmersiveMessage title = ImmersiveMessage.fromMarkup(160f,
+    "<neon c=FF0000><shake>BOSS BATTLE BEGINS!</shake></neon>")
+    .anchor(TextAnchor.MIDDLE)
+    .scale(2.0f)
+    .fadeInTicks(15)
+    .fadeOutTicks(15);
+
+ImmersiveMessage subtitle = ImmersiveMessage.fromMarkup(100f,
+    "<italic><grad from=FF8800 to=FF0000>The Lich King has awakened</grad></italic>")
+    .anchor(TextAnchor.BOTTOM_CENTER)
+    .fadeInTicks(10)
+    .fadeOutTicks(20);
+
+// Step 2: Story beat
+ImmersiveMessage beat2 = ImmersiveMessage.fromMarkup(120f,
+    "<grad from=FF0000 to=440000>Defeat the Lich King to claim victory.</grad>")
+    .anchor(TextAnchor.MIDDLE)
+    .fadeInTicks(20)
+    .fadeOutTicks(20);
+
+// Step 3: Atmosphere line
+ImmersiveMessage beat3 = ImmersiveMessage.fromMarkup(80f,
+    "<fade>Survive. Fight. Win.</fade>")
+    .anchor(TextAnchor.MIDDLE);
+
+// Step 4: Sign-off
+ImmersiveMessage beat4 = ImmersiveMessage.fromMarkup(100f,
+    "<rainbow><bold>Good luck!</bold></rainbow>")
+    .anchor(TextAnchor.MIDDLE)
+    .fadeInTicks(10)
+    .fadeOutTicks(30);
+
+// Build steps — step 1 has two simultaneous messages
+List<List<ImmersiveMessage>> steps = List.of(
+    List.of(title, subtitle),   // Both show at once; step ends when both expire
+    List.of(beat2),
+    List.of(beat3),
+    List.of(beat4)
+);
+
+net.sendQueue(player, "cutscene", steps);
+```
+
+**What this does:**
+- Step 1 shows the boss title and a subtitle simultaneously. The step ends when both messages expire (160 ticks).
+- Steps 2, 3, and 4 play one after the other automatically.
+- No manual timing or scheduled tasks needed — `ClientMessageManager` advances the queue on the client.
+- To cancel the remaining steps mid-cutscene: `net.sendClearQueue(player, "cutscene")`.
+- To abort everything immediately: `net.sendClearAllQueues(player)`.

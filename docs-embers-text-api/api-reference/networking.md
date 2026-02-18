@@ -22,7 +22,7 @@ Registered during `FMLCommonSetupEvent` using Forge's `SimpleChannel`:
 
 ```java
 // Registers all S2C packets on the Forge SimpleChannel
-// Protocol version: "3"
+// Protocol version: "4"
 ```
 
 ### NeoForge 1.21.1
@@ -101,15 +101,106 @@ Removes all active messages from the client.
 public record S2C_CloseAllMessagesPacket()
 ```
 
-No fields. Clears the entire active message set.
+No fields. Clears the entire active message set and all channel queues.
 
 **Handler:** `ClientMessageManager.closeAll()`
 
 ---
 
-## Convenience Method
+### S2C_OpenQueuePacket
 
-For the most common case (sending a new message), use the static helper:
+Sends a full ordered sequence of message steps to the client on a named channel. Steps play sequentially — the next step starts only after every message in the current step has expired.
+
+**Wire format:**
+```
+writeUtf(channel)
+writeVarInt(stepCount)
+for each step:
+    writeVarInt(messageCount)
+    for each message:
+        writeUUID(id)
+        writeNbt(serializedImmersiveMessage)
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `channel` | `String` | Named channel identifier. Multiple channels run independently. |
+| `ids` | `List<List<UUID>>` | Per-step, per-message UUIDs for lifecycle tracking. |
+| `stepData` | `List<List<CompoundTag>>` | Per-step, per-message serialized `ImmersiveMessage` data. |
+
+**Handler:** `ClientMessageManager.enqueueSteps(channel, steps)`
+
+If the channel already has active messages, the new steps are appended to the end of its queue.
+
+---
+
+### S2C_ClearQueuePacket
+
+Clears pending queue steps from a named channel, or all channels.
+
+```java
+public record S2C_ClearQueuePacket(String channel)
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `channel` | `String` | The channel to clear. An **empty string** clears all channels and closes all active messages immediately. |
+
+**Handler:**
+- Empty channel: `ClientMessageManager.clearAllQueues()`
+- Named channel: `ClientMessageManager.clearQueue(channel)`
+
+---
+
+## Sending Messages — NetworkHelper API
+
+The `NetworkHelper` interface provides all server-side send methods. Obtain the singleton via `NetworkHelper.getInstance()`.
+
+### Individual Messages
+
+```java
+/** Send a new message to a player (generates a random UUID internally). */
+void sendMessage(ServerPlayer player, ImmersiveMessage message)
+
+/** Send a new message with an explicit UUID. */
+void sendOpenMessage(ServerPlayer player, ImmersiveMessage message)
+
+/** Update an existing message by its string UUID. */
+void sendUpdateMessage(ServerPlayer player, String messageId, ImmersiveMessage message)
+
+/** Close a specific message by its string UUID. */
+void sendCloseMessage(ServerPlayer player, String messageId)
+
+/** Close all active messages on the client (also clears all queues). */
+void sendCloseAllMessages(ServerPlayer player)
+```
+
+### Queue Operations
+
+```java
+/**
+ * Send a full queue of steps to a player on a named channel.
+ * Steps is a list of lists — outer list = sequential steps,
+ * inner list = messages to display simultaneously within that step.
+ * If the channel already has an active queue, the steps are appended.
+ */
+void sendQueue(ServerPlayer player, String channel, List<List<ImmersiveMessage>> steps)
+
+/**
+ * Clear pending (not-yet-started) steps from a named channel.
+ * The currently displaying step is not interrupted.
+ */
+void sendClearQueue(ServerPlayer player, String channel)
+
+/**
+ * Clear all channel queues and close all active messages immediately.
+ */
+void sendClearAllQueues(ServerPlayer player)
+```
+
+### Convenience Static Helper
+
+For the most common case (sending a single new message):
 
 ```java
 // Forge / NeoForge
@@ -121,10 +212,7 @@ import net.tysontheember.emberstextapi.fabric.EmbersTextAPIFabric;
 EmbersTextAPIFabric.sendMessage(serverPlayer, immersiveMessage);
 ```
 
-This internally:
-1. Generates a new UUID.
-2. Serializes the message to NBT.
-3. Sends an `S2C_OpenMessagePacket`.
+This internally generates a new UUID, serializes the message to NBT, and sends an `S2C_OpenMessagePacket`.
 
 ---
 
@@ -160,9 +248,11 @@ On deserialization, `EffectRegistry.parseTag()` recreates the effect instance. I
 
 ## ClientMessageManager
 
-The client-side manager that stores and processes active messages.
+The client-side manager that stores and processes active messages and queues.
 
 **Package:** `net.tysontheember.emberstextapi.client`
+
+### Individual Message Methods
 
 ```java
 /** Open (create) a new message. */
@@ -174,14 +264,56 @@ public static void update(UUID id, ImmersiveMessage message)
 /** Close (remove) a specific message. */
 public static void close(UUID id)
 
-/** Close all active messages. */
+/** Close all active messages (does not clear pending queue steps). */
 public static void closeAll()
 
-/** Called each game tick — handles age tracking and expiry. */
+/** Called each game tick — handles age tracking, expiry, and queue advancement. */
 public static void onClientTick()
 
 /** Called each frame — renders all active messages. */
 public static void onRenderGui()
 ```
+
+### Queue Methods
+
+```java
+/**
+ * Enqueue a list of steps on a named channel.
+ * If the channel has no active messages, the first step is started immediately.
+ * Otherwise, the steps are appended to the channel's pending queue.
+ */
+public static void enqueueSteps(String channel, List<QueueStep> steps)
+
+/**
+ * Clear all pending (not yet started) steps for the named channel.
+ * The currently active step continues until its messages expire naturally.
+ */
+public static void clearQueue(String channel)
+
+/**
+ * Close all active messages and clear all channel queues immediately.
+ */
+public static void clearAllQueues()
+```
+
+### Queue Data Types
+
+```java
+/** A single message within a queue step. */
+public record QueuedMessage(UUID id, ImmersiveMessage message)
+
+/** One sequential step — all messages in this list are displayed simultaneously. */
+public record QueueStep(List<QueuedMessage> messages)
+```
+
+### Queue Advancement Logic
+
+On each tick, after processing message expiry, `ClientMessageManager` checks each active channel:
+
+1. If all UUIDs that were started for a channel are no longer in the active set (i.e., they have all expired), the next `QueueStep` is dequeued.
+2. The next step's messages are opened via `open()`, and their UUIDs are registered as the channel's new active set.
+3. If the queue is empty, the channel entry is removed automatically.
+
+Individual messages and queue messages coexist freely — queue channels only advance based on their own tracked UUIDs.
 
 Messages are stored in a `ConcurrentHashMap<UUID, ActiveMessage>` for thread-safe access.

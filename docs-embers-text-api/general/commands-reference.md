@@ -85,202 +85,103 @@ Multiple effects:
 
 ---
 
-## `/eta sendcustom <player> <data> <duration> <text>`
+## `/eta queue <player> <channel> <queue_definition>`
 
-Sends an advanced message with full control over positioning, background, effects, and styling via NBT data. This command supports three text formats:
-
-1. **Markup syntax** (if text contains `<` and `>`)
-2. **JSON text components** (if text starts with `{` or `[`)
-3. **Translatable components** (if text starts with `tr:`)
-4. **Plain text** (fallback)
+Sends an ordered sequence of immersive messages to a player on a named channel. Messages are grouped into **steps** — each step's messages display simultaneously, and the next step begins only after every message in the current step has expired.
 
 **Syntax:**
 ```
-/eta sendcustom <player> <data> <duration> <text>
+/eta queue <player> <channel> <queue_definition>
 ```
 
 **Parameters:**
 - `player`: Target player (selector or name)
-- `data`: NBT compound tag with message properties
-- `duration`: Duration in ticks (20 ticks = 1 second)
-- `text`: Message text (markup, JSON, translatable, or plain)
+- `channel`: A string identifier for this queue (e.g., `cutscene`, `boss`, `tutorial`). Multiple channels run independently.
+- `queue_definition`: The full sequence definition using step and message separators (see below)
 
-### NBT Data Properties
+### Queue Definition Syntax
 
-#### Positioning & Layout
-| Property | Type | Description |
-|---|---|---|
-| `anchor` | String | Screen anchor: `TOP_CENTER`, `MIDDLE`, `BOTTOM_LEFT`, etc. |
-| `align` | String | Horizontal text alignment: `LEFT` (default), `CENTER`, `RIGHT` |
-| `offsetX` | Float | Horizontal offset in pixels |
-| `offsetY` | Float | Vertical offset in pixels |
-| `size` | Float | Text scale multiplier (1.0 = normal) |
-| `wrap` | Int | Maximum width in pixels before wrapping |
-| `shadow` | Boolean | Enable/disable text shadow |
+| Separator | Meaning |
+|---|---|
+| ` \| ` (space-pipe-space) | Separates sequential steps |
+| ` & ` (space-ampersand-space) | Separates simultaneous messages within a step |
 
-#### Background & Border
-| Property | Type | Description |
-|---|---|---|
-| `background` | Boolean | Enable semi-transparent background |
-| `bgColor` | String | Background color (hex or color name, supports alpha) |
-| `bgAlpha` | Float | Background transparency (0.0 = invisible, 1.0 = opaque) |
-| `borderColor` | String | Border color (hex or color name, supports alpha) |
-| `bgGradient` | Compound/List | Vertical gradient: `{start:"#FF0000", end:"#0000FF"}` or list of colors |
-| `borderGradient` | Compound/List | Border gradient (same format as bgGradient) |
+Each message must contain a `<dur:N>` tag to specify its duration in ticks. If omitted, it defaults to 60 ticks (3 seconds) with a warning.
 
-#### Texture Background
-| Property | Type | Description |
-|---|---|---|
-| `textureBackground` | String/Compound | Resource location or detailed texture config |
-
-For detailed texture config:
+**Format:**
 ```
-{
-  location: "modid:path/to/texture",
-  u: 0,                    # UV coordinates
-  v: 0,
-  width: 256,              # Region dimensions
-  height: 256,
-  atlasWidth: 256,         # Full texture size
-  atlasHeight: 256,
-  padding: 4.0,            # Padding around text
-  scale: 1.0,              # Texture scale
-  mode: "stretch"          # "stretch", "crop", or "tile"
-}
+"<dur:N>message1" | "<dur:N>message2" | "<dur:N>message3"
 ```
-
-#### Text Styling (Legacy Mode Only)
-These properties only apply when **not** using markup syntax:
-
-| Property | Type | Description |
-|---|---|---|
-| `font` | String | Font resource location (e.g., `"minecraft:alt"`, `"emberstextapi:norse"`) |
-| `bold` | Boolean | Bold text |
-| `italic` | Boolean | Italic text |
-| `underlined` | Boolean | Underlined text |
-| `strikethrough` | Boolean | Strikethrough text |
-| `obfuscated` | Boolean | Vanilla obfuscation |
-| `color` | String | Text color (hex or color name) |
-
-#### Gradient Effects (Legacy Mode)
-| Property | Type | Description |
-|---|---|---|
-| `gradient` | Compound/List | Text gradient: `{start:"#FF0000", end:"#00FF00"}` or list of colors |
-
-#### Animation Effects (Legacy Mode)
-| Property | Type | Description |
-|---|---|---|
-| `typewriter` | Float | Typewriter speed (characters per second) |
-| `center` | Boolean | Center text during typewriter effect |
-| `obfuscate` | String | Obfuscate mode: `RANDOM`, `LEFT`, `RIGHT`, `CENTER` |
-| `obfuscateSpeed` | Float | Obfuscation reveal speed |
-| `shakeWave` | Float | Wave shake intensity |
-| `shakeCircle` | Float | Circular shake intensity |
-| `shakeRandom` | Float | Random shake intensity |
-| `charShakeWave` | Float | Per-character wave shake |
-| `charShakeCircle` | Float | Per-character circular shake |
-| `charShakeRandom` | Float | Per-character random shake |
-
-#### Font Assignment (Markup Mode)
-When using markup syntax, you can assign fonts to specific spans:
-
-| Property | Type | Description |
-|---|---|---|
-| `font` | String | Apply this font to ALL spans globally |
-| `font0`, `font1`, etc. | String | Apply font to specific span by index |
-
-**Example:**
-```
-{font0:"emberstextapi:norse", font1:"minecraft:alt"}
-```
-This applies the Norse font to the first span and the alt font to the second span.
 
 ### Examples
 
-#### Basic Custom Message with Background
+#### Sequential story beats:
 ```
-/eta sendcustom @p {background:true, bgColor:"#80000000", anchor:"MIDDLE"} 150 <rainbow>Important Announcement!</rainbow>
+/eta queue @p cutscene "<dur:120><rainbow>You have entered the dungeon!</rainbow>" | "<dur:100><shake>Beware what lies ahead...</shake>" | "<dur:80><bold>Turn back now.</bold>"
+```
+Each line appears only after the previous one expires.
+
+#### Simultaneous messages in a step (both show at once):
+```
+/eta queue @p hud "<dur:80>Top line" & "<dur:80>Bottom line"
+```
+Both messages display together. The step ends when both expire.
+
+#### Mixed — simultaneous + sequential:
+```
+/eta queue @p scene "<dur:100>Header" & "<dur:60>Subtext" | "<dur:80><italic>Next beat...</italic>"
+```
+The first step shows Header and Subtext at the same time. After both expire, the next step plays.
+
+#### Appending to an active channel:
+If `/eta queue` is sent to a channel that already has messages running, the new steps are **appended** to the end of the queue — the current display is not interrupted.
+
+```
+/eta queue @p story "<dur:120>Chapter 1"
+/eta queue @p story "<dur:120>Chapter 2"
+/eta queue @p story "<dur:120>Chapter 3"
 ```
 
-#### Message with Position and Scale
+#### With markup effects:
 ```
-/eta sendcustom @p {anchor:"TOP_CENTER", offsetY:50, size:1.5, shadow:false} 200 <bold>Quest Complete!</bold>
-```
-
-#### Background Gradient
-```
-/eta sendcustom @p {background:true, bgGradient:{start:"#AA004400", end:"#AA440000"}, borderColor:"gold"} 180 <color value="white">Warning Message</color>
-```
-
-#### JSON Text Component Support (NEW in v2.0.0)
-You can now use JSON text components directly:
-```
-/eta sendcustom @p {background:true, anchor:"MIDDLE"} 100 {"text":"Hello","color":"gold","bold":true}
-```
-
-Array format:
-```
-/eta sendcustom @p {size:1.2} 100 [{"text":"Warning: ","color":"red"},{"text":"Low health!","color":"yellow"}]
-```
-
-#### Translatable Text Support (NEW in v2.0.0)
-Use the `tr:` prefix for translatable components:
-```
-/eta sendcustom @p {background:true} 100 tr:container.inventory Extra text here
-```
-
-This will translate `container.inventory` and append " Extra text here".
-
-#### Legacy Mode with Typewriter
-When NOT using markup (no `<` or `>`), you can use legacy NBT properties:
-```
-/eta sendcustom @p {background:true, bgColor:"#60000000", typewriter:2.0, bold:true, color:"#FFD700", size:1.3} 250 The ancient scroll reveals its secrets...
-```
-
-#### Markup Mode with Per-Span Fonts
-```
-/eta sendcustom @p {font0:"emberstextapi:norse", font1:"minecraft:alt", background:true} 150 <bold>Norse</bold> <italic>Alt Font</italic>
-```
-
-This applies the Norse font to the first span ("Norse") and the alt font to the second span ("Alt Font").
-
-#### Texture Background
-```
-/eta sendcustom @p {textureBackground:{location:"minecraft:textures/block/oak_planks.png", mode:"tile", padding:8}, anchor:"MIDDLE"} 200 <color value="white"><bold>Wooden Sign</bold></color>
+/eta queue @p boss "<dur:200><neon c=FF0000><shake>BOSS BATTLE BEGINS!</shake></neon>" | "<dur:150><grad from=FF0000 to=440000>Defeat the Lich King to claim victory.</grad>" | "<dur:100><typewriter>Survive. Fight. Win.</typewriter>"
 ```
 
 ---
 
-## Command Behavior Notes
+## `/eta clearqueue <player> [channel]`
 
-### Markup vs. Legacy Mode
-The `/eta sendcustom` command automatically detects the text format:
+Clears pending (not-yet-started) steps from a queue channel, or clears all active messages immediately.
 
-- **Markup mode** (text contains `<` and `>`): Uses the markup parser to create TextSpan objects. NBT styling properties like `bold`, `color`, `italic` are **ignored** (use markup tags instead). Background, positioning, and font assignment still work.
-
-- **JSON mode** (text starts with `{` or `[`): Parses as JSON text component
-
-- **Translatable mode** (text starts with `tr:`): Creates translatable component
-
-- **Legacy mode** (plain text): Creates a literal component and applies NBT styling properties like `bold`, `color`, `gradient`, `typewriter`, etc.
-
-### Markup + NBT Combination
-You can combine markup syntax with NBT properties for advanced control:
-
+**Syntax:**
 ```
-/eta sendcustom @p {
-  background:true,
-  bgColor:"#AA000000",
-  borderGradient:{start:"gold", end:"orange"},
-  anchor:"MIDDLE",
-  size:1.5,
-  font0:"emberstextapi:norse"
-} 200 <gradient from="#FFD700" to="#FFA500"><bold>LEGENDARY</bold></gradient>
+/eta clearqueue <player>               # Clear all channels immediately
+/eta clearqueue <player> <channel>     # Clear pending steps for one channel
 ```
 
-This uses:
-- Markup for text effects (`<gradient>`, `<bold>`)
-- NBT for background, positioning, scale, and font assignment
+**Parameters:**
+- `player`: Target player (selector or name)
+- `channel` (optional): The channel name to clear. If omitted, all channels are cleared immediately including any currently displaying messages.
+
+### Behavior
+
+**With channel name:**
+Removes all *pending* steps from the named channel. The step currently being displayed plays to completion. Once it expires, no further steps follow.
+
+```
+# Start a long queue
+/eta queue @p cutscene "<dur:200>Long Intro" | "<dur:100>Part 2" | "<dur:100>Part 3"
+
+# Immediately skip to just the long intro (cancel Part 2 and Part 3)
+/eta clearqueue @p cutscene
+```
+
+**Without channel name:**
+Removes all active messages across all channels immediately. Useful for aborting a cutscene entirely.
+
+```
+/eta clearqueue @p
+```
 
 ---
 
