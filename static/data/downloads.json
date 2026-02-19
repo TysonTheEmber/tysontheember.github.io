@@ -1,68 +1,7 @@
 {
-  "modrinth": 4971,
-  "curseforge": 1591951,
-  "total": 1596922,
-  "lastUpdated": "2026-02-04T20:51:12Z",
-  "projects": {
-    "embers-text-api": {
-      "curseforge": 627880,
-      "modrinth": 4323,
-      "total": 632203
-    },
-    "aperture-api": {
-      "curseforge": 1215,
-      "modrinth": 648,
-      "total": 1863
-    },
-    "explodee": {
-      "curseforge": 2759,
-      "modrinth": 4451,
-      "total": 7210
-    },
-    "spelunkery-plus": {
-      "curseforge": 204214,
-      "modrinth": 0,
-      "total": 204214
-    },
-    "orbital-railgun-reforged": {
-      "curseforge": 748986,
-      "modrinth": 0,
-      "total": 748986
-    },
-    "echoes-of-battle": {
-      "curseforge": 0,
-      "modrinth": 0,
-      "total": 0
-    },
-    "embercraft-rekindled": {
-      "curseforge": 2772,
-      "modrinth": 0,
-      "total": 2772
-    },
-    "project-ember-embercraft": {
-      "curseforge": 3686,
-      "modrinth": 0,
-      "total": 3686
-    },
-    "resistance-formulation": {
-      "curseforge": 134,
-      "modrinth": 0,
-      "total": 134
-    },
-    "infernumrpg": {
-      "curseforge": 34,
-      "modrinth": 0,
-      "total": 34
-    },
-    "particle-interactions-reforged": {
-      "curseforge": 228,
-      "modrinth": 0,
-      "total": 228
-    },
-    "hyrpland-input-fix": {
-      "curseforge": 43,
-      "modrinth": 0,
-      "total": 43
-    }
-  }
+  "modrinth": 7501,
+  "curseforge": 2129136,
+  "total": 2136637,
+  "lastUpdated": "2026-02-19T06:08:55Z",
+  "projects": {"embers-text-api": {"curseforge": 882527, "modrinth": 6687, "total": 889214},"aperture-api": {"curseforge": 27233, "modrinth": 814, "total": 28047},"spelunkery-plus": {"curseforge": 249140, "modrinth": 0, "total": 249140},"orbital-railgun-reforged": {"curseforge": 940981, "modrinth": 0, "total": 940981},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 121, "modrinth": 0, "total": 121},"particle-interactions-reforged": {"curseforge": 3597, "modrinth": 0, "total": 3597},"explodee": {"curseforge": 18610, "modrinth": 4623, "total": 23233},"resistance-formulation": {"curseforge": 252, "modrinth": 0, "total": 252},"hyrpland-input-fix": {"curseforge": 143, "modrinth": 0, "total": 143},"embercraft-rekindled": {"curseforge": 2819, "modrinth": 0, "total": 2819},"project-ember-embercraft": {"curseforge": 3713, "modrinth": 0, "total": 3713}}
 }
