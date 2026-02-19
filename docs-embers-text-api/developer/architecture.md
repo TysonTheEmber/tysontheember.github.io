@@ -139,7 +139,8 @@ fabric-1.20.1/ (or fabric-1.21.1/)
 │  Per-tick: ActiveMessage.tick() — age tracking, expiry           │
 │       │                                                          │
 │       ▼                                                          │
-│  Per-frame: ImmersiveMessage.render()                            │
+│  Per-frame: Loader HUD callback → ClientMessageManager.render()  │
+│            (ordered after vanilla chat)                          │
 │       │                                                          │
 │       ├── For each TextSpan:                                     │
 │       │     ├── For each character:                              │
@@ -201,20 +202,33 @@ The initialization sequence is the same across all loaders, though the specific 
 1. `EmbersTextAPI` constructor registers event listeners and mod config.
 2. `commonSetup` (`FMLCommonSetupEvent`) registers the network channel via Forge's `SimpleChannel`.
 3. `onClientSetup` (`FMLClientSetupEvent`, client-only) initializes the effect registry with all built-in effects and locks it.
-4. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager`.
+4. During client mod-event registration, a HUD overlay is registered with `RegisterGuiOverlaysEvent` using `registerAbove(VanillaGuiOverlay.CHAT_PANEL, ...)`.
+5. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager` in that chat-above overlay layer.
 
 ### NeoForge 1.21.1
 
 1. `EmbersTextAPI` constructor registers event listeners.
 2. Network packets are registered using NeoForge's `StreamCodec` system.
 3. Client setup initializes the effect registry with all built-in effects and locks it.
-4. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager`.
+4. During client mod-event registration, a GUI layer is registered with `RegisterGuiLayersEvent` using `registerAbove(VanillaGuiLayers.CHAT, ...)`.
+5. At runtime, messages are sent/received via network packets and rendered each frame by `ClientMessageManager` in that chat-above layer.
 
 ### Fabric (1.20.1 and 1.21.1)
 
 1. `EmbersTextAPIFabric` (`ModInitializer`) registers config, networking, commands, and player join handler.
 2. `EmbersTextAPIFabricClient` (`ClientModInitializer`) initializes the effect registry with all built-in effects and locks it, and registers client-side event handlers.
-3. At runtime, messages are sent/received via Fabric Networking API and rendered each frame by `ClientMessageManager`.
+3. Rendering is registered through `HudRenderCallback`, which fires after `InGameHud` (including chat).
+4. At runtime, messages are sent/received via Fabric Networking API and rendered each frame by `ClientMessageManager` in this post-chat HUD callback.
+
+### Render Ordering Summary
+
+| Loader | HUD Render Registration | Chat Ordering |
+|---|---|---|
+| Forge 1.20.1 | `RegisterGuiOverlaysEvent` | `registerAbove(VanillaGuiOverlay.CHAT_PANEL, ...)` |
+| NeoForge 1.21.1 | `RegisterGuiLayersEvent` | `registerAbove(VanillaGuiLayers.CHAT, ...)` |
+| Fabric 1.20.1 / 1.21.1 | `HudRenderCallback` | Callback runs after `InGameHud` chat rendering |
+
+All loaders use standard HUD render state (blend enabled, depth test disabled, color reset) and a positive GUI Z translate so immersive text stays visible over chat without altering message layout logic.
 
 :::note
 The API surface is identical on all loaders. The differences are limited to the mod entry point and network registration — the effect system, markup parser, and rendering pipeline are shared code in the common modules.

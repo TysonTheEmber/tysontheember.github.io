@@ -150,6 +150,8 @@ ImmersiveMessage fadeOutTicks(int ticks)
 ```
 Message alpha ramps from 1 to 0 over the specified number of ticks at the end (counting backward from `duration`).
 
+> **Implementation note:** very low alpha values (`0..3` out of `255`) are treated as fully transparent in the immersive renderer. This avoids a vanilla font edge case where near-zero alpha can render as a fully opaque glyph for one frame.
+
 ### Text Gradients
 
 ```java

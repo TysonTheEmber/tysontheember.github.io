@@ -36,8 +36,8 @@ Embers Text API solves this by providing:
 
 | Minecraft Version | Mod Loaders | Mod Version | Java |
 |---|---|---|---|
-| 1.20.1 | Forge 47.4.0, Fabric | 2.0.2 | 17+ |
-| 1.21.1 | NeoForge, Fabric | 2.0.2 | 21+ |
+| 1.20.1 | Forge 47.4.0, Fabric | v2 | 17+ |
+| 1.21.1 | NeoForge, Fabric | v2 | 21+ |
 
 ## What's New in v2
 

@@ -78,7 +78,15 @@ Each game tick, `ClientMessageManager.onClientTick()` iterates all active messag
 
 ## Stage 5: Per-Frame Rendering
 
-Each frame, `ClientMessageManager.onRenderGui()` is called. For each active message:
+Each frame, the loader-specific HUD callback invokes `ClientMessageManager.render(...)`:
+
+- **Forge 1.20.1** — Registered via `RegisterGuiOverlaysEvent`, ordered with `registerAbove(VanillaGuiOverlay.CHAT_PANEL, ...)`.
+- **NeoForge 1.21.1** — Registered via `RegisterGuiLayersEvent`, ordered with `registerAbove(VanillaGuiLayers.CHAT, ...)`.
+- **Fabric 1.20.1 / 1.21.1** — Rendered from `HudRenderCallback`, which runs after `InGameHud` (including chat).
+
+This guarantees immersive messages draw after chat, so chat background/text cannot overdraw them.
+
+Before drawing, the renderer enables blend, disables depth test, resets shader color, and applies a positive GUI Z translate (`+200`) for stable top-layer HUD rendering. For each active message:
 
 ### 5a. Position Calculation
 
@@ -109,6 +117,8 @@ Some effects (neon, glitch) add "sibling" layers to `EffectSettings`. These are 
 ### 5e. Fade Alpha
 
 The message-level fade-in/fade-out timing adjusts a global alpha multiplier that is applied on top of all per-character alpha values.
+
+For immersive message text rendering, alpha bytes in the `0..3` range are collapsed to `0`. This protects against a vanilla font behavior that can interpret near-zero alpha as fully opaque and produce a single-frame flash at fade boundaries.
 
 ---
 

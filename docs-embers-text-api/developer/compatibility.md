@@ -46,6 +46,18 @@ Animation tracks (typewriter, obfuscate) are cached and reused across frames. Th
 
 ## Compatibility Notes
 
+### HUD / Chat Layering
+
+Immersive messages are rendered in a HUD layer that is intentionally ordered after vanilla chat. This prevents chat background and chat glyphs from hiding immersive overlays when they overlap.
+
+| Loader | Render Hook | Chat Ordering |
+|---|---|---|
+| Forge 1.20.1 | `RegisterGuiOverlaysEvent` | `registerAbove(VanillaGuiOverlay.CHAT_PANEL, ...)` |
+| NeoForge 1.21.1 | `RegisterGuiLayersEvent` | `registerAbove(VanillaGuiLayers.CHAT, ...)` |
+| Fabric 1.20.1 / 1.21.1 | `HudRenderCallback` | Callback runs after `InGameHud` chat rendering |
+
+The render path also forces standard HUD state (`blend on`, `depth test off`, color reset) and uses a positive GUI Z translate to keep immersive content visually on top without changing layout logic.
+
 ### Font Renderers
 
 Embers Text API hooks into Minecraft's `BakedGlyph` rendering at the lowest level. This means it works with:
@@ -54,6 +66,8 @@ Embers Text API hooks into Minecraft's `BakedGlyph` rendering at the lowest leve
 - Any font that produces `BakedGlyph` objects through the standard pipeline
 
 It does **not** work with external text rendering libraries that bypass Minecraft's glyph system entirely.
+
+The immersive renderer also normalizes very low alpha bytes (`0..3`) to `0` before glyph draw. This avoids a vanilla font edge case where near-zero alpha can appear as fully opaque for a single frame during fade-in/fade-out.
 
 ### Other Text Mods
 

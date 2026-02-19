@@ -12,7 +12,7 @@ This page gives a high-level tour of every major capability in Embers Text API. 
 
 ## Immersive Messages
 
-Immersive Messages are on-screen text displays that float in the player's viewport. They are not part of chat, the HUD, or any specific GUI — they render directly over the game world.
+Immersive Messages are on-screen text displays that float in the player's viewport. They render in a dedicated HUD overlay layer (not as chat messages), and are ordered above vanilla chat so they stay visible when overlapping the chat area.
 
 **What you can do with them:**
 
