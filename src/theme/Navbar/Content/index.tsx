@@ -123,6 +123,12 @@ export default function NavbarContent(): JSX.Element {
               label="CurseForge profile"
               size={32}
             />
+            <NavbarIcon
+              icon="simple-icons:kofi"
+              href="https://ko-fi.com/tysontheember"
+              label="Support on Ko-fi"
+              size={30}
+            />
             <SettingsMenu />
           </div>
           <NavbarColorModeToggle className={styles.colorModeToggle} />
