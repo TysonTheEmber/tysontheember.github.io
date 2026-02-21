@@ -183,6 +183,41 @@ Only release versions are published. There are no snapshot builds.
 
 ---
 
+## Troubleshooting
+
+### Forge 1.20.1 — Mixin crash on launch (`InvalidInjectionException`)
+
+If your dev client crashes on startup with an error like:
+
+```
+Critical injection failure: @Inject annotation on emberstextapi$visit could not find any
+targets matching '...TranslatableContents;m_213724_(...)'
+```
+
+this is a mixin refmap remapping issue. The published Forge jar embeds an SRG-mapped refmap (required for production), but in your dev environment `fg.deobf()` remaps the bytecode to Parchment/Mojang names without touching the refmap JSON. The mixin system then looks for SRG names in a class where the methods are now Parchment-named, and fails.
+
+**Fix:** add these JVM args to every run configuration in your `build.gradle`:
+
+```groovy title="build.gradle"
+minecraft {
+    runs {
+        configureEach {
+            jvmArgs(
+                "-Dmixin.env.remapRefMap=true",
+                "-Dmixin.env.refMapRemappingFile=${projectDir}/build/createSrgToMcp/output.srg"
+            )
+        }
+        // ... your client / server run blocks
+    }
+}
+```
+
+`output.srg` is the SRG→Parchment mapping file that ForgeGradle generates automatically for your project (via the `createSrgToMcp` task). With `remapRefMap=true`, the mixin system translates EmbersTextAPI's refmap entries at load time so they match your deobfed classpath.
+
+After adding this, re-run `./gradlew genIntellijRuns` (or your equivalent IDE setup task) to pick up the updated JVM args.
+
+---
+
 ## Next Steps
 
 - **[Sending Messages](./sending-messages.md)** — Create your first `ImmersiveMessage` and send it to a player
