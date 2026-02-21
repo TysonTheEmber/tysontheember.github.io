@@ -44,7 +44,7 @@ repositories {
 
 ## Dependency Snippets
 
-Replace `VERSION` with the release you want (e.g. `2.4.0`). See [GitHub releases](https://github.com/TysonTheEmber/EmbersTextAPI/releases) for the latest version.
+Replace `VERSION` with the release you want (e.g. `2.4.0`).
 
 **Group ID:** `net.tysontheember.emberstextapi`
 
