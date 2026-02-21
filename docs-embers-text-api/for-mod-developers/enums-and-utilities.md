@@ -1,16 +1,16 @@
 ---
-sidebar_position: 7
-title: Enums and Utility Classes
-description: TextAnchor, TextAlign, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser.
+sidebar_position: 8
+title: Enums and Utilities
+description: TextAnchor, TextAlign, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser, and other utility classes.
 ---
 
-# Enums and Utility Classes
+# Enums and Utilities
 
 ---
 
 ## TextAnchor
 
-Defines 9-position screen anchor positions for message placement. Values use clean normalized coordinates (0, 0.5, 1).
+Defines 9 screen anchor positions for message placement.
 
 **Package:** `net.tysontheember.emberstextapi.immersivemessages.api`
 
@@ -28,14 +28,14 @@ public enum TextAnchor {
     BOTTOM_CENTER(0.5f, 1f),
     BOTTOM_RIGHT(1f, 1f);
 
-    public final float xFactor;  // Normalized X position (0.0 = left, 1.0 = right)
-    public final float yFactor;  // Normalized Y position (0.0 = top, 1.0 = bottom)
+    public final float xFactor;  // 0.0 = left edge, 1.0 = right edge
+    public final float yFactor;  // 0.0 = top edge, 1.0 = bottom edge
 }
 ```
 
-Text is automatically clamped to stay on screen with a small margin, so edge anchors like `TOP_LEFT` won't render text off-screen.
+Messages are automatically clamped to stay on screen, so edge anchors won't render text off-screen.
 
-Used in:
+**Used in:**
 - `ImmersiveMessage.anchor(TextAnchor)`
 - `<anchor value=...>` markup tag
 
@@ -57,7 +57,7 @@ public enum TextAlign {
 }
 ```
 
-Used in:
+**Used in:**
 - `ImmersiveMessage.align(TextAlign)`
 - `<align value=...>` markup tag
 
@@ -72,15 +72,18 @@ Defines the direction in which characters are revealed or hidden during obfuscat
 ```java
 public enum ObfuscateMode {
     NONE,       // No directional animation
-    LEFT,       // Reveal/hide from left to right
-    RIGHT,      // Reveal/hide from right to left
+    LEFT,       // Reveal/hide left to right
+    RIGHT,      // Reveal/hide right to left
     CENTER,     // Reveal/hide from center outward
     EDGES,      // Reveal/hide from both edges inward
     RANDOM      // Random reveal order
 }
 ```
 
-Used in the `<obfuscate direction=...>` markup tag and `ImmersiveMessage.obfuscate(ObfuscateMode, float)`.
+**Used in:**
+- `<obfuscate direction=...>` markup tag
+- `ImmersiveMessage.obfuscate(ObfuscateMode, float)`
+- `TextSpan.obfuscate(ObfuscateMode, float)`
 
 ---
 
@@ -92,54 +95,54 @@ Legacy enum for shake animation types. In v2, the effect system handles these vi
 
 ```java
 public enum ShakeType {
-    WAVE,      // Sinusoidal vertical wave → maps to WaveEffect
-    CIRCLE,    // Circular orbital motion → maps to CircleEffect
-    RANDOM     // Random jitter → maps to ShakeEffect
+    WAVE,      // Sinusoidal vertical wave → WaveEffect
+    CIRCLE,    // Circular orbital motion → CircleEffect
+    RANDOM     // Random jitter → ShakeEffect
 }
 ```
+
+**Used in:**
+- `ImmersiveMessage.shake(ShakeType, float)` (legacy)
+- `TextSpan.shake(ShakeType, float)` (legacy)
+
+For new code, prefer the effect system: `span.effect("wave a=2.0")` etc.
 
 ---
 
 ## ImmersiveColor
 
-A color class that supports an alpha channel, unlike Minecraft's `TextColor` which is RGB-only.
+A color class that supports an alpha channel, unlike Minecraft's `TextColor` (which is RGB-only).
 
 **Package:** `net.tysontheember.emberstextapi.immersivemessages.util`
 
 ```java
 public class ImmersiveColor {
-    /** Create from a packed ARGB integer. */
+    /** Create from a packed ARGB integer (0xAARRGGBB). */
     public ImmersiveColor(int argb)
 
-    /** Get the packed RGB value (no alpha). */
-    public int getRGB()
-
-    /** Get the packed ARGB value. */
-    public int getARGB()
-
-    /** Get the alpha channel as a float (0.0–1.0). */
-    public float getAlpha()
+    public int getRGB()          // Packed RGB (no alpha)
+    public int getARGB()         // Packed ARGB
+    public float getAlpha()      // Alpha as float (0.0–1.0)
 }
 ```
 
-**Example:**
+**Color format:** `0xAARRGGBB`
+- `AA` = Alpha (`00` = transparent, `FF` = opaque)
+- `RR` = Red, `GG` = Green, `BB` = Blue
+
+**Examples:**
 
 ```java
-// 50% opaque black background
-ImmersiveColor bg = new ImmersiveColor(0x80000000);
-
-// Fully opaque red
-ImmersiveColor red = new ImmersiveColor(0xFFFF0000);
-
-// 30% opaque white border
-ImmersiveColor border = new ImmersiveColor(0x4DFFFFFF);
+new ImmersiveColor(0x80000000)   // 50% opaque black
+new ImmersiveColor(0xFFFF0000)   // Fully opaque red
+new ImmersiveColor(0x4DFFFFFF)   // 30% opaque white
 ```
 
-**Color format:** `0xAARRGGBB`
-- `AA` = Alpha (00 = transparent, FF = opaque)
-- `RR` = Red
-- `GG` = Green
-- `BB` = Blue
+**Used in:**
+- `ImmersiveMessage.backgroundColors(ImmersiveColor, ImmersiveColor, ImmersiveColor)`
+- `ImmersiveMessage.backgroundGradient(ImmersiveColor...)`
+- `TextSpan.background(ImmersiveColor)`
+- `TextSpan.globalBackgroundColor(ImmersiveColor)`
 
 ---
 
@@ -152,16 +155,13 @@ Utility class for parsing color strings into various formats.
 ```java
 public class ColorParser {
 
-    /**
-     * Parse a hex color string to RGB float array [r, g, b].
-     * Accepts: "FF0000", "#FF0000", "RRGGBB"
-     */
+    /** Parse hex string to RGB float array [r, g, b]. Accepts "FF0000" or "#FF0000". */
     public static Optional<float[]> parseToRgbFloats(String hex)
 
-    /** Convert a packed RGB integer to float array [r, g, b]. */
+    /** Packed RGB integer to float array [r, g, b]. */
     public static float[] intToRgbFloats(int packed)
 
-    /** Convert RGB float values to a packed integer. */
+    /** RGB float values to packed integer. */
     public static int rgbFloatsToInt(float r, float g, float b)
 
     /**
@@ -176,13 +176,13 @@ public class ColorParser {
 
 ## ViewStateTracker
 
-Prevents typewriter and obfuscation animations from resetting when text is re-rendered (e.g., tooltip hover refresh).
+Prevents typewriter and obfuscation animations from resetting when text is re-rendered (e.g., when a tooltip re-renders on hover).
 
 **Package:** `net.tysontheember.emberstextapi.util`
 
 Each message or text context gets a unique context ID. The tracker remembers whether an animation has started for that context, so re-rendering doesn't restart it.
 
-This is used internally by the rendering system. Mod developers generally don't need to interact with it directly unless implementing custom animation-based effects that need to survive re-renders.
+Used internally by the rendering system. You generally don't need to interact with it directly unless implementing custom animation-based effects that need to survive re-renders.
 
 ---
 
@@ -193,5 +193,7 @@ Caches computed text layout calculations to avoid redundant work each frame.
 **Package:** `net.tysontheember.emberstextapi.client`
 
 - Automatically cleared when the GUI scale changes.
-- Transparent to mod developers — it operates internally during rendering.
-- Improves performance for messages that don't change content between frames.
+- Transparent to mod developers — it operates entirely internally during rendering.
+- Significantly improves performance for messages that don't change content between frames.
+
+You don't need to interact with this class directly.

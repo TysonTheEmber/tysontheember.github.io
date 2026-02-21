@@ -392,6 +392,55 @@ body:has(.hero--primary) .navbar__logo img {
   gap: 0.5rem;
 }
 
+/* Top-level sidebar section headers — bold with spacing */
+.theme-doc-sidebar-menu > .menu__list > .menu__list-item > .menu__link {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.theme-doc-sidebar-menu > .menu__list > .menu__list-item + .menu__list-item {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ifm-border-color);
+}
+
+/* Tabs — make them visually distinct */
+div:has(> [role="tablist"]) {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabs {
+  background-color: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-border-color);
+  margin-bottom: 0 !important;
+  padding: 0 0.5rem;
+  gap: 0.25rem;
+}
+
+.tabs__item {
+  border-radius: 6px 6px 0 0 !important;
+  font-size: 0.875rem;
+}
+
+.tabs__item--active {
+  background-color: var(--ifm-color-primary) !important;
+  color: #fff !important;
+  border-bottom-color: transparent !important;
+}
+
+[data-theme='dark'] .tabs__item--active {
+  color: var(--ifm-background-color) !important;
+}
+
+[role="tabpanel"] {
+  background-color: var(--ifm-background-surface-color);
+  margin-top: 0 !important;
+  padding: 1.25rem;
+}
+
 /* Active menu items with ember accent */
 .menu__link--active {
   background-color: rgba(168, 72, 50, 0.1);
@@ -459,16 +508,39 @@ body:has(.hero--primary) .navbar__logo img {
   border-radius: 8px;
 }
 
-/* Tables */
+/* Tables — consistent rounded corners */
 table {
-  border-radius: 8px;
-  overflow: hidden;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
 }
+
+table th,
+table td {
+  border-bottom: 1px solid var(--ifm-table-border-color, var(--ifm-border-color));
+  border-right: 1px solid var(--ifm-table-border-color, var(--ifm-border-color));
+}
+
+table th:first-child,
+table td:first-child {
+  border-left: 1px solid var(--ifm-table-border-color, var(--ifm-border-color));
+}
+
+table thead tr:first-child th {
+  border-top: 1px solid var(--ifm-table-border-color, var(--ifm-border-color));
+}
+
+/* Round the four corner cells */
+table thead tr:first-child th:first-child { border-top-left-radius: 6px; }
+table thead tr:first-child th:last-child  { border-top-right-radius: 6px; }
+table tbody tr:last-child  td:first-child { border-bottom-left-radius: 6px; }
+table tbody tr:last-child  td:last-child  { border-bottom-right-radius: 6px; }
 
 /* Code blocks */
 pre {
   border-radius: 8px;
   border: 1px solid var(--ifm-border-color);
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 /* Inline code */

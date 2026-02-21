@@ -83,15 +83,6 @@ const config: Config = {
         sidebarPath: './sidebars-embers-legacy.ts',
       },
     ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'aperture-api',
-        path: 'docs-aperture-api',
-        routeBasePath: 'aperture-api',
-        sidebarPath: './sidebars-aperture.ts',
-      },
-    ],
   ],
 
   themeConfig: {
@@ -144,12 +135,6 @@ const config: Config = {
               label: 'Embers Text API (Legacy)',
             },
             {
-              type: 'docSidebar',
-              sidebarId: 'apertureSidebar',
-              docsPluginId: 'aperture-api',
-              label: 'Aperture API',
-            },
-            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -190,10 +175,6 @@ const config: Config = {
             {
               label: 'Embers Text API (Legacy)',
               to: '/embers-text-api-legacy/intro',
-            },
-            {
-              label: 'Aperture API',
-              to: '/aperture-api/intro',
             },
             {
               label: 'Orbital Railgun Config',

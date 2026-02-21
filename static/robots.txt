@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+User-agent: Algolia Crawler
+Disallow: /embers-text-api-legacy/

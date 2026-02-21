@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 title: EffectSettings
 description: The per-character mutable rendering state passed through the effect chain.
 ---
@@ -34,13 +34,13 @@ Effects modify these to move, rotate, or resize individual characters.
 | `b` | `float` | `1.0` | Blue channel (0.0–1.0) |
 | `a` | `float` | `1.0` | Alpha / opacity (0.0 = invisible, 1.0 = fully opaque) |
 
-Color effects (rainbow, gradient) set `r`, `g`, `b`. Transparency effects (fade, typewriter) set `a`.
+Color effects (rainbow, gradient) write `r`, `g`, `b`. Transparency effects (fade, typewriter) write `a`.
 
 ---
 
 ## Character Context (Read-Only)
 
-These fields provide information about the character being processed. Effects read these to determine behavior but should not modify them.
+These fields provide information about the character being rendered. Effects read these but should not modify them.
 
 | Field | Type | Description |
 |---|---|---|
@@ -56,22 +56,20 @@ These fields provide information about the character being processed. Effects re
 
 | Field | Type | Description |
 |---|---|---|
-| `typewriterTrack` | `TypewriterTrack` | Active typewriter animation state for this context |
-| `typewriterIndex` | `int` | Global character position offset for typewriter ordering (-1 = uninitialized) |
+| `typewriterTrack` | `TypewriterTrack` | Active typewriter animation state |
+| `typewriterIndex` | `int` | Global position offset for typewriter ordering |
 | `obfuscateKey` | `Object` | Cache key for obfuscation tracking |
 | `obfuscateStableKey` | `Object` | Stable cache key (for tooltips that re-render) |
 | `obfuscateTrack` | `ObfuscateTrack` | Active obfuscation animation state |
-| `obfuscateSpanStart` | `int` | Span-local start index (keeps spans independent) |
+| `obfuscateSpanStart` | `int` | Span-local start index |
 | `obfuscateSpanLength` | `int` | Span-local length |
 | `useRandomGlyph` | `boolean` | If `true`, render a random glyph instead of the real character |
 
 ---
 
-## Multi-Layer Support
+## Multi-Layer Support (Siblings)
 
-### Siblings
-
-Some effects (neon, glitch) need to render additional character layers — glow rings, displaced slices, chromatic fringes. They do this by adding "sibling" `EffectSettings` objects.
+Some effects (neon, glitch) render additional character layers — glow rings, displaced slices, chromatic fringes. They do this by adding "sibling" `EffectSettings` objects.
 
 ```java
 /** Get or create the siblings list (lazy initialization). */
@@ -80,16 +78,18 @@ List<EffectSettings> getSiblings()
 /** Add a sibling layer. */
 void addSibling(EffectSettings sibling)
 
-/** Check if any siblings have been added (without creating the list). */
+/** Check if any siblings were added (without creating the list). */
 boolean hasSiblings()
 
-/** Safe iteration — returns empty list if no siblings (does NOT create list). */
+/** Safe iteration — returns empty list if no siblings (does NOT create the list). */
 List<EffectSettings> getSiblingsOrEmpty()
 ```
 
 Each sibling is rendered as an additional glyph pass after the main character.
 
-### Vertical Masking
+---
+
+## Vertical Masking
 
 | Field | Type | Default | Description |
 |---|---|---|---|
@@ -120,7 +120,7 @@ int getPackedColor()
 
 ## How Effects Use EffectSettings
 
-Here is a concrete example showing how a simple effect interacts with EffectSettings:
+A concrete example — the wave effect:
 
 ```java
 public class WaveEffect extends BaseEffect {
@@ -135,7 +135,7 @@ public class WaveEffect extends BaseEffect {
 
     @Override
     public void apply(EffectSettings settings) {
-        // Read: character index (for phase offset)
+        // Read: character index (for phase offset between characters)
         float phase = settings.index * 0.2f;
 
         // Read: current time
@@ -147,7 +147,47 @@ public class WaveEffect extends BaseEffect {
 }
 ```
 
-The effect:
-1. **Reads** `settings.index` to calculate a per-character phase offset.
-2. **Writes** `settings.y` to add vertical displacement.
-3. Does not touch color, alpha, or rotation — those remain as set by previous effects or defaults.
+The effect reads `index` for phase offset and writes `y` for displacement. It leaves color, alpha, and rotation unchanged.
+
+---
+
+## Shadow Layer
+
+Effects that should not modify the shadow pass check `isShadow`:
+
+```java
+@Override
+public void apply(EffectSettings settings) {
+    if (settings.isShadow) {
+        return;  // Skip shadow — shadows keep their original color/position
+    }
+    // ... modify settings normally
+}
+```
+
+Color effects (rainbow, gradient, color) all skip the shadow layer.
+
+---
+
+## Creating Sibling Layers
+
+For effects that need to render additional copies of a character:
+
+```java
+@Override
+public void apply(EffectSettings settings) {
+    // Create a glow layer
+    EffectSettings glow = settings.copy();
+    glow.r = 1.0f;
+    glow.g = 1.0f;
+    glow.b = 1.0f;
+    glow.a *= 0.3f;      // Semi-transparent
+    glow.scale *= 1.2f;  // Slightly larger
+
+    settings.addSibling(glow);
+
+    // Main character renders with original settings (unchanged)
+}
+```
+
+Siblings are rendered after the main character.

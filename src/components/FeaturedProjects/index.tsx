@@ -17,23 +17,15 @@ interface FeaturedProject {
 const featuredProjects: FeaturedProject[] = [
   {
     title: 'Embers Text API',
-    description: 'Create stunning animated in-game overlays, banners, and cinematic text messaging with full control over styling, positioning, and animations.',
+    description: 'Send animated text overlays anywhere on screen — typewriter effect, rainbow gradients, neon glow, shake, wave, and more. Built for modpack creators using commands and markup, and mod developers using a clean Java API.',
     image: '/img/embers-text-api-icon.png',
     docLink: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',
     modrinthSlug: 'embers-text-api',
   },
   {
-    title: 'Aperture API',
-    description: 'Professional cinematic camera tooling for Minecraft Forge with in-game editing, smooth camera paths, and export capabilities.',
-    image: '/img/aperture-api-icon.png',
-    docLink: '/aperture-api/intro',
-    curseforgeSlug: 'aperture-api',
-    modrinthSlug: 'aperture-api',
-  },
-  {
     title: 'Orbital Railgun Reforged',
-    description: 'A powerful weapon mod bringing devastating orbital strikes to Minecraft with absolute destruction and power at your fingertips.',
+    description: 'Call down a beam from the heavens and obliterate your foes. A weapon mod that brings orbital railgun firepower to Minecraft — aim, charge, and watch it burn from above. Highly configurable with a in depth config.',
     image: '/img/orbital-railgun-icon.png',
     docLink: '/orbital-railgun/config',
     curseforgeSlug: 'orbital-railgun-reforged',

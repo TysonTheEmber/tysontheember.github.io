@@ -20,29 +20,15 @@ export const projects: Project[] = [
     image: require('@site/static/img/embers-text-api-icon.png').default,
     description: (
       <>
-        Create stunning animated in-game overlays, banners, and cinematic text messaging
-        with full control over styling, positioning, and animations. With more to come!
+        Send cinematic animated text overlays to players with 19+ effects — typewriter,
+        rainbow, neon glow, shake, wave, fade, and more. Fully controllable via commands
+        or a clean Java API. No Java required for modpack creators.
       </>
     ),
-    tags: ['Minecraft', 'API', 'Cinematic', 'UI'],
+    tags: ['API', 'Visual'],
     link: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',
     modrinthSlug: 'embers-text-api',
-  },
-  {
-    id: 'aperture-api',
-    title: 'Aperture API',
-    image: require('@site/static/img/aperture-api-icon.png').default,
-    description: (
-      <>
-        Professional cinematic camera tooling for Minecraft Forge with in-game editing,
-        smooth camera paths, and export capabilities for use in your videos.
-      </>
-    ),
-    tags: ['Minecraft', 'API', 'Cinematic'],
-    link: '/aperture-api/intro',
-    curseforgeSlug: 'aperture-api',
-    modrinthSlug: 'aperture-api',
   },
   {
     id: 'orbital-railgun-reforged',
@@ -50,11 +36,12 @@ export const projects: Project[] = [
     image: require('@site/static/img/orbital-railgun-icon.png').default,
     description: (
       <>
-        A powerful weapon mod bringing devastating orbital strikes to Minecraft.
-        Unleash precision firepower from the skies with advanced targeting systems.
+        Call down a beam from the heavens and obliterate your foes.
+        A weapon mod that brings orbital railgun firepower to Minecraft: aim, charge,
+        and watch it burn from above. Highly configurable with a in depth config.
       </>
     ),
-    tags: ['Minecraft', 'Mod', 'Combat', 'Technology'],
+    tags: ['Mod', 'Combat'],
     link: '/orbital-railgun/config',
     buttonLabel: 'Config Guide',
     curseforgeSlug: 'orbital-railgun-reforged',
@@ -69,7 +56,7 @@ export const projects: Project[] = [
         to make underground exploration more rewarding and exciting.
       </>
     ),
-    tags: ['Minecraft', 'Mod', 'Exploration', 'Content'],
+    tags: ['Mod', 'Exploration'],
     curseforgeSlug: 'spelunkery-plus',
   },
   {
@@ -82,7 +69,7 @@ export const projects: Project[] = [
         player actions and environmental changes.
       </>
     ),
-    tags: ['Minecraft', 'Mod', 'QOL', 'Visual'],
+    tags: ['Mod', 'Visual'],
     curseforgeSlug: 'particle-interactions-reforged',
   },
   {
@@ -95,7 +82,7 @@ export const projects: Project[] = [
         effects and alchemical combinations.
       </>
     ),
-    tags: ['Minecraft', 'Mod', 'QOL', 'Magic'],
+    tags: ['Mod', 'Magic'],
     curseforgeSlug: 'resistance-formulation',
   },
 ];
