@@ -118,16 +118,31 @@ Combine both separators for complex sequences:
 
 ---
 
-## Clearing Queues
+## Clearing and Stopping Queues
 
-**Cancel pending steps** (current step finishes naturally):
+Three commands give you different levels of control:
+
+| Command | Effect |
+|---|---|
+| `/eta clearqueue @p cutscene` | Remove pending steps from `cutscene`; current message plays out |
+| `/eta clearqueue @p` | Remove pending steps from **all** channels; current messages play out |
+| `/eta stopqueue @p cutscene` | Force-stop `cutscene` — closes current message + clears pending steps |
+| `/eta stopqueue @p` | Force-stop **all** channels immediately |
+| `/eta closeall @p` | Close every message on screen and clear all queues |
+
+**Drain pending steps gracefully** (current step finishes):
 ```
 /eta clearqueue @p cutscene
 ```
 
-**Stop everything immediately** across all channels:
+**Cut off a specific channel mid-step:**
 ```
-/eta clearqueue @p
+/eta stopqueue @p cutscene
+```
+
+**Emergency clear — wipe everything off screen:**
+```
+/eta closeall @p
 ```
 
 ---

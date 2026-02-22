@@ -1,8 +1,4 @@
 {
   "label": "Examples",
-  "position": 8,
-  "link": {
-    "type": "generated-index",
-    "description": "Complete command-only examples for common use cases — from simple welcome messages to multi-step cutscene sequences. All examples use only /eta commands and markup syntax, with no Java code required."
-  }
+  "position": 8
 }

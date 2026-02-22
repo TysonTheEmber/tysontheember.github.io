@@ -149,21 +149,62 @@ See the [Message Queues](./message-queues.md) guide for a full deep-dive with re
 
 ## `/eta clearqueue <player> [channel]`
 
-Cancels pending queue steps for a channel, or closes all active messages immediately.
+Cancels **pending** queue steps for a channel, letting the currently-displaying message finish naturally.
 
-**With a channel name** — removes pending steps; the current step finishes naturally:
+**With a channel name** — removes pending steps for that channel; the current step finishes naturally:
 ```
 /eta clearqueue @p cutscene
 ```
 
-**Without a channel name** — immediately removes all active messages across all channels:
+**Without a channel name** — removes all pending steps across every channel; current steps still finish naturally:
 ```
 /eta clearqueue @p
 ```
 
 **Parameters:**
 - `player` — Player name or selector
-- `channel` (optional) — Which channel to clear. Omit to clear everything.
+- `channel` (optional) — Which channel to clear. Omit to clear all channels.
+
+---
+
+## `/eta stopqueue <player> [channel]`
+
+Like `clearqueue`, but **also immediately closes the currently-displaying message(s)**. Use this when you need to cut off a queue mid-step.
+
+**With a channel name** — force-stops that channel (closes its active message + clears pending steps):
+```
+/eta stopqueue @p cutscene
+```
+
+**Without a channel name** — force-stops all channels immediately:
+```
+/eta stopqueue @p
+```
+
+**Parameters:**
+- `player` — Player name or selector
+- `channel` (optional) — Which channel to stop. Omit to stop all channels.
+
+---
+
+## `/eta closeall <player>`
+
+Immediately closes **all** messages currently on screen and clears all queues — regardless of which channel they came from or whether they are part of a queue.
+
+```
+/eta closeall @p
+```
+
+```
+/eta closeall @a
+```
+
+**Parameters:**
+- `player` — Player name or selector
+
+:::tip
+Use `closeall` as an emergency clear — for example, when a player dies, quits a dungeon, or skips a cutscene entirely.
+:::
 
 ---
 
