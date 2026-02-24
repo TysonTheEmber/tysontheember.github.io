@@ -38,7 +38,7 @@ Install ETA like any other mod — drop the JAR for your loader and Minecraft ve
 | 1.21.1 | NeoForge | [Modrinth](https://modrinth.com/mod/embers-text-api/versions?g=1.21.1&l=neoforge) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api/files/all?page=1&pageSize=20&version=1.21.1&gameVersionTypeId=4&showAlphaFiles=show) |
 | 1.21.1 | Fabric | [Modrinth](https://modrinth.com/mod/embers-text-api/versions?g=1.21.1&l=fabric) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api/files/all?page=1&pageSize=20&version=1.21.1&gameVersionTypeId=4&showAlphaFiles=show) |
 
-No config file is required. ETA works out of the box.
+ETA works out of the box with no configuration required. A config file is generated on first launch if you want to customize behavior — see [Configuration](./configuration.md).
 
 ---
 
@@ -89,4 +89,5 @@ Same command, but wrapped in `<rainbow>` markup — the text now cycles through 
 | See all 19 effects | [Effects Reference](./effects-reference.md) |
 | Position messages on screen | [Layout and Positioning](./layout-and-positioning.md) |
 | Create cutscenes and quest sequences | [Message Queues](./message-queues.md) |
+| Configure permissions, limits, and disabled effects | [Configuration](./configuration.md) |
 | See complete examples | [Basic Examples](./examples/basic-examples.md) |

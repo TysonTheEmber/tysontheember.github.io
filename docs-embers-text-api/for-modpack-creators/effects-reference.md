@@ -72,15 +72,16 @@ Applies a single solid color to text via the effect system. Unlike the `<color>`
 
 | Tag | Aliases |
 |---|---|
-| `<color col=HEX>` | — |
+| `<color col=HEX>` | `<color value=HEX>` |
 
 | Parameter | Default | Description |
 |---|---|---|
 | `col` | `FFFFFF` | The color to apply (hex string) |
+| `value` | `FFFFFF` | Alternative to `col` |
 
 ```markup title="Examples"
 <color col=FF0000>Red text</color>
-<color col=#00FF00>Green text</color>
+<color value=#00FF00>Green text</color>
 <color col=5BCEFA>Sky blue text</color>
 ```
 

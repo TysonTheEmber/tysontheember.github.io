@@ -124,7 +124,7 @@ All 19 built-in effects are available as tags. See [Effects Reference](./effects
 |---|---|---|
 | `<rainbow>` | `<rainb>` | Cycling color spectrum |
 | `<grad>` | `<gradient>` | Color gradient from A to B |
-| `<color col=HEX>` | — | Apply a solid color via effect system |
+| `<color col=HEX>` | `<color value=HEX>` | Apply a solid color via effect system |
 | `<pulse>` | — | Rhythmic brightness pulsing |
 | `<fade>` | — | Transparency oscillation |
 | `<wave>` | — | Sinusoidal up-down motion |
