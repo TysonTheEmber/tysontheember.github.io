@@ -30,7 +30,7 @@ export const projects: Project[] = [
         or a clean Java API. No Java required for modpack creators.
       </>
     ),
-    type: 'other',
+    type: 'mod',
     tags: ['API', 'Visual', 'Utility'],
     link: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',

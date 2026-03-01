@@ -92,6 +92,9 @@ const config: Config = {
       apiKey: '93791c27131499c512943e864ef6cf39',
       indexName: 'dev_Docs',
       contextualSearch: false,
+      searchParameters: {
+        hitsPerPage: 20,
+      },
       searchPagePath: 'search',
       translations: {
         button: {
