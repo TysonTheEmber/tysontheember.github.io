@@ -43,7 +43,7 @@ export default function ProjectCard({
     ((curseforgeDownloads ?? 0) + (modrinthDownloads ?? 0));
 
   return (
-    <div className="card">
+    <div className={`card ${styles.projectCard}`}>
       <div className={styles.projectCardHeader}>
         <img
           src={image}
@@ -65,62 +65,68 @@ export default function ProjectCard({
       <div className={styles.projectCardBody}>
         <p className={styles.projectDescription}>{description}</p>
 
-        {(curseforgeSlug || modrinthSlug) && (
-          <div className={styles.statsSection}>
-            {downloadsLoading ? (
-              <div className={styles.downloadText}>Loading downloads...</div>
-            ) : downloadsError ? (
-              <div className={styles.downloadText}>Downloads unavailable</div>
-            ) : (
-              <>
-                {(projectData && totalDownloads !== null && totalDownloads > 0) ? (
-                  <>
-                    <div className={styles.totalDownloads}>
-                      <strong>{formatDownloads(totalDownloads)}</strong> downloads
-                    </div>
-                    <div className={styles.platformStats}>
-                      {curseforgeDownloads !== undefined && curseforgeDownloads !== null && curseforgeSlug && (
-                        <span className={styles.statBadge}>
-                          CF: {formatDownloads(curseforgeDownloads)}
-                        </span>
-                      )}
-                      {modrinthSlug && modrinthDownloads !== undefined && modrinthDownloads !== null && (
-                        <span className={styles.statBadge}>
-                          MR: {formatDownloads(modrinthDownloads)}
-                        </span>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <div className={styles.downloadText}>No downloads yet</div>
+        <div className={styles.projectCardFooter}>
+          {(curseforgeSlug || modrinthSlug) && (
+            <div className={styles.statsSection}>
+              {downloadsLoading ? (
+                <div className={styles.downloadText}>Loading downloads...</div>
+              ) : downloadsError ? (
+                <div className={styles.downloadText}>Downloads unavailable</div>
+              ) : (
+                <>
+                  {(projectData && totalDownloads !== null && totalDownloads > 0) ? (
+                    <>
+                      <div className={styles.totalDownloads}>
+                        <strong>{formatDownloads(totalDownloads)}</strong> downloads
+                      </div>
+                      <div className={styles.platformStats}>
+                        {curseforgeDownloads !== undefined && curseforgeDownloads !== null && curseforgeSlug && (
+                          <span className={styles.statBadge}>
+                            CF: {formatDownloads(curseforgeDownloads)}
+                          </span>
+                        )}
+                        {modrinthSlug && modrinthDownloads !== undefined && modrinthDownloads !== null && (
+                          <span className={styles.statBadge}>
+                            MR: {formatDownloads(modrinthDownloads)}
+                          </span>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <div className={styles.downloadText}>No downloads yet</div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+
+          <div className={styles.projectActions}>
+            {link && (
+              <Link to={link} className="button button--primary button--block">
+                {buttonLabel ?? 'View Docs'}
+              </Link>
+            )}
+            {(curseforgeSlug || modrinthSlug) && (
+              <div className={styles.downloadActions}>
+                {curseforgeSlug && (
+                  <Link
+                    className="button button--secondary button--block"
+                    href={`https://www.curseforge.com/minecraft/mc-mods/${curseforgeSlug}`}
+                  >
+                    Download on CurseForge
+                  </Link>
                 )}
-              </>
+                {modrinthSlug && (
+                  <Link
+                    className="button button--secondary button--block"
+                    href={`https://modrinth.com/mod/${modrinthSlug}`}
+                  >
+                    Download on Modrinth
+                  </Link>
+                )}
+              </div>
             )}
           </div>
-        )}
-
-        <div className={styles.projectActions}>
-          {link && (
-            <Link to={link} className="button button--primary button--block">
-              {buttonLabel ?? 'View Docs'}
-            </Link>
-          )}
-          {curseforgeSlug && (
-            <Link
-              className="button button--secondary button--block"
-              href={`https://www.curseforge.com/minecraft/mc-mods/${curseforgeSlug}`}
-            >
-              Download on CurseForge
-            </Link>
-          )}
-          {modrinthSlug && (
-            <Link
-              className="button button--secondary button--block"
-              href={`https://modrinth.com/mod/${modrinthSlug}`}
-            >
-              Download on Modrinth
-            </Link>
-          )}
         </div>
       </div>
     </div>

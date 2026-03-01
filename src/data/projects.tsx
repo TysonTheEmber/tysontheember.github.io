@@ -6,12 +6,17 @@ export type Project = {
   title: string;
   image: string;
   description: ReactNode;
+  type: ProjectType;
   tags: string[];
   link?: string;
   buttonLabel?: string;
   curseforgeSlug?: string;
   modrinthSlug?: string;
 };
+
+export type ProjectType = 'mod' | 'modpack' | 'other';
+
+export const allProjectTypes: ProjectType[] = ['mod', 'modpack', 'other'];
 
 export const projects: Project[] = [
   {
@@ -25,7 +30,8 @@ export const projects: Project[] = [
         or a clean Java API. No Java required for modpack creators.
       </>
     ),
-    tags: ['API', 'Visual'],
+    type: 'other',
+    tags: ['API', 'Visual', 'Utility'],
     link: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',
     modrinthSlug: 'embers-text-api',
@@ -41,7 +47,8 @@ export const projects: Project[] = [
         and watch it burn from above. Highly configurable with a in depth config.
       </>
     ),
-    tags: ['Mod', 'Combat'],
+    type: 'mod',
+    tags: ['Combat', 'Visual', 'Items'],
     link: '/orbital-railgun/config',
     buttonLabel: 'Config Guide',
     curseforgeSlug: 'orbital-railgun-reforged',
@@ -56,7 +63,8 @@ export const projects: Project[] = [
         to make underground exploration more rewarding and exciting.
       </>
     ),
-    tags: ['Mod', 'Exploration'],
+    type: 'mod',
+    tags: ['Exploration', 'Items'],
     curseforgeSlug: 'spelunkery-plus',
   },
   {
@@ -69,7 +77,8 @@ export const projects: Project[] = [
         player actions and environmental changes.
       </>
     ),
-    tags: ['Mod', 'Visual'],
+    type: 'mod',
+    tags: ['Visual'],
     curseforgeSlug: 'particle-interactions-reforged',
   },
   {
@@ -82,7 +91,8 @@ export const projects: Project[] = [
         effects and alchemical combinations.
       </>
     ),
-    tags: ['Mod', 'Magic'],
+    type: 'mod',
+    tags: ['Utility', 'Items'],
     curseforgeSlug: 'resistance-formulation',
   },
 ];

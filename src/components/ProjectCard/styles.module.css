@@ -1,3 +1,9 @@
+.projectCard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .projectCardHeader {
   display: flex;
   align-items: center;
@@ -65,16 +71,25 @@
 
 .projectCardBody {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .projectDescription {
   color: var(--ifm-font-color-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.6;
 }
 
+.projectCardFooter {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .statsSection {
-  margin-bottom: 1rem;
   padding: 1rem;
   background: var(--ember-ash);
   border-radius: 8px;
@@ -128,6 +143,16 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.downloadActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.downloadActions .button {
+  margin: 0;
 }
 
 .downloadText {

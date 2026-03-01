@@ -4,12 +4,13 @@ import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import FilterBar from '@site/src/components/FilterBar';
 import ProjectCard from '@site/src/components/ProjectCard';
-import {projects, allTags} from '@site/src/data/projects';
+import {projects, allProjectTypes, allTags, type ProjectType} from '@site/src/data/projects';
 import type {DownloadsData} from '@site/src/utils/downloads';
 import {fetchDownloads} from '@site/src/utils/downloads';
 import styles from './projects.module.css';
 
 export default function ProjectsPage(): ReactNode {
+  const [selectedType, setSelectedType] = useState<ProjectType | 'all'>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [downloadsData, setDownloadsData] = useState<DownloadsData | null>(null);
   const [downloadsLoading, setDownloadsLoading] = useState(true);
@@ -42,17 +43,19 @@ export default function ProjectsPage(): ReactNode {
   };
 
   const handleClearFilters = () => {
+    setSelectedType('all');
     setSelectedTags([]);
   };
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
+      const typeMatch = selectedType === 'all' || project.type === selectedType;
       const tagsMatch =
         selectedTags.length === 0 ||
         selectedTags.every((tag) => project.tags.includes(tag));
-      return tagsMatch;
+      return typeMatch && tagsMatch;
     });
-  }, [selectedTags]);
+  }, [selectedType, selectedTags]);
 
   return (
     <Layout
@@ -67,6 +70,9 @@ export default function ProjectsPage(): ReactNode {
           </header>
 
           <FilterBar
+            projectTypes={allProjectTypes}
+            selectedType={selectedType}
+            onTypeChange={setSelectedType}
             tags={allTags}
             selectedTags={selectedTags}
             onTagToggle={handleTagToggle}

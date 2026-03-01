@@ -13,6 +13,15 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at center, #faf5f0 0%, #f5e6d3 50%, #f5e6d3 100%);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.heroBanner * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 [data-theme='dark'] .heroBanner {

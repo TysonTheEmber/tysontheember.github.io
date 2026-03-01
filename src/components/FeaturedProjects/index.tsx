@@ -88,21 +88,25 @@ function ProjectCard({project, downloadsData, loading}: ProjectCardProps): React
               View Documentation
             </Link>
           )}
-          {project.curseforgeSlug && (
-            <Link
-              className="button button--secondary button--block"
-              href={`https://www.curseforge.com/minecraft/mc-mods/${project.curseforgeSlug}`}
-            >
-              Download on CurseForge
-            </Link>
-          )}
-          {project.modrinthSlug && !project.curseforgeSlug && (
-            <Link
-              className="button button--secondary button--block"
-              href={`https://modrinth.com/mod/${project.modrinthSlug}`}
-            >
-              Download on Modrinth
-            </Link>
+          {(project.curseforgeSlug || project.modrinthSlug) && (
+            <div className={styles.downloadActions}>
+              {project.curseforgeSlug && (
+                <Link
+                  className="button button--secondary button--block"
+                  href={`https://www.curseforge.com/minecraft/mc-mods/${project.curseforgeSlug}`}
+                >
+                  Download on CurseForge
+                </Link>
+              )}
+              {project.modrinthSlug && (
+                <Link
+                  className="button button--secondary button--block"
+                  href={`https://modrinth.com/mod/${project.modrinthSlug}`}
+                >
+                  Download on Modrinth
+                </Link>
+              )}
+            </div>
           )}
         </div>
       </div>

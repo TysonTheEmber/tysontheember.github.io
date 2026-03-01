@@ -33,13 +33,13 @@
   color: var(--ember-deep-red);
 }
 
-.gameButtons {
+.typeButtons {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.gameButton {
+.typeButton {
   padding: 0.5rem 1.5rem;
   border: 2px solid var(--ember-brick);
   background: var(--ifm-background-color);
@@ -52,28 +52,28 @@
   text-transform: capitalize;
 }
 
-.gameButton:hover {
+.typeButton:hover {
   background: var(--ember-peach);
   transform: translateY(-2px);
 }
 
-.gameButton.active {
+.typeButton.active {
   background: var(--ember-brick);
   color: white;
   border-color: var(--ember-brick);
 }
 
-[data-theme='dark'] .gameButton {
+[data-theme='dark'] .typeButton {
   border-color: var(--ember-rust);
   background: var(--ifm-background-surface-color);
   color: var(--ember-glow);
 }
 
-[data-theme='dark'] .gameButton:hover {
+[data-theme='dark'] .typeButton:hover {
   background: rgba(214, 118, 80, 0.15);
 }
 
-[data-theme='dark'] .gameButton.active {
+[data-theme='dark'] .typeButton.active {
   background: var(--ember-rust);
   color: var(--ifm-background-color);
   border-color: var(--ember-rust);
@@ -160,13 +160,13 @@
 
 /* Accessibility: Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .gameButton,
+  .typeButton,
   .tagButton,
   .clearButton {
     transition: none !important;
   }
 
-  .gameButton:hover,
+  .typeButton:hover,
   .tagButton:hover,
   .clearButton:hover {
     transform: none !important;
@@ -178,12 +178,12 @@
     padding: 1rem;
   }
 
-  .gameButtons,
+  .typeButtons,
   .tagButtons {
     gap: 0.5rem;
   }
 
-  .gameButton {
+  .typeButton {
     padding: 0.4rem 1rem;
     font-size: 0.85rem;
   }
