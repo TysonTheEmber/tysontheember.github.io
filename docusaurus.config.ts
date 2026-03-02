@@ -176,6 +176,10 @@ const config: Config = {
               to: '/embers-text-api/intro',
             },
             {
+              label: 'EML v1.2 Licence',
+              to: '/modding-licence',
+            },
+            {
               label: 'Embers Text API (Legacy)',
               to: '/embers-text-api-legacy/intro',
             },

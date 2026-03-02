@@ -57,6 +57,14 @@ Add ETA as a Gradle dependency and use the Java API to send messages, build cust
 
 ---
 
+## Licence
+
+Embers Text API is distributed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**.
+
+If you are building modpacks, distributing bundles, creating forks, or planning commercial use, read the licence terms before distribution.
+
+---
+
 ## Quick Preview
 
 The fastest way to see ETA in action — run this command in-game (requires operator level 2):

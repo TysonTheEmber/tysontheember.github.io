@@ -146,7 +146,9 @@ When v2 releases, v1 features will continue to work through a compatibility laye
 - **Feature Requests:** [GitHub Issues](https://github.com/TysonTheEmber/EmbersTextAPI/issues)
 - **Source Code:** [GitHub Repository](https://github.com/TysonTheEmber/EmbersTextAPI)
 
-## License & Credits
+## Licence & Credits
+
+Embers Text API is distributed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**.
 
 Embers Text API is developed by [TysonTheEmber](https://github.com/TysonTheEmber).
 

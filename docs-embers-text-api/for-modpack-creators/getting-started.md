@@ -40,6 +40,8 @@ Install ETA like any other mod — drop the JAR for your loader and Minecraft ve
 
 ETA works out of the box with no configuration required. A config file is generated on first launch if you want to customize behavior — see [Configuration](./configuration.md).
 
+This mod is licensed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**. For modpacks and launcher bundles, use official-source downloads and do not rehost jar files.
+
 ---
 
 ## Your First Commands

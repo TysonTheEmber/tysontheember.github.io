@@ -46,6 +46,8 @@ dependencies {
 
 Replace `FILE_ID` with the latest file ID from the [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/embers-text-api). For example, `7104998` for a specific version.
 
+This mod is licensed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**. For modpacks/launcher distributions, use official-source downloads and do not rehost jar files.
+
 :::note Version Information
 **Current Version:** v1 (Public)
 **In Development:** v2 (Beta)

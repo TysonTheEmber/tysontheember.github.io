@@ -885,3 +885,103 @@ body:has(.intro-page-no-sidebar) article {
   max-width: 1200px !important;
   margin: 0 auto !important;
 }
+
+/* Legal page: lettered clauses rendered as bold a), b), c) markers */
+.modding-licence-content {
+  max-width: 880px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.modding-licence-content p {
+  margin: 0.7rem 0;
+}
+
+.modding-licence-content h2 {
+  margin-top: 2.2rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+.alpha-legal-list {
+  list-style: lower-alpha;
+  list-style-position: outside;
+  margin: 0.45rem 0 1rem 0;
+  padding-left: 2.25rem;
+  margin-left: 0.25rem;
+}
+
+.alpha-legal-list > li {
+  margin: 0.2rem 0;
+  padding-left: 0;
+}
+
+.alpha-legal-list > li::marker {
+  content: counter(list-item, lower-alpha) ") ";
+  font-weight: 700;
+}
+
+/* Legal page: increase spacing between numbered sections */
+.modding-licence-content h3 {
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.modding-licence-content h3:first-of-type {
+  margin-top: 1.25rem;
+}
+
+.modding-licence-content table {
+  font-size: 0.97rem;
+}
+
+.licence-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0.9rem 0 0.8rem 0;
+}
+
+.licence-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--ifm-background-surface-color);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.licence-note {
+  border-left: 3px solid var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
+  padding: 0.65rem 0.8rem;
+  border-radius: 6px;
+  margin: 0.1rem 0 1rem 0;
+}
+
+.licence-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.2rem 0 1rem 0;
+}
+
+.licence-action {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.licence-action:hover {
+  text-decoration: none;
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+}

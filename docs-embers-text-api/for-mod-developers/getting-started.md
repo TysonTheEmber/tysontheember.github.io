@@ -183,6 +183,14 @@ Only release versions are published. There are no snapshot builds.
 
 ---
 
+## Licence
+
+Embers Text API is distributed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**.
+
+If your project includes forks/derivative code, redistribution, or commercial usage, review the licence terms before publishing.
+
+---
+
 ## Troubleshooting
 
 ### Forge 1.20.1 — Mixin crash on launch (`InvalidInjectionException`)
