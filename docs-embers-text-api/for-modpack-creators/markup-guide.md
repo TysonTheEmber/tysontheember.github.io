@@ -307,6 +307,20 @@ Picked up <item id=minecraft:oak_planks size=64/>.
 | `count` | `size` | Stack size displayed |
 | `x` | `offsetx` | Horizontal pixel offset |
 | `y` | `offsety` | Vertical pixel offset |
+| `nbt` | — | SNBT string for item NBT data |
+
+#### Item NBT
+
+The `nbt` parameter lets you specify NBT data for items that have different in-game representations based on their NBT (e.g., modded items from Apotheosis, Cobblemon, Hostile Neural Networks, etc.):
+
+```markup
+<item id=cobblemon:poke_ball nbt="{species:\"cobblemon:bulbasaur\"}"/>
+<item id=minecraft:potion nbt="{Potion:\"minecraft:healing\"}"/>
+```
+
+:::note
+The NBT value must be quoted if it contains spaces. Use escaped quotes (`\"`) for strings inside the SNBT.
+:::
 
 ### Inline Entity
 
@@ -326,6 +340,16 @@ Beware the <entity id=minecraft:creeper scale=0.5/>!
 | `spin` | `rotate` | *(none)* | Continuous rotation speed |
 | `anim` | `animation` | `idle` | Animation state (`idle`, `walk`, `attack`, `hurt`) |
 | `lighting` | `light` | `15` | Light level (0–15) |
+| `nbt` | — | *(none)* | SNBT string for entity NBT data |
+
+#### Entity NBT
+
+The `nbt` parameter lets you customize the entity's NBT data for specialized rendering (e.g., colored sheep, baby variants, specific mob types):
+
+```markup
+<entity id=minecraft:sheep nbt="{Color:14}" scale=0.5/>
+<entity id=minecraft:zombie nbt="{IsBaby:1b}" scale=0.4/>
+```
 
 ---
 

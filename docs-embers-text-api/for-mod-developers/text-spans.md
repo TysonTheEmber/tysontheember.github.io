@@ -115,6 +115,7 @@ Render a Minecraft item icon inline with the text:
 span.item("minecraft:diamond")
 span.item("minecraft:diamond", 3)     // With stack count
 span.itemOffset(2f, -1f)              // Pixel offset
+span.itemNbt("{Potion:\"minecraft:healing\"}")  // SNBT data
 ```
 
 | Method | Description |
@@ -122,6 +123,7 @@ span.itemOffset(2f, -1f)              // Pixel offset
 | `item(String id)` | Item ID to render |
 | `item(String id, int count)` | With stack size displayed |
 | `itemOffset(float x, float y)` | Pixel offset for positioning |
+| `itemNbt(String nbt)` | SNBT string for item NBT data |
 
 ---
 
@@ -137,6 +139,7 @@ span.entityRotation(90f, 0f, 0f)           // Yaw, pitch, roll
 span.entityLighting(15)                    // Light level 0-15
 span.entitySpin(2.0f)                      // Degrees per tick continuous rotation
 span.entityAnimation("walk")              // idle, walk, attack, hurt
+span.entityNbt("{Color:14}")              // SNBT data (e.g., red sheep)
 ```
 
 | Method | Description |
@@ -148,6 +151,7 @@ span.entityAnimation("walk")              // idle, walk, attack, hurt
 | `entityLighting(int level)` | Light level (0 = dark, 15 = full) |
 | `entitySpin(float degreesPerTick)` | Continuous Y-axis rotation |
 | `entityAnimation(String anim)` | Animation state |
+| `entityNbt(String nbt)` | SNBT string for entity NBT data |
 
 ---
 

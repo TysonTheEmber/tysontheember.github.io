@@ -169,6 +169,33 @@ ImmersiveMessage msg = new ImmersiveMessage(spans, 100f);
 
 ---
 
+## Translatable Text Support
+
+ETA automatically detects and processes markup in **translatable text components**. If a `TranslatableContents` fallback string contains markup tags, ETA will parse and apply effects during rendering.
+
+This means you can use markup directly in your mod's lang files:
+
+**`en_us.json`:**
+```json
+{
+  "mymod.quest.complete": "<rainbow><bold>Quest Complete!</bold></rainbow> You defeated the dragon.",
+  "mymod.item.found": "You found <item id=minecraft:diamond count=1/>!"
+}
+```
+
+**Java usage:**
+```java
+Component message = Component.translatable("mymod.quest.complete");
+player.sendSystemMessage(message);
+// The player will see the text with rainbow + bold effects applied
+```
+
+:::note
+Translatable markup works with the fallback string only. The effects are processed entirely client-side during rendering — no special server-side handling is needed.
+:::
+
+---
+
 ## Best Practices
 
 - Use `ImmersiveMessage.fromMarkup()` for simple cases — it's the most concise.

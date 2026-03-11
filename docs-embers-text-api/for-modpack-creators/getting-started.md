@@ -82,6 +82,20 @@ Same command, but wrapped in `<rainbow>` markup — the text now cycles through 
 
 ---
 
+## Chat Markup
+
+Players can use the same markup tags directly in chat messages. For example, typing `<rainbow>hello</rainbow>` in chat will display the text with a rainbow color effect.
+
+Server operators can control who has access to chat markup using the `markupPermissionMode` config option — see [Configuration](./configuration.md#chat-markup-permissions).
+
+---
+
+## Translatable Text Support
+
+ETA automatically detects and processes markup tags inside translatable text components. This means mods can include markup in their lang file entries, and ETA will apply the effects when the text is rendered on screen.
+
+---
+
 ## What's Next?
 
 | I want to... | Go to... |
