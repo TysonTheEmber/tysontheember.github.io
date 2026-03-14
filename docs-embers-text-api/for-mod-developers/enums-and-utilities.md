@@ -1,7 +1,7 @@
 ---
 sidebar_position: 8
 title: Enums and Utilities
-description: TextAnchor, TextAlign, ObfuscateMode, ShakeType, ImmersiveColor, ColorParser, and other utility classes.
+description: TextAnchor, TextAlign, ObfuscateMode, ImmersiveColor, ColorParser, and other utility classes.
 ---
 
 # Enums and Utilities
@@ -84,28 +84,6 @@ public enum ObfuscateMode {
 - `<obfuscate direction=...>` markup tag
 - `ImmersiveMessage.obfuscate(ObfuscateMode, float)`
 - `TextSpan.obfuscate(ObfuscateMode, float)`
-
----
-
-## ShakeType (Legacy)
-
-Legacy enum for shake animation types. In v2, the effect system handles these via separate effect classes (`ShakeEffect`, `WaveEffect`, `CircleEffect`).
-
-**Package:** `net.tysontheember.emberstextapi.immersivemessages.api`
-
-```java
-public enum ShakeType {
-    WAVE,      // Sinusoidal vertical wave → WaveEffect
-    CIRCLE,    // Circular orbital motion → CircleEffect
-    RANDOM     // Random jitter → ShakeEffect
-}
-```
-
-**Used in:**
-- `ImmersiveMessage.shake(ShakeType, float)` (legacy)
-- `TextSpan.shake(ShakeType, float)` (legacy)
-
-For new code, prefer the effect system: `span.effect("wave a=2.0")` etc.
 
 ---
 

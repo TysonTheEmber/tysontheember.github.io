@@ -50,14 +50,14 @@ net.tysontheember.emberstextapi/
 │   │   ├── TextSpan                 # A styled span of text
 │   │   ├── MarkupParser             # Parses XML-style markup into TextSpans
 │   │   ├── TextAnchor               # Screen positioning enum
-│   │   ├── ObfuscateMode            # Obfuscation direction enum
-│   │   └── ShakeType                # Legacy shake type enum
+│   │   └── ObfuscateMode            # Obfuscation direction enum
 │   ├── effects/                     # The effect system
 │   │   ├── Effect                   # Core effect interface
 │   │   ├── BaseEffect               # Abstract base with parameter helpers
 │   │   ├── EffectRegistry           # Central effect registry
 │   │   ├── EffectSettings           # Per-character mutable rendering state
-│   │   ├── visual/                  # 19 built-in effect implementations
+│   │   ├── animation/               # Animation effects (typewriter, obfuscate) + state managers
+│   │   ├── visual/                  # 19 built-in visual effect implementations
 │   │   ├── params/                  # Parameter parsing and validation
 │   │   └── preset/                  # Effect presets (JSON-based bundles)
 │   └── util/                        # Color parsing, ImmersiveColor
@@ -67,7 +67,6 @@ net.tysontheember.emberstextapi/
 │   ├── ConfigHelper                 # Config abstraction
 │   └── PlatformHelper               # General platform utilities
 ├── serialization/                   # TextSpan codec and serialization
-├── typewriter/                      # Typewriter animation state management
 └── util/                            # Cross-cutting utilities
 ```
 

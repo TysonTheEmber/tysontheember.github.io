@@ -190,9 +190,6 @@ These map to the older v1 animation system. In v2, prefer the effect system:
 
 ```java
 span.typewriter(float speed, boolean center)
-span.shake(ShakeType type, float amplitude)
-span.shake(ShakeType type, float amplitude, float speed)
-span.shake(ShakeType type, float amplitude, float speed, float wavelength)
 span.obfuscate(ObfuscateMode mode, float speed)
 ```
 

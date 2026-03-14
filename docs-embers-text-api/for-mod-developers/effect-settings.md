@@ -56,7 +56,7 @@ These fields provide information about the character being rendered. Effects rea
 
 | Field | Type | Description |
 |---|---|---|
-| `typewriterTrack` | `TypewriterTrack` | Active typewriter animation state |
+| `typewriterTrack` | `TypewriterTrack` | Active typewriter animation state (package: `effects.animation`) |
 | `typewriterIndex` | `int` | Global position offset for typewriter ordering |
 | `obfuscateKey` | `Object` | Cache key for obfuscation tracking |
 | `obfuscateStableKey` | `Object` | Stable cache key (for tooltips that re-render) |

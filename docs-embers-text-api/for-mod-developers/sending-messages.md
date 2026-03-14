@@ -113,12 +113,12 @@ msg.backgroundGradient("60000040", "60400000")  // Hex strings
 
 ### Text Color Gradient
 
-```java
-// Two-color gradient across the text
-msg.gradient("FF0000", "0000FF")   // Red to blue
+Use the `<grad>` markup tag on your spans instead:
 
-// Multi-stop gradient
-msg.gradient("FF0000", "FFFF00", "00FF00")
+```java
+List<TextSpan> spans = MarkupParser.parse("<grad from=FF0000 to=0000FF>Hello!</grad>");
+// Multi-stop:
+List<TextSpan> spans = MarkupParser.parse("<grad from=FF0000 via=FFFF00 to=00FF00>Hello!</grad>");
 ```
 
 ### Typewriter
