@@ -61,6 +61,33 @@ If you encounter a conflict with another mod, report it with the mod combination
 
 ---
 
+## Emojiful Compatibility
+
+ETA automatically detects [Emojiful](https://www.curseforge.com/minecraft/mc-mods/emojiful) and enables a compatibility layer. No configuration is needed — effects work alongside emoji sprites transparently.
+
+### How It Works
+
+Emojiful replaces Minecraft's font renderer with its own `EmojiCharacterRenderer`, which bypasses ETA's normal rendering hooks. ETA includes an optional `@Pseudo` mixin that intercepts Emojiful's character renderer and applies effects to non-emoji characters, while letting Emojiful handle emoji sprite rendering normally.
+
+- **Regular characters** in styled text get full ETA effects (rainbow, wave, shake, etc.)
+- **Emoji sprites** render normally through Emojiful's pipeline
+- **Mixed text** like `<rainbow>Hello :thinking:</rainbow>` — "Hello" gets the rainbow effect, the emoji renders as its sprite
+
+### Supported Versions
+
+| Minecraft | Loader | Emojiful Version |
+|---|---|---|
+| 1.20.1 | Forge | 4.x (`EmojiFontRenderer`) |
+| 1.21.1 | NeoForge | 5.x (`EmojiFontHelper`) |
+| 1.20.1 | Fabric | 4.x (if available) |
+| 1.21.1 | Fabric | 5.x (if available) |
+
+### Graceful Degradation
+
+Emojiful is **not** a dependency. The compatibility mixin uses `@Pseudo` (target class may not exist) and `require = 0` (injection is optional). If Emojiful is not installed, the mixin is silently skipped. If a future Emojiful update changes its internals, the mixin simply won't apply — ETA continues to work normally, and effects on emoji-containing text fall back to Emojiful's default rendering.
+
+---
+
 ## FTB Quests Integration
 
 ETA includes an optional mixin for FTB Quests (`QuestScreenMixin`) that enables immersive messages to render in quest UI screens. This mixin is included in the mixin config but **gracefully fails** if FTB Quests is not present — no errors are thrown.
