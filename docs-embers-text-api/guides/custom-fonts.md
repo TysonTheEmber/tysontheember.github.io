@@ -240,6 +240,42 @@ The SDF generator uses several techniques to ensure clean edges, especially with
 
 All of this happens during one-time texture generation — SDF textures are cached per glyph, so there is no per-frame cost.
 
+## Troubleshooting
+
+### White Dots / Artifacts Above Characters
+
+Some fonts (especially serif fonts like Cinzel with complex outline intersections) may show small white specks above certain characters. This is caused by edge cases in the SDF generator's winding number computation — isolated pixels are incorrectly classified as "inside" the glyph.
+
+**To diagnose**, launch Minecraft with the JVM argument:
+
+```
+-Deta.sdf.debug=true
+```
+
+This dumps each glyph's raw SDF texture as a PNG to `<game_dir>/debug-sdf/`. Open the PNG files for affected characters and look for bright pixels (value > 128) in areas that should be dark (outside the glyph shape). If you see them, the issue is in SDF generation; if the textures look clean, the issue is in atlas packing or shader rendering.
+
+**Workarounds:**
+- Try increasing `sdf_resolution` (e.g., 64 or 96) — higher resolution can reduce winding errors at the cost of more texture memory
+- Try adjusting `spread` — a smaller value (e.g., 2.0) shrinks the distance field falloff, which can make stray pixels less visible
+- Report the issue with the font name and affected characters so the SDF generator can be improved
+
+### Blurry Text at Small Sizes
+
+If SDF text looks blurry at normal GUI scale, try increasing `oversample`:
+
+```json
+"oversample": 2.0
+```
+
+This makes the glyph render smaller but with more texture detail per displayed pixel.
+
+### Font Not Appearing
+
+- Verify the `file` path matches the actual font file location: `assets/<namespace>/font/<filename>`
+- Check logs for `EmbersTextAPI/SDFGlyphProvider` messages — initialization errors are logged there
+- Ensure the JSON `type` is exactly `"emberstextapi:sdf"`
+- On older Minecraft versions, check that ETA is loaded (the SDF provider type won't exist without it)
+
 ---
 
 ## Font Credits & Licenses

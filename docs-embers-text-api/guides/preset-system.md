@@ -71,7 +71,7 @@ The filename (without `.json`) is the tag name.
 | `styles.strikethrough` | No | Boolean |
 | `styles.obfuscated` | No | Boolean |
 | `styles.color` | No | Hex color string (e.g., `"FFD700"`) |
-| `styles.font` | No | ResourceLocation string (e.g., `"emberstextapi:norse"`) |
+| `styles.font` | No | Font ID or short alias (e.g., `"emberstextapi:norse"` or `"norse"`, `"cinzel"`) |
 
 ---
 
