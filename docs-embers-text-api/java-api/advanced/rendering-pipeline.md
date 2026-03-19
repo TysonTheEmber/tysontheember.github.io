@@ -144,6 +144,7 @@ The effect system also works in standard Minecraft tooltips and text components 
 ## Performance Considerations
 
 - **`TextLayoutCache`** caches text layout calculations. Cleared automatically on GUI scale change.
+- **SDF textures** are generated once per glyph (with degenerate segment filtering, 32-step Bezier subdivision, and isolated pixel correction) then cached in a 4096-entry LRU cache. No per-frame cost for SDF quality processing.
 - **`NeonEffect`** uses pre-computed trigonometry lookup tables instead of calling `Math.cos`/`Math.sin` per sample.
 - **Quality presets** on NeonEffect: `q=1` = 6 samples, `q=2` = 12 samples, `q=3` = 20 samples per character.
 - **Sibling layers** (neon, glitch) add rendering cost proportional to character count × quality × sibling count. Use `q=1` for neon on long strings.

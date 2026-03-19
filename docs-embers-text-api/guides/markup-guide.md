@@ -1,8 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 1
 title: Markup Guide
 description: Complete guide to the markup syntax used in /eta commands — tags, parameters, effects, and nesting.
 ---
+
+:::tip Java API
+For using markup in Java code, see [Markup in Java](../java-api/markup-in-java.md).
+:::
 
 # Markup Guide
 
@@ -77,7 +81,7 @@ Basic text formatting:
 
 | Tag | Shorthand | Effect |
 |---|---|---|
-| `<bold>` | `<b>` | **Bold** text |
+| `<bold>` | `<b>` | **Bold** text (auto-selects [bold font variant](./custom-fonts.md#bold-font-variants) when used with custom fonts) |
 | `<italic>` | `<i>` | *Italic* text |
 | `<underline>` | `<u>` | Underlined text |
 | `<strikethrough>` | `<s>` | ~~Strikethrough~~ text |
@@ -266,11 +270,50 @@ When `<fade>` includes effect parameters (`a`, `f`, `w`), it acts as an oscillat
 
 ### `<font>` — Custom Font
 
-Changes the font for the wrapped text:
+Changes the font for the wrapped text. Supports four attribute names interchangeably: `id`, `value`, `font`, `name`.
+
+**Using bundled ETA fonts by short name** (recommended):
 
 ```markup
-<font id=minecraft:font/unifont>Text in unifont</font>
+<font name=cinzel>Imperial Cinzel font</font>
+<font name=norse>Norse runes font</font>
+<font name=almendra>Fantasy Almendra font</font>
+<font name=cardo>Scholarly Cardo font</font>
+<font name=metamorphous>Metamorphous font</font>
 ```
+
+**Using a full ResourceLocation** (also works, fully backwards-compatible):
+
+```markup
+<font id=emberstextapi:cinzel>Cinzel via full ID</font>
+<font id=minecraft:font/unifont>Minecraft built-in unifont</font>
+```
+
+:::tip Bundled fonts — short names
+ETA ships five ready-to-use SDF fonts. Short names are case-insensitive:
+
+| Short name | Font | Bold short name |
+|---|---|---|
+| `norse` | Norse | `norse_bold` |
+| `metamorphous` or `meta` | Metamorphous | *(no bold variant)* |
+| `cinzel` | Cinzel | `cinzel_bold` |
+| `almendra` | Almendra | `almendra_bold` |
+| `cardo` | Cardo | `cardo_bold` |
+
+See [Bundled Fonts](./custom-fonts.md#bundled-fonts) for the full table with ResourceLocation IDs and designer credits.
+:::
+
+When combined with `<bold>`, ETA automatically switches to the `_bold` variant of the font if one exists:
+
+```markup
+<!-- Renders in cinzel_bold automatically -->
+<bold><font name=cinzel>Bold Cinzel text</font></bold>
+
+<!-- Tag order doesn't matter — same result -->
+<font name=norse><b>Bold Norse text</b></font>
+```
+
+See [Bold Font Variants](./custom-fonts.md#bold-font-variants) for full details.
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Effect Registry
 description: EffectRegistry API, registration, Effect interface, BaseEffect, and the preset system.
 ---
@@ -193,6 +193,8 @@ public static float clamp(String effectName, String paramName, float value, floa
 ---
 
 ## Preset System
+
+For the full guide — JSON format, built-in presets, creating presets via resource packs — see the [Preset System](../guides/preset-system.md) guide.
 
 ### What Is a Preset?
 

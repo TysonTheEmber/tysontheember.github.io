@@ -77,11 +77,18 @@
   color: var(--ember-deep-red);
 }
 
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .projectCardBody {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1;
 }
 
 .projectDescription {

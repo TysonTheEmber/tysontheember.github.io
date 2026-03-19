@@ -66,7 +66,7 @@ Sends an immersive message to a player. Supports markup syntax for effects and s
 **Parameters:**
 - `player` — Player name or selector (`@p`, `@a`, `@s`, `PlayerName`)
 - `duration` — How long to display the message, in **ticks** (20 ticks = 1 second)
-- `text` — The message text. Supports [markup](./markup-guide.md) if it contains `<` and `>`
+- `text` — The message text. Supports [markup](./guides/markup-guide.md) if it contains `<` and `>`
 
 **Examples:**
 
@@ -87,7 +87,7 @@ Sends an immersive message to a player. Supports markup syntax for effects and s
 ```
 
 :::tip
-Use `<anchor>`, `<offset>`, and `<scale>` tags in your text to control where and how big the message appears. See [Layout and Positioning](./layout-and-positioning.md).
+Use `<anchor>`, `<offset>`, and `<scale>` tags in your text to control where and how big the message appears. See [Layout and Positioning](./guides/layout-and-positioning.md).
 :::
 
 ---
@@ -142,7 +142,7 @@ If you send a queue to a channel that already has messages running, the new step
 Each command adds its steps to the `story` channel queue.
 
 :::tip
-See the [Message Queues](./message-queues.md) guide for a full deep-dive with real-world examples.
+See the [Message Queues](./guides/message-queues.md) guide for a full deep-dive with real-world examples.
 :::
 
 ---

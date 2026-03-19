@@ -66,6 +66,16 @@ net.tysontheember.emberstextapi/
 │   ├── NetworkHelper                # Network abstraction
 │   ├── ConfigHelper                 # Config abstraction
 │   └── PlatformHelper               # General platform utilities
+├── sdf/                             # SDF font rendering system
+│   ├── FreeTypeManager              # FreeType library lifecycle singleton
+│   ├── GlyphOutline                 # Parsed glyph outline data (contours + segments)
+│   ├── SDFGenerator                 # Core SDF distance field computation
+│   ├── SDFConfig                    # Font provider configuration record
+│   ├── SDFGlyphProvider             # MC GlyphProvider implementation
+│   ├── SDFGlyphInfo                 # MC GlyphInfo implementation
+│   ├── SDFSheetGlyphInfo            # MC SheetGlyphInfo for atlas upload
+│   ├── SDFGlyphProviderDefinition   # JSON codec + provider definition
+│   └── SDFRenderTypes               # GlyphRenderTypes factory for SDF shader
 ├── serialization/                   # TextSpan codec and serialization
 └── util/                            # Cross-cutting utilities
 ```

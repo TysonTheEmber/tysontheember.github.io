@@ -15,20 +15,29 @@ description: Embers Text API — rich, animated on-screen text messages for Mine
 <div className="row" style={{marginTop: '1.5rem', gap: '1rem', display: 'flex', flexWrap: 'wrap'}}>
 <div style={{flex: '1', minWidth: '260px', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px'}}>
 
-### 📦 Modpack Creators
+### 📦 Getting Started
 
-Use commands and markup syntax to send animated messages in your modpack — no Java required.
+Use commands and markup syntax to send animated messages — no Java required.
 
-→ **[Get Started](./for-modpack-creators/getting-started.md)**
+→ **[Get Started](./getting-started.md)**
 
 </div>
 <div style={{flex: '1', minWidth: '260px', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px'}}>
 
-### 🔧 Mod Developers
+### 🔧 Java API
 
 Add ETA as a Gradle dependency and use the Java API to send messages, build custom effects, and integrate with your mod.
 
-→ **[Get Started](./for-mod-developers/getting-started.md)**
+→ **[Get Started](./java-api/getting-started.md)**
+
+</div>
+<div style={{flex: '1', minWidth: '260px', padding: '1.5rem', border: '1px solid var(--ifm-color-emphasis-300)', borderRadius: '8px'}}>
+
+### 📖 Guides
+
+Markup syntax, effects reference, layout, custom fonts, queues, presets, and configuration.
+
+→ **[Browse Guides](./guides/markup-guide.md)**
 
 </div>
 </div>
@@ -38,6 +47,7 @@ Add ETA as a Gradle dependency and use the Java API to send messages, build cust
 ## What Can It Do?
 
 - **19 built-in visual effects** — rainbow, gradient, wave, shake, bounce, glitch, neon glow, typewriter, and more
+- **5 bundled SDF fonts** — Norse, Metamorphous, Cinzel, Almendra, Cardo — usable by short name in markup
 - **Markup language** — XML-style tags for declarative styling in commands and config
 - **Screen positioning** — 9 anchor positions, pixel offsets, scale control, backgrounds
 - **Message queues** — ordered sequences that play step-by-step on named channels

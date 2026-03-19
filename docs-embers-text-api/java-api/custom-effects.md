@@ -1,5 +1,5 @@
 ---
-sidebar_position: 9
+sidebar_position: 7
 title: Custom Effects
 description: Step-by-step guide to building and registering your own text effects.
 ---

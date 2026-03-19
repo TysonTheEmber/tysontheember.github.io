@@ -4,7 +4,7 @@ title: Getting Started
 description: What Embers Text API is, how to install it, and your first commands.
 ---
 
-# Getting Started (Modpack Creators)
+# Getting Started
 
 Embers Text API lets you display animated, styled text overlays anywhere on a player's screen — no Java coding required. Everything is controlled through in-game commands and a simple markup language.
 
@@ -38,7 +38,7 @@ Install ETA like any other mod — drop the JAR for your loader and Minecraft ve
 | 1.21.1 | NeoForge | [Modrinth](https://modrinth.com/mod/embers-text-api/versions?g=1.21.1&l=neoforge) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api/files/all?page=1&pageSize=20&version=1.21.1&gameVersionTypeId=4&showAlphaFiles=show) |
 | 1.21.1 | Fabric | [Modrinth](https://modrinth.com/mod/embers-text-api/versions?g=1.21.1&l=fabric) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embers-text-api/files/all?page=1&pageSize=20&version=1.21.1&gameVersionTypeId=4&showAlphaFiles=show) |
 
-ETA works out of the box with no configuration required. A config file is generated on first launch if you want to customize behavior — see [Configuration](./configuration.md).
+ETA works out of the box with no configuration required. A config file is generated on first launch if you want to customize behavior — see [Configuration](./guides/configuration.md).
 
 This mod is licensed under **[Ember's Modding Licence (EML) v1.2](/modding-licence)**. For modpacks and launcher bundles, use official-source downloads and do not rehost jar files.
 
@@ -86,7 +86,7 @@ Same command, but wrapped in `<rainbow>` markup — the text now cycles through 
 
 Players can use the same markup tags directly in chat messages. For example, typing `<rainbow>hello</rainbow>` in chat will display the text with a rainbow color effect.
 
-Server operators can control who has access to chat markup using the `markupPermissionMode` config option — see [Configuration](./configuration.md#chat-markup-permissions).
+Server operators can control who has access to chat markup using the `markupPermissionMode` config option — see [Configuration](./guides/configuration.md#chat-markup-permissions).
 
 ---
 
@@ -101,9 +101,10 @@ ETA automatically detects and processes markup tags inside translatable text com
 | I want to... | Go to... |
 |---|---|
 | Learn all the commands | [Commands](./commands.md) |
-| Style text with effects and colors | [Markup Guide](./markup-guide.md) |
-| See all 19 effects | [Effects Reference](./effects-reference.md) |
-| Position messages on screen | [Layout and Positioning](./layout-and-positioning.md) |
-| Create cutscenes and quest sequences | [Message Queues](./message-queues.md) |
-| Configure permissions, limits, and disabled effects | [Configuration](./configuration.md) |
-| See complete examples | [Basic Examples](./examples/basic-examples.md) |
+| Style text with effects and colors | [Markup Guide](./guides/markup-guide.md) |
+| See all 19 effects | [Effects Reference](./guides/effects-reference.md) |
+| Position messages on screen | [Layout and Positioning](./guides/layout-and-positioning.md) |
+| Create cutscenes and quest sequences | [Message Queues](./guides/message-queues.md) |
+| Configure permissions, limits, and disabled effects | [Configuration](./guides/configuration.md) |
+| See complete examples | [Basic Examples](./guides/examples/basic-examples.md) |
+| Use the Java API in my mod | [Java API - Getting Started](./java-api/getting-started.md) |

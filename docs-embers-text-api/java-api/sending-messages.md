@@ -13,6 +13,10 @@ import TabItem from '@theme/TabItem';
 
 **Package:** `net.tysontheember.emberstextapi.immersivemessages.api`
 
+:::tip
+For a list of all available effects and their parameters, see the [Effects Reference](../guides/effects-reference.md).
+:::
+
 ---
 
 ## The Simplest Message
@@ -133,6 +137,65 @@ msg.typewriter(0.5f, true)     // With center-aligned reveal
 ```java
 msg.wrap(200)   // Max 200 pixels wide before wrapping
 ```
+
+### Texture Backgrounds
+
+Use a custom texture as the message background instead of a solid color. Texture backgrounds are **Java API-only** — there is no markup tag equivalent.
+
+```java
+import net.minecraft.resources.ResourceLocation;
+
+// Simple — uses a 256x256 texture at full size
+msg.textureBackground(ResourceLocation.parse("mymod:textures/gui/panel.png"));
+
+// Specify texture dimensions
+msg.textureBackground(ResourceLocation.parse("mymod:textures/gui/panel.png"), 128, 64);
+
+// Full atlas control — UV offset, region size, atlas size
+msg.textureBackground(
+    ResourceLocation.parse("mymod:textures/gui/atlas.png"),
+    0, 0,       // u, v offset
+    64, 32,     // region width, height
+    256, 256    // atlas width, height
+);
+```
+
+**Configuration methods** (all return `this` for chaining):
+
+```java
+// Scale the texture (uniform or per-axis)
+msg.textureBackgroundScale(2.0f);
+msg.textureBackgroundScale(1.5f, 2.0f);  // scaleX, scaleY
+
+// Add padding around the text area
+msg.textureBackgroundPadding(8.0f);
+msg.textureBackgroundPadding(10.0f, 5.0f);  // paddingX, paddingY
+
+// Override the rendered size (ignores scale)
+msg.textureBackgroundSize(200f, 100f);
+msg.textureBackgroundWidth(200f);
+msg.textureBackgroundHeight(100f);
+
+// Sizing mode: how the texture fills the background area
+msg.textureBackgroundMode(ImmersiveMessage.TextureSizingMode.STRETCH);  // Default
+msg.textureBackgroundMode(ImmersiveMessage.TextureSizingMode.CROP);
+```
+
+| Method | Description |
+|---|---|
+| `textureBackground(ResourceLocation)` | Set texture (assumes 256x256 atlas) |
+| `textureBackground(ResourceLocation, width, height)` | Set texture with dimensions |
+| `textureBackground(ResourceLocation, u, v, regionW, regionH, atlasW, atlasH)` | Full atlas UV control |
+| `textureBackgroundScale(float)` | Uniform scale multiplier |
+| `textureBackgroundScale(float, float)` | Per-axis scale (X, Y) |
+| `textureBackgroundPadding(float)` | Uniform padding around text |
+| `textureBackgroundPadding(float, float)` | Per-axis padding (X, Y) |
+| `textureBackgroundSize(float, float)` | Override rendered width and height |
+| `textureBackgroundWidth(float)` | Override rendered width only |
+| `textureBackgroundHeight(float)` | Override rendered height only |
+| `textureBackgroundMode(TextureSizingMode)` | STRETCH (default) or CROP |
+
+See [`TextureSizingMode`](./enums-and-utilities.md#texturesizingmode) for sizing mode details.
 
 ---
 

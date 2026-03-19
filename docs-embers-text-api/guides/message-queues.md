@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 title: Message Queues
 description: Send ordered sequences of messages — steps, channels, simultaneous displays, and real-world examples.
 ---
@@ -224,4 +224,8 @@ For NPC dialogue, typewriter + queue is a powerful combination. Set `speed` so t
 
 :::tip
 Use unique channel names for each concurrent use case. If you reuse a channel name while a queue is still running, new steps are appended rather than replacing the current display.
+:::
+
+:::note
+Server operators can limit queue size with the `maxQueueSize` config option (default: 50 steps per channel). See [Configuration](./configuration.md#server-limits) for details.
 :::

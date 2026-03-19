@@ -164,6 +164,31 @@ Used internally by the rendering system. You generally don't need to interact wi
 
 ---
 
+## TextureSizingMode
+
+Defines how a texture background fills the available space.
+
+**Package:** `net.tysontheember.emberstextapi.immersivemessages.api` (inner enum of `ImmersiveMessage`)
+
+```java
+public enum TextureSizingMode {
+    STRETCH,
+    CROP
+}
+```
+
+| Value | Description |
+|---|---|
+| `STRETCH` | Stretches the texture to fill the background area exactly. May distort aspect ratio. *(default)* |
+| `CROP` | Scales the texture to cover the background area while preserving aspect ratio. Excess is cropped. |
+
+**Used in:**
+- `ImmersiveMessage.textureBackgroundMode(TextureSizingMode)`
+
+**String parsing:** Also accepts `"crop"`, `"cut"`, or `"cover"` (all map to `CROP`). Anything else maps to `STRETCH`.
+
+---
+
 ## TextLayoutCache
 
 Caches computed text layout calculations to avoid redundant work each frame.

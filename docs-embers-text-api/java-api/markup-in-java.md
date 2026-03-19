@@ -1,8 +1,12 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 title: Markup in Java
 description: Using MarkupParser to convert markup strings to TextSpan lists in your Java code.
 ---
+
+:::tip
+For the full markup syntax reference — all tags, parameters, and examples — see the [Markup Guide](../guides/markup-guide.md).
+:::
 
 # Markup in Java
 

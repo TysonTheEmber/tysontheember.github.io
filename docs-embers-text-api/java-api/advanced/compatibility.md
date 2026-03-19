@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 title: Compatibility
 description: Performance guidance, known compatibility notes, HUD layering, font renderers, and integration tips.
 ---
@@ -42,9 +42,16 @@ The render path also forces standard HUD state (`blend on`, `depth test off`, co
 ETA hooks into Minecraft's `BakedGlyph` rendering at the character level. This means it works with:
 - The default Minecraft font renderer
 - Custom fonts loaded via resource packs (using the `<font>` tag)
+- ETA's built-in SDF font provider (`emberstextapi:sdf`) for TrueType/OpenType fonts
 - Any font that produces `BakedGlyph` objects through the standard pipeline
 
 It does **not** work with external text rendering libraries that bypass Minecraft's glyph system entirely.
+
+### SDF Font Provider
+
+ETA includes a custom `GlyphProvider` type (`emberstextapi:sdf`) that renders vector fonts using signed distance field textures. SDF glyphs are baked into MC's standard `FontTexture` atlas via `SheetGlyphInfo`, and a mixin on `FontTexture` swaps the `GlyphRenderTypes` to use a custom SDF fragment shader. Because `BakedGlyph` carries its own `GlyphRenderTypes`, all existing effects work on SDF glyphs with zero changes to the effects pipeline.
+
+The SDF provider requires LWJGL FreeType. MC 1.21.1 includes FreeType natively. For MC 1.20.1 (both Forge and Fabric), ETA includes a `NativeFreeType` compatibility layer that calls FreeType functions directly via `JNI.invoke*()` by address, bypassing the LWJGL 3.3.3 `FreeType` wrapper class that is incompatible with MC 1.20.1's LWJGL 3.3.1. SDF fonts work on all supported platforms.
 
 The immersive renderer normalizes very low alpha bytes (`0..3`) to `0` before glyph draw. This avoids a vanilla font edge case where near-zero alpha can appear as fully opaque for a single frame during fade-in/fade-out.
 

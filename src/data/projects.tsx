@@ -26,8 +26,8 @@ export const projects: Project[] = [
     description: (
       <>
         Send cinematic animated text overlays to players with 19+ effects — typewriter,
-        rainbow, neon glow, shake, wave, fade, and more. Fully controllable via commands
-        or a clean Java API. No Java required for modpack creators.
+        rainbow, neon glow, shake, wave, fade, and more. Use commands and markup for
+        quick setup, or the Java API for full programmatic control.
       </>
     ),
     type: 'mod',

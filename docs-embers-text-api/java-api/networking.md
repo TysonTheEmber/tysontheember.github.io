@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 9
 title: Networking
 description: Server-to-client packets, NetworkHelper API, and ClientMessageManager.
 ---
@@ -68,6 +68,10 @@ net.sendCloseMessage(ServerPlayer player, String messageId)
 // Close all active messages across all channels
 net.sendCloseAllMessages(ServerPlayer player)
 ```
+
+:::note[Server-Side Limits]
+All messages sent through `NetworkHelper` are automatically subject to [server-side config limits](/docs/guides/configuration#server-limits). Message durations are capped by `maxServerMessageDuration`, queues are truncated to `maxQueueSize`, and effects not in `allowedEffects` (if configured) are replaced with no-ops. No additional code is needed — enforcement happens transparently.
+:::
 
 ### Queue Methods
 

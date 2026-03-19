@@ -17,7 +17,7 @@ interface FeaturedProject {
 const featuredProjects: FeaturedProject[] = [
   {
     title: 'Embers Text API',
-    description: 'Send animated text overlays anywhere on screen — typewriter effect, rainbow gradients, neon glow, shake, wave, and more. Built for modpack creators using commands and markup, and mod developers using a clean Java API.',
+    description: 'Send cinematic animated text overlays to players with 19+ effects — typewriter, rainbow, neon glow, shake, wave, fade, and more. Fully controllable via commands or a clean Java API.',
     image: '/img/embers-text-api-icon.png',
     docLink: '/embers-text-api/intro',
     curseforgeSlug: 'embers-text-api',
@@ -46,7 +46,7 @@ function ProjectCard({project, downloadsData, loading}: ProjectCardProps): React
   const mrDownloads = projectData?.modrinth ?? 0;
 
   return (
-    <div className="card">
+    <div className={`card ${styles.projectCard}`}>
       <div className={styles.projectCardHeader}>
         <img
           src={project.image}

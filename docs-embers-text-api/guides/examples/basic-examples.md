@@ -197,3 +197,54 @@ What it does:
 - Top center, shifted down 20px
 - Rainbow bold title followed by gray description text
 - Typewriter reveal, smooth fade out
+
+---
+
+## Font Showcase
+
+ETA ships five SDF fonts usable by short name. These examples show each font in a typical use case.
+
+### Royal Announcement (Cinzel)
+
+Cinzel is a Roman-style serif suited for titles, achievement unlocks, and dramatic announcements.
+
+```
+/eta send @p 200 <anchor value=MIDDLE><scale value=1.3><bg color=#60000000><fade in=20 out=20><neon c=FFD700 r=2><grad from=FFD700 to=FFAA00><bold><font name=cinzel>Royal Decree</font></bold></grad></neon></fade></bg></scale></anchor>
+```
+
+What it does:
+- Centered at 130% scale with a dark background
+- Gold gradient + neon glow
+- Bold text auto-selects `cinzel_bold`
+- Fades in and out over 1 second each
+
+---
+
+### Ancient Lore (Almendra)
+
+Almendra is a fantasy serif with decorative flourishes — ideal for NPC dialogue and lore scrolls.
+
+```
+/eta send @p 280 <anchor value=BOTTOM_CENTER><offset y=-20><bg color=#50100500><fade in=25 out=25><typewriter speed=50><italic><font name=almendra>The tome whispers of forgotten ages...</font></italic></typewriter></fade></bg></offset></anchor>
+```
+
+What it does:
+- Bottom center of screen, shifted up 20px
+- Dark sepia background, italic text
+- Typewriter reveal at 50ms per character
+- Smooth fade in/out
+
+---
+
+### Scholar's Margin Note (Cardo)
+
+Cardo is a classical scholarly serif — readable body text for item lore, book excerpts, or enchantment info.
+
+```
+/eta send @p 200 <anchor value=TOP_RIGHT><offset x=-10 y=10><bg color=#40000000><font name=cardo><color value=DDDDDD>Enchantment level: 42</color></font></bg></offset></anchor>
+```
+
+What it does:
+- Top-right corner with a subtle background
+- Light gray body text in Cardo — clean and legible at any GUI scale
+

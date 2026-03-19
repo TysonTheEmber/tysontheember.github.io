@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 6
 title: Preset System
-description: PresetRegistry, PresetDefinition, JSON format, and creating custom presets.
+description: Reusable effect bundles — JSON format, built-in presets, creating custom presets via resource packs.
 ---
 
 # Preset System
 
-Presets are reusable bundles of effects and style overrides that can be used as markup tags. This page covers the preset system's internals and how to create and register custom presets.
+Presets are reusable bundles of effects and style overrides that can be used as markup tags. Instead of writing complex combinations of effects every time, define a preset once and use it by name.
 
 ---
 
@@ -22,34 +22,6 @@ Once loaded, the preset is available as a markup tag using its name:
 <epic>Epic styled text</epic>
 <legendary>Legendary text</legendary>
 <mypreset>Custom preset</mypreset>
-```
-
----
-
-## PresetDefinition
-
-```java
-public record PresetDefinition(
-    String name,
-    int formatVersion,
-    List<EffectEntry> effects,
-    StyleOverrides styles
-)
-
-public record EffectEntry(
-    String type,                    // Effect name (e.g., "rainbow", "wave")
-    Map<String, Object> params      // Effect parameters as key-value pairs
-)
-
-public record StyleOverrides(
-    Boolean bold,
-    Boolean italic,
-    Boolean underline,
-    Boolean strikethrough,
-    Boolean obfuscated,
-    String color,                   // Hex color string (e.g., "FFD700")
-    String font                     // ResourceLocation string
-)
 ```
 
 ---
@@ -90,7 +62,16 @@ The filename (without `.json`) is the tag name.
 |---|---|---|
 | `format_version` | Yes | Must be `1` |
 | `effects` | Yes | Array of effect entries. Can be empty `[]` for style-only presets. |
+| `effects[].type` | Yes | Effect name (e.g., `"rainbow"`, `"wave"`, `"neon"`) |
+| `effects[].params` | Yes | Effect parameters as key-value pairs |
 | `styles` | No | Style overrides. All fields are optional. |
+| `styles.bold` | No | Boolean |
+| `styles.italic` | No | Boolean |
+| `styles.underline` | No | Boolean |
+| `styles.strikethrough` | No | Boolean |
+| `styles.obfuscated` | No | Boolean |
+| `styles.color` | No | Hex color string (e.g., `"FFD700"`) |
+| `styles.font` | No | ResourceLocation string (e.g., `"emberstextapi:norse"`) |
 
 ---
 
@@ -163,42 +144,6 @@ assets/emberstextapi/presets/yourpreset.json
 
 ---
 
-## PresetRegistry API
-
-```java
-/** Get a preset by name. Returns null if not found. */
-public static PresetDefinition get(String name)
-
-/** Check if a preset is registered. */
-public static boolean has(String name)
-
-/** Register a preset programmatically. */
-public static void register(PresetDefinition preset)
-```
-
-### Registering Programmatically
-
-```java
-import net.tysontheember.emberstextapi.immersivemessages.effects.preset.PresetDefinition;
-import net.tysontheember.emberstextapi.immersivemessages.effects.preset.PresetRegistry;
-
-PresetDefinition myPreset = new PresetDefinition(
-    "mypreset",
-    1,
-    List.of(
-        new EffectEntry("rainbow", Map.of("f", 1.5)),
-        new EffectEntry("wave", Map.of("a", 2.0, "f", 1.0))
-    ),
-    new StyleOverrides(true, false, false, false, false, "FFD700", null)
-);
-
-PresetRegistry.register(myPreset);
-```
-
-Programmatic registration can happen during mod initialization, before or after the default presets are loaded.
-
----
-
 ## Combining Presets with Effects
 
 Presets can be wrapped with additional effects in markup:
@@ -218,3 +163,9 @@ The wave effect applies on top of the fire preset's existing bounce and gradient
 - `format_version: 1` is the only supported version.
 - Omit the `styles` object entirely for effects-only presets.
 - Effect parameter values in JSON follow the same types as markup: numbers are numbers, strings are strings, booleans are booleans.
+
+---
+
+:::tip Java API
+For programmatic preset registration and the `PresetRegistry` API, see [Effect Registry - Preset System](../java-api/effect-registry.md#preset-system).
+:::

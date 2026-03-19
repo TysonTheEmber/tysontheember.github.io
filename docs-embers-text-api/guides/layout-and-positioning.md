@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 title: Layout and Positioning
 description: How to position messages anywhere on screen, control text alignment, add backgrounds, and combine layout controls.
 ---

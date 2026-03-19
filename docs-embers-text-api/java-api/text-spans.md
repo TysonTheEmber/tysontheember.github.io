@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: TextSpan
 description: The per-span text unit — styling, effects, inline items, entities, and serialization.
 ---
@@ -58,8 +58,16 @@ span.obfuscated(true)
 ### Font
 
 ```java
+// Minecraft built-in font by full ResourceLocation
 span.font(ResourceLocation.parse("minecraft:font/unifont"))
+
+// ETA bundled font using FontAliasRegistry short names
+span.font(FontAliasRegistry.resolve("cinzel"))       // → emberstextapi:cinzel
+span.font(FontAliasRegistry.resolve("norse"))         // → emberstextapi:norse
+span.font(FontAliasRegistry.resolve("almendra_bold")) // → emberstextapi:almendra_bold
 ```
+
+`FontAliasRegistry.resolve()` checks the alias table first (case-insensitive), then falls back to `ResourceLocation.tryParse()` for full IDs. Returns `null` for unrecognised names — always null-check the result. See [Bundled Fonts](../guides/custom-fonts.md#bundled-fonts) for the complete list of built-in aliases.
 
 ---
 

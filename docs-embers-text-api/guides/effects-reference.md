@@ -1,10 +1,14 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 title: Effects Reference
 description: All 19 built-in effects — parameters, examples, and use cases.
 ---
 
 # Effects Reference
+
+:::tip Java API
+For programmatic effect creation and the registry API, see [Effect Registry](../java-api/effect-registry.md).
+:::
 
 Every built-in effect in Embers Text API, with parameters, markup examples, and suggestions for when to use each one.
 
@@ -412,6 +416,8 @@ Multi-ring glow effect surrounding text with a soft luminous halo.
 
 :::tip
 Use `q=1` for neon on long messages. Each neon layer renders 6–20 extra passes per character — it gets expensive fast.
+
+Players can also cap neon quality globally with the `maxNeonQuality` client config option — see [Configuration](./configuration.md#maxneonquality).
 :::
 
 **When to use:** Title screens, legendary item reveals, sci-fi UI elements, boss names.
