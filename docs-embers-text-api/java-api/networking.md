@@ -70,7 +70,7 @@ net.sendCloseAllMessages(ServerPlayer player)
 ```
 
 :::note[Server-Side Limits]
-All messages sent through `NetworkHelper` are automatically subject to [server-side config limits](/docs/guides/configuration#server-limits). Message durations are capped by `maxServerMessageDuration`, queues are truncated to `maxQueueSize`, and effects not in `allowedEffects` (if configured) are replaced with no-ops. No additional code is needed — enforcement happens transparently.
+All messages sent through `NetworkHelper` are automatically subject to [server-side config limits](/embers-text-api/guides/configuration#server-limits). Message durations are capped by `maxServerMessageDuration`, queues are truncated to `maxQueueSize`, and effects not in `allowedEffects` (if configured) are replaced with no-ops. No additional code is needed — enforcement happens transparently.
 :::
 
 ### Queue Methods
