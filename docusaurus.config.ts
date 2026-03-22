@@ -83,6 +83,15 @@ const config: Config = {
         sidebarPath: './sidebars-embers-legacy.ts',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'mixin-helper',
+        path: 'docs-mixin-helper',
+        routeBasePath: 'mixin-helper',
+        sidebarPath: './sidebars-mixin-helper.ts',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -138,6 +147,12 @@ const config: Config = {
               label: 'Embers Text API (Legacy)',
             },
             {
+              type: 'docSidebar',
+              sidebarId: 'mixinHelperSidebar',
+              docsPluginId: 'mixin-helper',
+              label: 'Mixin Helper',
+            },
+            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -182,6 +197,10 @@ const config: Config = {
             {
               label: 'Embers Text API (Legacy)',
               to: '/embers-text-api-legacy/intro',
+            },
+            {
+              label: 'Mixin Helper',
+              to: '/mixin-helper/intro',
             },
             {
               label: 'Orbital Railgun Config',
