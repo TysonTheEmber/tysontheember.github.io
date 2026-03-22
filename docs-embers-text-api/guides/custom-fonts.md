@@ -6,7 +6,7 @@ description: How to use TrueType and OpenType fonts with SDF rendering for crisp
 
 # Custom Fonts
 
-Embers Text API includes an **SDF (Signed Distance Field) font provider** that renders TrueType (.ttf) and OpenType (.otf) fonts with crisp anti-aliasing at any scale. Unlike Minecraft's built-in bitmap fonts, SDF fonts stay sharp when scaled up or viewed at high GUI scales.
+Embers Text API includes an **MSDF (Multi-Channel Signed Distance Field) font provider** that renders TrueType (.ttf) and OpenType (.otf) fonts with crisp anti-aliasing at any scale. Unlike Minecraft's built-in bitmap fonts, MSDF fonts stay sharp when scaled up or viewed at high GUI scales — with perfect corner reproduction on letters like A, M, W, and N.
 
 All ETA effects (rainbow, wave, shake, glitch, neon, etc.) work with SDF fonts — no extra configuration needed.
 
@@ -52,7 +52,8 @@ Create a font definition JSON at `assets/<namespace>/font/<fontname>.json`:
       "size": 16.0,
       "sdf_resolution": 48,
       "padding": 4,
-      "spread": 4.0,
+      "px_range": 8.0,
+      "angle_threshold": 3.0,
       "oversample": 1.0,
       "shift": [0.0, 0.0],
       "skip": ""
@@ -78,9 +79,11 @@ The `id` is `<namespace>:<fontname>` — matching the JSON file path without the
 | `type` | string | — | Must be `"emberstextapi:sdf"` |
 | `file` | string | — | Resource location of the font file (e.g., `"mypack:norse.otf"`) |
 | `size` | float | `16.0` | Font size in Minecraft units |
-| `sdf_resolution` | int | `48` | Resolution of the SDF texture per glyph (higher = more detail, more memory) |
-| `padding` | int | `4` | Padding around each glyph in the SDF texture |
-| `spread` | float | `4.0` | Distance field spread — controls how far the anti-aliasing extends |
+| `sdf_resolution` | int | `48` | Resolution of the MSDF texture per glyph (higher = more detail, more memory) |
+| `padding` | int | `4` | Padding around each glyph in the MSDF texture |
+| `px_range` | float | `8.0` | Pixel range — how many pixels the distance field spans on each side of edges. Higher = smoother anti-aliasing, lower = sharper. Range: 2–32. |
+| `angle_threshold` | float | `3.0` | Corner detection threshold in radians. Lower values detect more corners for sharper reproduction. Range: 0–π. Default 3.0 ≈ 171.9°. |
+| `spread` | float | `4.0` | **Deprecated** — use `px_range` instead. If present without `px_range`, converted as `px_range = spread × 2`. |
 | `oversample` | float | `1.0` | Display scale divisor — glyphs render at `size / oversample` MC units. Higher values = smaller display. |
 | `shift` | float[2] | `[0, 0]` | Horizontal and vertical offset in MC units |
 | `skip` | string | `""` | Characters to skip (won't be provided by this font) |
@@ -88,7 +91,8 @@ The `id` is `<namespace>:<fontname>` — matching the JSON file path without the
 ### Tuning Tips
 
 - **`sdf_resolution`**: 48 works well for most fonts. Increase to 64 or 96 for fonts with very fine details. Higher values use more texture memory.
-- **`spread`**: Controls the anti-aliasing falloff. Values of 3.0–6.0 work well. Lower values give sharper edges; higher values give smoother transitions.
+- **`px_range`**: Controls the anti-aliasing width. Values of 4.0–8.0 work well. Lower values give sharper edges; higher values give smoother transitions at distance.
+- **`angle_threshold`**: Controls corner sharpness. The default (3.0 radians ≈ 171.9°) detects only very sharp corners. Lower values (e.g., 2.0) detect more corners, giving sharper letter shapes at the cost of slightly more complex distance fields.
 - **`shift`**: Use this to fine-tune vertical or horizontal alignment. For example, `[0.0, 1.0]` shifts the text down by 1 MC unit.
 - **`size`**: This controls the scale of the rendered glyphs. Adjust to match the visual size you want relative to Minecraft's default font.
 
@@ -149,7 +153,7 @@ assets/mypack/font/norse_bold.otf
       "size": 16.0,
       "sdf_resolution": 48,
       "padding": 4,
-      "spread": 4.0,
+      "px_range": 8.0,
       "shift": [0.0, 0.0],
       "skip": ""
     }
@@ -191,7 +195,7 @@ ETA ships with the following fonts ready to use — no resource pack or setup re
 All bundled fonts use ETA's SDF renderer for crisp scaling at any GUI scale.
 
 :::note
-Metamorphous changed from Minecraft's vanilla TTF renderer to the SDF renderer starting in ETA 2.x
+Metamorphous changed from Minecraft's vanilla TTF renderer to the SDF renderer starting in ETA 2.9.0
 (affects Forge/Fabric 1.20.1 only — 1.21.1 was already using SDF).
 :::
 
@@ -226,38 +230,62 @@ Built-in ETA font aliases (`norse`, `cinzel`, etc.) cannot be overwritten. Choos
 
 ## How It Works
 
-The SDF provider uses FreeType to extract vector outlines from the font file, then generates a signed distance field texture for each glyph. The SDF texture encodes the distance from each pixel to the nearest glyph edge. A custom fragment shader then uses this distance information to render crisp edges at any resolution via `smoothstep` anti-aliasing.
+The MSDF provider uses FreeType to extract vector outlines from the font file, then generates a **multi-channel signed distance field** texture for each glyph. Unlike traditional single-channel SDF, MSDF encodes distance information in three color channels (RGB), where each channel tracks the distance to a differently-colored subset of the glyph's edges.
 
-This is the same technique used by modern text renderers like Valve's SDF text and Google's font rendering. The key advantage over bitmap fonts is that a single texture works at all zoom levels — no mipmapping artifacts, no blurriness when scaled up.
+A custom fragment shader takes the **median** of the three channels to reconstruct the correct distance at any point — including at sharp corners where traditional SDF would produce rounded artifacts.
+
+This approach is based on Viktor Chlumsky's MSDF algorithm, an evolution of Valve's SDF text rendering. The key advantages:
+- **Sharp corners** — Letters like A, M, W, N maintain crisp corners even at high zoom
+- **No bitmap intermediary** — Distance is computed analytically from Bézier curves, not approximated from a rasterized bitmap
+- **Artifact-free** — Cross-product sign determination eliminates winding number errors that caused stray pixels in the old approach
 
 ### Rendering Quality
 
-The SDF generator uses several techniques to ensure clean edges, especially with bold fonts at large scales:
+The MSDF generator uses several techniques to ensure clean rendering:
 
-- **High-resolution Bezier subdivision** — Curves are approximated with 32 line segments for accurate distance and winding number calculations.
-- **Degenerate segment filtering** — Tiny segments (including Bezier curves where all control points cluster together) are removed before processing. Bold fonts often produce these at stroke junctions, and they can cause stray bright pixels.
-- **Isolated pixel correction** — After SDF generation, a post-processing pass detects pixels whose inside/outside classification disagrees with all four cardinal neighbors and corrects them. This eliminates any remaining edge artifacts without affecting real glyph edges.
+- **Analytical Bézier distance** — Closest point on quadratic/cubic Bézier curves is found via Newton-Raphson refinement, not subdivision approximation. This provides sub-pixel accuracy.
+- **Edge coloring** — At corners, adjacent edges are assigned different color channels (e.g., Cyan/Magenta/Yellow). The median operation in the shader then produces a sharp transition instead of the rounding that monochrome SDF inherently causes.
+- **Pseudo-distance** — The perpendicular (orthogonal) distance to the tangent line at the closest point is used instead of true Euclidean distance. This prevents "bleeding" around segment endpoints.
+- **Error correction** — After MSDF generation, a post-processing pass detects and corrects texels where the median disagrees with neighboring texels, fixing any remaining false-color artifacts.
+- **Degenerate segment filtering** — Tiny segments that bold fonts produce at stroke junctions are filtered out during outline extraction.
 
-All of this happens during one-time texture generation — SDF textures are cached per glyph, so there is no per-frame cost.
+All of this happens during one-time texture generation — MSDF textures are cached per glyph, so there is no per-frame cost.
 
 ## Troubleshooting
 
-### White Dots / Artifacts Above Characters
+### Rendering Artifacts
 
-Some fonts (especially serif fonts like Cinzel with complex outline intersections) may show small white specks above certain characters. This is caused by edge cases in the SDF generator's winding number computation — isolated pixels are incorrectly classified as "inside" the glyph.
-
-**To diagnose**, launch Minecraft with the JVM argument:
+If you see visual artifacts with custom fonts, launch Minecraft with the JVM argument:
 
 ```
 -Deta.sdf.debug=true
 ```
 
-This dumps each glyph's raw SDF texture as a PNG to `<game_dir>/debug-sdf/`. Open the PNG files for affected characters and look for bright pixels (value > 128) in areas that should be dark (outside the glyph shape). If you see them, the issue is in SDF generation; if the textures look clean, the issue is in atlas packing or shader rendering.
+This dumps each glyph's raw MSDF texture as an RGB PNG to `<game_dir>/debug-sdf/`. Each color channel shows the distance to edges of that color. The median of the three channels determines inside/outside.
 
-**Workarounds:**
-- Try increasing `sdf_resolution` (e.g., 64 or 96) — higher resolution can reduce winding errors at the cost of more texture memory
-- Try adjusting `spread` — a smaller value (e.g., 2.0) shrinks the distance field falloff, which can make stray pixels less visible
-- Report the issue with the font name and affected characters so the SDF generator can be improved
+**Workarounds for persistent issues:**
+- Try increasing `sdf_resolution` (e.g., 64 or 96) — higher resolution provides more detail
+- Try adjusting `px_range` — a smaller value (e.g., 4.0) gives sharper edges, a larger value (e.g., 12.0) gives smoother transitions
+- Try lowering `angle_threshold` (e.g., 2.5) — this detects more corners for sharper reproduction
+- Report the issue with the font name and affected characters
+
+### Halo / Fringe Around Text (MC 1.20.1)
+
+If you see a faint halo or fringe around SDF text edges on MC 1.20.1, make sure you are running ETA 2.9.0 or later. Earlier versions had a rendering issue where MC 1.20.1's blit-to-screen read semi-transparent alpha values from SDF anti-aliasing, creating a visible fringe. This was fixed in 2.9.0 with an alpha-preserving blend function in the SDF shader.
+
+If you are developing a custom SDF shader for MC 1.20.1, define the blend state in the **shader JSON** (not in a `TransparencyStateShard`):
+
+```json
+"blend": {
+    "func": "add",
+    "srcrgb": "srcalpha",
+    "dstrgb": "1-srcalpha",
+    "srcalpha": "0",
+    "dstalpha": "1"
+}
+```
+
+See [Compatibility — Alpha-Preserving Blend](../java-api/advanced/compatibility.md#font-renderers) for the full technical explanation.
 
 ### Blurry Text at Small Sizes
 

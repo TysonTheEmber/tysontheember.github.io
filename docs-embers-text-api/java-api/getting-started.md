@@ -44,7 +44,7 @@ repositories {
 
 ## Dependency Snippets
 
-Replace `VERSION` with the release you want (e.g. `2.4.0`).
+Replace `VERSION` with the release you want (e.g. `2.9.0`).
 
 **Group ID:** `net.tysontheember.emberstextapi`
 

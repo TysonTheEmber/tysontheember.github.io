@@ -53,6 +53,12 @@ ETA includes a custom `GlyphProvider` type (`emberstextapi:sdf`) that renders ve
 
 The SDF provider requires LWJGL FreeType. MC 1.21.1 includes FreeType natively. For MC 1.20.1 (both Forge and Fabric), ETA includes a `NativeFreeType` compatibility layer that calls FreeType functions directly via `JNI.invoke*()` by address, bypassing the LWJGL 3.3.3 `FreeType` wrapper class that is incompatible with MC 1.20.1's LWJGL 3.3.1. SDF fonts work on all supported platforms.
 
+#### MC 1.20.1 Alpha-Preserving Blend (Fringe Fix)
+
+MC 1.20.1's blit-to-screen reads the framebuffer alpha channel. Because MSDF text produces semi-transparent edge fragments for anti-aliasing, those alpha values caused a visible halo (fringe) around SDF-rendered text on all 1.20.1 loaders. MC 1.21.1 does not exhibit this issue because its blit pipeline ignores framebuffer alpha.
+
+The fix uses an **alpha-preserving blend function** defined in the SDF shader JSON files (`rendertype_eta_sdf_text.json` and `rendertype_eta_sdf_text_see_through.json`). The blend section specifies `srcalpha=0, dstalpha=1`, which tells OpenGL to leave the framebuffer alpha untouched while blending RGB normally. This is defined in the shader JSON rather than in a `TransparencyStateShard` because MC 1.20.1's `ShaderInstance.apply()` applies the JSON blend immediately before the draw call — ensuring nothing can override it.
+
 The immersive renderer normalizes very low alpha bytes (`0..3`) to `0` before glyph draw. This avoids a vanilla font edge case where near-zero alpha can appear as fully opaque for a single frame during fade-in/fade-out.
 
 ---

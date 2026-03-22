@@ -66,10 +66,11 @@ net.tysontheember.emberstextapi/
 │   ├── NetworkHelper                # Network abstraction
 │   ├── ConfigHelper                 # Config abstraction
 │   └── PlatformHelper               # General platform utilities
-├── sdf/                             # SDF font rendering system
+├── sdf/                             # MSDF font rendering system
 │   ├── FreeTypeManager              # FreeType library lifecycle singleton
 │   ├── GlyphOutline                 # Parsed glyph outline data (contours + segments)
-│   ├── SDFGenerator                 # Core SDF distance field computation
+│   ├── MSDFGenerator                # Multi-channel SDF generation with analytical Bézier distance
+│   ├── EdgeColoring                 # MSDF edge coloring algorithm (RGB channel assignment)
 │   ├── SDFConfig                    # Font provider configuration record
 │   ├── SDFGlyphProvider             # MC GlyphProvider implementation
 │   ├── SDFGlyphInfo                 # MC GlyphInfo implementation
