@@ -60,7 +60,7 @@ function HomepageHeader() {
           <div className={styles.buttons}>
             <Link
               className="button button--primary button--lg"
-              to="/projects"
+              href="https://www.curseforge.com/members/tysontheember/projects"
             >
               Browse Projects
             </Link>
