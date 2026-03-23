@@ -92,6 +92,15 @@ const config: Config = {
         sidebarPath: './sidebars-mixin-helper.ts',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'remapids',
+        path: 'docs-remapids',
+        routeBasePath: 'remapids',
+        sidebarPath: './sidebars-remapids.ts',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -153,6 +162,12 @@ const config: Config = {
               label: 'Mixin Helper',
             },
             {
+              type: 'docSidebar',
+              sidebarId: 'remapidsSidebar',
+              docsPluginId: 'remapids',
+              label: 'RemapIDs',
+            },
+            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -201,6 +216,10 @@ const config: Config = {
             {
               label: 'Mixin Helper',
               to: '/mixin-helper/intro',
+            },
+            {
+              label: 'RemapIDs',
+              to: '/remapids/intro',
             },
             {
               label: 'Orbital Railgun Config',
