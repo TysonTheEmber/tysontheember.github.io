@@ -183,12 +183,3 @@ When the game loads, RemapIDs processes config files in this order:
 }
 ```
 
----
-
-## Next Steps
-
-- [Wildcards Guide](guides/wildcards.md) — Pattern matching for bulk remaps
-- [Type Filtering Guide](guides/type-filtering.md) — Control which remap types apply
-- [Tag Remapping Guide](guides/tag-remapping.md) — Redirect tag references
-- [Chain Flattening Guide](guides/chain-flattening.md) — Multi-step chain resolution
-- [Examples](examples.md) — Real-world modpack scenarios

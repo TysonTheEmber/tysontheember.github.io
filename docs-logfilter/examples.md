@@ -215,10 +215,3 @@ This config ensures errors and warnings are always visible, then suppresses know
 5. **Use the `level` field** — Narrowing a rule to a specific level avoids accidentally suppressing important messages
 6. **Name your rules** — The `name` field is for your reference and makes configs easier to maintain
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Full reference for all config options
-- [Troubleshooting](troubleshooting.md) — Common issues and solutions
-- [Getting Started](getting-started.md) — Installation and first-time setup

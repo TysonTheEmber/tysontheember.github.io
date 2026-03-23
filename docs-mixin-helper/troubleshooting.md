@@ -49,6 +49,19 @@ sidebar_position: 6
 
 ---
 
+### Guardrail Blocked an Operation
+
+**Symptoms:** Log shows `GUARDRAIL BLOCKED` and your blacklist or method removal rule has no effect.
+
+1. **Check which class triggered it** — The log will show the class name, category, and reason.
+2. **Reconsider whether you need this operation** — Protected classes are dangerous to modify. In most cases, there's a safer alternative (e.g., blacklist the specific mixin instead of the target class).
+3. **Bypass if you're certain** — Set `guardrails.bypassProtectedClasses` to `true` in the `guardrails` config section. The operation will proceed with warnings.
+4. **Exclude a specific class** — Use `guardrails.excludeFromProtection` with `bypassProtectedClasses` to unprotect only the class you need.
+
+See the [Guardrails Guide](guides/guardrails.md) for full details.
+
+---
+
 ### JSON Syntax Errors
 
 Common JSON mistakes:
@@ -136,10 +149,3 @@ If you encounter an issue not covered here:
 2. Generate an audit report and review it for unexpected mixin behavior
 3. Join the [Discord Server](https://discord.gg/GCN2Hv4Qzr) for community support
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Installation and first-time setup
-- [Configuration Reference](configuration.md) — Full config documentation
-- [Examples](examples.md) — Real-world modpack scenarios

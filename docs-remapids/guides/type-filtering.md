@@ -92,10 +92,3 @@ Reloadable remaps intercept datapack processing to rewrite IDs in tags, recipes,
 Start with specific types and broaden only if needed. Using `["item", "block"]` for a mod replacement covers most cases without affecting recipes or tags that may not need changes.
 :::
 
----
-
-## Next Steps
-
-- [Tag Remapping](tag-remapping.md) — Redirect tag references with the `#` prefix
-- [Wildcards](wildcards.md) — Pattern matching for bulk remaps
-- [Configuration Reference](../configuration.md) — Full reference for the JSON config format

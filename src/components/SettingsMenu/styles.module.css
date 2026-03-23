@@ -34,10 +34,10 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-border-color);
+  background: #ede4db;
+  border: 1px solid rgba(139, 58, 50, 0.2);
   border-radius: 8px;
-  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  box-shadow: 0 4px 14px rgba(139, 58, 50, 0.15);
   min-width: 280px;
   z-index: 1000;
   animation: slideDown 0.2s ease;
@@ -53,9 +53,9 @@
 }
 
 [data-theme='dark'] .settingsDropdown {
-  background: var(--ifm-background-surface-color);
-  border-color: var(--ifm-border-color);
-  box-shadow: 0 4px 16px var(--shadow-color);
+  background: #1c0d07;
+  border-color: rgba(168, 72, 50, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes slideDown {

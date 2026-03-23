@@ -87,10 +87,3 @@ Because chain flattening works across multiple config files, you can keep remaps
 Chains exceeding 10 levels are treated as likely circular and are rejected. If you need very deep migrations, consider collapsing intermediate steps into direct mappings.
 :::
 
----
-
-## Next Steps
-
-- [Configuration Reference](../configuration.md) — Full reference for the JSON config format
-- [Examples](../examples.md) — Real-world modpack scenarios
-- [Troubleshooting](../troubleshooting.md) — Common issues and solutions

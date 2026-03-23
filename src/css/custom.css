@@ -250,6 +250,23 @@ body:has(.hero--primary) .navbar__logo img {
   filter: drop-shadow(0 0 8px rgba(214, 118, 80, 0.5));
 }
 
+/* Navbar dropdown separation */
+.navbar__item.dropdown .dropdown__menu,
+.navbar .dropdown__menu {
+  background-color: #ede4db;
+  border: 1px solid rgba(139, 58, 50, 0.2);
+  box-shadow: 0 4px 14px rgba(139, 58, 50, 0.15);
+  border-radius: 8px;
+}
+
+[data-theme='dark'] .navbar__item.dropdown .dropdown__menu,
+[data-theme='dark'] .navbar .dropdown__menu {
+  background-color: #1c0d07;
+  border: 1px solid rgba(168, 72, 50, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+}
+
 /* Button styling */
 .button {
   border-radius: 8px;

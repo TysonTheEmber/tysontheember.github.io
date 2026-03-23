@@ -196,10 +196,3 @@ If you don't need annotation data and want slightly faster startup:
 }
 ```
 
----
-
-## Next Steps
-
-- [Blacklisting Guide](blacklisting.md) — Use the audit report to identify and block mixins
-- [Priority Control](priorities.md) — Reorder mixins based on what the report reveals
-- [Configuration Reference](../configuration.md) — Full config documentation

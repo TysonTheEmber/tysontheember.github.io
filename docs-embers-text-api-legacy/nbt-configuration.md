@@ -817,11 +817,3 @@ Size scaling may not be available in all versions. Check your implementation.
 3. Ensure duration is long enough to see effect
 4. Check for conflicting tags (e.g., `color` vs `gradient`)
 
----
-
-## Next Steps
-
-- See these tags in action: [Examples](examples.md)
-- Learn about visual design: [Styling & Effects](styling-effects.md)
-- Use in code: [Developer API](developer-api.md)
-- Try the test command: `/emberstextapi test 1-9`

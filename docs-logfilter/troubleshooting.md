@@ -149,10 +149,3 @@ If you encounter an issue not covered here:
 2. Verify your JSON syntax with a validator
 3. Join the [Discord Server](https://discord.gg/GCN2Hv4Qzr) for community support
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Installation and first-time setup
-- [Configuration Reference](configuration.md) — Full config documentation
-- [Examples](examples.md) — Real-world filtering scenarios

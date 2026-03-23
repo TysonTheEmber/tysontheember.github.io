@@ -259,10 +259,3 @@ Rule order matters. Place `ALLOW` rules before `DENY` rules when you need to pro
 }
 ```
 
----
-
-## Next Steps
-
-- [Examples](examples.md) — Real-world log filtering scenarios
-- [Troubleshooting](troubleshooting.md) — Common issues and solutions
-- [Getting Started](getting-started.md) — Installation and first-time setup

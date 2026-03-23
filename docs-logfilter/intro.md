@@ -36,10 +36,3 @@ The mod monitors its config file for changes using a background watcher thread. 
 LogFilter never filters its own messages. You will always see `[LogFilter]` initialization and reload messages in the log regardless of your rules.
 :::
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Install the mod and enable your first filter rule
-- [Configuration Reference](configuration.md) — Full reference for every config option
-- [Examples](examples.md) — Real-world filtering scenarios

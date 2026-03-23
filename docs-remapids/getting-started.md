@@ -74,10 +74,3 @@ Each JSON file contains a top-level object with a `remaps` array. Each entry def
 
 Valid type values: `block`, `item`, `fluid`, `entity_type`, `tag`, `recipe`, `loot_table`
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Detailed documentation for every config option
-- [Wildcards Guide](guides/wildcards.md) — Remap entire families of IDs with patterns
-- [Examples](examples.md) — Real-world modpack migration scenarios

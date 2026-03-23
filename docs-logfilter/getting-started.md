@@ -119,10 +119,3 @@ Here is the complete default config generated on first launch:
 
 All default rules are disabled. Enable individual rules by setting `"enabled": true`.
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Detailed documentation for every config option
-- [Examples](examples.md) — Real-world log filtering scenarios
-- [Troubleshooting](troubleshooting.md) — Common issues and solutions

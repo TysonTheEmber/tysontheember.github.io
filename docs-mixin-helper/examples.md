@@ -146,7 +146,45 @@ The method still exists (so nothing crashes trying to call it), but its body is 
 
 ---
 
-## 7. Full Modpack Config Example
+## 7. Guardrails: Protecting Critical Classes
+
+**Scenario:** You accidentally added `net.minecraft.world.level.chunk.PalettedContainer` to `blacklist.targetClasses` and it would have corrupted your world.
+
+**What happens:** Mixin Helper's guardrails detect the protected class and block the operation:
+
+```
+[MixinHelper] GUARDRAIL BLOCKED: Blocking all mixins targeting class via blacklist.targetClasses
+[MixinHelper]   Class: net.minecraft.world.level.chunk.PalettedContainer
+[MixinHelper]   Category: PALETTE
+[MixinHelper]   Reason: Modifying palette classes can corrupt chunk data and crash the JVM
+```
+
+**If you genuinely need to bypass it** (e.g., you know what you're doing and have backups):
+
+```json
+{
+  "guardrails": {
+    "bypassProtectedClasses": true
+  }
+}
+```
+
+Or to exclude just one specific class while keeping other protections:
+
+```json
+{
+  "guardrails": {
+    "bypassProtectedClasses": true,
+    "excludeFromProtection": [
+      "net.minecraft.world.level.chunk.PalettedContainer"
+    ]
+  }
+}
+```
+
+---
+
+## 8. Full Modpack Config Example
 
 A comprehensive config for a modpack with several known conflicts:
 
@@ -188,6 +226,12 @@ A comprehensive config for a modpack with several known conflicts:
     "verbose": false,
     "logBlacklistActions": true,
     "logMethodRemovals": true
+  },
+  "guardrails": {
+    "enabled": true,
+    "bypassProtectedClasses": false,
+    "additionalProtectedPatterns": [],
+    "excludeFromProtection": []
   }
 }
 ```
@@ -209,10 +253,3 @@ When you encounter a mixin-related issue, follow this workflow:
    - Blacklist a config → if the mod's mixins are broadly incompatible
 6. **Restart and test** — repeat until stable
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Full reference for all config options
-- [Troubleshooting](troubleshooting.md) — Common issues and solutions
-- [Audit Log Guide](guides/audit-log.md) — Deep dive into the audit report

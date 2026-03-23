@@ -122,10 +122,3 @@ To diagnose:
 3. Look for `@Redirect` or `@Overwrite` annotations — these are most likely to conflict
 4. Adjust priorities so the desired mod's mixin applies first
 
----
-
-## Next Steps
-
-- [Blacklisting Guide](blacklisting.md) — Disable mixins entirely instead of reordering
-- [Method Removal Guide](method-removal.md) — Remove specific injected methods
-- [Configuration Reference](../configuration.md) — Full config documentation

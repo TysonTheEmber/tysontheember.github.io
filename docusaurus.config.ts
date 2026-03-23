@@ -143,11 +143,6 @@ const config: Config = {
       },
       items: [
         {
-          to: '/projects',
-          label: 'Projects',
-          position: 'left',
-        },
-        {
           type: 'dropdown',
           label: 'Documentation',
           position: 'left',
@@ -156,13 +151,7 @@ const config: Config = {
               type: 'docSidebar',
               sidebarId: 'embersSidebar',
               docsPluginId: 'embers-text-api',
-              label: 'Embers Text API v2',
-            },
-            {
-              type: 'docSidebar',
-              sidebarId: 'embersSidebarLegacy',
-              docsPluginId: 'embers-text-api-legacy',
-              label: 'Embers Text API (Legacy)',
+              label: 'Embers Text API',
             },
             {
               type: 'docSidebar',
@@ -204,12 +193,12 @@ const config: Config = {
               to: '/',
             },
             {
-              label: 'Projects',
-              to: '/projects',
-            },
-            {
               label: 'Search Documentation',
               to: '/search',
+            },
+            {
+              label: 'EML v1.2 Licence',
+              to: '/modding-licence',
             },
           ],
         },
@@ -217,16 +206,8 @@ const config: Config = {
           title: 'Documentation',
           items: [
             {
-              label: 'Embers Text API v2',
+              label: 'Embers Text API',
               to: '/embers-text-api/intro',
-            },
-            {
-              label: 'EML v1.2 Licence',
-              to: '/modding-licence',
-            },
-            {
-              label: 'Embers Text API (Legacy)',
-              to: '/embers-text-api-legacy/intro',
             },
             {
               label: 'Mixin Helper',

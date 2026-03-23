@@ -733,11 +733,3 @@ v2 will introduce major architectural changes:
 
 **Migration Path:** When v2 releases, v1 APIs will be deprecated but continue to function through a compatibility layer. The shift to span-based effects represents a fundamental architectural change that will enable more powerful and flexible text styling throughout Minecraft.
 
----
-
-## Next Steps
-
-- Explore [Styling & Effects](styling-effects.md) for visual design tips
-- Review [NBT Configuration](nbt-configuration.md) for command-based alternatives
-- Check [Examples](examples.md) for more use cases
-- Join the community for support and updates

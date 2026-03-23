@@ -696,11 +696,3 @@ public void subtitle(ServerPlayer player, String text, int duration) {
 }
 ```
 
----
-
-## Next Steps
-
-- Reference all available options: [NBT Configuration](nbt-configuration.md)
-- Learn about effects: [Styling & Effects](styling-effects.md)
-- Understand the API: [Developer API](developer-api.md)
-- Try the demos: `/emberstextapi test 1-9`

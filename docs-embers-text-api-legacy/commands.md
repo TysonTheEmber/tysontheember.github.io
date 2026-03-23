@@ -346,11 +346,3 @@ The `sendcustom` command provides extensive control. Consider limiting access to
 2. Check data types (e.g., `1.5f` for floats, `1b` for booleans)
 3. Reference the [NBT Configuration](nbt-configuration.md) page for correct tag names
 
----
-
-## Next Steps
-
-- Learn about [Styling & Effects](styling-effects.md) to create beautiful messages
-- Explore [NBT Configuration](nbt-configuration.md) for complete customization options
-- Check out [Examples](examples.md) for practical use cases
-- Read the [Developer API](developer-api.md) to integrate into your mod

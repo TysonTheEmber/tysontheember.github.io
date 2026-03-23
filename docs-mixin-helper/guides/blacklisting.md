@@ -116,6 +116,10 @@ Prevent any mixin — from any mod — from applying to specific Minecraft class
 Target class blacklisting affects **all** mods. If Mod A and Mod B both mixin into `Level`, blacklisting `Level` blocks both. For finer control, use individual mixin blacklisting instead.
 :::
 
+:::info Guardrails
+Certain critical classes (chunk generation, palette containers, threading, etc.) are protected by the [guardrails system](../configuration.md#guardrails). If you attempt to blacklist a protected target class, the operation will be blocked by default. See the [Guardrails Guide](guardrails.md) for details.
+:::
+
 ---
 
 ## Combining Blacklists
@@ -153,10 +157,3 @@ To confirm your blacklist is working:
 [MixinHelper] Blacklisted mixin config: problematicmod.mixins.json
 ```
 
----
-
-## Next Steps
-
-- [Priority Control](priorities.md) — Override mixin execution order instead of blacklisting
-- [Audit Log](audit-log.md) — Learn how to read the audit report to find mixin names
-- [Configuration Reference](../configuration.md) — Full config documentation

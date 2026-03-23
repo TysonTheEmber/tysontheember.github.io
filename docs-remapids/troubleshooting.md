@@ -154,10 +154,3 @@ Generally yes. RemapIDs operates at the registry/mixin level and is compatible w
 2. **Validate your JSON** — Most issues are caused by syntax errors in config files
 3. **Join the [Discord Server](https://discord.gg/GCN2Hv4Qzr)** — Get help from the community
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Installation and first remap setup
-- [Configuration Reference](configuration.md) — Full reference for all config options
-- [Examples](examples.md) — Real-world modpack scenarios

@@ -14,6 +14,7 @@ Mixin Helper is a utility mod for modpack developers that provides complete cont
 | **Priority Control** | Override mixin execution order to resolve load-order conflicts |
 | **Method Removal** | Surgically remove or neutralize methods injected by other mods |
 | **Audit Logging** | Generate a comprehensive JSON report of all loaded mixins and their annotations |
+| **Guardrails** | Built-in protection prevents accidental modifications to critical classes that could corrupt worlds or crash the JVM |
 
 ## Supported Platforms
 
@@ -35,10 +36,3 @@ Mixin Helper hooks into the Mixin framework's plugin system at load time — bef
 
 Because it operates at the mixin framework level, it works identically across all supported mod loaders.
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Install the mod and make your first config change
-- [Configuration Reference](configuration.md) — Full reference for every config option
-- [Examples](examples.md) — Real-world modpack conflict resolution scenarios

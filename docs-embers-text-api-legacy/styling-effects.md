@@ -687,11 +687,3 @@ ImmersiveMessage.builder(200, "BOSS BATTLE")
 .gradient(0x0000FF, 0x4169E1)
 ```
 
----
-
-## Next Steps
-
-- Review [NBT Configuration](nbt-configuration.md) for complete parameter reference
-- Check [Examples](examples.md) for practical use cases
-- Explore [Developer API](developer-api.md) for programmatic styling
-- Experiment with the test command: `/emberstextapi test 1-9`

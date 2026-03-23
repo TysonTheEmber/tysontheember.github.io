@@ -119,14 +119,13 @@ Here is the complete default config generated on first launch:
     "verbose": false,
     "logBlacklistActions": true,
     "logMethodRemovals": true
+  },
+  "guardrails": {
+    "enabled": true,
+    "bypassProtectedClasses": false,
+    "additionalProtectedPatterns": [],
+    "excludeFromProtection": []
   }
 }
 ```
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Detailed documentation for every config option
-- [Blacklisting Guide](guides/blacklisting.md) — Learn all three levels of mixin blacklisting
-- [Audit Log Guide](guides/audit-log.md) — Get the most out of the audit report

@@ -104,10 +104,3 @@ A removed mod's tag is referenced in recipes from other mods. Instead of editing
 
 Every recipe that used `{"tag": "removedmod:special_dust"}` as an ingredient will now use `{"item": "minecraft:glowstone_dust"}` instead.
 
----
-
-## Next Steps
-
-- [Chain Flattening](chain-flattening.md) — Automatic multi-step chain resolution
-- [Type Filtering](type-filtering.md) — Control which remap types apply
-- [Examples](../examples.md) — Real-world modpack scenarios

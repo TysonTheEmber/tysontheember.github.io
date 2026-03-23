@@ -258,10 +258,3 @@ When migrating your modpack, follow this workflow:
 8. **Check logs** for `[RemapIDs]` messages — warnings indicate missing targets or invalid entries
 9. **Test reloadable types** with `/reload` to iterate quickly on tag, recipe, and loot table remaps
 
----
-
-## Next Steps
-
-- [Configuration Reference](configuration.md) — Full reference for all config options
-- [Troubleshooting](troubleshooting.md) — Common issues and solutions
-- [Wildcards Guide](guides/wildcards.md) — Pattern matching for bulk remaps

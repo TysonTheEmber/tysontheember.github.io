@@ -328,6 +328,104 @@ Log each method removal or nop action.
 
 ---
 
+## guardrails
+
+Safety system that prevents accidental modifications to classes critical to the JVM, chunk generation, palette storage, and world persistence. Enabled by default.
+
+### guardrails.enabled
+
+Master toggle for the guardrails system.
+
+**Type:** Boolean
+**Default:** `true`
+
+```json
+"guardrails": {
+  "enabled": true
+}
+```
+
+Set to `false` to disable all guardrail protection. Not recommended.
+
+---
+
+### guardrails.bypassProtectedClasses
+
+Allow operations on protected classes despite the risks.
+
+**Type:** Boolean
+**Default:** `false`
+
+```json
+"guardrails": {
+  "bypassProtectedClasses": false
+}
+```
+
+When set to `true`, operations targeting protected classes will proceed with loud warnings in the log instead of being blocked. Only use this if you understand the risks.
+
+:::danger
+Enabling bypass can lead to world corruption, JVM crashes, or deadlocks. Always back up your worlds first.
+:::
+
+---
+
+### guardrails.additionalProtectedPatterns
+
+Add your own class prefixes to the protected list. Any class whose fully qualified name starts with a listed prefix will be protected.
+
+**Type:** String array
+**Default:** `[]`
+
+```json
+"guardrails": {
+  "additionalProtectedPatterns": [
+    "com.example.criticalmod.core."
+  ]
+}
+```
+
+---
+
+### guardrails.excludeFromProtection
+
+Selectively remove specific classes from protection. Only takes effect when `bypassProtectedClasses` is also `true`.
+
+**Type:** String array
+**Default:** `[]`
+
+```json
+"guardrails": {
+  "bypassProtectedClasses": true,
+  "excludeFromProtection": [
+    "net.minecraft.world.level.chunk.LevelChunk"
+  ]
+}
+```
+
+:::warning
+This requires `bypassProtectedClasses` to be enabled. Even then, use with extreme caution.
+:::
+
+---
+
+### Protected Classes
+
+The following classes are protected by default:
+
+| Category | Classes |
+|----------|---------|
+| **Chunk Generation** | `ChunkGenerator`, `NoiseBasedChunkGenerator`, `WorldGenRegion`, `LevelChunk`, `ChunkStatus` |
+| **Palette Containers** | `PalettedContainer`, `LinearPalette`, `HashMapPalette`, `Palette` |
+| **Mixin System** | All classes under `org.spongepowered.asm.*` |
+| **JVM Internals** | `java.lang.ClassLoader`, `sun.misc.Unsafe`, `jdk.internal.*` |
+| **Threading** | `BlockableEventLoop`, `TickTask` |
+| **World Persistence** | `LevelStorageSource`, `net.minecraft.nbt.*`, `LevelData` |
+
+All classes under `net.minecraft.world.level.chunk` that match these prefixes are protected, including inner classes and subclasses.
+
+---
+
 ## Complete Default Config
 
 ```json
@@ -354,15 +452,13 @@ Log each method removal or nop action.
     "verbose": false,
     "logBlacklistActions": true,
     "logMethodRemovals": true
+  },
+  "guardrails": {
+    "enabled": true,
+    "bypassProtectedClasses": false,
+    "additionalProtectedPatterns": [],
+    "excludeFromProtection": []
   }
 }
 ```
 
----
-
-## Next Steps
-
-- [Blacklisting Guide](guides/blacklisting.md) — Detailed guide for each blacklist level
-- [Priority Control Guide](guides/priorities.md) — Resolve mixin ordering conflicts
-- [Method Removal Guide](guides/method-removal.md) — Safely neutralize injected methods
-- [Examples](examples.md) — Real-world modpack scenarios

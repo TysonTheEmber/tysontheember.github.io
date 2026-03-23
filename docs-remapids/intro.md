@@ -35,10 +35,3 @@ RemapIDs operates through two categories of remaps:
 
 There are no in-game commands or UI — RemapIDs is configured entirely through JSON files placed in `config/remapids/remaps/`.
 
----
-
-## Next Steps
-
-- [Getting Started](getting-started.md) — Install the mod and create your first remap
-- [Configuration Reference](configuration.md) — Full reference for the JSON config format
-- [Examples](examples.md) — Real-world modpack migration scenarios

@@ -85,10 +85,3 @@ Wildcard expansion is performed against IDs that exist in the current game regis
 If a wildcard pattern matches no known IDs, RemapIDs logs a warning. Double-check your namespace spelling and ensure the source mod is loaded.
 :::
 
----
-
-## Next Steps
-
-- [Type Filtering](type-filtering.md) — Control which remap types a mapping applies to
-- [Tag Remapping](tag-remapping.md) — Redirect tag references with the `#` prefix
-- [Configuration Reference](../configuration.md) — Full reference for the JSON config format

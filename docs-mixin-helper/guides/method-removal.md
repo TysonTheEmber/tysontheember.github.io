@@ -127,6 +127,10 @@ You can define multiple rules. They are applied in order:
 
 ---
 
+:::info Guardrails
+Method removal and nop operations on [protected classes](guardrails.md) (chunk generation, palette containers, threading, etc.) are blocked by the guardrails system by default. If a method removal rule targets a protected class, it will be skipped unless `guardrails.bypassProtectedClasses` is enabled.
+:::
+
 ## When to Use Method Removal
 
 | Scenario | Recommended Action |
@@ -162,10 +166,3 @@ Check the game log for confirmation:
 [MixinHelper] Removed method: customRenderOverlay in net.minecraft.client.gui.screens.Screen
 ```
 
----
-
-## Next Steps
-
-- [Blacklisting Guide](blacklisting.md) — Disable entire mixins instead of individual methods
-- [Priority Control](priorities.md) — Reorder mixins instead of removing methods
-- [Configuration Reference](../configuration.md) — Full config documentation
