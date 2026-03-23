@@ -101,6 +101,15 @@ const config: Config = {
         sidebarPath: './sidebars-remapids.ts',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'log-filter',
+        path: 'docs-logfilter',
+        routeBasePath: 'log-filter',
+        sidebarPath: './sidebars-logfilter.ts',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -168,6 +177,12 @@ const config: Config = {
               label: 'RemapIDs',
             },
             {
+              type: 'docSidebar',
+              sidebarId: 'logFilterSidebar',
+              docsPluginId: 'log-filter',
+              label: 'LogFilter',
+            },
+            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -220,6 +235,10 @@ const config: Config = {
             {
               label: 'RemapIDs',
               to: '/remapids/intro',
+            },
+            {
+              label: 'LogFilter',
+              to: '/log-filter/intro',
             },
             {
               label: 'Orbital Railgun Config',
