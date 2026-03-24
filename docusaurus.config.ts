@@ -110,6 +110,15 @@ const config: Config = {
         sidebarPath: './sidebars-logfilter.ts',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'better-harvest-level',
+        path: 'docs-better-harvest-level',
+        routeBasePath: 'better-harvest-level',
+        sidebarPath: './sidebars-better-harvest-level.ts',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -172,6 +181,12 @@ const config: Config = {
               label: 'LogFilter',
             },
             {
+              type: 'docSidebar',
+              sidebarId: 'betterHarvestLevelSidebar',
+              docsPluginId: 'better-harvest-level',
+              label: 'Better Harvest Level',
+            },
+            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -220,6 +235,10 @@ const config: Config = {
             {
               label: 'LogFilter',
               to: '/log-filter/intro',
+            },
+            {
+              label: 'Better Harvest Level',
+              to: '/better-harvest-level/intro',
             },
             {
               label: 'Orbital Railgun Config',
