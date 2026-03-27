@@ -74,6 +74,21 @@ Remap chains are limited to 10 levels. This usually indicates an accidental cycl
 
 ---
 
+### Unknown Numerical ID
+
+```
+[RemapIDs] Unknown numerical ID: '999' (not found in flattening table — may be a modded ID)
+```
+
+The numerical ID you used as a source isn't in the built-in flattening table. This typically means:
+
+- The ID belongs to a modded block/item from 1.12.2, not a vanilla one
+- The ID or metadata value is incorrect
+
+For modded content, use the mod's namespaced string ID instead (e.g., `"oldmod:block_name"`). The flattening table only covers vanilla Minecraft IDs.
+
+---
+
 ### JSON Syntax Errors
 
 Common JSON mistakes:
@@ -139,6 +154,25 @@ No. Remaps are applied at runtime. The world's saved data retains the original (
 **Registry types** (block, item, fluid, entity_type) are applied when the game's registries freeze during startup. They require a full game restart and targets must exist in the registry.
 
 **Reloadable types** (tag, recipe, loot_table) are applied when datapacks load. They support `/reload` for quick iteration and don't validate targets at load time.
+
+---
+
+### Can I use numerical IDs from old Minecraft versions?
+
+Yes. You can use pre-1.13 numerical block/item IDs as source values in your remap configs (e.g., `"source": "35:14"` for red wool). RemapIDs includes a built-in flattening table that automatically resolves these to modern string IDs. See the [Numerical IDs Guide](guides/numerical-ids.md).
+
+Note that this only covers vanilla Minecraft IDs. Modded blocks from 1.12.2 should use their namespaced string IDs.
+
+---
+
+### How do I find a block or item's registry ID?
+
+Use the in-game commands:
+
+- `/remapids id block` — shows the ID of the block you're looking at
+- `/remapids id hand` — shows the ID of the item in your main hand
+
+See the [Commands Guide](guides/commands.md) for details.
 
 ---
 

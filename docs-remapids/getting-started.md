@@ -68,7 +68,7 @@ Each JSON file contains a top-level object with a `remaps` array. Each entry def
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `source` | String | Yes | The original namespaced ID to redirect (e.g., `"oldmod:silver_ingot"`) |
+| `source` | String | Yes | The original ID to redirect — namespaced (e.g., `"oldmod:silver_ingot"`) or [numerical](guides/numerical-ids.md) (e.g., `"35:14"`) |
 | `target` | String | Yes | The destination namespaced ID (e.g., `"minecraft:iron_ingot"`) |
 | `types` | String array | No | Which remap types to apply. Empty or omitted = all types |
 

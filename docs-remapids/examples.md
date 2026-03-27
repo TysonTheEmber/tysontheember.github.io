@@ -244,12 +244,57 @@ A comprehensive config for a modpack that removed two mods and replaced them wit
 
 ---
 
+## 8. Legacy World Migration with Numerical IDs
+
+**Scenario:** You're updating an old 1.12.2 world to 1.20.1 and want to remap some of the old vanilla blocks to modded replacements.
+
+**Solution:** Use pre-1.13 numerical IDs as sources. RemapIDs resolves them automatically via its built-in flattening table:
+
+```json
+{
+  "remaps": [
+    {
+      "source": "35:14",
+      "target": "decormod:red_fabric",
+      "types": ["block", "item"]
+    },
+    {
+      "source": "35:11",
+      "target": "decormod:blue_fabric",
+      "types": ["block", "item"]
+    },
+    {
+      "source": "1:3",
+      "target": "buildmod:polished_diorite_alt",
+      "types": ["block"]
+    },
+    {
+      "source": "263:1",
+      "target": "fuelmod:refined_charcoal",
+      "types": ["item"]
+    }
+  ]
+}
+```
+
+RemapIDs resolves `35:14` to `minecraft:red_wool`, `1:3` to `minecraft:diorite`, and `263:1` to `minecraft:charcoal` before applying the remaps.
+
+:::tip
+Use the `types` filter when working with numerical IDs. Some IDs exist in both the blocks and items tables, and specifying the type avoids ambiguity.
+:::
+
+:::info
+Numerical IDs only cover vanilla Minecraft blocks and items. For modded content from 1.12.2, use the mod's namespaced string IDs (e.g., `"oldmod:item_name"`) which were already used by Forge even in older versions.
+:::
+
+---
+
 ## Migration Workflow
 
 When migrating your modpack, follow this workflow:
 
 1. **Identify** which mods are being removed or replaced
-2. **List the IDs** that need remapping (items, blocks, entities, tags)
+2. **List the IDs** that need remapping — use `/remapids id block` and `/remapids id hand` to look up exact registry IDs in-game
 3. **Create a remap file** in `config/remapids/remaps/`
 4. **Add registry remaps** (item, block) for items players may have in inventories or placed in the world
 5. **Add tag remaps** if other mods reference the removed mod's tags

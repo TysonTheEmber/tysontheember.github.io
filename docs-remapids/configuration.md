@@ -47,11 +47,12 @@ The top-level `remaps` array contains all remap entries for the file.
 
 ## remaps[].source
 
-The original namespaced ID to redirect.
+The original ID to redirect.
 
-**Type:** String (namespaced ID)
+**Type:** String (namespaced ID or numerical ID)
 
-- Must be in `namespace:path` format (must contain a colon)
+- **Namespaced ID:** `namespace:path` format (e.g., `"oldmod:silver_ingot"`)
+- **Numerical ID:** Pre-1.13 numerical block/item ID, optionally with metadata (e.g., `"1"`, `"35:14"`) — see [Numerical IDs Guide](guides/numerical-ids.md)
 - Supports `*` wildcard for pattern matching (see [Wildcards Guide](guides/wildcards.md))
 - Prefix with `#` for tag remaps (e.g., `"#forge:ingots/gold"`) — see [Tag Remapping Guide](guides/tag-remapping.md)
 
@@ -61,6 +62,18 @@ The original namespaced ID to redirect.
   "target": "newmod:silver_ingot"
 }
 ```
+
+### Numerical ID example
+
+```json
+{
+  "source": "35:14",
+  "target": "somemod:red_block",
+  "types": ["block"]
+}
+```
+
+The numerical ID `35:14` (red wool in pre-1.13) is automatically resolved to `minecraft:red_wool` before processing. See the [Numerical IDs Guide](guides/numerical-ids.md) for details.
 
 ---
 
@@ -130,11 +143,12 @@ Apply to all remap types (block, item, fluid, entity_type, tag, recipe, loot_tab
 When the game loads, RemapIDs processes config files in this order:
 
 1. **Parse** — All `.json` files in the remaps directory are loaded alphabetically
-2. **Expand wildcards** — `*` patterns are matched against known registry IDs
-3. **Group by type** — Entries are organized by their applicable remap types
-4. **Flatten chains** — Transitive mappings are resolved (A→B + B→C = A→C, max depth 10)
-5. **Validate** — Registry type targets are checked against known IDs (reloadable types skip this)
-6. **Apply** — The final remap configuration is activated
+2. **Resolve numerical IDs** — Pre-1.13 numerical sources (e.g., `"35:14"`) are converted to post-flattening string IDs (e.g., `"minecraft:red_wool"`)
+3. **Expand wildcards** — `*` patterns are matched against known registry IDs
+4. **Group by type** — Entries are organized by their applicable remap types
+5. **Flatten chains** — Transitive mappings are resolved (A→B + B→C = A→C, max depth 10)
+6. **Validate** — Registry type targets are checked against known IDs (reloadable types skip this)
+7. **Apply** — The final remap configuration is activated
 
 ---
 
