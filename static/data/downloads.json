@@ -1,7 +1,7 @@
 {
-  "modrinth": 31511,
-  "curseforge": 2228266,
-  "total": 2259777,
-  "lastUpdated": "2026-03-01T01:51:44Z",
-  "projects": {"embers-text-api": {"curseforge": 957451, "modrinth": 31511, "total": 988962},"aperture-api": {"curseforge": 0, "modrinth": 823, "total": 823},"spelunkery-plus": {"curseforge": 259225, "modrinth": 0, "total": 259225},"orbital-railgun-reforged": {"curseforge": 981388, "modrinth": 0, "total": 981388},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 146, "modrinth": 0, "total": 146},"particle-interactions-reforged": {"curseforge": 4191, "modrinth": 0, "total": 4191},"explodee": {"curseforge": 25383, "modrinth": 4750, "total": 30133},"resistance-formulation": {"curseforge": 294, "modrinth": 0, "total": 294},"hyrpland-input-fix": {"curseforge": 188, "modrinth": 0, "total": 188}}
+  "modrinth": 78912,
+  "curseforge": 2697259,
+  "total": 2776171,
+  "lastUpdated": "2026-03-28T23:43:20Z",
+  "projects": {"embers-text-api": {"curseforge": 1215649, "modrinth": 78852, "total": 1294501},"aperture-api": {"curseforge": 0, "modrinth": 823, "total": 823},"spelunkery-plus": {"curseforge": 280403, "modrinth": 0, "total": 280403},"orbital-railgun-reforged": {"curseforge": 1095497, "modrinth": 0, "total": 1095497},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 195, "modrinth": 0, "total": 195},"particle-interactions-reforged": {"curseforge": 6641, "modrinth": 0, "total": 6641},"explodee": {"curseforge": 44047, "modrinth": 4958, "total": 49005},"mixin-helper": {"curseforge": 92, "modrinth": 32, "total": 124},"configurable-waterlogging": {"curseforge": 26588, "modrinth": 0, "total": 26588},"resistance-formulation": {"curseforge": 439, "modrinth": 0, "total": 439},"hyrpland-input-fix": {"curseforge": 264, "modrinth": 0, "total": 264},"embers-log-filtering": {"curseforge": 24, "modrinth": 0, "total": 24},"ocean-core": {"curseforge": 27305, "modrinth": 0, "total": 27305},"remap-ids": {"curseforge": 75, "modrinth": 28, "total": 103},"better-harvest-levels": {"curseforge": 40, "modrinth": 0, "total": 40}}
 }
