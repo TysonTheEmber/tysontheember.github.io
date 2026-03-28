@@ -111,6 +111,39 @@ To target a specific variant, include the metadata: `"35:14"` resolves to `minec
 
 The built-in flattening table covers all vanilla Minecraft blocks (IDs 0-255) and items (IDs 256+), including all metadata variants for blocks like stone types, wood types, wool/terracotta/glass/concrete colors, flowers, slabs, and more.
 
-:::warning
-The flattening table only covers **vanilla** Minecraft IDs. Modded blocks and items from 1.12.2 had their own numerical IDs assigned by Forge, which are not included. For modded content, use the standard namespaced ID format instead.
+## Custom Numerical IDs (Modded Content)
+
+Modded blocks and items from 1.12.2 also had numerical IDs, assigned dynamically by Forge at runtime. These IDs are **not** included in the built-in table because they varied per world and modpack.
+
+To support modded numerical IDs, create a file at `config/remapids/numerical_ids.json` with the same format as the built-in table:
+
+```json
+{
+  "blocks": {
+    "500": "oldmod:custom_ore",
+    "500:1": "oldmod:custom_ore_nether",
+    "501": "oldmod:machine_block"
+  },
+  "items": {
+    "5000": "oldmod:wrench",
+    "5001": "oldmod:battery",
+    "5001:1": "oldmod:battery_charged"
+  }
+}
+```
+
+Custom entries are merged on top of the built-in vanilla table. If a custom entry uses the same key as a built-in one, the custom entry takes precedence.
+
+### Finding old modded numerical IDs
+
+In Forge 1.12.2, numerical IDs were stored in the world save. You can find them by:
+
+1. Opening your old 1.12.2 world's `level.dat` with an NBT editor (like NBTExplorer)
+2. Looking under `FML` > `Registries` > `minecraft:blocks` (or `minecraft:items`) > `ids`
+3. Each entry maps a namespaced string ID to its numerical ID
+
+Use those numerical IDs as keys in your `numerical_ids.json` file, with the old mod's namespaced ID as the value. Then use the standard remap config to redirect those namespaced IDs to their modern replacements.
+
+:::tip
+You only need `numerical_ids.json` if you want to reference modded blocks/items by their old numerical IDs in your remap configs. If you already know the old mod's namespaced string IDs, you can use those directly in the remap config without this file.
 :::

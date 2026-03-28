@@ -119,6 +119,15 @@ const config: Config = {
         sidebarPath: './sidebars-better-harvest-level.ts',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'item-receipt',
+        path: 'docs-item-receipt',
+        routeBasePath: 'item-receipt',
+        sidebarPath: './sidebars-item-receipt.ts',
+      },
+    ],
   ],
 
   themeConfig: {
@@ -187,6 +196,12 @@ const config: Config = {
               label: 'Better Harvest Level',
             },
             {
+              type: 'docSidebar',
+              sidebarId: 'itemReceiptSidebar',
+              docsPluginId: 'item-receipt',
+              label: 'Item Receipt',
+            },
+            {
               to: '/orbital-railgun/config',
               label: 'Orbital Railgun Config',
             },
@@ -239,6 +254,10 @@ const config: Config = {
             {
               label: 'Better Harvest Level',
               to: '/better-harvest-level/intro',
+            },
+            {
+              label: 'Item Receipt',
+              to: '/item-receipt/intro',
             },
             {
               label: 'Orbital Railgun Config',

@@ -14,10 +14,9 @@ If your remaps aren't taking effect, check for JSON syntax errors. A misplaced c
 
 ## File Structure
 
-- **Directory:** `config/remapids/remaps/`
-- All `.json` files in this directory are loaded automatically
-- Files are processed in **alphabetical order**
-- Each file is independent — organize your remaps however you like (e.g., one file per removed mod, one file per remap type)
+- **Remap configs:** `config/remapids/remaps/*.json` — all `.json` files are loaded automatically in alphabetical order
+- **Custom numerical IDs:** `config/remapids/numerical_ids.json` — optional file for modded pre-1.13 numerical ID mappings (see [Numerical IDs Guide](guides/numerical-ids.md))
+- Each remap file is independent — organize however you like (e.g., one file per removed mod, one file per remap type)
 
 ---
 

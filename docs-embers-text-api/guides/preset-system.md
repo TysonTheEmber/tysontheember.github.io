@@ -122,6 +122,85 @@ Fast rainbow with neon glow, bold gold. Tag: `<legendary>`
 
 Gentle shake with fading, dark purple italic. Tag: `<spooky>`
 
+### arcane.json
+
+```json
+{
+  "format_version": 1,
+  "effects": [
+    { "type": "neon", "params": { "c": "9944FF" } },
+    { "type": "turbulence", "params": { "a": 0.6, "f": 0.8 } }
+  ],
+  "styles": { "color": "BB88FF", "font": "emberstextapi:cinzel" }
+}
+```
+
+Neon glow with turbulence, purple Cinzel font. Tag: `<arcane>`
+
+### chaotic.json
+
+```json
+{
+  "format_version": 1,
+  "effects": [
+    { "type": "rainbow", "params": { "f": 3.0, "w": 0.4 } },
+    { "type": "glitch", "params": { "f": 2.0 } },
+    { "type": "bounce", "params": { "a": 1.5, "f": 2.0 } }
+  ],
+  "styles": { "bold": true }
+}
+```
+
+Fast rainbow with glitch and bounce, bold. Tag: `<chaotic>`
+
+### divine.json
+
+```json
+{
+  "format_version": 1,
+  "effects": [
+    { "type": "neon", "params": { "c": "FFFFAA" } },
+    { "type": "wave", "params": { "a": 0.5, "f": 0.6 } },
+    { "type": "pulse", "params": { "f": 0.8, "a": 0.3 } }
+  ],
+  "styles": { "bold": true, "color": "FFD700", "font": "emberstextapi:almendra" }
+}
+```
+
+Warm neon glow with gentle wave and pulse, bold gold Almendra font. Tag: `<divine>`
+
+### frozen.json
+
+```json
+{
+  "format_version": 1,
+  "effects": [
+    { "type": "gradient", "params": { "from": "88CCFF", "to": "FFFFFF" } },
+    { "type": "pendulum", "params": { "a": 0.4, "f": 0.5 } },
+    { "type": "neon", "params": { "c": "44AAFF" } }
+  ],
+  "styles": { "italic": true, "font": "emberstextapi:cardo" }
+}
+```
+
+Ice-blue gradient with pendulum sway and neon, italic Cardo font. Tag: `<frozen>`
+
+### infernal.json
+
+```json
+{
+  "format_version": 1,
+  "effects": [
+    { "type": "gradient", "params": { "from": "FF4400", "to": "FFD700" } },
+    { "type": "shake", "params": { "a": 0.8, "f": 4.0 } },
+    { "type": "neon", "params": { "c": "FF2200" } }
+  ],
+  "styles": { "bold": true, "font": "emberstextapi:norse" }
+}
+```
+
+Fire gradient with intense shake and red neon, bold Norse font. Tag: `<infernal>`
+
 ---
 
 ## Adding Custom Presets

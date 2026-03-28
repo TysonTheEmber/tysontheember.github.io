@@ -522,9 +522,17 @@ Presets bundle multiple effects and styles into one tag:
 | `<epic>` | Pulse (f=2.0) + Wave | Bold italic purple (#AA00FF) |
 | `<legendary>` | Rainbow (f=1.5) + Neon | Bold gold (#FFD700) |
 | `<spooky>` | Shake (a=0.5) + Fade (a=0.4) | Italic dark purple (#2D1B4E) |
+| `<arcane>` | Neon (c=9944FF) + Turbulence | Purple (#BB88FF), Cinzel font |
+| `<chaotic>` | Rainbow (f=3.0) + Glitch + Bounce | Bold |
+| `<divine>` | Neon (c=FFFFAA) + Wave + Pulse | Bold gold (#FFD700), Almendra font |
+| `<frozen>` | Gradient (88CCFF→FFFFFF) + Pendulum + Neon | Italic, Cardo font |
+| `<infernal>` | Gradient (FF4400→FFD700) + Shake + Neon | Bold, Norse font |
 
 ```markup title="Preset examples"
 <epic>You have slain the Dragon!</epic>
 <legendary>Legendary Sword of Doom obtained!</legendary>
 <spooky>Something lurks in the darkness...</spooky>
+<arcane>Ancient runes shimmer before you...</arcane>
+<divine>A blessing from the heavens!</divine>
+<infernal>The flames consume everything!</infernal>
 ```

@@ -80,12 +80,12 @@ Remap chains are limited to 10 levels. This usually indicates an accidental cycl
 [RemapIDs] Unknown numerical ID: '999' (not found in flattening table — may be a modded ID)
 ```
 
-The numerical ID you used as a source isn't in the built-in flattening table. This typically means:
+The numerical ID you used as a source isn't in the flattening table. This typically means:
 
 - The ID belongs to a modded block/item from 1.12.2, not a vanilla one
 - The ID or metadata value is incorrect
 
-For modded content, use the mod's namespaced string ID instead (e.g., `"oldmod:block_name"`). The flattening table only covers vanilla Minecraft IDs.
+For modded numerical IDs, create a `config/remapids/numerical_ids.json` file with your custom mappings. See the [Numerical IDs Guide](guides/numerical-ids.md#custom-numerical-ids-modded-content) for details.
 
 ---
 

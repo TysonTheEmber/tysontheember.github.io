@@ -253,6 +253,11 @@ Used as: `<fire>FIRE SALE!</fire>`
 | `epic.json` | `<epic>` | Pulse (f=2.0) + Wave | Bold italic purple (#AA00FF) |
 | `legendary.json` | `<legendary>` | Rainbow (f=1.5, w=0.8) + Neon | Bold gold (#FFD700) |
 | `spooky.json` | `<spooky>` | Shake (a=0.5, f=3.0) + Fade (a=0.4, f=1.5) | Italic dark purple (#2D1B4E) |
+| `arcane.json` | `<arcane>` | Neon (c=9944FF) + Turbulence (a=0.6, f=0.8) | Purple (#BB88FF), Cinzel font |
+| `chaotic.json` | `<chaotic>` | Rainbow (f=3.0, w=0.4) + Glitch (f=2.0) + Bounce (a=1.5, f=2.0) | Bold |
+| `divine.json` | `<divine>` | Neon (c=FFFFAA) + Wave (a=0.5, f=0.6) + Pulse (f=0.8, a=0.3) | Bold gold (#FFD700), Almendra font |
+| `frozen.json` | `<frozen>` | Gradient (88CCFF→FFFFFF) + Pendulum (a=0.4, f=0.5) + Neon (c=44AAFF) | Italic, Cardo font |
+| `infernal.json` | `<infernal>` | Gradient (FF4400→FFD700) + Shake (a=0.8, f=4.0) + Neon (c=FF2200) | Bold, Norse font |
 
 ### PresetRegistry
 
