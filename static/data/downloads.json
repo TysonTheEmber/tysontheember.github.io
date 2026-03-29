@@ -1,7 +1,7 @@
 {
-  "modrinth": 79036,
-  "curseforge": 2700705,
-  "total": 2779741,
-  "lastUpdated": "2026-03-29T01:56:06Z",
-  "projects": {"embers-text-api": {"curseforge": 1217096, "modrinth": 78976, "total": 1296072},"aperture-api": {"curseforge": 0, "modrinth": 823, "total": 823},"spelunkery-plus": {"curseforge": 280524, "modrinth": 0, "total": 280524},"orbital-railgun-reforged": {"curseforge": 1095969, "modrinth": 0, "total": 1095969},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 197, "modrinth": 0, "total": 197},"particle-interactions-reforged": {"curseforge": 6660, "modrinth": 0, "total": 6660},"explodee": {"curseforge": 44187, "modrinth": 4958, "total": 49145},"mixin-helper": {"curseforge": 93, "modrinth": 32, "total": 125},"configurable-waterlogging": {"curseforge": 27199, "modrinth": 0, "total": 27199},"resistance-formulation": {"curseforge": 442, "modrinth": 0, "total": 442},"hyrpland-input-fix": {"curseforge": 266, "modrinth": 0, "total": 266},"embers-log-filtering": {"curseforge": 24, "modrinth": 0, "total": 24},"ocean-core": {"curseforge": 27930, "modrinth": 0, "total": 27930},"remap-ids": {"curseforge": 75, "modrinth": 28, "total": 103},"better-harvest-levels": {"curseforge": 43, "modrinth": 0, "total": 43}}
+  "modrinth": 79663,
+  "curseforge": 2706775,
+  "total": 2786438,
+  "lastUpdated": "2026-03-29T06:56:35Z",
+  "projects": {"embers-text-api": {"curseforge": 1219754, "modrinth": 79602, "total": 1299356},"aperture-api": {"curseforge": 0, "modrinth": 823, "total": 823},"spelunkery-plus": {"curseforge": 280711, "modrinth": 0, "total": 280711},"orbital-railgun-reforged": {"curseforge": 1096835, "modrinth": 0, "total": 1096835},"echoes-of-battle": {"curseforge": 0, "modrinth": 0, "total": 0},"infernumrpg": {"curseforge": 197, "modrinth": 0, "total": 197},"particle-interactions-reforged": {"curseforge": 6683, "modrinth": 0, "total": 6683},"explodee": {"curseforge": 44400, "modrinth": 4959, "total": 49359},"mixin-helper": {"curseforge": 93, "modrinth": 33, "total": 126},"configurable-waterlogging": {"curseforge": 28251, "modrinth": 0, "total": 28251},"resistance-formulation": {"curseforge": 442, "modrinth": 0, "total": 442},"hyrpland-input-fix": {"curseforge": 266, "modrinth": 0, "total": 266},"embers-log-filtering": {"curseforge": 24, "modrinth": 0, "total": 24},"ocean-core": {"curseforge": 28995, "modrinth": 0, "total": 28995},"remap-ids": {"curseforge": 81, "modrinth": 28, "total": 109},"better-harvest-levels": {"curseforge": 43, "modrinth": 0, "total": 43}}
 }
