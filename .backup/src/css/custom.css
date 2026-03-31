@@ -1,0 +1,686 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* EmberForge Fire/Ember Theme */
+
+/* Light Mode - Warm ember accents */
+:root {
+  /* Primary ember orange colors */
+  --ifm-color-primary: #ff6b35;
+  --ifm-color-primary-dark: #ff5519;
+  --ifm-color-primary-darker: #ff4708;
+  --ifm-color-primary-darkest: #e63d00;
+  --ifm-color-primary-light: #ff8151;
+  --ifm-color-primary-lighter: #ff8f62;
+  --ifm-color-primary-lightest: #ffad84;
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 107, 53, 0.1);
+}
+
+/* Dark Mode - Glowing ember accents on neutral dark */
+[data-theme='dark'] {
+  /* Ember orange for accents */
+  --ifm-color-primary: #ff8c42;
+  --ifm-color-primary-dark: #ff7a24;
+  --ifm-color-primary-darker: #ff6e13;
+  --ifm-color-primary-darkest: #e65c00;
+  --ifm-color-primary-light: #ff9e60;
+  --ifm-color-primary-lighter: #ffaa71;
+  --ifm-color-primary-lightest: #ffc393;
+
+  /* Lighter background colors */
+  --ifm-background-color: #1a1a1a;
+  --ifm-background-surface-color: #242424;
+  --ifm-color-emphasis-100: #242424;
+  --ifm-color-emphasis-200: #2e2e2e;
+  --ifm-color-emphasis-300: #383838;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 140, 66, 0.15);
+}
+
+/* Hero banner with fire gradient */
+.hero--primary {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 50%, #ffa577 100%);
+  color: white;
+}
+
+[data-theme='dark'] .hero--primary {
+  background: radial-gradient(circle at center, #0f0a08 0%, #1f1510 50%, #2f2018 100%);
+  border-bottom: 3px solid #ff8c42;
+}
+
+/* Fire glow effect on hero title */
+.hero__title {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 10px rgba(255, 107, 53, 0.8),
+    0 0 20px rgba(255, 107, 53, 0.6),
+    0 0 30px rgba(255, 107, 53, 0.4),
+    0 0 40px rgba(255, 140, 66, 0.3),
+    0 0 50px rgba(255, 140, 66, 0.2);
+  animation: fireGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes fireGlow {
+  0% {
+    text-shadow:
+      0 0 10px rgba(255, 107, 53, 0.8),
+      0 0 20px rgba(255, 107, 53, 0.6),
+      0 0 30px rgba(255, 107, 53, 0.4),
+      0 0 40px rgba(255, 140, 66, 0.3),
+      0 0 50px rgba(255, 140, 66, 0.2);
+  }
+  100% {
+    text-shadow:
+      0 0 15px rgba(255, 107, 53, 1),
+      0 0 25px rgba(255, 107, 53, 0.8),
+      0 0 35px rgba(255, 107, 53, 0.6),
+      0 0 45px rgba(255, 140, 66, 0.5),
+      0 0 60px rgba(255, 140, 66, 0.3),
+      0 0 75px rgba(255, 158, 96, 0.2);
+  }
+}
+
+/* Disable fire glow animation on mobile for performance */
+@media screen and (max-width: 768px) {
+  .hero__title {
+    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.8) !important;
+    animation: none !important;
+  }
+}
+
+/* Ember glow effect on buttons */
+.button--primary {
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, #ff5519, #ff7a24);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .button--primary {
+  background: linear-gradient(135deg, #a84817, #c55420);
+  box-shadow: 0 4px 12px rgba(168, 72, 23, 0.4);
+  color: #d4d4d4;
+}
+
+[data-theme='dark'] .button--primary:hover {
+  background: linear-gradient(135deg, #c55420, #d96028);
+  box-shadow: 0 6px 20px rgba(197, 84, 32, 0.6);
+  color: #e8e8e8;
+}
+
+/* Secondary button with ember outline */
+.button--secondary {
+  border: 2px solid #ff6b35;
+  color: #ff6b35;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.button--secondary:hover {
+  background-color: #ff6b35;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+[data-theme='dark'] .button--secondary {
+  border-color: #a84817;
+  color: #c55420;
+  background-color: transparent;
+}
+
+[data-theme='dark'] .button--secondary:hover {
+  background-color: #a84817;
+  border-color: #c55420;
+  color: #d4d4d4;
+}
+
+/* Orange bar at the bottom of navbar */
+.navbar {
+  border-bottom: 2px solid rgba(255, 107, 53, 0.5);
+  box-shadow: 0 2px 6px rgba(255, 107, 53, 0.1);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom: 2px solid rgba(255, 140, 66, 0.6);
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.15);
+}
+
+/* Navbar links with ember hover */
+.navbar__link:hover {
+  color: #ff6b35;
+}
+
+[data-theme='dark'] .navbar__link:hover {
+  color: #ff9e60;
+}
+
+/* Navbar logo (icon) size */
+.navbar__logo {
+  height: 2.5rem !important;
+  width: auto !important;
+}
+
+.navbar__logo img {
+  height: 2.5rem !important;
+  width: auto !important;
+}
+
+/* Highlight navbar brand (EmberForge title) on homepage */
+.navbar__title {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+}
+
+body[class*='homepage'] .navbar__title,
+body:has(.hero--primary) .navbar__title {
+  color: #ff6b35;
+  font-weight: 900;
+}
+
+[data-theme='dark'] body[class*='homepage'] .navbar__title,
+[data-theme='dark'] body:has(.hero--primary) .navbar__title {
+  color: #ff9e60;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar__title {
+    font-size: 1.35rem;
+  }
+}
+
+/* Highlight navbar icon on homepage */
+body[class*='homepage'] .navbar__logo img,
+body:has(.hero--primary) .navbar__logo img {
+  filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.45));
+}
+
+[data-theme='dark'] body[class*='homepage'] .navbar__logo img,
+[data-theme='dark'] body:has(.hero--primary) .navbar__logo img {
+  filter: drop-shadow(0 0 8px rgba(255, 158, 96, 0.55));
+}
+
+/* Active menu items with ember accent */
+.menu__link--active {
+  background-color: rgba(255, 107, 53, 0.1);
+  color: #ff6b35;
+  border-left: 3px solid #ff6b35;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(255, 140, 66, 0.15);
+  color: #ff9e60;
+  border-left: 3px solid #ff8c42;
+}
+
+/* Table of contents active link */
+.table-of-contents__link--active {
+  color: #ff6b35;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #ff9e60;
+}
+
+/* Footer styling */
+.footer {
+  background: linear-gradient(180deg, #1a1a1a 0%, #242424 50%, #1a1a1a 100%) !important;
+  border-top: 2px solid rgba(168, 72, 23, 0.3);
+  padding: 3rem 0 2rem 0;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(197, 84, 32, 0.5) 20%,
+    rgba(168, 72, 23, 0.8) 50%,
+    rgba(197, 84, 32, 0.5) 80%,
+    transparent 100%
+  );
+}
+
+.footer__title {
+  color: #c55420 !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(197, 84, 32, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.footer__link-item {
+  color: rgba(212, 212, 212, 0.7) !important;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.footer__link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #a84817, #c55420);
+  transition: width 0.3s ease;
+}
+
+.footer__link-item:hover {
+  color: #c55420 !important;
+  transform: translateX(3px);
+}
+
+.footer__link-item:hover::after {
+  width: 100%;
+}
+
+.footer__copyright {
+  color: rgba(212, 212, 212, 0.5) !important;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(168, 72, 23, 0.2);
+  font-size: 0.9rem;
+}
+
+.footer__logo {
+  filter: drop-shadow(0 0 8px rgba(197, 84, 32, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.footer__logo:hover {
+  filter: drop-shadow(0 0 12px rgba(197, 84, 32, 0.6));
+}
+
+.footer__col {
+  margin-bottom: 1.5rem;
+}
+
+.footer__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Add ember accent to footer sections */
+.footer__col:hover .footer__title {
+  text-shadow: 0 0 15px rgba(197, 84, 32, 0.5);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .footer__link-item,
+  .footer__logo {
+    transition: none !important;
+  }
+
+  .footer__link-item:hover {
+    transform: none !important;
+  }
+
+  .footer__link-item::after {
+    transition: none !important;
+  }
+}
+
+/* Animation preference controls */
+/* Reduced animations - simplify and shorten */
+html[data-animation-preference='reduced'] {
+  /* Shorten animation durations */
+  --animation-duration-multiplier: 0.5;
+}
+
+html[data-animation-preference='reduced'] .hero__title {
+  animation: none !important;
+  text-shadow: 0 0 10px rgba(255, 107, 53, 0.8) !important;
+}
+
+html[data-animation-preference='reduced'] .button--primary:hover,
+html[data-animation-preference='reduced'] .button--secondary:hover {
+  transition-duration: 0.15s !important;
+  transform: none !important;
+}
+
+html[data-animation-preference='reduced'] .footer__link-item {
+  transition-duration: 0.15s !important;
+}
+
+html[data-animation-preference='reduced'] .footer__link-item:hover {
+  transform: none !important;
+}
+
+html[data-animation-preference='reduced'] .footer__link-item::after {
+  transition-duration: 0.15s !important;
+}
+
+html[data-animation-preference='reduced'] .footer__logo {
+  transition-duration: 0.15s !important;
+}
+
+html[data-animation-preference='reduced'] .DocSearch-Button:hover {
+  transition-duration: 0.15s !important;
+}
+
+/* No animations - disable all */
+html[data-animation-preference='none'] * {
+  animation: none !important;
+  transition: none !important;
+}
+
+html[data-animation-preference='none'] .hero__title {
+  text-shadow: 0 2px 8px rgba(255, 107, 53, 0.8) !important;
+  animation: none !important;
+}
+
+html[data-animation-preference='none'] .button--primary:hover,
+html[data-animation-preference='none'] .button--secondary:hover {
+  transform: none !important;
+}
+
+html[data-animation-preference='none'] .footer__link-item:hover {
+  transform: none !important;
+}
+
+html[data-animation-preference='none'] .footer__logo {
+  filter: drop-shadow(0 0 8px rgba(197, 84, 32, 0.4)) !important;
+}
+
+/* Hide sidebar on intro page only */
+.intro-page-no-sidebar ~ * .theme-doc-sidebar-container,
+article:has(.intro-page-no-sidebar) ~ .theme-doc-sidebar-container,
+.theme-doc-page:has(.intro-page-no-sidebar) .theme-doc-sidebar-container {
+  display: none !important;
+}
+
+.theme-doc-page:has(.intro-page-no-sidebar) .main-wrapper,
+.theme-doc-page:has(.intro-page-no-sidebar) .docMainContainer {
+  max-width: 100% !important;
+}
+
+.theme-doc-page:has(.intro-page-no-sidebar) article {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+/* Alternative approach using body class */
+body:has(.intro-page-no-sidebar) .theme-doc-sidebar-container {
+  display: none !important;
+}
+
+body:has(.intro-page-no-sidebar) .main-wrapper,
+body:has(.intro-page-no-sidebar) .docMainContainer {
+  max-width: 100% !important;
+}
+
+body:has(.intro-page-no-sidebar) article {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+/* Algolia DocSearch Modal - Ember Theme */
+.DocSearch-Button {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+}
+
+.DocSearch-Button:hover {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: rgba(255, 107, 53, 0.5);
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+}
+
+[data-theme='dark'] .DocSearch-Button {
+  background: rgba(255, 140, 66, 0.1);
+  border: 1px solid rgba(255, 140, 66, 0.3);
+}
+
+[data-theme='dark'] .DocSearch-Button:hover {
+  background: rgba(255, 140, 66, 0.15);
+  border-color: rgba(255, 140, 66, 0.5);
+  box-shadow: 0 2px 8px rgba(255, 140, 66, 0.3);
+}
+
+.DocSearch-Search-Icon {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Search-Icon {
+  color: #ff9e60 !important;
+}
+
+/* Modal container */
+.DocSearch-Container {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Modal styling */
+.DocSearch-Modal {
+  background: var(--ifm-background-color) !important;
+  box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+}
+
+[data-theme='dark'] .DocSearch-Modal {
+  background: #1b1b1b !important;
+  box-shadow: 0 10px 40px rgba(255, 140, 66, 0.3);
+}
+
+/* Search form */
+.DocSearch-Form {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Form {
+  background: #2a2a2a;
+  border-color: rgba(255, 140, 66, 0.2);
+}
+
+.DocSearch-Input {
+  background: transparent !important;
+  color: var(--ifm-font-color-base) !important;
+}
+
+.DocSearch-Input:focus {
+  border-color: #ff6b35;
+  box-shadow: none;
+  outline: none;
+}
+
+[data-theme='dark'] .DocSearch-Input:focus {
+  border-color: #ff8c42;
+}
+
+/* Dropdown */
+.DocSearch-Dropdown {
+  background: var(--ifm-background-color);
+}
+
+[data-theme='dark'] .DocSearch-Dropdown {
+  background: #1b1b1b;
+}
+
+/* Search results */
+.DocSearch-Hit {
+  border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+[data-theme='dark'] .DocSearch-Hit {
+  border-bottom-color: rgba(255, 140, 66, 0.1);
+}
+
+.DocSearch-Hit a {
+  background: transparent;
+  border-radius: 6px;
+}
+
+.DocSearch-Hit a:hover {
+  background: rgba(255, 107, 53, 0.05);
+}
+
+[data-theme='dark'] .DocSearch-Hit a:hover {
+  background: rgba(255, 140, 66, 0.1);
+}
+
+.DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(255, 107, 53, 0.15) !important;
+}
+
+[data-theme='dark'] .DocSearch-Hit[aria-selected='true'] a {
+  background: rgba(255, 140, 66, 0.2) !important;
+}
+
+/* Section headers */
+.DocSearch-Hit-source {
+  background: transparent;
+  color: #ff6b35 !important;
+  font-weight: 600;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+[data-theme='dark'] .DocSearch-Hit-source {
+  background: transparent;
+  color: #ff9e60 !important;
+}
+
+/* Hit content */
+.DocSearch-Hit-title {
+  color: var(--ifm-font-color-base);
+}
+
+.DocSearch-Hit-path {
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Highlighted text in results */
+.DocSearch-Hit mark {
+  color: #ff6b35 !important;
+  background: rgba(255, 107, 53, 0.2);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .DocSearch-Hit mark {
+  color: #ffaa71 !important;
+  background: rgba(255, 140, 66, 0.25);
+}
+
+/* "Clear the query" link */
+.DocSearch-Reset,
+.DocSearch-Reset svg {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Reset,
+[data-theme='dark'] .DocSearch-Reset svg {
+  color: #ff9e60 !important;
+}
+
+.DocSearch-Reset:hover,
+.DocSearch-Reset:hover svg {
+  color: #ff5519 !important;
+}
+
+[data-theme='dark'] .DocSearch-Reset:hover,
+[data-theme='dark'] .DocSearch-Reset:hover svg {
+  color: #ffaa71 !important;
+}
+
+/* Cancel button */
+.DocSearch-Cancel {
+  color: #ff6b35 !important;
+}
+
+[data-theme='dark'] .DocSearch-Cancel {
+  color: #ff9e60 !important;
+}
+
+/* Footer */
+.DocSearch-Footer {
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid rgba(255, 107, 53, 0.2);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Footer {
+  background: #2a2a2a;
+  border-top-color: rgba(255, 140, 66, 0.2);
+}
+
+/* Footer commands */
+.DocSearch-Commands-Key {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  box-shadow: none;
+}
+
+[data-theme='dark'] .DocSearch-Commands-Key {
+  background: rgba(255, 140, 66, 0.15);
+  border-color: rgba(255, 140, 66, 0.3);
+}
+
+/* Make theme switcher icon bigger to match other navbar icons */
+.navbar__item button[aria-label*="Switch"] svg,
+button[class*='colorModeToggle'] svg,
+button[class*='toggle'] svg,
+[class*='colorModeToggle'] svg,
+.colorModeToggle svg {
+  transform: scale(1.675) !important;
+}
+
+/* Also ensure the button container is sized appropriately */
+.navbar__item button[aria-label*="Switch"],
+button[class*='colorModeToggle'],
+[class*='colorModeToggle'] button {
+  padding: 6px !important;
+  margin: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Make all navbar icon links have consistent spacing */
+.navbar__item.navbar__link {
+  margin: 0 8px !important;
+  padding: 6px !important;
+}
+
+/* Hover effect for theme toggle */
+.navbar__item button[aria-label*="Switch"]:hover,
+button[class*='colorModeToggle']:hover {
+  background-color: rgba(255, 107, 53, 0.1) !important;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+[data-theme='dark'] .navbar__item button[aria-label*="Switch"]:hover,
+[data-theme='dark'] button[class*='colorModeToggle']:hover {
+  background-color: rgba(255, 140, 66, 0.1) !important;
+}

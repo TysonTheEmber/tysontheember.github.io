@@ -1,0 +1,139 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+.heroBanner {
+  min-height: 85vh;
+  padding: 8rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 0.6) 100%);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emberBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroBanner .container {
+  position: relative;
+  z-index: 1;
+}
+
+.heroBanner h1 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.heroBanner p {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    min-height: 70vh;
+    padding: 4rem 1.5rem;
+  }
+
+  .heroBanner h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroBanner p {
+    font-size: 1.2rem;
+  }
+}
+
+/* Optimize for mobile performance */
+@media screen and (max-width: 768px) {
+  .heroBanner {
+    /* Simpler background for mobile performance */
+    background: rgba(0, 0, 0, 0.7);
+    will-change: auto;
+    min-height: 60vh;
+    padding: 3rem 1rem;
+  }
+
+  .heroBanner h1 {
+    /* Reduce text-shadow complexity on mobile */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: none;
+    font-size: 2rem;
+  }
+
+  .heroBanner p {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    font-size: 1rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.heroButton {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.heroButton:hover {
+  background-color: rgba(255, 173, 132, 0.5);
+  border-color: rgba(255, 173, 132, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.downloads {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.downloadCount {
+  color: var(--ifm-color-emphasis-800);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  display: inline-block;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.downloadCount strong {
+  color: var(--ifm-color-primary-lightest);
+  font-size: 2rem;
+}
+
+[data-theme='dark'] .downloadCount {
+  color: var(--ifm-color-emphasis-900);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .downloadCount strong {
+  color: #ffaa71;
+}

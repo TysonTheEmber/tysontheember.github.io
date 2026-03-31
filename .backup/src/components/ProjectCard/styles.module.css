@@ -1,0 +1,160 @@
+.projectCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-bottom: 2px solid var(--ifm-border-color);
+  background: linear-gradient(to right, rgba(255, 107, 53, 0.08), rgba(255, 140, 66, 0.03));
+}
+
+.projectIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid var(--ifm-border-color);
+  background-color: var(--ifm-background-color);
+  padding: 0.25rem;
+}
+
+.projectInfo {
+  flex: 1;
+}
+
+.projectInfo h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--ifm-heading-color);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  background: rgba(255, 107, 53, 0.1);
+  color: var(--ifm-color-primary);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+html[data-theme='dark'] .tag {
+  background: rgba(255, 140, 66, 0.15);
+  color: var(--ifm-color-primary-light);
+  border-color: rgba(255, 140, 66, 0.3);
+}
+
+.projectCardBody {
+  padding: 1.5rem;
+}
+
+.projectDescription {
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.statsSection {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 8px;
+  border: 1px solid var(--ifm-border-color);
+}
+
+.totalDownloads {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--ifm-heading-color);
+  margin-bottom: 0.75rem;
+}
+
+.totalDownloads strong {
+  font-size: 1.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.platformStats {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.statBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--ifm-color-primary);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 107, 53, 0.25);
+}
+
+html[data-theme='dark'] .statBadge {
+  background: rgba(255, 140, 66, 0.2);
+  color: var(--ifm-color-primary-light);
+  border-color: rgba(255, 140, 66, 0.35);
+}
+
+.projectActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.downloadText {
+  text-align: center;
+  color: var(--ifm-color-emphasis-600);
+  font-style: italic;
+}
+
+html[data-theme='dark'] .projectCardHeader {
+  background: linear-gradient(to right, rgba(255, 140, 66, 0.1), rgba(255, 107, 53, 0.03));
+}
+
+html[data-theme='dark'] .projectIcon {
+  background-color: var(--ifm-background-surface-color);
+}
+
+html[data-theme='dark'] .statsSection {
+  background: rgba(255, 140, 66, 0.08);
+}
+
+@media (max-width: 768px) {
+  .projectCardHeader {
+    padding: 1rem;
+  }
+
+  .projectIcon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .projectInfo h3 {
+    font-size: 1.25rem;
+  }
+
+  .projectCardBody {
+    padding: 1rem;
+  }
+
+  .totalDownloads {
+    font-size: 1rem;
+  }
+
+  .totalDownloads strong {
+    font-size: 1.25rem;
+  }
+
+  .statBadge {
+    font-size: 0.8rem;
+  }
+}
