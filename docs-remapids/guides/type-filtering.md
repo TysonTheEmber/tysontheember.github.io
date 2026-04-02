@@ -55,11 +55,12 @@ This remap only affects item and block registries — tags, recipes, and loot ta
 
 **block**, **item**, **fluid**, **entity_type**
 
-- Applied at registry freeze time, before the world loads
+- Applied after all mods have registered their content (on Forge, via `FMLLoadCompleteEvent`)
 - Require a full game restart to take effect
-- Targets are validated — if the target ID doesn't exist in the registry, the remap is skipped with a warning
+- Targets are validated at injection time — if the target doesn't exist, the alias is skipped with a warning
+- Works for both removed-mod IDs and live vanilla/modded IDs
 
-Registry remaps work by injecting aliases into the game's internal registries, so any code that looks up the source ID will find the target instead.
+Registry remaps work by injecting aliases into the game's internal registries, so any code that looks up the source ID will find the target instead. For block remaps, block state IDs are also remapped in `Block.BLOCK_STATE_REGISTRY` so network serialization stays consistent.
 
 ---
 
@@ -82,6 +83,7 @@ Reloadable remaps intercept datapack processing to rewrite IDs in tags, recipes,
 | Replace a removed mod's items | `["item"]` |
 | Redirect block registry entries | `["block"]` |
 | Replace both items and blocks | `["item", "block"]` |
+| Replace vanilla blocks with modded | `["item", "block"]` |
 | Change recipe ingredients | `["recipe"]` |
 | Consolidate tags from removed mods | `["tag"]` |
 | Redirect loot table drops | `["loot_table"]` |

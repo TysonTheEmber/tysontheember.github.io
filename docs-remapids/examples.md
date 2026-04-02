@@ -61,7 +61,7 @@ Wildcards only match IDs that exist in the current game registries. If the sourc
 
 ---
 
-## 9. Removed Mod World Migration (Explicit Entries)
+## 10. Removed Mod World Migration (Explicit Entries)
 
 **Scenario:** You're removing Create from your modpack. Players have brass and andesite blocks placed in the world and items in their inventories. You want those to become vanilla blocks/items instead of disappearing.
 
@@ -280,7 +280,51 @@ A comprehensive config for a modpack that removed two mods and replaced them wit
 
 ---
 
-## 8. Legacy World Migration with Numerical IDs
+## 8. Replace Vanilla Blocks with Modded Equivalents
+
+**Scenario:** You want copper blocks to be brass blocks from Create, and copper ingots to become brass ingots everywhere in your modpack.
+
+**Solution:** Remap the vanilla IDs to the modded IDs. RemapIDs handles both registry aliasing and block state ID remapping so the replacement works in existing and new worlds:
+
+```json
+{
+  "remaps": [
+    {
+      "source": "minecraft:copper_block",
+      "target": "create:brass_block",
+      "types": ["item", "block"]
+    },
+    {
+      "source": "minecraft:copper_ingot",
+      "target": "create:brass_ingot",
+      "types": ["item"]
+    },
+    {
+      "source": "minecraft:chain",
+      "target": "create:industrial_iron_block",
+      "types": ["item", "block"]
+    }
+  ]
+}
+```
+
+**How it works:**
+- The `block` type aliases the source block to the target in the block registry and remaps block state IDs so chunks serialize correctly
+- The `item` type aliases the source item to the target in the item registry
+- Compatible block state properties (e.g. `axis`, `waterlogged`) are preserved where the target block supports them
+- On Forge, `ForgeRegistry.getValue()` lookups are also redirected
+
+:::note
+When remapping blocks with state properties to blocks without them (e.g. chain with `axis` → industrial iron block), the properties are dropped and the target block's default state is used.
+:::
+
+:::tip
+Add `"recipe"`, `"loot_table"`, and `"tag"` to the types array if you also want recipes, loot tables, and tags to be rewritten.
+:::
+
+---
+
+## 9. Legacy World Migration with Numerical IDs
 
 **Scenario:** You're updating an old 1.12.2 world to 1.20.1 and want to remap some of the old vanilla blocks to modded replacements.
 

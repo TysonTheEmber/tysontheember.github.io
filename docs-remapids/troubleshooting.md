@@ -18,20 +18,23 @@ If your remaps don't seem to be working:
 
 ---
 
-### Remap Target Not Found Warning
+### Remap Target "Not Found Yet" Warning
 
 ```
-[RemapIDs] Skipping remap: target 'oldmod:silver_ingot' not found in registry
+[RemapIDs] Remap target 'modid:item' not found in item registry yet (may be a modded ID
+not registered at this point), remap from 'minecraft:item' will be attempted at freeze time
 ```
 
-This means the target ID doesn't exist in the game's registries. Common causes:
+This warning means the target ID wasn't in the registry at **validation time** (early during loading). This is normal for modded targets — the remap entry is preserved and injection is attempted later when all mods have finished registering.
+
+If you also see `Cannot inject alias ... target not found` later in the log, that means the target truly doesn't exist. Common causes:
 
 - The target mod isn't installed
 - Typo in the target namespace or path
 - The target ID was renamed in a mod update
 
 :::note
-This validation only applies to registry types (block, item, fluid, entity_type). Reloadable types (tag, recipe, loot_table) skip target validation since datapack content may load later.
+As of 1.3.0, validation is non-destructive — entries are never removed during validation. The actual registry check happens at injection time, when all modded content is available.
 :::
 
 ---
@@ -142,9 +145,25 @@ Yes. Just use the full namespaced ID for both source and target:
 
 ---
 
+### Can I remap vanilla blocks/items to modded ones?
+
+Yes, as of 1.3.0. You can remap vanilla IDs to modded IDs:
+
+```json
+{
+  "source": "minecraft:copper_block",
+  "target": "create:brass_block",
+  "types": ["item", "block"]
+}
+```
+
+For block remaps, RemapIDs also remaps block state IDs in `Block.BLOCK_STATE_REGISTRY` so that network serialization uses the target block's state IDs. Compatible block state properties (like `axis` or `waterlogged`) are preserved where the target block supports them.
+
+---
+
 ### What happens if the target doesn't exist?
 
-For **registry types** (block, item, fluid, entity_type), the remap is skipped with a warning in the log. For **reloadable types** (tag, recipe, loot_table), no validation is performed since targets may be created by datapacks that load later.
+For **registry types** (block, item, fluid, entity_type), a warning is logged during validation but the entry is kept. At injection time, if the target still doesn't exist, the alias is skipped with a second warning. For **reloadable types** (tag, recipe, loot_table), no validation is performed since targets may be created by datapacks that load later.
 
 ---
 

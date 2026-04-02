@@ -10,6 +10,7 @@ RemapIDs is a data-driven registry remap and alias system for modpack developers
 
 | Feature | Description |
 |---------|-------------|
+| **Vanilla & Modded Remapping** | Remap vanilla IDs to modded IDs (and vice versa) — including live block replacement with block state remapping |
 | **Wildcard Expansion** | Use `*` patterns to remap entire families of IDs in a single entry |
 | **Type Filtering** | Optionally limit which remap types (block, item, recipe, etc.) a mapping applies to |
 | **Chain Flattening** | Automatically resolves multi-step chains (A→B, B→C becomes A→C) |
@@ -32,7 +33,7 @@ RemapIDs is a data-driven registry remap and alias system for modpack developers
 
 RemapIDs operates through two categories of remaps:
 
-1. **Registry remaps** (block, item, fluid, entity_type) are injected at registry freeze time, before the world loads. These require a full game restart to apply.
+1. **Registry remaps** (block, item, fluid, entity_type) are injected into the game registries after all mods have registered their content. These require a full game restart to apply. For block remaps, block state IDs are also remapped so network serialization stays consistent.
 2. **Reloadable remaps** (tag, recipe, loot_table) are applied when datapacks load and can be refreshed with `/reload`.
 
 RemapIDs is configured through JSON files placed in `config/remapids/remaps/`. The `/remapids id` command is available in-game to help identify block and item registry IDs — see the [Commands Guide](guides/commands.md).

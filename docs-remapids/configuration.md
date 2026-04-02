@@ -84,7 +84,7 @@ The destination namespaced ID that the source will be redirected to.
 
 - Same format requirements as `source`
 - If `source` uses `*`, `target` must also use `*` (and vice versa)
-- For registry types, the target must exist in the game's registries — otherwise the remap is skipped with a warning
+- For registry types, the target must exist in the game's registries — a warning is logged if it's not found at validation time, but injection is still attempted (modded targets may not be registered yet during early validation)
 
 ```json
 {
@@ -146,8 +146,8 @@ When the game loads, RemapIDs processes config files in this order:
 3. **Expand wildcards** — `*` patterns are matched against known registry IDs
 4. **Group by type** — Entries are organized by their applicable remap types
 5. **Flatten chains** — Transitive mappings are resolved (A→B + B→C = A→C, max depth 10)
-6. **Validate** — Registry type targets are checked against known IDs (reloadable types skip this)
-7. **Apply** — The final remap configuration is activated
+6. **Warn** — Registry type targets are checked against known IDs. Missing targets produce a warning but are **not removed** — modded targets may not be registered yet at this point
+7. **Apply** — The final remap configuration is activated. On Forge, alias injection happens via `FMLLoadCompleteEvent` to ensure all modded content is available. Block state IDs are remapped in `Block.BLOCK_STATE_REGISTRY` for consistent network serialization
 
 ---
 
@@ -172,6 +172,25 @@ When the game loads, RemapIDs processes config files in this order:
       "source": "iceandfire:silver_ore",
       "target": "thermal:silver_ore",
       "types": ["block", "item"]
+    }
+  ]
+}
+```
+
+### Replace vanilla with modded
+
+```json
+{
+  "remaps": [
+    {
+      "source": "minecraft:copper_block",
+      "target": "create:brass_block",
+      "types": ["item", "block"]
+    },
+    {
+      "source": "minecraft:copper_ingot",
+      "target": "create:brass_ingot",
+      "types": ["item"]
     }
   ]
 }
