@@ -77,8 +77,25 @@ Migrating silver items from Ice and Fire to Thermal:
 }
 ```
 
-:::warning
-Wildcard expansion is performed against IDs that exist in the current game registries. If a source ID only exists in saved world data (because the original mod was removed), it won't be matched by wildcards. Use explicit source/target pairs for removed mod migration.
+## Limitations
+
+:::warning Wildcards require the source mod to be loaded
+Wildcard expansion runs against IDs in the **current game registries**. If the source mod has been removed, its IDs are no longer registered and wildcards will match nothing.
+
+For removed-mod migration (e.g., remapping placed blocks and inventory items after uninstalling a mod), **always use explicit source/target pairs**:
+
+```json
+{
+  "remaps": [
+    { "source": "removedmod:copper_block", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "removedmod:copper_ingot", "target": "minecraft:copper_ingot", "types": ["item"] }
+  ]
+}
+```
+:::
+
+:::note
+Both `source` and `target` must contain `*`, or neither. Many-to-one mappings (wildcard source → fixed target) are not supported. If you need all matches to map to the same target, list them explicitly.
 :::
 
 :::note

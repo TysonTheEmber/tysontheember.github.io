@@ -37,7 +37,7 @@ For registry remaps like items, the target mod must be loaded. Make sure the rep
 
 ## 2. Wildcard Migration Between Mods
 
-**Scenario:** You're replacing an entire mod and both mods use the same naming convention for their items.
+**Scenario:** You're replacing an entire mod and both mods use the same naming convention for their items. **Both mods are still installed.**
 
 **Solution:** Use wildcards to remap all matching IDs at once:
 
@@ -56,7 +56,43 @@ For registry remaps like items, the target mod must be loaded. Make sure the rep
 This automatically expands to cover `silver_ingot`, `silver_nugget`, `silver_block`, `silver_ore`, and any other `silver_*` IDs from Ice and Fire.
 
 :::warning
-Wildcards only match IDs that exist in the current game registries. If the source mod has already been removed, use explicit source/target pairs instead.
+Wildcards only match IDs that exist in the current game registries. If the source mod has already been removed, use explicit source/target pairs instead — see Example 9 below.
+:::
+
+---
+
+## 9. Removed Mod World Migration (Explicit Entries)
+
+**Scenario:** You're removing Create from your modpack. Players have brass and andesite blocks placed in the world and items in their inventories. You want those to become vanilla blocks/items instead of disappearing.
+
+**Solution:** List every block/item ID explicitly. Wildcards won't work here because Create's IDs are no longer in the registry after removal.
+
+```json
+{
+  "remaps": [
+    { "source": "create:brass_block", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "create:brass_casing", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "create:brass_funnel", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "create:brass_tunnel", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "create:brass_ingot", "target": "minecraft:copper_ingot", "types": ["item"] },
+    { "source": "create:brass_nugget", "target": "minecraft:copper_ingot", "types": ["item"] },
+
+    { "source": "create:andesite_casing", "target": "minecraft:gravel", "types": ["block", "item"] },
+    { "source": "create:andesite_funnel", "target": "minecraft:gravel", "types": ["block", "item"] },
+    { "source": "create:andesite_tunnel", "target": "minecraft:gravel", "types": ["block", "item"] },
+    { "source": "create:andesite_alloy", "target": "minecraft:gravel", "types": ["item"] }
+  ]
+}
+```
+
+**Workflow:**
+1. Add this config **before** removing Create
+2. Players save and exit the world
+3. Remove the Create `.jar` from `mods/`
+4. Launch the game — placed blocks become copper blocks/gravel, inventory items remap accordingly
+
+:::tip
+Include both `"block"` and `"item"` types for blocks. This ensures both the placed block in the world and the item form in inventories are covered.
 :::
 
 ---

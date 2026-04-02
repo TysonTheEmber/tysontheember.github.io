@@ -14,6 +14,7 @@ If your remaps don't seem to be working:
 2. **Verify file location** — Files must be in `config/remapids/remaps/` and end with `.json`
 3. **Check the remap type** — Registry remaps (block, item, fluid, entity_type) require a full game restart. Reloadable remaps (tag, recipe, loot_table) can be applied with `/reload`
 4. **Check the game log** — Search for `[RemapIDs]` messages. The mod logs how many remaps were loaded and any warnings
+5. **Check the source namespace** — If remapping IDs from a removed mod (e.g., `create:brass_block`), use explicit entries rather than wildcards. Wildcards only expand against IDs currently in the registry
 
 ---
 
@@ -43,6 +44,10 @@ If a wildcard pattern produces no matches:
 - Ensure the source mod is still loaded (wildcards expand against current registry IDs)
 - Check that the path pattern is correct — `*` matches one or more characters
 - If the source mod was removed, use explicit source/target pairs instead of wildcards
+
+:::caution
+Wildcards **cannot** be used for removed-mod migration. When a mod is removed, its IDs are no longer in the registry, so wildcard patterns have nothing to expand against. Always use explicit `source`/`target` pairs when remapping IDs from mods that will be uninstalled.
+:::
 
 ---
 
@@ -179,6 +184,29 @@ See the [Commands Guide](guides/commands.md) for details.
 ### Can I use it alongside other registry manipulation mods?
 
 Generally yes. RemapIDs operates at the registry/mixin level and is compatible with most other mods. If you encounter conflicts, check the load order and consider using [Mixin Helper](/mixin-helper/intro) to manage mixin priorities.
+
+---
+
+### Blocks Disappear After Removing a Mod
+
+If placed blocks vanish when you remove a mod:
+
+1. **Add explicit remap entries** before removing the mod — list every block ID you placed with its replacement
+2. **Don't use wildcards** for this — they won't expand after the mod is removed
+3. **Include both `block` and `item` types** so both placed blocks and inventory items are covered
+4. **Restart the game** — registry remaps require a full restart, `/reload` is not enough
+
+Example for migrating Create brass blocks:
+```json
+{
+  "remaps": [
+    { "source": "create:brass_block", "target": "minecraft:copper_block", "types": ["block", "item"] },
+    { "source": "create:brass_casing", "target": "minecraft:copper_block", "types": ["block", "item"] }
+  ]
+}
+```
+
+On Forge, `MissingMappingsEvent` handles the world migration. On Fabric, the NBT migration mixins rewrite block/item IDs during chunk and inventory deserialization.
 
 ---
 
