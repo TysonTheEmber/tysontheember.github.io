@@ -1002,3 +1002,39 @@ body:has(.intro-page-no-sidebar) article {
   background-color: var(--ifm-color-primary);
   color: #fff;
 }
+
+/* Callout page: evidence documentation layout */
+.callout-page-content {
+  max-width: 880px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.callout-page-content p {
+  margin: 0.7rem 0;
+}
+
+.callout-page-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--ember-rust);
+}
+
+.callout-page-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.callout-page-content ul {
+  margin: 0.5rem 0 1rem 0;
+}
+
+.callout-page-content blockquote {
+  border-left: 3px solid var(--ember-rust);
+  background: color-mix(in srgb, var(--ember-rust) 6%, transparent);
+  padding: 0.65rem 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-style: italic;
+}
